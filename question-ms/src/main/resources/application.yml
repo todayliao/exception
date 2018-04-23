@@ -1,0 +1,113 @@
+spring:
+  application:
+    name: qms-ms # 服务的名字 记得修改 命名规范 -> 服务名-ms
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用 Druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML
+  session:
+    store-type: hash_map # session 会话的存储类型
+
+server:
+  port: 8090
+
+info:
+  name: 问答服务
+
+# alibaba druid
+druid:
+  initialSize: 5
+  minIdle: 5
+  maxActive: 1000
+  # 配置获取连接等待超时的时间
+  maxWait: 60000
+  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+  timeBetweenEvictionRunsMillis: 60000
+  # 配置一个连接在池中最小生存的时间，单位是毫秒
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 1 FROM DUAL
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
+  # 配置监控统计拦截的 filters，去掉后监控界面 sql 无法统计，'wall' 用于防火墙
+  filters: stat,wall,log4j
+  # 通过 connectProperties 属性来打开 mergeSql 功能；慢 SQL 记录
+  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  # 合并多个 DruidDataSource 的监控数据
+  useGlobalDataSourceStat: true
+
+# mybatis
+mybatis:
+  type-aliases-package: com.exception.qms.domain.entity
+  mapper-locations: classpath:mapper/*.xml
+
+# swagger
+swagger2.package: com.exception.qms.controller
+
+# logger
+logging:
+  config: classpath:logback-qms.xml
+
+# 关闭 http 基本验证
+security:
+  basic:
+    enabled: false
+
+# 阿里云OSS
+aliyunoss:
+  endpoint: http://oss-cn-hangzhou.aliyuncs.com
+  accessKeyId: LTAIOCh207S175Dk
+  accessKeySecret: K3b2OTzEqx28UfKtdR0T0YFXHwzdYh
+  publicBucketName: exception-image-bucket
+#  internalendpoint: http://oss-cn-shanghai-internal.aliyuncs.com
+#  publicBucketName: energymonster-public
+
+# elastic search
+elasticsearch:
+  host: 127.0.0.1
+  # tcp 端口，非 http 端口
+  port: 9300
+  cluster:
+    name: exception
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/qms?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: qwe123
+  thymeleaf:
+    cache: false
+
+# log 日志配置
+logging:
+  level:
+    com:
+      exception:
+        qms:
+          domain:
+            mapper: debug
+
+---
+spring:
+  profiles: prd
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qms?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: qwe123
+
+
+
+

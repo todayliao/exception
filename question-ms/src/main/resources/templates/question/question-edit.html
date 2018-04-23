@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/plugins/editor-md/editormd.css}">
+    <link rel="stylesheet" th:href="@{/css/web/question-add.css}">
+
+    <title>Exception问答社区,改进问题</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div th:replace="fragment/common :: header"></div>
+<!-- main content -->
+<div class="container main-content">
+    <div class="row">
+        <div class="col-12 br-3px">
+            <div th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" class="alert alert-warning" role="alert">
+                您还没登录呢! 问题将无法改进哦! 去<a th:href="@{/user/login}">登陆</a>
+            </div>
+            <!-- csrf -->
+            <div th:replace="fragment/common :: csrfHiddenInput"></div>
+            <form th:action="@{/question/edit}" id="form" method="post">
+                <input type="hidden" th:value="${response.id}" name="id">
+                <div class="form-group">
+                    <label>问题标题</label>
+                    <input type="text" class="form-control" name="title" th:value="${response.titleCn}">
+                </div>
+                <div class="form-group">
+                    <label>问题出现的场景描述</label>
+                    <div id="editormd1" class="editor-md">
+                        <textarea class="editormd-markdown-textarea" name="questionDesc" th:text="${response.questionDesc}">text</textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">提交</button>
+            </form>
+        </div>
+
+        <!-- 右边栏 -->
+    </div>
+
+</div>
+<!-- footer -->
+<div th:replace="fragment/common :: footer"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script th:src="@{/plugins/editor-md/editormd.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/plugins/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/validate/messages_zh.min.js}"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
+
+<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
+
+<script th:inline="javascript">
+    $(function() {
+        editormd("editormd1", {
+            width: "100%",
+            height: 600,
+            syncScrolling: "single",
+            path: "/plugins/editor-md/lib/", // 依赖的 lib 目录
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/editorMdImg/upload"
+        });
+    });
+</script>
+</html>

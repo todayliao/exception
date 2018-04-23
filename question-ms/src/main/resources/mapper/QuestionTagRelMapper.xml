@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exception.qms.domain.mapper.QuestionTagRelMapper" >
+  <cache/>
+  <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.QuestionTagRel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="question_id" property="questionId" jdbcType="BIGINT" />
+    <result column="tag_id" property="tagId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="HotTagResultMap" type="com.exception.qms.domain.enhancement.HotQuestionTagRel" extends="BaseResultMap">
+    <result column="question_count" property="questionCount" jdbcType="BIGINT"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, question_id, tag_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qms_question_tag_rel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTagIdByQuestionId" resultType="java.lang.Long">
+    select
+    tag_id
+    from t_qms_question_tag_rel
+    where question_id = #{questionId}
+  </select>
+  <select id="selectHotTags" resultMap="HotTagResultMap">
+    select tag_id, count(id) as question_count
+    from t_qms_question_tag_rel group by tag_id
+    order by question_count desc
+    limit 10
+  </select>
+
+    <select id="queryTagsByQuestionIds" resultMap="BaseResultMap">
+      select tag_id, question_id from t_qms_question_tag_rel where question_id in
+      <foreach collection="list" item="questionId" open="(" separator="," close=")">
+        #{questionId}
+      </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_qms_question_tag_rel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.exception.qms.domain.entity.QuestionTagRel" >
+    insert into t_qms_question_tag_rel (id, question_id, tag_id, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{questionId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="batchAddQuestionTagRel">
+    insert into t_qms_question_tag_rel (question_id, tag_id,
+      create_time, update_time)
+      values
+      <foreach collection="list" item="item" separator="," >
+          (#{item.questionId}, #{item.tagId}, NOW(), NOW())
+      </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.QuestionTagRel" >
+    insert into t_qms_question_tag_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="tagId != null" >
+        #{tagId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.QuestionTagRel" >
+    update t_qms_question_tag_rel
+    <set >
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="tagId != null" >
+        tag_id = #{tagId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.QuestionTagRel" >
+    update t_qms_question_tag_rel
+    set question_id = #{questionId,jdbcType=BIGINT},
+      tag_id = #{tagId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

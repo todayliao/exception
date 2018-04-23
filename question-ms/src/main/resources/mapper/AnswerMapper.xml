@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exception.qms.domain.mapper.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.Answer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="question_id" property="questionId" jdbcType="BIGINT" />
+    <result column="vote_up" property="voteUp" jdbcType="INTEGER" />
+    <result column="vote_down" property="voteDown" jdbcType="INTEGER" />
+    <result column="is_accepted" property="isAccepted" jdbcType="BIT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, create_user_id, question_id, vote_up, vote_down, is_accepted, 
+    is_deleted
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qms_answer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="queryByQuestionId" resultMap="BaseResultMap">
+    select id, create_time, create_user_id, question_id, vote_up, vote_down, is_accepted
+    from t_qms_answer
+    where question_id = #{questionId} and is_deleted = 0
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_qms_answer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.exception.qms.domain.entity.Answer" useGeneratedKeys="true" keyProperty="id">
+    insert into t_qms_answer (create_time, update_time,
+      create_user_id, question_id, vote_up, 
+      vote_down, is_accepted, is_deleted
+      )
+    values (NOW(), NOW(),
+      #{createUserId}, #{questionId,jdbcType=BIGINT}, 0,
+      0, #{isAccepted,jdbcType=BIT}, 0
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.Answer" >
+    insert into t_qms_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="voteUp != null" >
+        vote_up,
+      </if>
+      <if test="voteDown != null" >
+        vote_down,
+      </if>
+      <if test="isAccepted != null" >
+        is_accepted,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="voteUp != null" >
+        #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null" >
+        #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="isAccepted != null" >
+        #{isAccepted,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.Answer" >
+    update t_qms_answer
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="voteUp != null" >
+        vote_up = #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null" >
+        vote_down = #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="isAccepted != null" >
+        is_accepted = #{isAccepted,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.Answer" >
+    update t_qms_answer
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      question_id = #{questionId,jdbcType=BIGINT},
+      vote_up = #{voteUp,jdbcType=INTEGER},
+      vote_down = #{voteDown,jdbcType=INTEGER},
+      is_accepted = #{isAccepted,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,231 @@
+body {
+    background: #f7f7f7;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 15px;
+}
+
+.m-navbar {
+    /*line-height: 2;*/
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    box-shadow: 0 1px 5px rgba(0,0,0,.1);
+}
+
+.bg-light {
+    background-color: #fff !important;
+}
+
+.br-3px {
+    border-radius: 3px;
+}
+
+.margintop-3px {
+    margin-top: 3px;
+}
+
+.margintop-10px {
+    margin-top: 10px;
+}
+
+.margintop-15px {
+    margin-top: 15px;
+}
+
+.margintop-20px {
+    margin-top: 20px;
+}
+
+.margintop-30px {
+    margin-top: 30px;
+}
+
+.marginleft-5px {
+    margin-left: 5px;
+}
+
+.marginleft-10px {
+    margin-left: 10px;
+}
+
+.marginleft-20px {
+    margin-left: 20px;
+}
+
+.marginright-10px {
+    margin-right: 10px;
+}
+
+.marginright-5px {
+    margin-right: 5px;
+}
+
+.marginbottom-10px {
+    margin-bottom: 10px;
+}
+
+.paddingleft-6px {
+    padding-left: 6px;
+}
+
+.card-title {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.fs-12px {
+    font-size: 12px;
+}
+
+.fs-14px {
+    font-size: 14px;
+}
+
+.fs-15px {
+    font-size: 15px;
+}
+
+.media-img {
+    width: 48px;
+    height: 48px;
+}
+
+.footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #8590a6;
+    font-size: 14px;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.footer a {
+    color: #495057;
+}
+
+.media-left {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 14px;
+}
+
+.media-body {
+    word-break: break-all;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.m-fade {
+    color: #8590a6;
+}
+
+.gray-dark {
+    color: #24292e;
+}
+
+.main-content {
+    margin-top: 80px;
+    /*padding: 20px 0;*/
+}
+
+.login {
+    color: rgba(0, 0, 0, .5);
+}
+
+.login:hover {
+    color: rgba(0, 0, 0, .7);
+}
+
+.login-image {
+    width: 30px;
+    height: 30px;
+    margin-left: 1rem;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.badge-delete {
+    background: #fff;
+    color: #6c757d;
+    border-radius: 100px;
+}
+
+.gray-a {
+    color: #8590a6;
+    font-size: 12px;
+}
+
+.gray-a:hover {
+    text-decoration: none;
+    color: #495057;
+}
+
+.blue-a {
+    color: #175199;
+}
+
+.padding0 {
+    padding: 0;
+}
+
+.border0 {
+    border: 0;
+}
+
+.search-submit {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: -1px;
+    height: 100%;
+    color: #838E95;
+    padding-left: 2px;
+    padding-right: 0;
+    left: 10px;
+    padding-top: 3px;
+}
+
+.form-group-search {
+    position: relative;
+}
+
+.header-search {
+    padding-left: 32px;
+    font-size: 14px;
+}
+
+.login-image-a:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #8590a6;
+}
+
+.login-image-a {
+    color: #fff;
+}
+
+.login-image-a:hover {
+    color: #fff;
+}
+
+.m-login-image {
+    margin-left: 0;
+    margin-right: 20px;
+}
+
+.card-body ul li {
+    margin-bottom: 10px;
+}
+
+.card-body ul li:last-child {
+    margin-bottom: 0;
+}
+

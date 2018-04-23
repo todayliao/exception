@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title th:text="${response.titleCn}">title</title>
+    <meta name="description" th:content="${response.seoDescription}">
+    <meta name="keywords" th:content="${response.seoKeywords}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/plugins/google-code-prettify/prettify.css}">
+    <link rel="stylesheet" th:href="@{/css/web/question-detail.css}">
+
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div th:replace="fragment/common :: header"></div>
+<!-- main content -->
+<div class="container main-content">
+    <div class="row">
+        <div class="col-9 br-3px">
+            <!-- 问题展示区 -->
+            <div class="card question-card">
+                <div class="card-body">
+                    <div class="question">
+                        <h1 class="question-title" th:text="${response.titleCn}"></h1>
+                        <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}">
+                        </div>
+                        <div class="question-tags">
+                            <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a">改进</a>
+                </div>
+            </div>
+
+            <!-- 方案区 -->
+            <div class="answers-header margintop-30px">
+                <h5>[[${response.answersCount}]] 个解决方案</h5>
+            </div>
+
+            <div class="answers margintop-20px">
+                <div class="card" th:each="answer : ${response.answers}">
+                    <div class="card-header m-card-header">
+
+                        <div class="answer-item-user">
+                            <div class="media-left">
+                                <img th:src="${answer.user.avatar}"
+                                     class="rounded media-img answer-item-user-img">
+                            </div>
+                            <div class="media-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <strong><a href="#" class="gray-dark" th:text="${answer.user.name}">allen</a></strong>
+                                </div>
+                                <!--<small>Donec id elit non mi porta.</small>-->
+                                <div>
+                                    <span class="m-fade">
+                                    coding
+                                    </span>
+                                </div>
+                                <!--其他信息-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body answer-card-body" th:utext="${answer.descriptionCnHtml}">
+                    </div>
+                    <div class="card-footer">
+                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a">改进</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 右边栏 -->
+        <div class="col br-3px">
+            <!-- 相关问题 -->
+            <div id="about-question-card" class="card" style="display: none;">
+                <div class="card-header m-card-header">
+                    <h3 class="card-title">相关问题</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="about-question-list" class="list-group list-group-flush">
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center border0">-->
+                            <!--<a class="fs-14px blue-a" href="#">fsfsdjfljdsofjdosfjosdjf奇偶水电费是否就搜地方</a>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- footer -->
+<div th:replace="fragment/common :: footer"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>
+<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        // 代码高亮
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+
+        var questionTitle = [[${response.titleCn}]];
+        var questionId = [[${response.id}]];
+
+
+        $('#about-question-card').show();
+        // 右边栏数据，异步加载
+        // hot tags
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/search/question/about?id=" + questionId + "&title=" + questionTitle,
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, question) {
+                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<a class=\"fs-14px blue-a\" href=\"/question/" + question.id + "\">" + question.title + "</a>";
+                        html += "</li>"
+                    });
+                    $('#about-question-list').html(html);
+                }
+            }
+        });
+    });
+</script>
+</html>

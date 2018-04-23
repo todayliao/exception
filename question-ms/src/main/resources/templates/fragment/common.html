@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 顶部导航栏 -->
+<div class="container-fluid" th:fragment="header">
+    <!-- Content here -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light m-navbar">
+        <a class="navbar-brand" th:href="@{/home}">Exception</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" id="top-nav">
+                <li class="nav-item" id="question" >
+                    <a class="nav-link fs-15px" th:href="@{/home}">问题方案 <span class="sr-only">(current)</span></a>
+                </li>
+                <!--<li class="nav-item" id="blog">-->
+                    <!--<a class="nav-link fs-15px" href="#">博客</a>-->
+                <!--</li>-->
+                <li class="nav-item" id="about">
+                    <a class="nav-link fs-15px" href="#">关于</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
+                <div class="form-group">
+                    <div class="form-group-search">
+                        <input id="header-search" name="key" class="form-control mr-sm-2 header-search" type="search" placeholder="这里输入你遇到的问题 ..." aria-label="Search" style="width: 300px;">
+                        <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
+
+            <a class="nav-link login fs-15px" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" th:href="@{/user/login}">登录</a>
+
+             <div class="dropdown" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}">
+                <a href="#" class="dropdown-toggle login-image-a" data-toggle="dropdown">
+                    <img th:src="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.avatar}"
+                         class="rounded float-right login-image m-login-image" >
+                </a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:href="@{/logout}">安全退出</a>
+                </div>
+            </div>
+
+            <!-- 提交问答 -->
+            <a th:href="@{/question}">
+                <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
+                    提交问答
+                </button>
+            </a>
+
+        </div>
+    </nav>
+</div>
+
+
+<!-- footer -->
+<footer class="footer bg-white margintop-30px" th:fragment="footer">
+    <div class="container">
+        <p class="copy-right">Copyright © 2016-2018 by <a href="#">Jiang Bing</a>. All Rights Reserved.</p>
+        <p class="for-open-source margintop-10px">Thanks for the <a href="https://getbootstrap.com/">Bootstrap</a>, loving the open source, it changed the world.</p>
+    </div>
+</footer>
+
+<div th:fragment="csrfHiddenInput">
+    <input type="hidden" th:value="${_csrf.parameterName}" id="parameterName">
+    <input type="hidden" th:value="${_csrf.token}" id="token">
+</div>
+</body>
+</html>

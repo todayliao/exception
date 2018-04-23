@@ -1,0 +1,52 @@
+{
+  "settings": {
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "question": {
+      "dynamic": false,
+      "properties": {
+        "questionId": {
+          "type": "long"
+        },
+        "title": {
+          "type": "text",
+          "index": "analyzed",
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "desc": {
+          "type": "text",
+          "index": "analyzed",
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "createTime": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||epoch_millis"
+        },
+        "viewNum": {
+          "type": "integer"
+        },
+        "voteUp": {
+          "type": "integer"
+        },
+        "voteDown": {
+          "type": "integer"
+        },
+        "createUserId": {
+          "type": "long"
+        },
+        "createUserName": {
+          "type": "keyword"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "nested"
+        }
+      }
+    }
+  }
+}

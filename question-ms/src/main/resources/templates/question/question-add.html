@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/plugins/editor-md/editormd.css}">
+    <link rel="stylesheet" th:href="@{/css/web/question-add.css}">
+
+    <title>Exception问答社区,添加问题</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div th:replace="fragment/common :: header"></div>
+<!-- main content -->
+<div class="container main-content">
+    <div class="row">
+        <div class="col-12 br-3px">
+            <div th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" class="alert alert-warning" role="alert">
+                您还没登录呢! 问题将无法提交哦! 去<a th:href="@{/user/login}">登陆</a>
+            </div>
+            <!-- csrf -->
+            <div th:replace="fragment/common :: csrfHiddenInput"></div>
+
+            <form th:action="#{/question}" id="form" method="post">
+                <div class="form-group">
+                    <label>问题标题</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label>问题出现的场景描述</label>
+                    <div id="editormd1" class="editor-md">
+                        <textarea class="editormd-markdown-textarea" name="questionDesc"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>解决方案</label>
+                    <div id="editormd2" class="editor-md">
+                        <textarea class="editormd-markdown-textarea" name="answerDesc"></textarea>
+                    </div>
+                </div>
+                <div id="added-question-tags" style="margin-bottom: 10px;">
+                    已添加的标签：
+                    <!--<span class="badge badge-secondary marginright-5px">Secondary<i class="fa fa-times-circle marginleft-5px"></i></span>-->
+                </div>
+                <div id="tag-ids-hidden" style="visibility: hidden;">
+                    <!--<input name="tagIds[0]" value="0">-->
+                </div>
+                <div class="form-group">
+                    <label>添加问题标签</label>
+                    <input type="text" class="form-control" id="input-tag-name">
+                    <div id="response-tags-container" style="margin-top: 10px;">
+                        <!--<span class="badge badge-secondary" onclick="chooseTag();">Secondary</span>-->
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">提交</button>
+            </form>
+        </div>
+
+        <!-- 右边栏 -->
+    </div>
+
+</div>
+<!-- footer -->
+<div th:replace="fragment/common :: footer"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script th:src="@{/plugins/editor-md/editormd.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/plugins/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/validate/messages_zh.min.js}"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
+
+<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
+
+<script th:inline="javascript">
+    $(function() {
+        var editormd1, editormd2;
+        editormd1 = editormd("editormd1", {
+            width   : "100%",
+            height  : 400,
+            syncScrolling : "single",
+            path    : "/plugins/editor-md/lib/", // 依赖的 lib 目录
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/editorMdImg/upload" // 依赖的 lib 目录
+        });
+
+        editormd2 = editormd("editormd2", {
+            width   : "100%",
+            height  : 600,
+            syncScrolling : "single",
+            path    : "/plugins/editor-md/lib/", // 依赖的 lib 目录
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/editorMdImg/upload" // 依赖的 lib 目录
+        });
+
+        // 标签模糊查询
+        $("#input-tag-name").bind("input propertychange", function () {
+            var inputStr = $(this).val();
+            if ($.trim(inputStr).length < 3) {
+                return;
+            }
+
+            // csrf
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
+            var jsonStr = {"tagName": inputStr};
+
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "/tag/queryByName",
+                datatype: "json",
+                contentType: "application/json",
+                data: JSON.stringify(jsonStr),
+                success: function (response) {
+                    if (response.success == true) {
+                        var data = response.data;
+                        $('#response-tags-container').html('');
+                        $.each(data, function (i, tag) {
+                            var html = "<span class=\"badge badge-secondary marginright-5px\" onclick=\"chooseTag('"
+                                + tag.tagId + "', '"
+                                + tag.tagName + "');\">"
+                                + tag.tagName + "</span>";
+                            $('#response-tags-container').append(html);
+                        });
+                    }
+                }
+            });
+        });
+
+        // 表单验证 todo
+    });
+
+    var tagIdsMap = {};
+    var index = 0;
+
+    // add tag
+    function chooseTag(tagId, tagName) {
+        if (tagId in tagIdsMap) {
+            alert("该标签已经添加了呢！")
+            return;
+        }
+        var html = "<span class=\"badge badge-secondary marginright-5px\" id='"+tagName+"'>" + tagName
+            + "<i class=\"fa fa-times-circle marginleft-5px\" onclick=\"deleteTag('"+tagId+"','"+tagName+"')\"></i></span>";
+        $('#added-question-tags').append(html)
+        var html2 = " <input id='hidden-"+tagName+"' name=\"tagIds["+(index++)+"]\" value='"+tagId+"'>";
+        $('#tag-ids-hidden').append(html2);
+        // add to map
+        tagIdsMap[tagId] = tagId;
+    }
+
+    function deleteTag(tagId, tagName) {
+        $('#' + tagName).remove();
+        $('#hidden-' + tagName).remove();
+        delete tagIdsMap[tagId];
+    }
+
+
+
+
+
+
+
+
+</script>
+</html>

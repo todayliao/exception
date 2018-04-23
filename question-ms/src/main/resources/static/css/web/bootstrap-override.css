@@ -1,0 +1,106 @@
+/*.bg-dark {*/
+    /*background-color: #24292e!important;*/
+/*}*/
+
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+}
+
+.h5, h5 {
+    font-size: 16px;
+}
+
+pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #eff0f1;
+    border-radius: 3px;
+    overflow-x: auto;
+}
+
+code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 3px;
+}
+
+.form-control {
+    border-radius: 2px;
+}
+
+.btn {
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.badge {
+    border-radius: 3px;
+    padding: 0.3em 0.9em;
+    font-weight: normal;
+}
+
+
+.nav-tabs .nav-link {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #f7f7f7;
+    border-color: #dee2e6 #dee2e6 #f7f7f7;
+    border-top: 2px solid #e36209;
+}
+
+.alert {
+    border-radius: 2px;
+}
+
+.card-header {
+    background: #fff;
+    padding: .85rem 1.25rem;
+}
+
+.card-footer {
+    background: #fff;
+    border-top: 1px solid #f6f6f6;
+}
+
+.m-card-header {
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 1px 5px rgba(0,0,0,.1);
+}
+
+blockquote {
+    color: #666;
+    border-left: 4px solid #ddd;
+    padding: 0 10px;
+    margin-left: 0;
+    font-size: 14px;
+}
+
+.dropdown-menu {
+    left: -50px;
+    border-radius: 2px;
+    font-size: 14px;
+    margin: .5rem 0 0;
+}
+
+.badge-secondary {
+    color: #175199;
+    background-color: #f1f8ff;
+}
+
+.badge-secondary[href]:focus, .badge-secondary[href]:hover {
+    color: #175199;
+    text-decoration: none;
+    background-color: #def;
+}

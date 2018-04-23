@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exception.qms.domain.mapper.AnswerDescMapper" >
+  <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.AnswerDesc" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="answer_id" property="answerId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.exception.qms.domain.entity.AnswerDesc" extends="BaseResultMap" >
+    <result column="description_cn" property="descriptionCn" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, answer_id, create_time, update_time, create_user_id, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    description_cn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_qms_answer_desc
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="queryAnswerDescInfo" resultMap="ResultMapWithBLOBs">
+    select id, description_cn from t_qms_answer_desc
+    where answer_id = #{answerId}
+  </select>
+
+  <select id="queryByAnswerIds" resultMap="ResultMapWithBLOBs">
+    select answer_id, description_cn from t_qms_answer_desc
+    where answer_id in
+    <foreach collection="list" item="answerId" open="(" separator="," close=")">
+      #{answerId}
+    </foreach>
+    and is_deleted = 0
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_qms_answer_desc
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
+    insert into t_qms_answer_desc (answer_id, create_time,
+      update_time, create_user_id, is_deleted, 
+      description_cn)
+    values (#{answerId,jdbcType=BIGINT}, NOW(),
+      NOW(), #{createUserId,jdbcType=BIGINT}, 0,
+      #{descriptionCn,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
+    insert into t_qms_answer_desc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="answerId != null" >
+        answer_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="descriptionCnHtml != null" >
+        description_cn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="answerId != null" >
+        #{answerId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="descriptionCnHtml != null" >
+        #{descriptionCnHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
+    update t_qms_answer_desc
+    <set >
+      <if test="answerId != null" >
+        answer_id = #{answerId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="descriptionCn != null" >
+        description_cn = #{descriptionCn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
+    update t_qms_answer_desc
+    set answer_id = #{answerId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      description_cn = #{descriptionCnHtml,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
+    update t_qms_answer_desc
+    set answer_id = #{answerId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+/*.home-nav-item-a {*/
+    /*line-height: 0.5;*/
+/*}*/
+
+.home-list-group-item {
+    border-left: 0;
+    border-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.hot-tag-card-body ul li {
+    margin-bottom: 20px;
+}
+
+.hot-tag-card-body ul li:last-child {
+    margin-bottom: 0;
+}

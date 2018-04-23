@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/css/web/question-search.css}">
+
+    <title>Exception问答社区</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div th:replace="fragment/common :: header"></div>
+<!-- main content -->
+<div class="container main-content">
+    <div class="row">
+        <div class="col-9 br-3px">
+
+            <!-- search -->
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
+                        <div class="row" style="width: 100%; margin: 0 0;">
+                            <!--<div class="col-11">-->
+                            <!--<input id="searchKey" class="form-control mr-sm-2 fs-14px" th:value="${searchKey}" name="key" type="search" aria-label="Search" style="width: 100%;">-->
+                            <!--</div>-->
+                            <!--<div class="col-1" style="padding-left: 0;">-->
+                                <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">搜&nbsp;索</button>-->
+                            <!--</div>-->
+                            <div class="input-group" style="width: 100%;">
+                                <input th:value="${searchKey}" name="key" class="form-control fs-14px" type="search" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">搜&nbsp;&nbsp;&nbsp;&nbsp;索</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <ul id="tab-container" class="nav nav-tabs margintop-20px"  role="tablist">
+                <li class="nav-item">
+                    <a id="relevance" class="nav-link active fs-14px" th:href="@{'/search?tab=relevance&key=' + ${searchKey}}">相关度</a>
+                </li>
+                <li class="nav-item">
+                    <a id="vote" class="nav-link fs-14px" th:href="@{'/search?tab=vote&key=' + ${searchKey}}">点赞数</a>
+                </li>
+                <li class="nav-item">
+                    <a id="view" class="nav-link fs-14px" th:href="@{'/search?tab=view&key=' + ${searchKey}}">浏览数</a>
+                </li>
+                <li class="nav-item">
+                    <a id="new" class="nav-link fs-14px" th:href="@{'/search?tab=new&key=' + ${searchKey}}">最新</a>
+                </li>
+            </ul>
+            <!--<div class="list-group">-->
+
+            <!--</div>-->
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active margintop-20px" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="list-group">
+                            <div th:each="question : ${response.data}" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item">
+                                <!--<div class="media-left marginleft-5px">-->
+                                <!--<img th:src="${question.userAvatar}" class="rounded media-img">-->
+                                <!--</div>-->
+                                <h5 class="mb-1"><a th:href="@{'/question/' + ${question.questionId}}" th:utext="${question.titleCn}" class="gray-dark"></a></h5>
+                                <div class="d-flex w-100 justify-content-between">
+                                </div>
+                                <!--<small>Donec id elit non mi porta.</small>-->
+                                <div th:utext="${question.descriptionCn}">
+                                </div>
+                                <!--其他信息-->
+                                <div class="margintop-10px">
+                                    <a th:each="tag : ${question.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
+                                    <span class="m-fade fs-12px" style="margin-left: -2px;">
+                                        •&nbsp;<strong th:text="${question.createUserName}"></strong>
+                                        &nbsp;•&nbsp;[[${question.createTime}]]
+                                        </span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 分页 -->
+            <nav aria-label="Page navigation example">
+                <ul id="pagination" class="pagination justify-content-center margintop-30px">
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 右边栏 -->
+        <div class="col br-3px">
+            <!-- 热门标签 -->
+            <div class="card">
+                <div class="card-header m-card-header">
+                    <h3 class="card-title">热门标签</h3>
+                    <!--<span class="pull-right">更多>></span>-->
+                </div>
+                <div class="card-body hot-tag-card-body">
+                    <ul id="hot-tag-list" class="list-group list-group-flush">
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
+                        <!--<span class="badge badge-secondary">android</span>-->
+                        <!--<span class="badge badge-light badge-pill">14</span>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 热门问题-->
+            <div class="card margintop-20px">
+                <div class="card-header m-card-header">
+                    <h3 class="card-title">热门问题</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="hot-question-list" class="list-group list-group-flush">
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
+                        <!--<a class="fs-14px gray-dark" href="#">沃尔夫圣诞节福利的时间反馈了电视剧反垄断法</a>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- footer -->
+<div th:replace="fragment/common :: footer"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        // 分页
+        $('#pagination').twbsPagination({
+            totalPages: [[${response.totalPage}]],
+            visiblePages: 7,
+            startPage: [[${response.currentPage}]],
+            initiateStartPageClick: false,
+            first: '首页',
+            prev: '上一页',
+            next: '下一页',
+            last: '尾页',
+            onPageClick: function (event, pageIndex) {
+                var searchKey = $('#searchKey').val();
+                location.href = "/search?key=" + searchKey + "&pageIndex=" + pageIndex;
+            }
+        });
+
+        // 右边栏数据，异步加载
+        // hot tags
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/home/hot/tag/list",
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, tag) {
+                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<a href='#' class=\"badge badge-secondary\">" + tag.tagName + "</a>";
+                        html += "<span class=\"badge badge-light badge-pill m-fade\">" + tag.questionCount + "</span>";
+                        html += "</li>"
+                    });
+                    $('#hot-tag-list').html(html);
+                }
+            }
+        });
+
+        // hot questions
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/home/hot/question/list",
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, question) {
+                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<a class=\"fs-14px blue-a\" href='/question/" + question.id + "'>" + question.titleCn + "</a>";
+                        html += "</li>"
+                    });
+                    $('#hot-question-list').html(html);
+                }
+            }
+        });
+    });
+
+</script>
+</html>
