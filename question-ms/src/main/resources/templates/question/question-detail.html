@@ -34,7 +34,13 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a">改进</a>
+                    <!--点赞-->
+                    <span class="gray-a">
+                        <i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞
+                        <!--<i class="fa fa-heart-o stress-color"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
+                    </span>
+                    <span class="gray marginleft-10px">|</span>
+                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px">改进</a>
                 </div>
             </div>
 
@@ -69,6 +75,7 @@
                     <div class="card-body answer-card-body" th:utext="${answer.descriptionCnHtml}">
                     </div>
                     <div class="card-footer">
+
                         <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a">改进</a>
                     </div>
 

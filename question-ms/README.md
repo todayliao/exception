@@ -35,6 +35,7 @@
 
 ## V1.0.5
 
+- 用户登录，更新最后一次登录时间 TODO
 - 点赞功能，异步实现，spring security 返回 json 格式，非登录页格式 TODO
 ，并记录点赞的用户信息，以便显示 TODO
 - 基本 SEO 功能实现，head 加入 keywords description meta 信息，供搜索引擎更好的抓取

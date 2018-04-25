@@ -124,6 +124,14 @@ body {
     color: #24292e;
 }
 
+.gray {
+    color: #8590a6;
+}
+
+.stress-color {
+    color: #007bff;
+}
+
 .main-content {
     margin-top: 80px;
     /*padding: 20px 0;*/
@@ -156,7 +164,7 @@ body {
 
 .gray-a {
     color: #8590a6;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .gray-a:hover {
