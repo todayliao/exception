@@ -172,7 +172,7 @@ public class SearchBusinessImpl implements SearchBusiness {
             }
 
             String tagsJson = JSON.toJSONString(searchHitFields.getSource().get(QuestionIndexKey.TAGS));
-            List<TagResponseVO> responseVOS = JSON.parseArray(tagsJson,TagResponseVO.class);
+            List<TagResponseVO> responseVOS = JSON.parseArray(tagsJson, TagResponseVO.class);
             searchResponseVO.setTags(responseVOS);
 
             searchResponseVO.setCreateUserId(Longs.tryParse(String.valueOf(searchHitFields.getSource().get(QuestionIndexKey.CREATE_USER_ID))));
