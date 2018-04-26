@@ -1,10 +1,13 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
 import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author jiangbing(江冰)
@@ -26,4 +29,6 @@ public interface QuestionBusiness {
     BaseResponse addQuestion(QuestionForm questionForm, Long userId);
 
     BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm);
+
+    BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request);
 }

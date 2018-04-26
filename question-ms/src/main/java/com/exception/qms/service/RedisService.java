@@ -12,8 +12,12 @@ import java.util.List;
  **/
 public interface RedisService {
 
-    void set(String key, String value);
+    void set(String key, String value, long seconds);
 
     boolean exists(String key);
+
+    boolean expire(String key, long seconds);
+
+
 
 }

@@ -71,4 +71,9 @@ public class QuestionServiceImpl implements QuestionService {
     public int updateQuestionDesc(QuestionDesc questionDesc) {
         return questionDescMapper.updateByQuestionId(questionDesc);
     }
+
+    @Override
+    public int increaseQuestionViewNum(Long questionId) {
+        return questionMapper.increaseQuestionViewNum(questionId);
+    }
 }

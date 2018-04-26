@@ -6,12 +6,11 @@ import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.enums.QuestionTypeEnum;
 import com.exception.qms.exception.QMSException;
-import com.exception.qms.service.AnswerService;
-import com.exception.qms.service.QuestionSearchService;
-import com.exception.qms.service.QuestionService;
-import com.exception.qms.service.QuestionTagService;
+import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
+import com.exception.qms.utils.IpUtil;
 import com.exception.qms.utils.MarkdownUtil;
+import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
 import com.exception.qms.web.vo.common.TagResponseVO;
@@ -26,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -51,6 +51,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     private QuestionSearchService questionSearchService;
     @Autowired
     private ExecutorService executorService;
+    @Autowired
+    private RedisService redisService;
     @Autowired
     private Mapper mapper;
 
@@ -197,6 +199,31 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         // 异步添加/更新 es index
         executorService.execute(() -> questionSearchService.index(questionUpdateForm.getId()));
         return new BaseResponse().success();
+    }
+
+    @Override
+    public BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request) {
+        log.info("increaseQuestionViewNum, the remote ip: {}", IpUtil.getIpAddr(request));
+
+        String redisKey = String.format("%s_%s", IpUtil.getIpAddr(request), questionViewNumIncreaseDTO.getQuestionId());
+        boolean isExisted = redisService.exists(redisKey);
+
+        final long expireSeconds = 1*60*60;
+
+        if (isExisted) {
+            log.warn("Can't increase the viewNum of the question, the key already existed: {}", redisKey);
+            // expire the key, one hours
+            redisService.expire(redisKey, expireSeconds);
+            return new BaseResponse().fail();
+        }
+
+        int count = questionService.increaseQuestionViewNum(questionViewNumIncreaseDTO.getQuestionId());
+
+        if (count > 0) {
+            redisService.set(redisKey, "", expireSeconds);
+            return new BaseResponse().success();
+        }
+        return new BaseResponse().fail();
     }
 
 }

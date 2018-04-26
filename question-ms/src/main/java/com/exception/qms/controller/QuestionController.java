@@ -7,6 +7,7 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
+import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -77,7 +78,7 @@ public class QuestionController extends BaseController {
      * @return
      */
     @GetMapping("/question/{questionId}/edit")
-    @OperatorLog(description = "问题添加页面展示")
+    @OperatorLog(description = "问题改进页面展示")
     public String showQuestionEditPage(@PathVariable("questionId") Long quesitonId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), questionBusiness.queryQuestionInfo(quesitonId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
@@ -85,8 +86,9 @@ public class QuestionController extends BaseController {
     }
 
     /**
-     * 问题修改
+     * 问题更新
      *
+     * @param questionUpdateForm
      * @return
      */
     @PostMapping("/question/edit")
@@ -95,5 +97,18 @@ public class QuestionController extends BaseController {
         questionBusiness.updateQuestion(questionUpdateForm);
         // 跳转问题展示页
         return String.format("redirect:/question/%d", questionUpdateForm.getId());
+    }
+
+    /**
+     * 问题被浏览数增加
+     *
+     * @param questionViewNumIncreaseDTO
+     * @return
+     */
+    @PostMapping("/question/viewNum/increase")
+//    @OperatorLog(description = "问题被浏览数增加")
+    @ResponseBody
+    public BaseResponse increaseQuestionViewNum(@Validated @RequestBody QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request) {
+        return questionBusiness.increaseQuestionViewNum(questionViewNumIncreaseDTO, request);
     }
 }

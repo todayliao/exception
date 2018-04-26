@@ -176,4 +176,8 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <update id="increaseQuestionViewNum">
+    update t_qms_question set view_num = view_num + 1 where id = #{questionId}
+  </update>
 </mapper>

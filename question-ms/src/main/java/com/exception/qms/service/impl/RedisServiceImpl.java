@@ -14,6 +14,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author jiangbing(江冰)
@@ -29,8 +30,8 @@ public class RedisServiceImpl implements RedisService {
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
-    public void set(String key, String value) {
-        stringRedisTemplate.opsForValue().set(key, value);
+    public void set(String key, String value, long seconds) {
+        stringRedisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
     }
 
     @Override
@@ -39,6 +40,11 @@ public class RedisServiceImpl implements RedisService {
             byte[] bytes = getRedisMasterSerializer().serialize(key);
             return redisConnection.exists(bytes);
         });
+    }
+
+    @Override
+    public boolean expire(String key, long seconds) {
+        return stringRedisTemplate.expire(key, seconds, TimeUnit.SECONDS);
     }
 
     /**

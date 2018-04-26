@@ -37,4 +37,6 @@ public interface QuestionService {
     int updateQuestion(Question question);
 
     int updateQuestionDesc(QuestionDesc questionDesc);
+
+    int increaseQuestionViewNum(Long questionId);
 }
