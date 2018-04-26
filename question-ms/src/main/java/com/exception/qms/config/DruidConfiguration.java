@@ -108,10 +108,10 @@ public class DruidConfiguration {
 
         try {
             dataSource.setFilters(filters);
-            log.info("Druid 数据源初始化设置成功 ......");
+            log.info("The alibaba druid datasource init success ......");
         } catch (SQLException e) {
             e.printStackTrace();
-            log.error("Druid 数据源 filters 设置失败 ......");
+            log.error("The alibaba druid datasource init fail ......");
         }
         return dataSource;
     }

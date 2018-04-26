@@ -20,6 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author jiangbing(江冰)
@@ -34,6 +35,8 @@ public class AuthProvider implements AuthenticationProvider {
     private UserService userService;
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private ExecutorService executorService;
 
     /**
      * 加盐
@@ -60,6 +63,8 @@ public class AuthProvider implements AuthenticationProvider {
         authUser.setGrantedAuthorityList(grantedAuthorityList);
 
         if (md5PasswordEncoder.isPasswordValid(authUser.getPassword(), inputPassword, PASSWORD_SALT)) {
+            // update user the last login time
+            executorService.execute(() -> userService.updateLastLoginTime(user.getId()));
             return new UsernamePasswordAuthenticationToken(authUser, null, authUser.getAuthorities());
         }
 

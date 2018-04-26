@@ -14,10 +14,18 @@ public interface UserService {
 
     /**
      * 根据 userId 批量获取用户信息
+     *
      * @param userIds
      * @return
      */
     List<User> queryUsersByUserIds(List<Long> userIds);
 
     User queryByUserName(String userName);
+
+    /**
+     * 更新用户最后一次登录时间为当前时间
+     *
+     * @return
+     */
+    int updateLastLoginTime(Long userId);
 }
