@@ -47,7 +47,7 @@
                     <!-- 被浏览次数 -->
                     <span class="gray marginleft-10px fs-14px" href="#">
                         <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
-                        <i class="fa fa-eye"></i>&nbsp;&nbsp;9234&nbsp;次浏览
+                        <i class="fa fa-eye"></i>&nbsp;&nbsp;[[${response.viewNum}]]&nbsp;次浏览
                     </span>
                     <span class="gray marginleft-10px">|</span>
                     <!-- 改进 -->
@@ -88,8 +88,15 @@
                     <div class="card-body answer-card-body" th:utext="${answer.descriptionCnHtml}">
                     </div>
                     <div class="card-footer">
-
-                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a">改进</a>
+                        <!-- 点赞 -->
+                        <a class="gray-a" href="#">
+                            <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
+                            <i class="fa fa-heart"></i>&nbsp;&nbsp;90&nbsp;次点赞
+                        </a>
+                        <!-- 改进 -->
+                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px">
+                            <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
+                        </a>
                     </div>
 
                 </div>
@@ -173,7 +180,7 @@
             url: "/question/viewNum/increase",
             datatype: "json",
             contentType: "application/json",
-            data: JSON.stringify(jsonStr)
+            // data: JSON.stringify(jsonStr)
         });
     });
 </script>
