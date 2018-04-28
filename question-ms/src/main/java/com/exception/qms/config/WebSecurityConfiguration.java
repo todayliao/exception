@@ -1,6 +1,7 @@
 package com.exception.qms.config;
 
 import com.exception.qms.security.AuthProvider;
+import com.exception.qms.security.QmsAuthenticationSuccessHandler;
 import org.apache.catalina.filters.HttpHeaderSecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +47,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/user/login") // 配置角色登录处理入口
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home") // 设置默认登录后 forword url
+//                .defaultSuccessUrl("/home") // 设置默认登录后 forword url
+                .successHandler(authenticationSuccessHandler())
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -76,6 +78,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthProvider authProvider() {
         return new AuthProvider();
+    }
+
+    @Bean
+    public QmsAuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new QmsAuthenticationSuccessHandler();
     }
 
 }
