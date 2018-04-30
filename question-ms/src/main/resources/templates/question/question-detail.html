@@ -179,7 +179,7 @@
             async: true,
             url: "/question/viewNum/increase",
             datatype: "json",
-            // contentType: "application/json",
+            contentType: "application/json",
             data: JSON.stringify(jsonStr)
         });
     });
@@ -201,7 +201,7 @@
             url: "/api/question/voteUp/change",
             datatype: "json",
             contentType: "application/json",
-            // data: JSON.stringify(jsonStr),
+            data: JSON.stringify(jsonStr),
             success: function (response) {
                 if (response.success == true) {
                     alert("success");

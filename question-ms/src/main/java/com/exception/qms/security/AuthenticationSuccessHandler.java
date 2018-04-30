@@ -1,5 +1,8 @@
 package com.exception.qms.security;
 
+import com.exception.qms.common.BaseResponse;
+import com.exception.qms.utils.HttpUtil;
+import com.exception.qms.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -22,9 +25,9 @@ import java.io.PrintWriter;
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         // 开启 useReferer, 默认情况下关闭的
-        String returnUrl = httpServletRequest.getHeader("Referer");
+        String returnUrl = request.getHeader("Referer");
         // 如果是从登录页面登录成功(非异步)的，则跳转首页
         AntPathMatcher antPathMatcher = new AntPathMatcher();
         boolean isFromLoginPage = antPathMatcher.match("**/user/login**", returnUrl);
@@ -33,17 +36,15 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         }
 
         // 是否异步登录，异步登录，则返回 json
-        String ajaxHeader = httpServletRequest.getHeader("X-Requested-With");
-        boolean isAjax = "XMLHttpRequest".equals(ajaxHeader);
+        boolean isAjax = HttpUtil.isAjaxRequest(request);
         if (isAjax) {
-            httpServletResponse.setContentType("application/json;charset=UTF-8");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("success", true);
-            PrintWriter pw = httpServletResponse.getWriter();
-            pw.print(jsonObject);
+            response.setContentType(HttpUtil.JSON_UTF8_CONTENT_TYPE);
+            BaseResponse baseResponse = new BaseResponse();
+            PrintWriter pw = response.getWriter();
+            pw.print(JsonUtil.toString(baseResponse.success()));
             pw.close();
         } else {
-            super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
+            super.onAuthenticationSuccess(request, response, authentication);
         }
 
     }

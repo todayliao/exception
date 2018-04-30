@@ -1,8 +1,6 @@
 package com.exception.qms.config;
 
-import com.exception.qms.security.AuthProvider;
-import com.exception.qms.security.AuthenticationSuccessHandler;
-import com.exception.qms.security.LoginUrlEntryPoint;
+import com.exception.qms.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -11,7 +9,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -51,11 +51,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home") // 设置默认登录后 forword url
                 .successHandler(authenticationSuccessHandler())
+                .failureHandler(authenticationFailHandler())
                 .and()
                 .logout()
                 .logoutUrl("/logout")
 //                .logoutSuccessUrl("/home")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .logoutSuccessHandler(logoutSuccessHandler())
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
@@ -67,7 +69,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .disable()
                 .and();
-
     }
 
     /**
@@ -88,6 +89,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new AuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailHandler() {
+        return new AuthenticationFailHandler("/user/login");
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new LogoutSuccessHandler();
     }
 
     @Bean

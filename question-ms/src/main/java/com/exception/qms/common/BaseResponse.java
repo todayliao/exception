@@ -25,6 +25,12 @@ public class BaseResponse<T> implements Serializable {
         return this;
     }
 
+    public BaseResponse<T> fail(String errorMessage) {
+        this.setSuccess(false);
+        this.setErrorMessage(errorMessage);
+        return this;
+    }
+
     public BaseResponse<T> fail(BaseException baseException) {
         this.setSuccess(false);
         this.setErrorCode(baseException.getErrorCode());

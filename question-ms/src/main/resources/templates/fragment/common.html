@@ -103,16 +103,13 @@
                 type: "post",
                 async: true,
                 url: "/login",
-                // dataType: "json",
                 data: formParam,
                 success: function (response) {
-                    alert('come')
-                    alert(response.success);
                     if (response.success == true) {
                         $('#loginModal').modal('hide');
                         window.location.reload();
                     } else {
-                        layer.msg(response.message);
+                        layer.msg(response.errorMessage);
                     }
 
                 },

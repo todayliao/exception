@@ -1,5 +1,8 @@
 package com.exception.qms.security;
 
+import com.exception.qms.common.BaseResponse;
+import com.exception.qms.utils.HttpUtil;
+import com.exception.qms.utils.JsonUtil;
 import net.sf.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -43,13 +46,11 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
         String uri = request.getRequestURI();
         if (uri.startsWith(API_PREFIX)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.setContentType("application/json;charset=UTF-8");
+            response.setContentType(HttpUtil.JSON_UTF8_CONTENT_TYPE);
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("success", false);
-            jsonObject.put("message", "您还没登录呢");
+            BaseResponse baseResponse = new BaseResponse();
             PrintWriter pw = response.getWriter();
-            pw.print(jsonObject);
+            pw.print(JsonUtil.toString(baseResponse.fail("您还没登录呢")));
             pw.close();
         } else {
             super.commence(request, response, authException);
