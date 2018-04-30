@@ -1,6 +1,7 @@
 package com.exception.qms.security;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.util.AntPathMatcher;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author jiangbing(江冰)
@@ -29,7 +31,21 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         if (!isFromLoginPage) {
             super.setUseReferer(true);
         }
-        super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
+
+        // 是否异步登录，异步登录，则返回 json
+        String ajaxHeader = httpServletRequest.getHeader("X-Requested-With");
+        boolean isAjax = "XMLHttpRequest".equals(ajaxHeader);
+        if (isAjax) {
+            httpServletResponse.setContentType("application/json;charset=UTF-8");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("success", true);
+            PrintWriter pw = httpServletResponse.getWriter();
+            pw.print(jsonObject);
+            pw.close();
+        } else {
+            super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
+        }
+
     }
 
 }

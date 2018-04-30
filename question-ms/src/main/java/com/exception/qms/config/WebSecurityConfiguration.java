@@ -54,14 +54,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/home")
+//                .logoutSuccessUrl("/home")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(loginUrlEntryPoint())
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(loginUrlEntryPoint())
                 .and()
                 .headers()
                 .frameOptions()
@@ -90,9 +90,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new AuthenticationSuccessHandler();
     }
 
-//    @Bean
-//    public LoginUrlEntryPoint loginUrlEntryPoint() {
-//        return new LoginUrlEntryPoint("/user/login");
-//    }
+    @Bean
+    public LoginUrlEntryPoint loginUrlEntryPoint() {
+        return new LoginUrlEntryPoint("/user/login");
+    }
 
 }

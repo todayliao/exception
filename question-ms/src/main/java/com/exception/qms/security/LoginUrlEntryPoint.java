@@ -1,5 +1,6 @@
 package com.exception.qms.security;
 
+import net.sf.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
@@ -18,12 +19,6 @@ import java.io.PrintWriter;
 public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
     private static final String API_PREFIX = "/api";
-    private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
-    private static final String NEED_LOGIN_RESPONSE_JSON = "{\n" +
-            "  \"success\": false,\n" +
-            "  \"message\": \"您需要登录账号\"\n" +
-            "}";
-
 
     /**
      * @param loginFormUrl URL where the login page can be found. Should either be
@@ -35,7 +30,8 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
     }
 
     /**
-     * 异常处理
+     * 针对 /api 开头的 url 做特殊处理，不走 spring security 默认跳转的登录页面，而是返回 json
+     *
      * Performs the redirect (or forward) to the login form URL.
      *
      * @param request
@@ -47,10 +43,13 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
         String uri = request.getRequestURI();
         if (uri.startsWith(API_PREFIX)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.setContentType(CONTENT_TYPE);
+            response.setContentType("application/json;charset=UTF-8");
 
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("success", false);
+            jsonObject.put("message", "您还没登录呢");
             PrintWriter pw = response.getWriter();
-            pw.write(NEED_LOGIN_RESPONSE_JSON);
+            pw.print(jsonObject);
             pw.close();
         } else {
             super.commence(request, response, authException);

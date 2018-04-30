@@ -129,6 +129,7 @@
 
 <script th:replace="fragment/common-js :: js"></script>
 <script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
@@ -178,8 +179,8 @@
             async: true,
             url: "/question/viewNum/increase",
             datatype: "json",
-            contentType: "application/json",
-            // data: JSON.stringify(jsonStr)
+            // contentType: "application/json",
+            data: JSON.stringify(jsonStr)
         });
     });
 
@@ -200,14 +201,17 @@
             url: "/api/question/voteUp/change",
             datatype: "json",
             contentType: "application/json",
-            data: JSON.stringify(jsonStr),
+            // data: JSON.stringify(jsonStr),
             success: function (response) {
                 if (response.success == true) {
+                    alert("success");
                     var data = response.data;
 
-                } else {
-                    $('#loginModal').modal('show');
                 }
+            },
+            // http status not 200
+            error: function(response) {
+                $('#loginModal').modal('show');
             }
 
         });

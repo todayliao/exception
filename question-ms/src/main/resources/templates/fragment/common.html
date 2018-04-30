@@ -75,7 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/login}" method="POST">
+                <form id="login-form">
                     <div class="form-group">
                         <label>用户名</label>
                         <input type="text" class="form-control" name="username">
@@ -88,11 +88,41 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">记住密码</label>
                     </div>
-                    <button type="submit" class="btn btn-primary margintop-20px">登录</button>
+                    <!-- csrf -->
+                    <div th:replace="fragment/common :: csrfHiddenInput"></div>
+                    <button type="button" class="btn btn-primary margintop-20px" onclick="ajaxLogin()">登录</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script th:inline="javascript">
+        function ajaxLogin() {
+            var formParam = $('#login-form').serialize();
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/login",
+                // dataType: "json",
+                data: formParam,
+                success: function (response) {
+                    alert('come')
+                    alert(response.success);
+                    if (response.success == true) {
+                        $('#loginModal').modal('hide');
+                        window.location.reload();
+                    } else {
+                        layer.msg(response.message);
+                    }
+
+                },
+                // http status not 200
+                error: function(response) {
+                    layer.msg('登录失败 !!!');
+                }
+            });
+        }
+    </script>
 </div>
 
 <div th:fragment="csrfHiddenInput">
