@@ -185,7 +185,32 @@
 
     // 点赞问题
     function likeThisQuestion() {
-        $('#loginModal').modal('show');
+        // csrf
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        var questionId = [[${response.id}]];
+        var jsonStr = {"questionId": questionId};
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/api/question/voteUp/change",
+            datatype: "json",
+            contentType: "application/json",
+            data: JSON.stringify(jsonStr),
+            success: function (response) {
+                if (response.success == true) {
+                    var data = response.data;
+
+                } else {
+                    $('#loginModal').modal('show');
+                }
+            }
+
+        });
     }
 
     // 点赞方案

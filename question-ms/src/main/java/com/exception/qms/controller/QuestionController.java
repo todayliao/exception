@@ -7,9 +7,11 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
+import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
@@ -106,9 +108,19 @@ public class QuestionController extends BaseController {
      * @return
      */
     @PostMapping("/question/viewNum/increase")
-//    @OperatorLog(description = "问题被浏览数增加")
     @ResponseBody
     public BaseResponse increaseQuestionViewNum(@Validated @RequestBody QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request) {
         return questionBusiness.increaseQuestionViewNum(questionViewNumIncreaseDTO, request);
+    }
+
+    /**
+     * 问题赞数改变（增加或减少）
+     *
+     * @return
+     */
+    @PostMapping("/api/question/voteUp/change")
+    @ResponseBody
+    public BaseResponse changeQuestionVoteUp(@Validated @RequestBody ChangeQuestionVoteUpRequestDTO changeQuestionVoteUpRequestDTO, HttpSession session) {
+        return questionBusiness.changeQuestionVoteUp(changeQuestionVoteUpRequestDTO, session);
     }
 }

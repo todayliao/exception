@@ -1,6 +1,7 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
@@ -8,6 +9,7 @@ import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author jiangbing(江冰)
@@ -31,4 +33,6 @@ public interface QuestionBusiness {
     BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm);
 
     BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request);
+
+    BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO questionId, HttpSession session);
 }

@@ -1,8 +1,8 @@
 package com.exception.qms.config;
 
 import com.exception.qms.security.AuthProvider;
-import com.exception.qms.security.QmsAuthenticationSuccessHandler;
-import org.apache.catalina.filters.HttpHeaderSecurityFilter;
+import com.exception.qms.security.AuthenticationSuccessHandler;
+import com.exception.qms.security.LoginUrlEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -36,6 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home/**").permitAll()
                 .antMatchers("/tag/**").permitAll()
                 .antMatchers("/search/question/allIndex/update").hasRole("USER")
+                .antMatchers("/api/**").hasRole("USER")
 //                .antMatchers("/question/**").permitAll()
 //                .antMatchers("/static/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/question").hasRole("USER")
@@ -47,7 +49,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/user/login") // 配置角色登录处理入口
                 .loginProcessingUrl("/login")
-//                .defaultSuccessUrl("/home") // 设置默认登录后 forword url
+                .defaultSuccessUrl("/home") // 设置默认登录后 forword url
                 .successHandler(authenticationSuccessHandler())
                 .and()
                 .logout()
@@ -57,6 +59,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
+//                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(loginUrlEntryPoint())
                 .and()
                 .headers()
                 .frameOptions()
@@ -81,8 +86,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public QmsAuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new QmsAuthenticationSuccessHandler();
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AuthenticationSuccessHandler();
     }
+
+//    @Bean
+//    public LoginUrlEntryPoint loginUrlEntryPoint() {
+//        return new LoginUrlEntryPoint("/user/login");
+//    }
 
 }

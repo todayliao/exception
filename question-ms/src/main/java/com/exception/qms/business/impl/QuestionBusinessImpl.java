@@ -10,6 +10,7 @@ import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.utils.IpUtil;
 import com.exception.qms.utils.MarkdownUtil;
+import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -224,6 +226,11 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             return new BaseResponse().success();
         }
         return new BaseResponse().fail();
+    }
+
+    @Override
+    public BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO questionId, HttpSession session) {
+        return null;
     }
 
 }
