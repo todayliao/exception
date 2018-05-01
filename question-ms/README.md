@@ -39,15 +39,14 @@
 - 基本 SEO 功能实现，head 加入 keywords description meta 信息，供搜索引擎更好的抓取
 - 线上 nginx 容器化
 - 点赞功能，异步实现，spring security 返回 json 格式，非登录页格式
-，并记录点赞的用户信息，以便显示 TODO
+，并记录点赞的用户信息，以便显示
 
 
 ## V1.0.6
 
-- 登出后，停留在原页面 TODO
+- 登出后，停留在原页面
 - 用户中心，展示用户相关信息 TODO
 - 图片点击放大 TODO
-- 除问题详情页外，其他页面的 SEO 优化 TODO
 - 安全退出添加前置图标 TODO
 - elasticsearch 容器化 TODO
 
@@ -56,6 +55,7 @@
 - nginx 流量统计 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
+- 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
 
 ## V1.0.8
 
