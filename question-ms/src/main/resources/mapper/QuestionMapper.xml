@@ -180,4 +180,14 @@
   <update id="increaseQuestionViewNum">
     update t_qms_question set view_num = view_num + 1 where id = #{questionId}
   </update>
+  
+  <update id="voteUpQuestion">
+    update t_qms_question set vote_up = vote_up + 1 where id = #{questionId}
+  </update>
+
+  <update id="voteDownQuestion">
+    update t_qms_question set vote_up = vote_up - 1 where id = #{questionId}
+  </update>
+
+
 </mapper>

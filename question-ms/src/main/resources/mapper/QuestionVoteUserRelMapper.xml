@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exception.qms.domain.mapper.QuestionVoteUserRelMapper" >
+  <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.QuestionVoteUserRel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="question_id" property="questionId" jdbcType="BIGINT" />
+    <result column="vote_user_id" property="voteUserId" jdbcType="BIGINT" />
+    <result column="vote_operation_type" property="voteOperationType" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, question_id, vote_user_id, vote_operation_type, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qms_question_vote_user_rel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryCurrentUserVoteUpCount" resultType="int">
+    select count(*) from t_qms_question_vote_user_rel
+    where question_id = #{questionId}
+    and vote_user_id = #{userId}
+    and vote_operation_type = #{operationType}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_qms_question_vote_user_rel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.exception.qms.domain.entity.QuestionVoteUserRel" >
+    insert into t_qms_question_vote_user_rel (question_id, vote_user_id,
+      vote_operation_type, create_time, update_time
+      )
+    values (#{questionId,jdbcType=BIGINT}, #{voteUserId,jdbcType=BIGINT},
+      #{voteOperationType,jdbcType=TINYINT}, NOW(), NOW()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.QuestionVoteUserRel" >
+    insert into t_qms_question_vote_user_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="voteUserId != null" >
+        vote_user_id,
+      </if>
+      <if test="voteOperationType != null" >
+        vote_operation_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="voteUserId != null" >
+        #{voteUserId,jdbcType=BIGINT},
+      </if>
+      <if test="voteOperationType != null" >
+        #{voteOperationType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.QuestionVoteUserRel" >
+    update t_qms_question_vote_user_rel
+    <set >
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="voteUserId != null" >
+        vote_user_id = #{voteUserId,jdbcType=BIGINT},
+      </if>
+      <if test="voteOperationType != null" >
+        vote_operation_type = #{voteOperationType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.QuestionVoteUserRel" >
+    update t_qms_question_vote_user_rel
+    set question_id = #{questionId,jdbcType=BIGINT},
+      vote_user_id = #{voteUserId,jdbcType=BIGINT},
+      vote_operation_type = #{voteOperationType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteVoteDownRecord">
+    delete from t_qms_question_vote_user_rel
+    where question_id = #{questionId} and vote_user_id = #{userId} and vote_operation_type = #{operationType}
+  </delete>
+</mapper>

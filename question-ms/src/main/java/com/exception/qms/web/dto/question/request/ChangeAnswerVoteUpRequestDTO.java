@@ -12,9 +12,9 @@ import java.io.Serializable;
  * @discription
  **/
 @Data
-public class ChangeQuestionVoteUpRequestDTO implements Serializable {
+public class ChangeAnswerVoteUpRequestDTO implements Serializable {
     @NotNull
-    private Long questionId;
+    private Long answerId;
     @NotNull
     private Integer operationType;
 

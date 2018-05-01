@@ -39,10 +39,14 @@
                 </div>
                 <div class="card-footer">
                     <!-- 点赞 -->
-                    <a class="gray-a" href="#" onclick="likeThisQuestion();">
-                        <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
-                        <i class="fa fa-heart"></i>&nbsp;&nbsp;90&nbsp;次点赞
+                    <a id="like-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == false}" th:onclick="'javascript:likeThisQuestion(1);'">
+                        <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
+
+                    <a id="unlike-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == true}" th:onclick="'javascript:likeThisQuestion(-1);'">
+                        <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
+                    </a>
+
                     <span class="gray marginleft-10px">|</span>
                     <!-- 被浏览次数 -->
                     <span class="gray marginleft-10px fs-14px" href="#">
@@ -89,10 +93,14 @@
                     </div>
                     <div class="card-footer">
                         <!-- 点赞 -->
-                        <a class="gray-a" href="#" onclick="likeThisAnswer();">
-                            <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
-                            <i class="fa fa-heart"></i>&nbsp;&nbsp;90&nbsp;次点赞
+                        <a id="like-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == false}" th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'">
+                            <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
+
+                        <a id="unlike-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == true}" th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'">
+                            <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
+                        </a>
+
                         <!-- 改进 -->
                         <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px">
                             <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
@@ -185,7 +193,7 @@
     });
 
     // 点赞问题
-    function likeThisQuestion() {
+    function likeThisQuestion(operationType) {
         // csrf
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
@@ -194,7 +202,7 @@
         });
 
         var questionId = [[${response.id}]];
-        var jsonStr = {"questionId": questionId};
+        var jsonStr = {"questionId": questionId, "operationType": operationType};
         $.ajax({
             type: "post",
             async: true,
@@ -204,9 +212,9 @@
             data: JSON.stringify(jsonStr),
             success: function (response) {
                 if (response.success == true) {
-                    alert("success");
-                    var data = response.data;
-
+                    $('#loginModal').modal('hide');
+                    window.location.reload();
+                    // TODO 改成异步更新页面内容
                 }
             },
             // http status not 200
@@ -218,8 +226,35 @@
     }
 
     // 点赞方案
-    function likeThisAnswer() {
-        alert("like");
+    function likeThisAnswer(answerId, operationType) {
+        // csrf
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        var jsonStr = {"answerId": answerId, "operationType": operationType};
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/api/answer/voteUp/change",
+            datatype: "json",
+            contentType: "application/json",
+            data: JSON.stringify(jsonStr),
+            success: function (response) {
+                if (response.success == true) {
+                    $('#loginModal').modal('hide');
+                    window.location.reload();
+                    // TODO 改成异步更新页面内容
+                }
+            },
+            // http status not 200
+            error: function(response) {
+                $('#loginModal').modal('show');
+            }
+
+        });
     }
 </script>
 </html>

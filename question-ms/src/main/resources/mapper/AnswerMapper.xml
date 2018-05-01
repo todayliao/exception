@@ -146,4 +146,12 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <update id="voteUpAnswer">
+    update t_qms_answer set vote_up = vote_up + 1 where id = #{answerId}
+  </update>
+
+  <update id="voteDownAnswer">
+    update t_qms_answer set vote_up = vote_up - 1 where id = #{answerId}
+  </update>
 </mapper>

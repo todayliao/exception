@@ -30,4 +30,8 @@ public interface QuestionMapper {
     int updateByPrimaryKey(Question record);
 
     int increaseQuestionViewNum(Long questionId);
+
+    int voteUpQuestion(long questionId);
+
+    int voteDownQuestion(long questionId);
 }

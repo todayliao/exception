@@ -76,4 +76,14 @@ public class QuestionServiceImpl implements QuestionService {
     public int increaseQuestionViewNum(Long questionId) {
         return questionMapper.increaseQuestionViewNum(questionId);
     }
+
+    @Override
+    public int voteUpQuestion(long questionId) {
+        return questionMapper.voteUpQuestion(questionId);
+    }
+
+    @Override
+    public int voteDownQuestion(long questionId) {
+        return questionMapper.voteDownQuestion(questionId);
+    }
 }

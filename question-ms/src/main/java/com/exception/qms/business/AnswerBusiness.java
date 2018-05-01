@@ -1,6 +1,7 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
 import com.exception.qms.web.vo.home.AnswerInfoResponseVO;
 
@@ -15,4 +16,6 @@ public interface AnswerBusiness {
     AnswerInfoResponseVO queryAnswerInfo(Long answerId);
 
     BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm);
+
+    BaseResponse changeAnswerVoteUp(ChangeAnswerVoteUpRequestDTO changeAnswerVoteUpRequestDTO, Long userId);
 }

@@ -18,4 +18,8 @@ public interface AnswerMapper {
     int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
+
+    int voteUpAnswer(long answerId);
+
+    int voteDownAnswer(long answerId);
 }

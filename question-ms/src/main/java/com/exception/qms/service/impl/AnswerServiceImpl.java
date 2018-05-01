@@ -2,10 +2,13 @@ package com.exception.qms.service.impl;
 
 import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
+import com.exception.qms.domain.entity.AnswerVoteUserRel;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.domain.mapper.AnswerDescMapper;
 import com.exception.qms.domain.mapper.AnswerMapper;
+import com.exception.qms.domain.mapper.AnswerVoteUserRelMapper;
 import com.exception.qms.domain.mapper.UserMapper;
+import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.utils.MarkdownUtil;
 import com.exception.qms.web.vo.home.AnswerResponseVO;
@@ -36,10 +39,12 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
+    private AnswerVoteUserRelMapper answerVoteUserRelMapper;
+    @Autowired
     private Mapper mapper;
 
     @Override
-    public List<AnswerResponseVO> queryAnswersByQuestionId(Long questionId) {
+    public List<AnswerResponseVO> queryAnswersByQuestionId(Long questionId, Long userId) {
         List<Answer> answers = answerMapper.queryByQuestionId(questionId);
         List<Long> answerIds = answers.stream().map(Answer::getId).collect(Collectors.toList());
         List<AnswerDesc> answerDescs = answerDescMapper.queryByAnswerIds(answerIds);
@@ -61,9 +66,24 @@ public class AnswerServiceImpl implements AnswerService {
                 if (!CollectionUtils.isEmpty(userIdUserMap)) {
                     answerResponseVO.setUser(userIdUserMap.get(answer.getCreateUserId()));
                 }
+                // default is false
+                answerResponseVO.setIsCurrentUserVoteUp(false);
             }
             return answerResponseVO;
         }).collect(Collectors.toList());
+
+        // query answer vote user rel by answerIds and current userId
+        if (userId != null) {
+            List<AnswerVoteUserRel> answerVoteUserRels = answerVoteUserRelMapper.queryByAnswerIdsAndVoteUserId(answerIds, userId, VoteOperationTypeEnum.UP.getCode());
+            Map<Long, AnswerVoteUserRel> answerIdAnswerVoteUserRelMap = answerVoteUserRels.stream().collect(Collectors.toMap(AnswerVoteUserRel::getAnswerId, answerVoteUserRel -> answerVoteUserRel));
+            answerResponseVOS = answerResponseVOS.stream().map(answerResponseVO -> {
+                if (!CollectionUtils.isEmpty(answerIdAnswerVoteUserRelMap)) {
+                    boolean isCurrentUserVoteUp = answerIdAnswerVoteUserRelMap.get(answerResponseVO.getId()) != null;
+                    answerResponseVO.setIsCurrentUserVoteUp(isCurrentUserVoteUp);
+                }
+                return answerResponseVO;
+            }).collect(Collectors.toList());
+        }
         return answerResponseVOS;
     }
 
@@ -85,5 +105,15 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int updateAnswerDesc(AnswerDesc answerDesc) {
         return answerDescMapper.updateByPrimaryKeySelective(answerDesc);
+    }
+
+    @Override
+    public int voteUpAnswer(long answerId) {
+        return answerMapper.voteUpAnswer(answerId);
+    }
+
+    @Override
+    public int voteDownAnswer(long answerId) {
+        return answerMapper.voteDownAnswer(answerId);
     }
 }

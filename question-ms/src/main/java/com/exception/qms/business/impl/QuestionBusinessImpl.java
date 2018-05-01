@@ -5,6 +5,7 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.enums.QuestionTypeEnum;
+import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
@@ -22,12 +23,12 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -52,6 +53,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Autowired
     private QuestionSearchService questionSearchService;
     @Autowired
+    private QuestionVoteUserService questionVoteUserService;
+    @Autowired
     private ExecutorService executorService;
     @Autowired
     private RedisService redisService;
@@ -59,7 +62,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     private Mapper mapper;
 
     @Override
-    public QuestionDetailResponseVO queryQuestionDetail(Long questionId) {
+    public QuestionDetailResponseVO queryQuestionDetail(Long questionId, Long userId) {
         Question question = questionService.queryQuestionInfo(questionId);
 
         // quetion is not exist
@@ -82,8 +85,15 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             questionDetailResponseVO.setTags(questionIdTagsMap.get(questionId));
         }
 
+        // 当前用户是否已经点赞
+        boolean isCurrentUserVoteUp = false;
+        if (userId != null) {
+            isCurrentUserVoteUp = questionVoteUserService.isCurrentUserVoteUp(userId, questionId);
+        }
+        questionDetailResponseVO.setIsCurrentUserVoteUp(isCurrentUserVoteUp);
+
         // question answers
-        List<AnswerResponseVO> answerResponseVOS = answerService.queryAnswersByQuestionId(questionId);
+        List<AnswerResponseVO> answerResponseVOS = answerService.queryAnswersByQuestionId(questionId, userId);
         questionDetailResponseVO.setAnswers(answerResponseVOS);
         questionDetailResponseVO.setAnswersCount(CollectionUtils.isEmpty(answerResponseVOS) ? 0 : answerResponseVOS.size());
 
@@ -229,8 +239,43 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     }
 
     @Override
-    public BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO questionId, HttpSession session) {
-        return null;
+    @Transactional(rollbackFor = Exception.class)
+    public BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO changeQuestionVoteUpRequestDTO, Long userId) {
+        int operationType = changeQuestionVoteUpRequestDTO.getOperationType();
+        long questionId = changeQuestionVoteUpRequestDTO.getQuestionId();
+
+        if (userId == null) {
+            throw new QMSException(QmsResponseCodeEnum.USER_IS_NULL);
+        }
+
+        VoteOperationTypeEnum voteOperationTypeEnum = VoteOperationTypeEnum.codeOf(operationType);
+
+        switch (voteOperationTypeEnum) {
+            case UP:
+                questionService.voteUpQuestion(questionId);
+                // 添加问题和点赞用户的绑定信息
+                try {
+                    questionVoteUserService.addQuestionVoteUserRecord(questionId, operationType, userId);
+                } catch (DuplicateKeyException e) {
+                    log.error("duplicate key ==> questionId: {}, userId: {}, operationType: {}", questionId, userId, operationType);
+                    throw new QMSException(QmsResponseCodeEnum.ALREADY_VOTE_UP);
+                }
+                break;
+            case DOWN:
+                questionService.voteDownQuestion(questionId);
+                // 添加问题和踩用户的绑定信息
+                try {
+                    questionVoteUserService.addQuestionVoteUserRecord(questionId, operationType, userId);
+                } catch (DuplicateKeyException e) {
+                    log.error("duplicate key ==> questionId: {}, userId: {}, operationType: {}", questionId, userId, operationType);
+                    throw new QMSException(QmsResponseCodeEnum.ALREADY_VOTE_DOWN);
+                }
+                break;
+            default:
+                throw new QMSException(QmsResponseCodeEnum.PARAM_ERROR);
+        }
+
+        return new BaseResponse().success();
     }
 
 }

@@ -22,4 +22,5 @@ public interface AnswerDescMapper {
     int updateByPrimaryKeyWithBLOBs(AnswerDesc record);
 
     int updateByPrimaryKey(AnswerDesc record);
+
 }

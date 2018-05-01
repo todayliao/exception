@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_ums_user" domainObjectName="User"
+        <table tableName="t_qms_question_vote_user_rel" domainObjectName="QuestionVoteUserRel"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

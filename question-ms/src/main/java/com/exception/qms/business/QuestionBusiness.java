@@ -9,7 +9,6 @@ import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author jiangbing(江冰)
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  **/
 public interface QuestionBusiness {
 
-    QuestionDetailResponseVO queryQuestionDetail(Long questionId);
+    QuestionDetailResponseVO queryQuestionDetail(Long questionId, Long userId);
 
     QuestionInfoResponseVO queryQuestionInfo(Long questionId);
 
@@ -34,5 +33,5 @@ public interface QuestionBusiness {
 
     BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request);
 
-    BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO questionId, HttpSession session);
+    BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO changeQuestionVoteUpRequestDTO, Long userId);
 }

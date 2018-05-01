@@ -25,6 +25,11 @@ public class QuestionDetailResponseVO implements Serializable {
 
     private Integer voteDown;
 
+    /**
+     * 当前用户是否已经点赞
+     */
+    private Boolean isCurrentUserVoteUp;
+
     private String titleCn;
 
     /**

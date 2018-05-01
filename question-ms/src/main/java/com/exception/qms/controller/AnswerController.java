@@ -4,18 +4,21 @@ import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.AnswerBusiness;
 import com.exception.qms.common.BaseController;
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
+import com.exception.qms.utils.SpringMvcUtil;
+import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
+import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author jiangbing(江冰)
@@ -52,5 +55,17 @@ public class AnswerController extends BaseController {
     public String updateAnswer(@Validated AnswerUpdateForm answerUpdateForm) {
         answerBusiness.updateAnswer(answerUpdateForm);
         return "redirect:/home";
+    }
+
+    /**
+     * 回答方案赞数改变（增加或减少）
+     *
+     * @return
+     */
+    @PostMapping("/api/answer/voteUp/change")
+    @ResponseBody
+    public BaseResponse changeAnswerVoteUp(@Validated @RequestBody ChangeAnswerVoteUpRequestDTO changeAnswerVoteUpRequestDTO, HttpSession session) {
+        User user = SpringMvcUtil.getCurrentLoginUser(session);
+        return answerBusiness.changeAnswerVoteUp(changeAnswerVoteUpRequestDTO, user.getId());
     }
 }

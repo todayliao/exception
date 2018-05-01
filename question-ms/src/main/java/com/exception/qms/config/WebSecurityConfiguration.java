@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -44,7 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/question/edit").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/question/viewNum/increase").permitAll()
                 .antMatchers(HttpMethod.POST, "/answer/edit").hasRole("USER")
-                .antMatchers(HttpMethod.POST,"/file/editorMdImg/upload").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/file/editorMdImg/upload").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/user/login") // 配置角色登录处理入口
@@ -69,10 +67,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .disable()
                 .and();
+
+//        http.csrf().disable();
     }
 
     /**
      * 自定义认证策略
+     *
      * @param auth
      * @throws Exception
      */

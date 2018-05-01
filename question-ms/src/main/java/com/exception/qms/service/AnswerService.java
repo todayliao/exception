@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public interface AnswerService {
 
-    List<AnswerResponseVO> queryAnswersByQuestionId(Long questionId);
+    List<AnswerResponseVO> queryAnswersByQuestionId(Long questionId, Long userId);
 
     int addAnswer(Answer answer);
 
@@ -23,4 +23,8 @@ public interface AnswerService {
     AnswerDesc queryAnswerDescInfo(Long answerId);
 
     int updateAnswerDesc(AnswerDesc answerDesc);
+
+    int voteUpAnswer(long answerId);
+
+    int voteDownAnswer(long answerId);
 }
