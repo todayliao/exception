@@ -220,13 +220,6 @@
 			<version>2.7</version>
 		</dependency>
 
-		<!-- 内容格式化 -->
-		<dependency>
-			<groupId>ws.vinta</groupId>
-			<artifactId>pangu</artifactId>
-			<version>1.1.0</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
