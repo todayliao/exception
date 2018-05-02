@@ -11,6 +11,7 @@ import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.utils.IpUtil;
 import com.exception.qms.utils.MarkdownUtil;
+import com.exception.qms.utils.StringUtil;
 import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
@@ -115,7 +116,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // quetion is not exist
         if (question == null) {
-            log.warn("The question is not exit, questionId:{}", questionId);
+            log.warn("The question is not exit, questionId: {}", questionId);
             throw new QMSException(QmsResponseCodeEnum.QUESTION_NOT_EXIST);
         }
 
@@ -149,7 +150,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // add quesiton
         Question question = new Question();
-        question.setTitleCn(questionForm.getTitle());
+        question.setTitleCn(StringUtil.spacingText(questionForm.getTitle()));
         question.setCreateUserId(userId);
         question.setType(QuestionTypeEnum.PEOPLE_POST.getCode());
         questionService.addQuestion(question);
@@ -158,7 +159,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // add questionDesc
         QuestionDesc questionDesc = new QuestionDesc();
-        questionDesc.setDescriptionCn(questionForm.getQuestionDesc());
+        questionDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getQuestionDesc()));
         questionDesc.setQuestionId(questionId);
         questionDesc.setCreateUserId(userId);
         questionService.addQuestionDesc(questionDesc);
@@ -186,7 +187,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         AnswerDesc answerDesc = new AnswerDesc();
         answerDesc.setAnswerId(answerId);
         answerDesc.setCreateUserId(userId);
-        answerDesc.setDescriptionCn(questionForm.getAnswerDesc());
+        answerDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getAnswerDesc()));
         answerService.addAnswerDesc(answerDesc);
 
         // 异步添加/更新 es index
@@ -199,13 +200,13 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Transactional(rollbackFor = Exception.class)
     public BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm) {
         Question question = mapper.map(questionUpdateForm, Question.class);
-        question.setTitleCn(questionUpdateForm.getTitle());
+        question.setTitleCn(StringUtil.spacingText(questionUpdateForm.getTitle()));
         questionService.updateQuestion(question);
 
         // update questionDesc
         QuestionDesc questionDesc = new QuestionDesc();
         questionDesc.setQuestionId(questionUpdateForm.getId());
-        questionDesc.setDescriptionCn(questionUpdateForm.getQuestionDesc());
+        questionDesc.setDescriptionCn(StringUtil.spacingText(questionUpdateForm.getQuestionDesc()));
         questionService.updateQuestionDesc(questionDesc);
 
         // 异步添加/更新 es index
@@ -223,8 +224,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         final long expireSeconds = 1*60*60;
 
         if (isExisted) {
-            log.warn("Can't increase the viewNum of the question, the key already existed: {}", redisKey);
-            // expire the key, one hours
+            log.warn("Can't increase the viewNum of the question, the key already existed on the cache: {}", redisKey);
+            // expire the key, one hour
             redisService.expire(redisKey, expireSeconds);
             return new BaseResponse().fail();
         }

@@ -8,6 +8,7 @@ import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.service.AnswerVoteUserService;
+import com.exception.qms.utils.StringUtil;
 import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
 import com.exception.qms.web.vo.home.AnswerInfoResponseVO;
@@ -46,7 +47,7 @@ public class AnswerBusinessImpl implements AnswerBusiness {
     @Override
     public BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm) {
         AnswerDesc answerDesc = mapper.map(answerUpdateForm, AnswerDesc.class);
-        answerDesc.setDescriptionCn(answerUpdateForm.getAnswerDesc());
+        answerDesc.setDescriptionCn(StringUtil.spacingText(answerUpdateForm.getAnswerDesc()));
         answerService.updateAnswerDesc(answerDesc);
         return new BaseResponse().success();
     }
