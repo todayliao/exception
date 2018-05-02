@@ -9,6 +9,6 @@ package com.exception.qms.utils;
 public class StringUtilTest {
 
     public static void main(String[] args) {
-        System.out.println(StringUtil.spacingText("**2.复制 nginx 运行容器中的相关配置文件http://localhost **"));
+        System.out.println(StringUtil.spacingText("**2.复制 nginx 运行容器中的相关配置文件http://localhost**"));
     }
 }
