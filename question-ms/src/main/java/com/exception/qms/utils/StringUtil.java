@@ -40,7 +40,7 @@ public class StringUtil {
     // 字符串格式化，易读性处理 - start
     //----------------------------------------------------------------------
 
-    private static final Pattern CJK_ANS = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([a-z0-9`~@\\$%\\^&\\*\\-_\\+=\\|\\\\/])", 2);
+    private static final Pattern CJK_ANS = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([a-z0-9`~@\\$%\\^&\\-_\\+=\\|\\\\/])", 2);
     /**
      * 去掉 .
      */
