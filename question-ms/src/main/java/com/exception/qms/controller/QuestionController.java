@@ -7,15 +7,12 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
-import com.exception.qms.utils.HttpUtil;
-import com.exception.qms.utils.SpringMvcUtil;
+import com.exception.qms.utils.SpringMVCUtil;
 import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -44,7 +41,7 @@ public class QuestionController extends BaseController {
      */
     @GetMapping("/question/{questionId}")
     public String queryQuestionInfo(@PathVariable("questionId") Long questionId, Model model, HttpSession session) {
-        User user = SpringMvcUtil.getCurrentLoginUser(session);
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(),
                 questionBusiness.queryQuestionDetail(questionId, user == null ? null : user.getId()));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
@@ -71,7 +68,7 @@ public class QuestionController extends BaseController {
     @PostMapping("/question")
     @OperatorLog(description = "问题添加")
     public String addQuestion(@Validated QuestionForm questionForm, HttpSession session) {
-        User user = SpringMvcUtil.getCurrentLoginUser(session);
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
         questionBusiness.addQuestion(questionForm, user == null ? null : user.getId());
         return "redirect:/home";
     }
@@ -123,7 +120,7 @@ public class QuestionController extends BaseController {
     @PostMapping("/api/question/voteUp/change")
     @ResponseBody
     public BaseResponse changeQuestionVoteUp(@Validated @RequestBody ChangeQuestionVoteUpRequestDTO changeQuestionVoteUpRequestDTO, HttpSession session) {
-        User user = SpringMvcUtil.getCurrentLoginUser(session);
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
         return questionBusiness.changeQuestionVoteUp(changeQuestionVoteUpRequestDTO, user.getId());
     }
 }

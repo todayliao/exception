@@ -7,11 +7,9 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
-import com.exception.qms.utils.SpringMvcUtil;
+import com.exception.qms.utils.SpringMVCUtil;
 import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
-import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
-import com.exception.qms.web.form.question.QuestionUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +63,7 @@ public class AnswerController extends BaseController {
     @PostMapping("/api/answer/voteUp/change")
     @ResponseBody
     public BaseResponse changeAnswerVoteUp(@Validated @RequestBody ChangeAnswerVoteUpRequestDTO changeAnswerVoteUpRequestDTO, HttpSession session) {
-        User user = SpringMvcUtil.getCurrentLoginUser(session);
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
         return answerBusiness.changeAnswerVoteUp(changeAnswerVoteUpRequestDTO, user.getId());
     }
 }

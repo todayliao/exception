@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
  * @time 下午12:32
  * @discription
  **/
-public class SpringMvcUtil {
+public class SpringMVCUtil {
 
 
     /**
