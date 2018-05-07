@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @Profile({"dev","prd"})
-public class Swagger2Configuration {
+public class Swagger2Config {
 
     @Value("${swagger2.package}")
     private String basePackage;

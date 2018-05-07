@@ -13,7 +13,7 @@ import org.springframework.core.io.Resource;
  * @discription 注入 dozer bean
  **/
 @Configuration
-public class DozerConfiguration {
+public class DozerConfig {
 
     @Bean
     public DozerBeanMapperFactoryBean dozerBeanMapperFactoryBean(@Value("classpath*:dozer/LocalDate2LocalDate.xml") Resource[] resources) throws Exception {

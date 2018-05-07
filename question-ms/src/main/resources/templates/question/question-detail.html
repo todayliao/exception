@@ -33,17 +33,20 @@
                         <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}">
                         </div>
                         <div class="question-tags">
-                            <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px"></a>
+                            <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#"
+                               class="badge badge-secondary marginright-5px"></a>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
                     <!-- 点赞 -->
-                    <a id="like-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == false}" th:onclick="'javascript:likeThisQuestion(1);'">
+                    <a id="like-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == false}"
+                       th:onclick="'javascript:likeThisQuestion(1);'">
                         <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
-                    <a id="unlike-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == true}" th:onclick="'javascript:likeThisQuestion(-1);'">
+                    <a id="unlike-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == true}"
+                       th:onclick="'javascript:likeThisQuestion(-1);'">
                         <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
@@ -77,7 +80,8 @@
                             </div>
                             <div class="media-body">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <strong><a href="#" class="gray-dark" th:text="${answer.user.name}">allen</a></strong>
+                                    <strong><a href="#" class="gray-dark"
+                                               th:text="${answer.user.name}">allen</a></strong>
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->
                                 <div>
@@ -93,11 +97,13 @@
                     </div>
                     <div class="card-footer">
                         <!-- 点赞 -->
-                        <a id="like-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == false}" th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'">
+                        <a id="like-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == false}"
+                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'">
                             <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
 
-                        <a id="unlike-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == true}" th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'">
+                        <a id="unlike-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == true}"
+                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'">
                             <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
 
@@ -121,7 +127,7 @@
                 <div class="card-body">
                     <ul id="about-question-list" class="list-group list-group-flush">
                         <!--<li class="list-group-item d-flex justify-content-between align-items-center border0">-->
-                            <!--<a class="fs-14px blue-a" href="#">fsfsdjfljdsofjdosfjosdjf奇偶水电费是否就搜地方</a>-->
+                        <!--<a class="fs-14px blue-a" href="#">fsfsdjfljdsofjdosfjosdjf奇偶水电费是否就搜地方</a>-->
                         <!--</li>-->
                     </ul>
                 </div>
@@ -141,7 +147,7 @@
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         // 代码高亮
         $("pre").addClass("prettyprint");
         prettyPrint();
@@ -176,7 +182,7 @@
         // csrf
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function(e, xhr, options) {
+        $(document).ajaxSend(function (e, xhr, options) {
             xhr.setRequestHeader(header, token);
         });
 
@@ -197,7 +203,7 @@
         // csrf
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function(e, xhr, options) {
+        $(document).ajaxSend(function (e, xhr, options) {
             xhr.setRequestHeader(header, token);
         });
 
@@ -218,7 +224,7 @@
                 }
             },
             // http status not 200
-            error: function(response) {
+            error: function (response) {
                 $('#loginModal').modal('show');
             }
 
@@ -230,7 +236,7 @@
         // csrf
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function(e, xhr, options) {
+        $(document).ajaxSend(function (e, xhr, options) {
             xhr.setRequestHeader(header, token);
         });
 
@@ -250,7 +256,7 @@
                 }
             },
             // http status not 200
-            error: function(response) {
+            error: function (response) {
                 $('#loginModal').modal('show');
             }
 

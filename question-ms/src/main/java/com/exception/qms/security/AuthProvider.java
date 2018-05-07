@@ -29,6 +29,7 @@ import java.util.concurrent.ExecutorService;
  * @discription
  **/
 @Slf4j
+@Deprecated
 public class AuthProvider implements AuthenticationProvider {
 
     @Autowired
@@ -52,7 +53,7 @@ public class AuthProvider implements AuthenticationProvider {
 
         User user = userService.queryByUserName(userName);
         if (user == null) {
-            log.warn("the userName:{} is not exsit", userName);
+            log.warn("the userName:{} is not exist", userName);
             throw new AuthenticationCredentialsNotFoundException("auth error");
         }
 

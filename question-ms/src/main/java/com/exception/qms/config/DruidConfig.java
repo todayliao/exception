@@ -21,7 +21,7 @@ import java.sql.SQLException;
  **/
 @Configuration
 @Slf4j
-public class DruidConfiguration {
+public class DruidConfig {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
     @Value("${spring.datasource.url}")

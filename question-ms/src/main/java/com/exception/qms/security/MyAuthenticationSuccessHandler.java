@@ -1,10 +1,14 @@
 package com.exception.qms.security;
 
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.domain.enhancement.AuthUser;
+import com.exception.qms.domain.entity.User;
+import com.exception.qms.service.UserService;
 import com.exception.qms.utils.HttpUtil;
 import com.exception.qms.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.util.AntPathMatcher;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author jiangbing(江冰)
@@ -22,10 +27,19 @@ import java.io.PrintWriter;
  * @discription 自定义登录成功处理器
  **/
 @Slf4j
-public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
+    @Autowired
+    private ExecutorService executorService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        AuthUser user = (AuthUser) authentication.getPrincipal();
+        // update user the last login time
+        executorService.execute(() -> userService.updateLastLoginTime(user.getId()));
+
         // 开启 useReferer, 默认情况下关闭的
         String returnUrl = request.getHeader("Referer");
         // 如果是从登录页面登录成功(非异步)的，则跳转首页

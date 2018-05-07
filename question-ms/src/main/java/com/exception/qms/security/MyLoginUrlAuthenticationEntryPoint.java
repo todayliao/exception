@@ -19,7 +19,7 @@ import java.io.PrintWriter;
  * @time 下午8:00
  * @discription 自定义登录策略
  **/
-public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
+public class MyLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
     private static final String API_PREFIX = "/api";
 
@@ -28,7 +28,7 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
      *                     relative to the web-app context path (include a leading {@code /}) or an absolute
      *                     URL.
      */
-    public LoginUrlEntryPoint(String loginFormUrl) {
+    public MyLoginUrlAuthenticationEntryPoint(String loginFormUrl) {
         super(loginFormUrl);
     }
 

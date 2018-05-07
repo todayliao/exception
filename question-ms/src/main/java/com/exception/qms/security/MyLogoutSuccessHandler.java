@@ -24,7 +24,7 @@ import java.io.PrintWriter;
  * @discription 自定义登出成功处理器
  **/
 @Slf4j
-public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
+public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

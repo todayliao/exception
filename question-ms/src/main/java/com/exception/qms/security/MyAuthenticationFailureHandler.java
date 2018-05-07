@@ -27,9 +27,9 @@ import java.util.LinkedHashMap;
  * @discription 自定义登录失败处理器
  **/
 @Slf4j
-public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHandler {
+public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    public AuthenticationFailHandler(String defaultFailureUrl) {
+    public MyAuthenticationFailureHandler(String defaultFailureUrl) {
         super(defaultFailureUrl);
     }
 

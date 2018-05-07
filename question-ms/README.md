@@ -45,15 +45,18 @@
 
 - 登出后，停留在原页面
 - 提交内容后台自动格式化（中英文之间空格)
+- 记住我功能
 - 问题，以及方案编辑历史，编辑的用户信息展示 TODO
 - 用户中心，展示用户相关信息 TODO
 - 图片点击放大 TODO
 - 安全退出添加前置图标 TODO
 - elasticsearch 容器化 TODO
+- 支持 github 登录 TODO
 
 ## V1.0.7
 
 - nginx 流量统计 TODO
+- 回到顶部 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
 - 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO

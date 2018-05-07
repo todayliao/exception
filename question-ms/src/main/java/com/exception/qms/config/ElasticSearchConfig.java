@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
  **/
 @Configuration
 @Slf4j
-public class ElasticSearchConfiguration {
+public class ElasticSearchConfig {
 
     @Value("${elasticsearch.host}")
     private String esHost;
