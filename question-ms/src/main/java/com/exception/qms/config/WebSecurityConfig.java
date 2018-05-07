@@ -132,7 +132,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      `token` varchar(64) NOT NULL,
      `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      PRIMARY KEY (`series`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4;
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
      *
      * @return
