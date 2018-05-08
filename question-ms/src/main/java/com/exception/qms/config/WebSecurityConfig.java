@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds(7*24*60*60)
                     .and()
                 .authorizeRequests()
+                    .antMatchers("/").permitAll()
                     .antMatchers("/user/login").permitAll()
                     .antMatchers("/home/**").permitAll()
                     .antMatchers("/tag/**").permitAll()
