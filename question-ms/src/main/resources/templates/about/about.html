@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/css/web/about.css}">
+
+    <title>Exception问答社区,关于页面</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div th:replace="fragment/common :: header"></div>
+<!-- main content -->
+<div class="container main-content">
+    <div class="row">
+        <div class="card about-card">
+            <div class="card-header m-card-header">
+                关于本站
+            </div>
+            <div class="card-body">
+                <p>Exception 社区是一个程序员问题解决方案分享的社区，coder 可以将自己平时自己工作中各种场景下遇到的问题，以及解决
+                方案记录下来，分享给别人，提升国内的开发环境 ！！！</p>
+                <p>目前本站有两名开发人员，注：缺 <code style="font-size: 15px;">前端攻城狮</code>，如果您对本站感兴趣的话，欢迎您的加入 ！！！</p>
+                <p>另外：如果您对本站有啥好的建议，也欢迎批评指正 ！！！</p>
+                <p>联系方式：</p>
+                <p>QQ: 871361652</p>
+                <p>Gmail: weisuoai1991@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- footer -->
+<div th:replace="fragment/common :: footer"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
+
+</html>

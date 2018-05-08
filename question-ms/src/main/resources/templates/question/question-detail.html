@@ -52,13 +52,11 @@
                         <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
-                    <span class="gray marginleft-10px">|</span>
                     <!-- 被浏览次数 -->
-                    <span class="gray marginleft-10px fs-14px" href="#">
+                    <span class="gray marginleft-10px fs-13px" href="#">
                         <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
                         <i class="fa fa-eye"></i>&nbsp;&nbsp;[[${response.viewNum}]]&nbsp;次浏览
                     </span>
-                    <span class="gray marginleft-10px">|</span>
                     <!-- 改进 -->
                     <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px">
                         <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
