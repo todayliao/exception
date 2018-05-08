@@ -41,12 +41,14 @@
                 <div class="card-footer">
                     <!-- 点赞 -->
                     <a id="like-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == false}"
-                       th:onclick="'javascript:likeThisQuestion(1);'">
+                       th:onclick="'javascript:likeThisQuestion(1);'"
+                       data-toggle="modal">
                         <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
                     <a id="unlike-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == true}"
-                       th:onclick="'javascript:likeThisQuestion(-1);'">
+                       th:onclick="'javascript:likeThisQuestion(-1);'"
+                       data-toggle="modal">
                         <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
@@ -97,13 +99,17 @@
                     </div>
                     <div class="card-footer">
                         <!-- 点赞 -->
-                        <a id="like-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == false}"
-                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'">
+                        <a id="like-this-answer" class="gray-a" href="#"
+                           th:if="${answer.isCurrentUserVoteUp == false}"
+                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
+                           data-toggle="modal">
                             <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
 
-                        <a id="unlike-this-answer" class="gray-a" href="#" th:if="${answer.isCurrentUserVoteUp == true}"
-                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'">
+                        <a id="unlike-this-answer" class="gray-a" href="#"
+                           th:if="${answer.isCurrentUserVoteUp == true}"
+                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
+                           data-toggle="modal">
                             <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
 
