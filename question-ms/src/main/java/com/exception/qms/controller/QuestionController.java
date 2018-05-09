@@ -93,9 +93,9 @@ public class QuestionController extends BaseController {
      * @return
      */
     @PostMapping("/question/edit")
-    @OperatorLog(description = "问题更新")
-    public String updateQuestion(@Validated QuestionUpdateForm questionUpdateForm) {
-        questionBusiness.updateQuestion(questionUpdateForm);
+    public String updateQuestion(@Validated QuestionUpdateForm questionUpdateForm, HttpSession session) {
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
+        questionBusiness.updateQuestion(questionUpdateForm, user.getId());
         // 跳转问题展示页
         return String.format("redirect:/question/%d", questionUpdateForm.getId());
     }

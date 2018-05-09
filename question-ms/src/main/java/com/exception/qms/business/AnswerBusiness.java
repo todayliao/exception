@@ -15,7 +15,7 @@ public interface AnswerBusiness {
 
     AnswerInfoResponseVO queryAnswerInfo(Long answerId);
 
-    BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm);
+    BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm, Long userId);
 
     BaseResponse changeAnswerVoteUp(ChangeAnswerVoteUpRequestDTO changeAnswerVoteUpRequestDTO, Long userId);
 }

@@ -61,6 +61,21 @@
                     <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px">
                         <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
                     </a>
+
+                    <!-- 问题创建者 -->
+                    <div class="float-right gray fs-13px margintop-1px">
+                        &nbsp;&nbsp;&nbsp;创建者:
+                        <img th:src="${response.createUserAvatar}" class="rounded float-right card-footer-image marginleft-5px" alt="...">
+                    </div>
+
+                    <!-- 问题编辑者 -->
+                    <div th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
+                        最新编辑者:
+                        <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
+                             data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                    </div>
+
+
                 </div>
             </div>
 
@@ -115,6 +130,13 @@
                         <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px">
                             <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
                         </a>
+
+                        <!-- 方案编辑者 -->
+                        <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
+                            最新编辑者:
+                            <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
+                                 data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        </div>
                     </div>
 
                 </div>
@@ -145,12 +167,14 @@
 <div th:replace="fragment/common :: loginModal"></div>
 </body>
 
+<script href="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
 <script th:replace="fragment/common-js :: js"></script>
 <script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
+
     $(document).ready(function () {
         // 代码高亮
         $("pre").addClass("prettyprint");

@@ -1,13 +1,7 @@
 package com.exception.qms.service.impl;
 
-import com.exception.qms.domain.entity.Answer;
-import com.exception.qms.domain.entity.AnswerDesc;
-import com.exception.qms.domain.entity.AnswerVoteUserRel;
-import com.exception.qms.domain.entity.User;
-import com.exception.qms.domain.mapper.AnswerDescMapper;
-import com.exception.qms.domain.mapper.AnswerMapper;
-import com.exception.qms.domain.mapper.AnswerVoteUserRelMapper;
-import com.exception.qms.domain.mapper.UserMapper;
+import com.exception.qms.domain.entity.*;
+import com.exception.qms.domain.mapper.*;
 import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.utils.MarkdownUtil;
@@ -20,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -41,6 +36,8 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private AnswerVoteUserRelMapper answerVoteUserRelMapper;
     @Autowired
+    private AnswerEditHistoryMapper answerEditHistoryMapper;
+    @Autowired
     private Mapper mapper;
 
     @Override
@@ -53,8 +50,10 @@ public class AnswerServiceImpl implements AnswerService {
                 .collect(Collectors.toMap(AnswerDesc::getAnswerId, answerDesc -> answerDesc));
 
         // query answer's user
-        List<Long> createUserIds = answers.stream().map(Answer::getCreateUserId).collect(Collectors.toList());
-        List<User> users = userMapper.queryUsersByUserIds(createUserIds);
+        List<Long> userIds = answers.stream().map(Answer::getCreateUserId).collect(Collectors.toList());
+        List<Long> latestEditorUserIds = answers.stream().map(Answer::getLatestEditorUserId).collect(Collectors.toList());
+        userIds.addAll(latestEditorUserIds);
+        List<User> users = userMapper.queryUsersByUserIds(userIds);
         Map<Long, User> userIdUserMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
 
         List<AnswerResponseVO> answerResponseVOS = answers.stream().map(answer -> {
@@ -65,9 +64,14 @@ public class AnswerServiceImpl implements AnswerService {
                 // answer's user
                 if (!CollectionUtils.isEmpty(userIdUserMap)) {
                     answerResponseVO.setUser(userIdUserMap.get(answer.getCreateUserId()));
+                    // 方案的最新编辑人
+                    User latestEditorUser = userIdUserMap.get(answer.getLatestEditorUserId());
+                    answerResponseVO.setLatestEditorUserAvatar(latestEditorUser == null ? null : latestEditorUser.getAvatar());
                 }
                 // default is false
                 answerResponseVO.setIsCurrentUserVoteUp(false);
+
+
             }
             return answerResponseVO;
         }).collect(Collectors.toList());
@@ -84,6 +88,7 @@ public class AnswerServiceImpl implements AnswerService {
                 return answerResponseVO;
             }).collect(Collectors.toList());
         }
+
         return answerResponseVOS;
     }
 
@@ -98,8 +103,18 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    public Answer queryAnswerInfo(long answerId) {
+        return answerMapper.selectByPrimaryKey(answerId);
+    }
+
+    @Override
     public AnswerDesc queryAnswerDescInfo(Long answerId) {
         return answerDescMapper.queryAnswerDescInfo(answerId);
+    }
+
+    @Override
+    public int updateAnswer(Answer answer) {
+        return answerMapper.updateByPrimaryKeySelective(answer);
     }
 
     @Override
@@ -115,5 +130,10 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int voteDownAnswer(long answerId) {
         return answerMapper.voteDownAnswer(answerId);
+    }
+
+    @Override
+    public int addAnswerEditHistory(AnswerEditHistory answerEditHistory) {
+        return answerEditHistoryMapper.insert(answerEditHistory);
     }
 }

@@ -6,6 +6,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="latest_editor_user_id" property="latestEditorUserId" jdbcType="BIGINT" />
     <result column="question_id" property="questionId" jdbcType="BIGINT" />
     <result column="vote_up" property="voteUp" jdbcType="INTEGER" />
     <result column="vote_down" property="voteDown" jdbcType="INTEGER" />
@@ -13,18 +14,18 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, create_time, update_time, create_user_id, question_id, vote_up, vote_down, is_accepted, 
+    id, create_time, update_time, create_user_id, latest_editor_user_id, question_id, vote_up, vote_down, is_accepted,
     is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_qms_answer
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT} and is_deleted = 0
   </select>
 
   <select id="queryByQuestionId" resultMap="BaseResultMap">
-    select id, create_time, create_user_id, question_id, vote_up, vote_down, is_accepted
+    select id, create_time, create_user_id, question_id, vote_up, vote_down, is_accepted, latest_editor_user_id
     from t_qms_answer
     where question_id = #{questionId} and is_deleted = 0
   </select>
@@ -107,14 +108,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.Answer" >
     update t_qms_answer
     <set >
+      update_time = NOW(),
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="createUserId != null" >
         create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="latestEditorUserId != null" >
+        latest_editor_user_id = #{latestEditorUserId,jdbcType=BIGINT},
       </if>
       <if test="questionId != null" >
         question_id = #{questionId,jdbcType=BIGINT},

@@ -20,6 +20,8 @@ public class Question {
 
     private Long createUserId;
 
+    private Long latestEditorUserId;
+
     private Integer voteUp;
 
     private Integer voteDown;

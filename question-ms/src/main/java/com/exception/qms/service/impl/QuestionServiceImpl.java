@@ -2,7 +2,9 @@ package com.exception.qms.service.impl;
 
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.QuestionDesc;
+import com.exception.qms.domain.entity.QuestionEditHistory;
 import com.exception.qms.domain.mapper.QuestionDescMapper;
+import com.exception.qms.domain.mapper.QuestionEditHistoryMapper;
 import com.exception.qms.domain.mapper.QuestionMapper;
 import com.exception.qms.service.QuestionService;
 import com.exception.qms.utils.PageUtil;
@@ -26,6 +28,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionDescMapper questionDescMapper;
+    @Autowired
+    private QuestionEditHistoryMapper questionEditHistoryMapper;
 
     @Override
     public List<Question> queryQuestionPageList(int pageIndex, int pageSize, String orderByColumn) {
@@ -85,5 +89,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int voteDownQuestion(long questionId) {
         return questionMapper.voteDownQuestion(questionId);
+    }
+
+    @Override
+    public int addQuestionEditHistory(QuestionEditHistory questionEditHistory) {
+        return questionEditHistoryMapper.insert(questionEditHistory);
     }
 }

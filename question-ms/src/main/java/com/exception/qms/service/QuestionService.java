@@ -2,6 +2,7 @@ package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.QuestionDesc;
+import com.exception.qms.domain.entity.QuestionEditHistory;
 
 import java.util.List;
 
@@ -43,4 +44,6 @@ public interface QuestionService {
     int voteUpQuestion(long questionId);
 
     int voteDownQuestion(long questionId);
+
+    int addQuestionEditHistory(QuestionEditHistory questionEditHistory);
 }

@@ -4,16 +4,13 @@
   <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.AnswerDesc" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="answer_id" property="answerId" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.exception.qms.domain.entity.AnswerDesc" extends="BaseResultMap" >
     <result column="description_cn" property="descriptionCn" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, answer_id, create_time, update_time, create_user_id, is_deleted
+    id, answer_id, is_deleted
   </sql>
   <sql id="Blob_Column_List" >
     description_cn
@@ -46,11 +43,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
-    insert into t_qms_answer_desc (answer_id, create_time,
-      update_time, create_user_id, is_deleted, 
+    insert into t_qms_answer_desc (answer_id, is_deleted,
       description_cn)
-    values (#{answerId,jdbcType=BIGINT}, NOW(),
-      NOW(), #{createUserId,jdbcType=BIGINT}, 0,
+    values (#{answerId,jdbcType=BIGINT}, 0,
       #{descriptionCn,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
@@ -61,15 +56,6 @@
       </if>
       <if test="answerId != null" >
         answer_id,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="createUserId != null" >
-        create_user_id,
       </if>
       <if test="isDeleted != null" >
         is_deleted,
@@ -85,15 +71,6 @@
       <if test="answerId != null" >
         #{answerId,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null" >
-        #{createUserId,jdbcType=BIGINT},
-      </if>
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
@@ -108,15 +85,6 @@
       <if test="answerId != null" >
         answer_id = #{answerId,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=BIGINT},
-      </if>
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
@@ -129,9 +97,6 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
     update t_qms_answer_desc
     set answer_id = #{answerId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
       is_deleted = #{isDeleted,jdbcType=BIT},
       description_cn = #{descriptionCnHtml,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
@@ -139,9 +104,6 @@
   <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.AnswerDesc" >
     update t_qms_answer_desc
     set answer_id = #{answerId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

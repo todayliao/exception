@@ -16,12 +16,6 @@ public class QuestionDesc {
 
     private Long questionId;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
-
-    private Long createUserId;
-
     private Boolean isDeleted;
 
     private String descriptionCn;

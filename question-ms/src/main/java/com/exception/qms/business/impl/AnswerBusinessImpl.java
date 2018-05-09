@@ -2,7 +2,9 @@ package com.exception.qms.business.impl;
 
 import com.exception.qms.business.AnswerBusiness;
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
+import com.exception.qms.domain.entity.AnswerEditHistory;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.exception.QMSException;
@@ -45,7 +47,43 @@ public class AnswerBusinessImpl implements AnswerBusiness {
     }
 
     @Override
-    public BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm) {
+    @Transactional(rollbackFor = Exception.class)
+    public BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm, Long userId) {
+        if (userId == null) {
+            log.error("the userId is null");
+            throw new QMSException(QmsResponseCodeEnum.USER_IS_NULL);
+        }
+        // 老的解决方案数据入历史表
+        long answerId = answerUpdateForm.getId();
+
+        AnswerDesc answerDescTmp = answerService.queryAnswerDescInfo(answerId);
+        // 判断修改内容是否发生实质的改变
+        boolean isDescNotChanged = answerDescTmp.getDescriptionCn().trim()
+                .equals(answerUpdateForm.getAnswerDesc().trim());
+        if (isDescNotChanged) {
+            log.warn("the answer desc has't change, userId: {}, answerId:{}", userId, answerUpdateForm.getId());
+            throw new QMSException(QmsResponseCodeEnum.UPDATE_CONTENT_NOT_CHANGE);
+        }
+
+        Answer answerTmp = answerService.queryAnswerInfo(answerId);
+        AnswerEditHistory answerEditHistory = new AnswerEditHistory();
+        answerEditHistory.setAnswerId(answerId);
+        answerEditHistory.setCreateTime(answerTmp.getUpdateTime());
+        // 设置历史数据的创建者
+        if (answerTmp.getLatestEditorUserId() == 0) {
+            answerEditHistory.setCreateUserId(answerTmp.getCreateUserId());
+        } else {
+            answerEditHistory.setCreateUserId(answerTmp.getLatestEditorUserId());
+        }
+        answerEditHistory.setDescriptionCn(answerDescTmp.getDescriptionCn());
+
+        answerService.addAnswerEditHistory(answerEditHistory);
+
+        Answer answer = new Answer();
+        answer.setId(answerId);
+        answer.setLatestEditorUserId(userId);
+        answerService.updateAnswer(answer);
+
         AnswerDesc answerDesc = mapper.map(answerUpdateForm, AnswerDesc.class);
         answerDesc.setDescriptionCn(StringUtil.spacingText(answerUpdateForm.getAnswerDesc()));
         answerService.updateAnswerDesc(answerDesc);

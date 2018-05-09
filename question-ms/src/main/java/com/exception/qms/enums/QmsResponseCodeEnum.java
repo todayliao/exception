@@ -23,7 +23,8 @@ public enum QmsResponseCodeEnum {
     ES_STATUS_NOT_OK("QMS100008", "查询 ES 异常"),
     USER_IS_NULL("QMS100009", "用户信息不能为空"),
     ALREADY_VOTE_UP("QMS100010", "您已经点赞过了哦"),
-    ALREADY_VOTE_DOWN("QMS100010", "您已经踩过了哦"),
+    ALREADY_VOTE_DOWN("QMS100011", "您已经踩过了哦"),
+    UPDATE_CONTENT_NOT_CHANGE("QMS100012", "修改内容未发生实质改变"),
     ;
 
     private final String errorCode;

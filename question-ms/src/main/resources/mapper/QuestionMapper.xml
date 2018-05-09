@@ -6,6 +6,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="latest_editor_user_id" property="latestEditorUserId" jdbcType="BIGINT" />
     <result column="vote_up" property="voteUp" jdbcType="INTEGER" />
     <result column="vote_down" property="voteDown" jdbcType="INTEGER" />
     <result column="title_cn" property="titleCn" jdbcType="VARCHAR" />
@@ -25,7 +26,7 @@
   </select>
 
   <select id="queryQuestionInfo" resultMap="BaseResultMap">
-    select id, create_time, create_user_id, vote_up, vote_down, title_cn, view_num
+    select id, create_time, create_user_id, vote_up, vote_down, title_cn, view_num, update_time, latest_editor_user_id
     from t_qms_question
     where id = #{questionId} and is_deleted = 0
   </select>
@@ -55,11 +56,11 @@
   </delete>
   <insert id="insert" parameterType="com.exception.qms.domain.entity.Question" useGeneratedKeys="true" keyProperty="id">
     insert into t_qms_question (create_time, update_time,
-      create_user_id, vote_up, vote_down, 
+      create_user_id, latest_editor_user_id, vote_up, vote_down,
       title_cn, view_num, type, 
       is_deleted)
     values (NOW(), NOW(),
-      #{createUserId,jdbcType=BIGINT}, 0, 0,
+      #{createUserId,jdbcType=BIGINT}, #{latestEditorUserId,jdbcType=BIGINT}, 0, 0,
       #{titleCn,jdbcType=VARCHAR}, 1, #{type,jdbcType=TINYINT},
       0)
   </insert>
@@ -133,14 +134,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.Question" >
     update t_qms_question
     <set >
+      update_time = NOW(),
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="createUserId != null" >
         create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="latestEditorUserId != null" >
+        latest_editor_user_id = #{latestEditorUserId,jdbcType=BIGINT},
       </if>
       <if test="voteUp != null" >
         vote_up = #{voteUp,jdbcType=INTEGER},

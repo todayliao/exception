@@ -29,7 +29,7 @@ public interface QuestionBusiness {
      */
     BaseResponse addQuestion(QuestionForm questionForm, Long userId);
 
-    BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm);
+    BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm, Long userId);
 
     BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request);
 

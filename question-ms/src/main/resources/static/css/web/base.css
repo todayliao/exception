@@ -19,6 +19,10 @@ body {
     border-radius: 3px;
 }
 
+.margintop-1px {
+    margin-top: 1px;
+}
+
 .margintop-3px {
     margin-top: 3px;
 }

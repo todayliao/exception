@@ -15,12 +15,6 @@ public class AnswerDesc {
 
     private Long answerId;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
-
-    private Long createUserId;
-
     private Boolean isDeleted;
 
     private String descriptionCn;

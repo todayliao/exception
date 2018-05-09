@@ -56,6 +56,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Autowired
     private QuestionVoteUserService questionVoteUserService;
     @Autowired
+    private UserService userService;
+    @Autowired
     private ExecutorService executorService;
     @Autowired
     private RedisService redisService;
@@ -92,6 +94,23 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             isCurrentUserVoteUp = questionVoteUserService.isCurrentUserVoteUp(userId, questionId);
         }
         questionDetailResponseVO.setIsCurrentUserVoteUp(isCurrentUserVoteUp);
+
+        // 问题创建者，编辑者
+        List<Long> userIds = Lists.newArrayList();
+        userIds.add(question.getCreateUserId());
+        if (question.getLatestEditorUserId() != null
+                && question.getLatestEditorUserId() != 0) {
+            userIds.add(question.getLatestEditorUserId());
+        }
+        List<User> users = userService.queryUsersByUserIds(userIds);
+        Map<Long, User> userMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
+        if (!CollectionUtils.isEmpty(userMap)) {
+            User createUser = userMap.get(question.getCreateUserId());
+            User latestEditUser = userMap.get(question.getLatestEditorUserId());
+            questionDetailResponseVO.setCreateUserAvatar(createUser == null ? null : createUser.getAvatar());
+            questionDetailResponseVO.setLatestEditorUserAvatar(latestEditUser == null ? null : latestEditUser.getAvatar());
+        }
+
 
         // question answers
         List<AnswerResponseVO> answerResponseVOS = answerService.queryAnswersByQuestionId(questionId, userId);
@@ -153,6 +172,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         question.setTitleCn(StringUtil.spacingText(questionForm.getTitle()));
         question.setCreateUserId(userId);
         question.setType(QuestionTypeEnum.PEOPLE_POST.getCode());
+        // 第一次添加问题，不存在最新编辑的用户，默认为0
+        question.setLatestEditorUserId(0L);
         questionService.addQuestion(question);
 
         Long questionId = question.getId();
@@ -161,7 +182,6 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         QuestionDesc questionDesc = new QuestionDesc();
         questionDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getQuestionDesc()));
         questionDesc.setQuestionId(questionId);
-        questionDesc.setCreateUserId(userId);
         questionService.addQuestionDesc(questionDesc);
 
         // batch add questionTagRel
@@ -179,6 +199,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         answer.setCreateUserId(userId);
         answer.setIsAccepted(true);
         answer.setQuestionId(questionId);
+        // 初次添加解决方案，最近一次编辑者的id默认为0
+        answer.setLatestEditorUserId(0L);
         answerService.addAnswer(answer);
 
         Long answerId = answer.getId();
@@ -186,7 +208,6 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         // add answerDesc
         AnswerDesc answerDesc = new AnswerDesc();
         answerDesc.setAnswerId(answerId);
-        answerDesc.setCreateUserId(userId);
         answerDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getAnswerDesc()));
         answerService.addAnswerDesc(answerDesc);
 
@@ -198,9 +219,44 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm) {
+    public BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm, Long userId) {
+        if (userId == null) {
+            log.error("the userId is null");
+            throw new QMSException(QmsResponseCodeEnum.USER_IS_NULL);
+        }
+        // 老数据入问题历史表
+        long questionId = questionUpdateForm.getId();
+        Question tmpQuestion = questionService.queryQuestionInfo(questionId);
+        QuestionDesc tmpQuestionDesc = questionService.queryQuestionDesc(questionId);
+
+        // 判断修改内容是否发生实质的改变
+        boolean isTitleAndDescNotChanged = tmpQuestion.getTitleCn().trim().equals(questionUpdateForm.getTitle().trim())
+                && tmpQuestionDesc.getDescriptionCn().trim().equals(questionUpdateForm.getQuestionDesc().trim());
+
+        if (isTitleAndDescNotChanged) {
+            log.warn("the question title and description has't changed, userId: {}, questionId: {}", userId, questionUpdateForm.getId());
+            throw new QMSException(QmsResponseCodeEnum.UPDATE_CONTENT_NOT_CHANGE);
+        }
+
+        QuestionEditHistory questionEditHistory = new QuestionEditHistory();
+        // 设置历史数据的创建者
+        if (tmpQuestion.getLatestEditorUserId() == 0) {
+            questionEditHistory.setCreateUserId(tmpQuestion.getCreateUserId());
+        } else {
+            questionEditHistory.setCreateUserId(tmpQuestion.getLatestEditorUserId());
+        }
+        questionEditHistory.setQuestionId(questionId);
+        questionEditHistory.setTitleCn(tmpQuestion.getTitleCn());
+        questionEditHistory.setCreateTime(tmpQuestion.getUpdateTime());
+
+        questionEditHistory.setDescriptionCn(tmpQuestionDesc.getDescriptionCn());
+
+        questionService.addQuestionEditHistory(questionEditHistory);
+
         Question question = mapper.map(questionUpdateForm, Question.class);
         question.setTitleCn(StringUtil.spacingText(questionUpdateForm.getTitle()));
+        // 设置最新的编辑人
+        question.setLatestEditorUserId(userId);
         questionService.updateQuestion(question);
 
         // update questionDesc

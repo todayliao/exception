@@ -49,9 +49,9 @@ public class AnswerController extends BaseController {
      * @return
      */
     @PostMapping("/answer/edit")
-    @OperatorLog(description = "方案更新")
-    public String updateAnswer(@Validated AnswerUpdateForm answerUpdateForm) {
-        answerBusiness.updateAnswer(answerUpdateForm);
+    public String updateAnswer(@Validated AnswerUpdateForm answerUpdateForm, HttpSession session) {
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
+        answerBusiness.updateAnswer(answerUpdateForm, user.getId());
         return "redirect:/home";
     }
 

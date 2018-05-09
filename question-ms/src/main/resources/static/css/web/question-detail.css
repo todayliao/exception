@@ -83,3 +83,8 @@
     font-size: 15px;
     margin-bottom: 1rem;
 }
+
+.card-footer-image {
+    width: 18px;
+    height: 18px;
+}

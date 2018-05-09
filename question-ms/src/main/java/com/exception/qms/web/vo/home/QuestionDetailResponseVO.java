@@ -20,6 +20,14 @@ public class QuestionDetailResponseVO implements Serializable {
     private LocalDateTime createTime;
 
     private Long createUserId;
+    private String createUserAvatar;
+
+    /**
+     * 最近一次编辑人id
+     */
+    private Long latestEditorUserId;
+    private String latestEditorUserAvatar;
+
 
     private Integer voteUp;
 

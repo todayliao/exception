@@ -20,6 +20,9 @@ public class AnswerResponseVO implements Serializable {
 
     private Long createUserId;
 
+    private Long latestEditorUserId;
+    private String latestEditorUserAvatar;
+
     private Long questionId;
 
     private Integer voteUp;

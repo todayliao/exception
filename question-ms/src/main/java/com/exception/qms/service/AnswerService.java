@@ -2,6 +2,7 @@ package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
+import com.exception.qms.domain.entity.AnswerEditHistory;
 import com.exception.qms.web.vo.home.AnswerResponseVO;
 
 import java.util.List;
@@ -20,11 +21,17 @@ public interface AnswerService {
 
     int addAnswerDesc(AnswerDesc answerDesc);
 
+    Answer queryAnswerInfo(long answerId);
+
     AnswerDesc queryAnswerDescInfo(Long answerId);
+
+    int updateAnswer(Answer answer);
 
     int updateAnswerDesc(AnswerDesc answerDesc);
 
     int voteUpAnswer(long answerId);
 
     int voteDownAnswer(long answerId);
+
+    int addAnswerEditHistory(AnswerEditHistory answerEditHistory);
 }
