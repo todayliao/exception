@@ -22,6 +22,10 @@ public interface UserService {
 
     User queryByUserName(String userName);
 
+    int queryUserPageListCount();
+
+    List<User> queryUserPageList(Integer pageIndex, Integer pageSize);
+
     /**
      * 更新用户最后一次登录时间为当前时间
      *

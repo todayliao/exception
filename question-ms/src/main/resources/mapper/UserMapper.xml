@@ -13,6 +13,7 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -32,13 +33,22 @@
   </select>
 
     <select id="queryUsersByUserIds" resultMap="BaseResultMap">
-      select id, name, avatar from t_ums_user
+      select id, name, avatar, introduction from t_ums_user
       where id in
       <foreach collection="list" item="id" open="(" separator="," close=")">
         #{id}
       </foreach>
       and is_deleted = 0
     </select>
+  
+  <select id="queryUserPageListCount" resultType="int">
+    select count(*) from t_ums_user where id != 1 and is_deleted = 0
+  </select>
+
+  <select id="queryUserPageList" resultMap="BaseResultMap">
+    select id, name, avatar, introduction from t_ums_user where id != 1 and is_deleted = 0
+    limit #{start}, #{pageSize}
+  </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_ums_user

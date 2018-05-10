@@ -3,6 +3,7 @@ package com.exception.qms.service.impl;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.domain.mapper.UserMapper;
 import com.exception.qms.service.UserService;
+import com.exception.qms.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryByUserName(String userName) {
         return userMapper.queryByUserName(userName);
+    }
+
+    @Override
+    public int queryUserPageListCount() {
+        return userMapper.queryUserPageListCount();
+    }
+
+    @Override
+    public List<User> queryUserPageList(Integer pageIndex, Integer pageSize) {
+        return userMapper.queryUserPageList(PageUtil.calculateLimitSelectSqlStart(pageIndex, pageSize), pageSize);
     }
 
     /**

@@ -48,14 +48,8 @@
 - 记住我功能
 - 问题，以及方案编辑历史，编辑的用户信息问题详情页展示
 - 安全退出添加前置图标
+- 用户墙展示 TODO
 - 登录卡片化 TODO
-- springboot 线上 docker 容器化 TODO
-- 项目重构，maven 模块化拆分 TODO
-- 更改完问题和方案后跳转到首页的 bug TODO
-- 用户中心，展示用户相关信息 TODO
-- 图片点击放大 TODO
-- elasticsearch 容器化 TODO
-- 支持 github 登录 TODO
 
 ## V1.0.7
 
@@ -76,5 +70,15 @@
 - 用户维护日排行，周排行，总排行 TODO
 - 登录页面 UI 美化 TODO
 - 短信登录功能 TODO
+
+## V1.1.0
+
+- springboot 线上 docker 容器化 TODO
+- 项目重构，maven 模块化拆分 TODO
+- 更改完问题和方案后跳转到首页的 bug TODO
+- 用户中心，展示用户相关信息 TODO
+- 图片点击放大 TODO
+- elasticsearch 容器化 TODO
+- 支持 github 登录 TODO
 
 
