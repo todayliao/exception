@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.user-wall-card {
+    width: 100%;
+}
+
+.user-wall-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.user-name {
+    font-size: 16px;
+}
+
+.user-introduce {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #646464;
+    font-size: 14px;
+    max-width: 180px;
+}
+
+.card-body .item {
+    margin-right: 20px;
+}
+
+.card-body .item:last-child {
+    margin-right: 0;
+}
+
+.user-wall-media-left {
+    padding-right: 10px;
+}
+
+.user-wall-card-body {
+    padding-top: 0;
+}
+
+.item {
+    margin-top: 1.25rem;
+}
+
+.grid-layout {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.card-header-small {
+    color: #646464;
+}

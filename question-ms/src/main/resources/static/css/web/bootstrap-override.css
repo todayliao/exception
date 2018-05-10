@@ -1,6 +1,4 @@
-/*.bg-dark {*/
-    /*background-color: #24292e!important;*/
-/*}*/
+@charset "UTF-8";
 
 .list-group-item:first-child {
     border-top-left-radius: 0;

@@ -3,8 +3,11 @@ package com.exception.qms.controller;
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.common.BaseController;
+import com.exception.qms.enums.ResponseModelKeyEnum;
+import com.exception.qms.enums.TopNavEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @discription
  **/
 @Controller
-@RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Autowired
@@ -26,10 +28,17 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     @OperatorLog(description = "登录页")
     public String showUserLoginPage() {
         return "user/user-login";
+    }
+
+    @GetMapping("/user")
+    @OperatorLog(description = "展示用户墙")
+    public String showUser(Model model) {
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.USER.getCode());
+        return "user/user-wall";
     }
 
 }
