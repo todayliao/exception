@@ -47,6 +47,10 @@ body {
     margin-top: 30px;
 }
 
+.margintop-40px {
+    margin-top: 40px;
+}
+
 .margintop-80px {
     margin-top: 80px;
 }
@@ -73,6 +77,10 @@ body {
 
 .marginbottom-10px {
     margin-bottom: 10px;
+}
+
+.marginbottom-40px {
+    margin-bottom: 40px;
 }
 
 .margintop-56px {

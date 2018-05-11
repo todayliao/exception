@@ -23,3 +23,8 @@
 .hot-tag-card-body ul li:last-child {
     margin-bottom: 0;
 }
+
+.question-item {
+    padding-left: 15px;
+    padding-right: 15px;
+}
