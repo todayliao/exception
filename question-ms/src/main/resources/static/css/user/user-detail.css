@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.follow {
+    width: 100%;
+}
+
+.user-list-group-item {
+    border-left: 0;
+    border-right: 0;
+}

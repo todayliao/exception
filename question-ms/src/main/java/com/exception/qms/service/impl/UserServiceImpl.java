@@ -1,7 +1,11 @@
 package com.exception.qms.service.impl;
 
 import com.exception.qms.domain.entity.User;
+import com.exception.qms.domain.entity.UserAnswerContribution;
+import com.exception.qms.domain.entity.UserQuestionContribution;
+import com.exception.qms.domain.mapper.UserAnswerContributionMapper;
 import com.exception.qms.domain.mapper.UserMapper;
+import com.exception.qms.domain.mapper.UserQuestionContributionMapper;
 import com.exception.qms.service.UserService;
 import com.exception.qms.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -23,6 +28,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserQuestionContributionMapper userQuestionContributionMapper;
+    @Autowired
+    private UserAnswerContributionMapper userAnswerContributionMapper;
 
     @Override
     public List<User> queryUsersByUserIds(List<Long> userIds) {
@@ -54,5 +63,15 @@ public class UserServiceImpl implements UserService {
     public int updateLastLoginTime(Long userId) {
         Assert.notNull(userId, "updateLastLoginTime, the user id is null");
         return userMapper.updateLastLoginTime(userId);
+    }
+
+    @Override
+    public List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate today, LocalDate lastYearToday) {
+        return userQuestionContributionMapper.queryUserQuestionContribution(userId, today, lastYearToday);
+    }
+
+    @Override
+    public List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday) {
+        return userAnswerContributionMapper.queryUserAnswerContribution(userId, today, lastYearToday);
     }
 }

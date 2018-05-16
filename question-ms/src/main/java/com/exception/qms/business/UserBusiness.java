@@ -14,4 +14,6 @@ import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
 public interface UserBusiness {
 
     PageQueryResponse<QueryUserPageListResponseVO> queryUserPageList(Integer pageIndex, Integer pageSize, String tab);
+
+    BaseResponse queryContributionData(Long userId);
 }

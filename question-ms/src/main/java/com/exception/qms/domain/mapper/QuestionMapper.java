@@ -34,4 +34,6 @@ public interface QuestionMapper {
     int voteUpQuestion(long questionId);
 
     int voteDownQuestion(long questionId);
+
+    List<Question> queryAll();
 }

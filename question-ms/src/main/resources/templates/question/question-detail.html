@@ -64,7 +64,7 @@
 
                     <!-- 问题创建者 -->
                     <div class="float-right gray fs-13px margintop-1px">
-                        &nbsp;&nbsp;&nbsp;创建者:
+                        &nbsp;&nbsp;&nbsp;发布者:
                         <img th:src="${response.createUserAvatar}" class="rounded float-right card-footer-image marginleft-5px" alt="...">
                     </div>
 
@@ -95,7 +95,7 @@
                             </div>
                             <div class="media-body">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <strong><a href="#" class="gray-dark"
+                                    <strong><a th:href="@{'/user/' + ${answer.user.id}}" class="gray-dark"
                                                th:text="${answer.user.name}">allen</a></strong>
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->

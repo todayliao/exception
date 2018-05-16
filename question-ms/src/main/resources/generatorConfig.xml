@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_qms_answer_edit_history" domainObjectName="AnswerEditHistory"
+        <table tableName="t_ums_user_answer_contribution" domainObjectName="UserAnswerContribution"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

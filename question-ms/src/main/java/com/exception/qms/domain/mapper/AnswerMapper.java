@@ -22,4 +22,6 @@ public interface AnswerMapper {
     int voteUpAnswer(long answerId);
 
     int voteDownAnswer(long answerId);
+
+    List<Answer> queryAll();
 }

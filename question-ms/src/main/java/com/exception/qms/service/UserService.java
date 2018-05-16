@@ -1,7 +1,10 @@
 package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.User;
+import com.exception.qms.domain.entity.UserAnswerContribution;
+import com.exception.qms.domain.entity.UserQuestionContribution;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -32,4 +35,8 @@ public interface UserService {
      * @return
      */
     int updateLastLoginTime(Long userId);
+
+    List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate today, LocalDate lastYearToday);
+
+    List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday);
 }

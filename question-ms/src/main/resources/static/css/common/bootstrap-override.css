@@ -53,7 +53,7 @@ pre code {
 }
 
 .nav-tabs .nav-link.active {
-    background-color: #f7f7f7;
+    background-color: #fff;
     border-color: #dee2e6 #dee2e6 #f7f7f7;
     border-top: 2px solid #e36209;
 }

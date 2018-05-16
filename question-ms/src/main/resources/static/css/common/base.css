@@ -112,6 +112,14 @@ body {
     font-size: 15px;
 }
 
+.fs-18px {
+    font-size: 18px;
+}
+
+.fs-20px {
+    font-size: 20px;
+}
+
 .media-img {
     width: 48px;
     height: 48px;
@@ -271,5 +279,9 @@ body {
 
 .vertical-center {
     margin: auto 0;
+}
+
+.border-bottom-0 {
+    border-bottom: 0;
 }
 

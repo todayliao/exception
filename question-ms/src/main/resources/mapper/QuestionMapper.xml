@@ -190,6 +190,10 @@
   <update id="voteDownQuestion">
     update t_qms_question set vote_up = vote_up - 1 where id = #{questionId}
   </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+    select * from t_qms_question
+  </select>
 
 
 </mapper>
