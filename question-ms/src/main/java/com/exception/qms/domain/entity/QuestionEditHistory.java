@@ -22,6 +22,8 @@ public class QuestionEditHistory {
 
     private LocalDateTime createTime;
 
+    private LocalDateTime questionCreateTime;
+
     private Boolean isDeleted;
 
     private String descriptionCn;

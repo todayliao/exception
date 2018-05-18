@@ -26,11 +26,13 @@
 
                     <div th:each="user : ${response.data}" class="item float-left">
                         <div class="media-left user-wall-media-left">
-                            <img class="user-wall-avatar" th:src="${user.userAvatar}">
+                            <a th:href="@{'/user/' + ${user.userId}}">
+                                <img class="user-wall-avatar" th:src="${user.userAvatar}">
+                            </a>
                         </div>
                         <div class="media-body">
                             <div class="user-name">
-                                <a href="#" th:text="${user.userName}">username</a>
+                                <a th:href="@{'/user/' + ${user.userId}}" th:text="${user.userName}">username</a>
                             </div>
                             <div class="user-introduce" th:utext="${user.userIntroduction}">自我介绍</div>
                         </div>

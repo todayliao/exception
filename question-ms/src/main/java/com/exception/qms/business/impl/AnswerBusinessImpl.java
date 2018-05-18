@@ -68,7 +68,7 @@ public class AnswerBusinessImpl implements AnswerBusiness {
         Answer answerTmp = answerService.queryAnswerInfo(answerId);
         AnswerEditHistory answerEditHistory = new AnswerEditHistory();
         answerEditHistory.setAnswerId(answerId);
-        answerEditHistory.setCreateTime(answerTmp.getUpdateTime());
+        answerEditHistory.setAnswerCreateTime(answerTmp.getUpdateTime());
         // 设置历史数据的创建者
         if (answerTmp.getLatestEditorUserId() == 0) {
             answerEditHistory.setCreateUserId(answerTmp.getCreateUserId());

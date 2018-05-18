@@ -20,6 +20,8 @@ public class AnswerEditHistory {
 
     private LocalDateTime createTime;
 
+    private LocalDateTime answerCreateTime;
+
     private Boolean isDeleted;
 
     private String descriptionCn;

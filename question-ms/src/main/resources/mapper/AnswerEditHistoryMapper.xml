@@ -31,10 +31,10 @@
   </delete>
   <insert id="insert" parameterType="com.exception.qms.domain.entity.AnswerEditHistory" >
     insert into t_qms_answer_edit_history (answer_id, create_user_id,
-      create_time, is_deleted, description_cn
+      create_time, answer_create_time, is_deleted, description_cn
       )
     values (#{answerId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT},
-      #{createTime,jdbcType=TIMESTAMP}, 0, #{descriptionCn,jdbcType=LONGVARCHAR}
+      NOW(), #{answerCreateTime,jdbcType=TIMESTAMP}, 0, #{descriptionCn,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.AnswerEditHistory" >

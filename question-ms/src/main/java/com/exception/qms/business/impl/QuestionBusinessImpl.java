@@ -247,7 +247,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         }
         questionEditHistory.setQuestionId(questionId);
         questionEditHistory.setTitleCn(tmpQuestion.getTitleCn());
-        questionEditHistory.setCreateTime(tmpQuestion.getUpdateTime());
+        questionEditHistory.setQuestionCreateTime(tmpQuestion.getUpdateTime());
 
         questionEditHistory.setDescriptionCn(tmpQuestionDesc.getDescriptionCn());
 

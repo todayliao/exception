@@ -32,10 +32,10 @@
   </delete>
   <insert id="insert" parameterType="com.exception.qms.domain.entity.QuestionEditHistory" >
     insert into t_qms_question_edit_history (question_id, create_user_id,
-      title_cn, create_time, is_deleted, 
+      title_cn, create_time, question_create_time, is_deleted,
       description_cn)
     values (#{questionId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT},
-      #{titleCn,jdbcType=VARCHAR}, #{createTime}, 0,
+      #{titleCn,jdbcType=VARCHAR}, NOW(), #{questionCreateTime}, 0,
       #{descriptionCn,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.QuestionEditHistory" >

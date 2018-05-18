@@ -79,45 +79,45 @@ public class UserController extends BaseController {
     }
 
 
-    @Autowired
-    private QuestionMapper questionMapper;
-    @Autowired
-    private AnswerMapper answerMapper;
-    @Autowired
-    private UserQuestionContributionMapper userQuestionContributionMapper;
-    @Autowired
-    private UserAnswerContributionMapper userAnswerContributionMapper;
-
-
-    /**
-     * 待删除的 api
-     * @return
-     */
-    @GetMapping("/user/contribution/create")
-    @OperatorLog(description = "用户贡献数据生成")
-    @ResponseBody
-    public BaseResponse createUserContributionData() {
-        List<Question> questions = questionMapper.queryAll();
-        questions.forEach(question -> {
-            UserQuestionContribution userQuestionContribution = new UserQuestionContribution();
-            userQuestionContribution.setCreateTime(question.getCreateTime());
-            userQuestionContribution.setQuestionId(question.getId());
-            userQuestionContribution.setUserId(question.getCreateUserId());
-            userQuestionContribution.setType(UserQuestionContributionTypeEnum.CREATE.getCode());
-            userQuestionContributionMapper.insert(userQuestionContribution);
-        });
-
-        List<Answer> answers = answerMapper.queryAll();
-        answers.forEach(answer -> {
-            UserAnswerContribution userAnswerContribution = new UserAnswerContribution();
-            userAnswerContribution.setAnswerId(answer.getId());
-            userAnswerContribution.setCreateTime(answer.getCreateTime());
-            userAnswerContribution.setUserId(answer.getCreateUserId());
-            userAnswerContribution.setType(UserAnswerContributionTypeEnum.CREATE.getCode());
-            userAnswerContributionMapper.insert(userAnswerContribution);
-        });
-        return new BaseResponse().success();
-    }
+//    @Autowired
+//    private QuestionMapper questionMapper;
+//    @Autowired
+//    private AnswerMapper answerMapper;
+//    @Autowired
+//    private UserQuestionContributionMapper userQuestionContributionMapper;
+//    @Autowired
+//    private UserAnswerContributionMapper userAnswerContributionMapper;
+//
+//
+//    /**
+//     * 待删除的 api
+//     * @return
+//     */
+//    @GetMapping("/user/contribution/create")
+//    @OperatorLog(description = "用户贡献数据生成")
+//    @ResponseBody
+//    public BaseResponse createUserContributionData() {
+//        List<Question> questions = questionMapper.queryAll();
+//        questions.forEach(question -> {
+//            UserQuestionContribution userQuestionContribution = new UserQuestionContribution();
+//            userQuestionContribution.setCreateTime(question.getCreateTime());
+//            userQuestionContribution.setQuestionId(question.getId());
+//            userQuestionContribution.setUserId(question.getCreateUserId());
+//            userQuestionContribution.setType(UserQuestionContributionTypeEnum.CREATE.getCode());
+//            userQuestionContributionMapper.insert(userQuestionContribution);
+//        });
+//
+//        List<Answer> answers = answerMapper.queryAll();
+//        answers.forEach(answer -> {
+//            UserAnswerContribution userAnswerContribution = new UserAnswerContribution();
+//            userAnswerContribution.setAnswerId(answer.getId());
+//            userAnswerContribution.setCreateTime(answer.getCreateTime());
+//            userAnswerContribution.setUserId(answer.getCreateUserId());
+//            userAnswerContribution.setType(UserAnswerContributionTypeEnum.CREATE.getCode());
+//            userAnswerContributionMapper.insert(userAnswerContribution);
+//        });
+//        return new BaseResponse().success();
+//    }
 
     @GetMapping("/user/{userId}/contribution/data")
     @OperatorLog(description = "用户贡献数据")
