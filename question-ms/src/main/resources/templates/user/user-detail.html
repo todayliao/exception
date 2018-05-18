@@ -20,10 +20,10 @@
         <!-- 用户 avatar 展示 -->
         <div class="col-3">
             <div class="card">
-                <img class="card-img-top" src="https://avatars1.githubusercontent.com/u/22838525?s=460&v=4" alt="Card image cap">
+                <img class="card-img-top" th:src="${response.data.userAvatar}">
                 <div class="card-body">
-                    <h5 class="card-title fs-20px">Allen Jiang</h5>
-                    <p class="card-text m-fade">Java 工程师, 专注于分布式&高并发</p>
+                    <h5 class="card-title fs-20px" th:utext="${response.data.userName}">Allen Jiang</h5>
+                    <p class="card-text m-fade" th:utext="${response.data.userIntroduction}">Java 工程师, 专注于分布式&高并发</p>
                     <a href="#" class="btn btn-primary follow">关&nbsp;&nbsp;&nbsp;&nbsp;注</a>
                 </div>
                 <!--<ul class="list-group list-group-flush">-->
@@ -42,45 +42,33 @@
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
                             <a id="new" class="nav-link fs-14px active border-bottom-0" href="#">问题方案
-                                <span class="badge badge-dark">4</span>
+                                <span class="badge badge-dark" th:text="${response.data.totalQuestionCount}">4</span>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body padding0">
                     <div class="list-group">
-                        <div  href="#" class="list-group-item list-group-item-action flex-column align-items-start user-list-group-item">
+                        <div href="#" th:each="question : ${response.data.questions}" class="list-group-item list-group-item-action flex-column align-items-start user-list-group-item">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><a href="#" class="gray-dark">title</a></h5>
+                                <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" class="gray-dark" th:utext="${question.titleCn}">title</a></h5>
                             </div>
                             <!--<small>Donec id elit non mi porta.</small>-->
                             <div class="margintop-3px">
-                                <a href="#" class="badge badge-secondary marginright-5px">android</a>
+                                <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
                                 <span class="m-fade fs-12px" style="margin-left: -2px;">
-                                        •&nbsp;三天前
+                                        •&nbsp;[[${question.beforeTimeStr}]]
                                 </span>
                             </div>
                         </div>
 
-                        <div  href="#" class="list-group-item list-group-item-action flex-column align-items-start user-list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><a href="#" class="gray-dark">title</a></h5>
-                            </div>
-                            <!--<small>Donec id elit non mi porta.</small>-->
-                            <div class="margintop-3px">
-                                <a href="#" class="badge badge-secondary marginright-5px">android</a>
-                                <span class="m-fade fs-12px" style="margin-left: -2px;">
-                                        •&nbsp;三天前
-                                </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- 贡献图表 -->
             <div class="card margintop-20px">
-                <div class="card-header m-card-header">本月一共贡献了 <span id="totalCountOfMonth">0</span> 个问题解决方案</div>
+                <div class="card-header m-card-header">本月贡献值 <span id="totalCountOfMonth">0</span></div>
                 <div class="card-body">
                     <div class="contribution-chart-container"></div>
                 </div>

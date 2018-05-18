@@ -69,8 +69,11 @@ public class UserController extends BaseController {
 
     @GetMapping("/user/{userId}")
     @OperatorLog(description = "展示用户")
-    public String showUser(@PathVariable("userId") Long userId, Model model) {
+    public String showUser(@PathVariable("userId") Long userId,
+                           @RequestParam(value = "tab", defaultValue = "question") String tab,
+                           Model model) {
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.USER.getCode());
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), userBusiness.queryUserDetail(userId, tab));
         model.addAttribute("userId", userId);
         return "user/user-detail";
     }
@@ -122,6 +125,5 @@ public class UserController extends BaseController {
     public BaseResponse queryContributionData(@PathVariable("userId") Long userId) {
         return userBusiness.queryContributionData(userId);
     }
-
 
 }

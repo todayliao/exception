@@ -16,4 +16,11 @@ public interface UserBusiness {
     PageQueryResponse<QueryUserPageListResponseVO> queryUserPageList(Integer pageIndex, Integer pageSize, String tab);
 
     BaseResponse queryContributionData(Long userId);
+
+    /**
+     * 查询用户展示页数据
+     * @param userId
+     * @return
+     */
+    BaseResponse queryUserDetail(Long userId, String tab);
 }

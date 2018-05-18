@@ -18,7 +18,11 @@ public interface QuestionMapper {
                                          @Param("pageSize") int pageSize,
                                          @Param("orderByColumn") String orderByColumn);
 
+    List<Question> queryQuestionPageListByUser(long userId);
+
     int queryQuestionTotalCount();
+
+    int queryQuestionTotalCountByUser(Long userId);
 
     List<Question> queryHotQuestions();
 

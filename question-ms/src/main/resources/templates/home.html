@@ -34,17 +34,22 @@
                     <div class="list-group">
                         <div th:each="question : ${response.data}" href="#" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item question-item">
                             <div class="media-left marginleft-5px">
-                                <img th:src="${question.createUserAvatar}" class="rounded media-img">
+                                <a th:href="@{'/user/' + ${question.createUserId}}">
+                                    <img th:src="${question.createUserAvatar}" class="rounded media-img">
+                                </a>
                             </div>
                             <div class="media-body">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" th:text="${question.titleCn}" class="gray-dark"></a></h5>
+                                    <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" th:utext="${question.titleCn}" class="gray-dark"></a></h5>
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->
                                 <div class="margintop-3px">
-                                    <a th:each="tag : ${question.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
+                                    <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
                                     <span class="m-fade fs-12px" style="margin-left: -2px;">
-                                        •&nbsp;<strong th:text="${question.createUserName}"></strong>
+                                        •&nbsp;
+                                        <a th:href="@{'/user/' + ${question.createUserId}}" class="fs-12px gray-a">
+                                            <strong th:utext="${question.createUserName}"></strong>
+                                        </a>
                                         &nbsp;•&nbsp;[[${question.beforeTimeStr}]]
                                         </span>
                                 </div>

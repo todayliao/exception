@@ -5,12 +5,20 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.enhancement.UserAnswerContributionStatistics;
 import com.exception.qms.domain.enhancement.UserQuestionContributionStatistics;
+import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.domain.entity.UserAnswerContribution;
 import com.exception.qms.domain.entity.UserQuestionContribution;
+import com.exception.qms.service.QuestionService;
+import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.service.UserService;
+import com.exception.qms.utils.TimeUtil;
 import com.exception.qms.web.dto.user.response.QueryContributionDataItemDTO;
 import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
+import com.exception.qms.web.vo.common.TagResponseVO;
+import com.exception.qms.web.vo.home.QueryHomeQuestionPageListResponseVO;
+import com.exception.qms.web.vo.user.QueryUserDetailQuestionItemResponseVO;
+import com.exception.qms.web.vo.user.QueryUserDetailResponseVO;
 import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +30,7 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,6 +47,10 @@ public class UserBusinessImpl implements UserBusiness {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuestionService questionService;
+    @Autowired
+    private QuestionTagService questionTagService;
     @Autowired
     private Mapper mapper;
 
@@ -97,7 +110,7 @@ public class UserBusinessImpl implements UserBusiness {
         for (int i = 0; i < 370; i++) {
             QueryContributionDataItemDTO contributionItem = new QueryContributionDataItemDTO();
 
-            date = (i == 0 ? today.minus(1, ChronoUnit.DAYS) : date.minus(1, ChronoUnit.DAYS));
+            date = (i == 0 ? today : date.minus(1, ChronoUnit.DAYS));
 
             contributionItem.setDate(date);
 
@@ -137,6 +150,51 @@ public class UserBusinessImpl implements UserBusiness {
 
         queryContributionDataResponseDTO.setTotalCountOfMonth(totalCountOfMonth);
         return new BaseResponse().success(queryContributionDataResponseDTO);
+    }
+
+    /**
+     * 查询用户展示页数据
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public BaseResponse queryUserDetail(Long userId, String tab) {
+        List<User> users = userService.queryUsersByUserIds(Arrays.asList(userId));
+        User currentUser = users.get(0);
+
+        QueryUserDetailResponseVO queryUserDetailResponseVO = new QueryUserDetailResponseVO();
+        // 用户信息
+        queryUserDetailResponseVO.setUserId(currentUser.getId());
+        queryUserDetailResponseVO.setUserName(currentUser.getName());
+        queryUserDetailResponseVO.setUserIntroduction(currentUser.getIntroduction());
+        queryUserDetailResponseVO.setUserAvatar(currentUser.getAvatar());
+
+        // 用户维护的问题
+        int totalQuestionCount = questionService.queryQuestionTotalCountByUser(userId);
+
+        if (totalQuestionCount > 0) {
+            List<Question> questionList = questionService.queryQuestionPageListByUser(userId);
+
+            // 关联相关标签信息
+            // 获取问题 ids
+            List<Long> questionIds = questionList.stream().map(Question::getId).collect(Collectors.toList());
+            Map<Long, List<TagResponseVO>> questionIdTagIdsMap = questionTagService.queryTagInfoByQuestionIds(questionIds);
+
+            List<QueryUserDetailQuestionItemResponseVO> queryUserDetailQuestionItemResponseVOS = null;
+            if (!CollectionUtils.isEmpty(questionIdTagIdsMap)) {
+                queryUserDetailQuestionItemResponseVOS = questionList.stream().map(question -> {
+                    QueryUserDetailQuestionItemResponseVO queryUserDetailQuestionItemResponseVO = mapper.map(question, QueryUserDetailQuestionItemResponseVO.class);
+                    queryUserDetailQuestionItemResponseVO.setBeforeTimeStr(TimeUtil.calculateTimeDifference(question.getCreateTime()));
+                    queryUserDetailQuestionItemResponseVO.setTags(questionIdTagIdsMap.get(question.getId()));
+                    return queryUserDetailQuestionItemResponseVO;
+                }).collect(Collectors.toList());
+            }
+            queryUserDetailResponseVO.setQuestions(queryUserDetailQuestionItemResponseVOS);
+        }
+
+        queryUserDetailResponseVO.setTotalQuestionCount(totalQuestionCount);
+        return new BaseResponse().success(queryUserDetailResponseVO);
     }
 
 }

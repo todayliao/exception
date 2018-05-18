@@ -19,11 +19,15 @@ public interface QuestionService {
      */
     List<Question> queryQuestionPageList(int pageIndex, int pageSize, String orderByColumn);
 
+    List<Question> queryQuestionPageListByUser(long userId);
+
     /**
      * 查询首页问题列表总数
      * @return
      */
     int queryQuestionTotalCount();
+
+    int queryQuestionTotalCountByUser(Long userId);
 
     List<Question> queryHotQuestions();
 

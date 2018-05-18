@@ -65,14 +65,18 @@
                     <!-- 问题创建者 -->
                     <div class="float-right gray fs-13px margintop-1px">
                         &nbsp;&nbsp;&nbsp;发布者:
-                        <img th:src="${response.createUserAvatar}" class="rounded float-right card-footer-image marginleft-5px" alt="...">
+                        <a th:href="@{'/user/' + ${response.createUserId}}">
+                            <img th:src="${response.createUserAvatar}" class="rounded float-right card-footer-image marginleft-5px" alt="...">
+                        </a>
                     </div>
 
                     <!-- 问题编辑者 -->
                     <div th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
                         最新编辑者:
-                        <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
-                             data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
+                            <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
+                                 data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        </a>
                     </div>
 
 
@@ -90,8 +94,10 @@
 
                         <div class="answer-item-user">
                             <div class="media-left">
-                                <img th:src="${answer.user.avatar}"
-                                     class="rounded media-img answer-item-user-img">
+                                <a th:href="@{'/user/' + ${answer.user.id}}">
+                                    <img th:src="${answer.user.avatar}"
+                                         class="rounded media-img answer-item-user-img">
+                                </a>
                             </div>
                             <div class="media-body">
                                 <div class="d-flex w-100 justify-content-between">
@@ -134,8 +140,10 @@
                         <!-- 方案编辑者 -->
                         <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
                             最新编辑者:
-                            <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
-                                 data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                            <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
+                                <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
+                                     data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                            </a>
                         </div>
                     </div>
 

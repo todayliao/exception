@@ -37,8 +37,18 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<Question> queryQuestionPageListByUser(long userId) {
+        return questionMapper.queryQuestionPageListByUser(userId);
+    }
+
+    @Override
     public int queryQuestionTotalCount() {
         return questionMapper.queryQuestionTotalCount();
+    }
+
+    @Override
+    public int queryQuestionTotalCountByUser(Long userId) {
+        return questionMapper.queryQuestionTotalCountByUser(userId);
     }
 
     @Override
