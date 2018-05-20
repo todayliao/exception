@@ -15,6 +15,7 @@
 
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/plugins/google-code-prettify/prettify.css}">
+    <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
     <link rel="stylesheet" th:href="@{/css/question/question-detail.css}">
 
 </head>
@@ -179,6 +180,7 @@
 <script th:replace="fragment/common-js :: js"></script>
 <script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
+<script th:src="@{/plugins/zoomify/zoomify.js}"></script>
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
@@ -187,6 +189,9 @@
         // 代码高亮
         $("pre").addClass("prettyprint");
         prettyPrint();
+
+        // 图片放大
+        $('p img').zoomify();
 
         var questionTitle = [[${response.titleCn}]];
         var questionId = [[${response.id}]];

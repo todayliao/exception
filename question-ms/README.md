@@ -79,7 +79,7 @@
 - 项目重构，maven 模块化拆分 TODO
 - 更改完问题和方案后跳转到首页的 bug TODO
 - 用户中心，展示用户相关信息 TODO
-- 图片点击放大 TODO
+- 图片点击放大
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
 

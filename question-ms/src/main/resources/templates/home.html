@@ -40,7 +40,7 @@
                             </div>
                             <div class="media-body">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" th:utext="${question.titleCn}" class="gray-dark"></a></h5>
+                                    <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" th:text="${question.titleCn}" class="gray-dark"></a></h5>
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->
                                 <div class="margintop-3px">

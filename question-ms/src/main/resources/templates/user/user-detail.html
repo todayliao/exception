@@ -51,7 +51,7 @@
                     <div class="list-group">
                         <div href="#" th:each="question : ${response.data.questions}" class="list-group-item list-group-item-action flex-column align-items-start user-list-group-item">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" class="gray-dark" th:utext="${question.titleCn}">title</a></h5>
+                                <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" class="gray-dark" th:text="${question.titleCn}">title</a></h5>
                             </div>
                             <!--<small>Donec id elit non mi porta.</small>-->
                             <div class="margintop-3px">
