@@ -39,4 +39,18 @@ public interface UserService {
     List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate today, LocalDate lastYearToday);
 
     List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday);
+
+    /**
+     * 添加问题的贡献记录
+     *
+     * @param questionId
+     * @return
+     */
+    int addQuestionContribution(Long questionId, Long userId, int type);
+
+    /**
+     * 添加解决方案的贡献记录
+     * @return
+     */
+    int addAnswerContribution(Long answerId, Long userId, int type);
 }

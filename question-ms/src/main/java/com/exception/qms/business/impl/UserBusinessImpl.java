@@ -80,8 +80,10 @@ public class UserBusinessImpl implements UserBusiness {
     @Override
     public BaseResponse queryContributionData(Long userId) {
         LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
         LocalDate lastYearToday = LocalDate.now().minus(1, ChronoUnit.YEARS);
-        List<UserQuestionContribution> userQuestionContributions = userService.queryUserQuestionContribution(userId, today, lastYearToday);
+        LocalDate lastYearYesterday = lastYearToday.minus(1, ChronoUnit.DAYS);
+        List<UserQuestionContribution> userQuestionContributions = userService.queryUserQuestionContribution(userId, tomorrow, lastYearYesterday);
 
         List<UserQuestionContributionStatistics> userQuestionContributionStatisticsList
                 = userQuestionContributions.stream()
@@ -93,7 +95,7 @@ public class UserBusinessImpl implements UserBusiness {
 
         Map<LocalDate, Long> userQuestionContributionMap = userQuestionContributionStatisticsList.stream().collect(Collectors.groupingBy(UserQuestionContributionStatistics::getContributeDate, Collectors.counting()));
 
-        List<UserAnswerContribution> userAnswerContributions = userService.queryUserAnswerContribution(userId, today, lastYearToday);
+        List<UserAnswerContribution> userAnswerContributions = userService.queryUserAnswerContribution(userId, tomorrow, lastYearYesterday);
 
         List<UserAnswerContributionStatistics> userAnswerContributionStatisticsList = userAnswerContributions.stream()
                 .map(userAnswerContribution -> {

@@ -6,10 +6,12 @@ import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
 import com.exception.qms.domain.entity.AnswerEditHistory;
 import com.exception.qms.enums.QmsResponseCodeEnum;
+import com.exception.qms.enums.UserAnswerContributionTypeEnum;
 import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.service.AnswerVoteUserService;
+import com.exception.qms.service.UserService;
 import com.exception.qms.utils.StringUtil;
 import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
@@ -20,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author jiangbing(江冰)
@@ -35,6 +39,10 @@ public class AnswerBusinessImpl implements AnswerBusiness {
     private AnswerService answerService;
     @Autowired
     private AnswerVoteUserService answerVoteUserService;
+    @Autowired
+    private ExecutorService executorService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private Mapper mapper;
 
@@ -87,6 +95,10 @@ public class AnswerBusinessImpl implements AnswerBusiness {
         AnswerDesc answerDesc = mapper.map(answerUpdateForm, AnswerDesc.class);
         answerDesc.setDescriptionCn(StringUtil.spacingText(answerUpdateForm.getAnswerDesc()));
         answerService.updateAnswerDesc(answerDesc);
+
+        // 异步添加贡献数据
+        executorService.execute(() -> userService.addAnswerContribution(answerId, userId, UserAnswerContributionTypeEnum.EDIT.getCode()));
+
         return new BaseResponse().success();
     }
 

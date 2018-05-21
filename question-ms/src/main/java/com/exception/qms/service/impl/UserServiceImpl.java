@@ -6,6 +6,8 @@ import com.exception.qms.domain.entity.UserQuestionContribution;
 import com.exception.qms.domain.mapper.UserAnswerContributionMapper;
 import com.exception.qms.domain.mapper.UserMapper;
 import com.exception.qms.domain.mapper.UserQuestionContributionMapper;
+import com.exception.qms.enums.UserAnswerContributionTypeEnum;
+import com.exception.qms.enums.UserQuestionContributionTypeEnum;
 import com.exception.qms.service.UserService;
 import com.exception.qms.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -56,8 +59,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 更新用户最后一次登录时间为当前时间
      *
-     * @return
      * @param userId
+     * @return
      */
     @Override
     public int updateLastLoginTime(Long userId) {
@@ -73,5 +76,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday) {
         return userAnswerContributionMapper.queryUserAnswerContribution(userId, today, lastYearToday);
+    }
+
+    /**
+     * 添加问题的贡献记录
+     *
+     * @param questionId
+     * @return
+     */
+    @Override
+    public int addQuestionContribution(Long questionId, Long userId, int type) {
+        UserQuestionContribution userQuestionContribution = new UserQuestionContribution();
+        userQuestionContribution.setCreateTime(LocalDateTime.now());
+        userQuestionContribution.setQuestionId(questionId);
+        userQuestionContribution.setUserId(userId);
+        userQuestionContribution.setType(type);
+        return userQuestionContributionMapper.insert(userQuestionContribution);
+    }
+
+    /**
+     * 添加解决方案的贡献记录
+     *
+     * @param answerId
+     * @return
+     */
+    @Override
+    public int addAnswerContribution(Long answerId, Long userId, int type) {
+        UserAnswerContribution userAnswerContribution = new UserAnswerContribution();
+        userAnswerContribution.setAnswerId(answerId);
+        userAnswerContribution.setCreateTime(LocalDateTime.now());
+        userAnswerContribution.setUserId(userId);
+        userAnswerContribution.setType(type);
+        return userAnswerContributionMapper.insert(userAnswerContribution);
     }
 }

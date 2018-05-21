@@ -3,9 +3,7 @@ package com.exception.qms.business.impl;
 import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.*;
-import com.exception.qms.enums.QmsResponseCodeEnum;
-import com.exception.qms.enums.QuestionTypeEnum;
-import com.exception.qms.enums.VoteOperationTypeEnum;
+import com.exception.qms.enums.*;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
@@ -211,6 +209,10 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         answerDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getAnswerDesc()));
         answerService.addAnswerDesc(answerDesc);
 
+        // 异步添加记录贡献
+        executorService.execute(() -> userService.addQuestionContribution(questionId, userId, UserQuestionContributionTypeEnum.CREATE.getCode()));
+        executorService.execute(() -> userService.addAnswerContribution(answerId, userId, UserAnswerContributionTypeEnum.CREATE.getCode()));
+
         // 异步添加/更新 es index
         executorService.execute(() -> questionSearchService.index(questionId));
 
@@ -264,6 +266,9 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         questionDesc.setQuestionId(questionUpdateForm.getId());
         questionDesc.setDescriptionCn(StringUtil.spacingText(questionUpdateForm.getQuestionDesc()));
         questionService.updateQuestionDesc(questionDesc);
+
+        // 异步添加记录贡献
+        executorService.execute(() -> userService.addQuestionContribution(questionId, userId, UserQuestionContributionTypeEnum.EDIT.getCode()));
 
         // 异步添加/更新 es index
         executorService.execute(() -> questionSearchService.index(questionUpdateForm.getId()));
