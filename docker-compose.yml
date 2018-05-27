@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  qms:
+    image: exception/qms:latest
+    environment:
+      - JAVA_OPTS=-Xms300m -Xmx300m -Dspring.profiles.active=prd
+    ports:
+      - 8090:8090
+
+
+
+
