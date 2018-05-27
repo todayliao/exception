@@ -57,6 +57,7 @@
 - 编辑历史，数据库结构优化
 - 图片点击放大
 - 问题方案添加，问题修改，方案修改计入贡献
+- springboot 线上 docker 容器化
 - nginx 流量统计 TODO
 - 回到顶部 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
@@ -77,7 +78,6 @@
 
 ## V1.1.0
 
-- springboot 线上 docker 容器化 TODO
 - 项目重构，maven 模块化拆分 TODO
 - 更改完问题和方案后跳转到首页的 bug TODO
 - 用户中心，展示用户相关信息 TODO

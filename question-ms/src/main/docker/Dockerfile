@@ -9,4 +9,4 @@ RUN sh -c 'touch /app.jar'
 # ENV为设置环境变量
 ENV JAVA_OPTS=""
 # ENTRYPOINT 为启动时运行的命令
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]

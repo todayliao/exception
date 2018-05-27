@@ -36,8 +36,10 @@
     </springProfile>
 
     <springProfile name="prd">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
         <root level="INFO">
             <appender-ref ref="FILE" />
+            <appender-ref ref="CONSOLE" />
         </root>
     </springProfile>
 </configuration>
