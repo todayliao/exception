@@ -58,6 +58,7 @@
 - 图片点击放大
 - 问题方案添加，问题修改，方案修改计入贡献
 - springboot 线上 docker 容器化
+- springboot 项目容器化后，无法访问宿主机 elasticsearch bug fixed 
 - nginx 流量统计 TODO
 - 回到顶部 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
@@ -66,6 +67,8 @@
 
 ## V1.0.8
 
+- 社区相关跳转问题 TODO
+- 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
 - 关于静态页面开发

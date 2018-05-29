@@ -117,6 +117,10 @@ spring:
     host: 172.17.0.1
     password:
 
+# elastic search
+elasticsearch:
+  host: 172.17.0.1
+
 
 
 

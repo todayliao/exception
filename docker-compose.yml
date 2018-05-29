@@ -1,12 +1,27 @@
 version: '3'
 
 services:
+#  mysql:
+#    image: mysql:5.7
+#    container_name: mysql
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=qwe123
+#      - character-set-server=utf8mb4
+#      - collation-server=utf8mb4_unicode_ci
+#    volumes:
+#      - /Users/a123123/mysql:/var/lib/mysql
+#    ports:
+#      - 3306:3306
+
   qms:
     image: exception/qms:latest
+    container_name: qms
     environment:
       - JAVA_OPTS=-Xms300m -Xmx300m -Dspring.profiles.active=prd
     ports:
       - 8090:8090
+#    volumes:
+#      - /app/logs/qms:/app/logs/qms
 
 
 
