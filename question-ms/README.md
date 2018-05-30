@@ -65,11 +65,14 @@
 
 ## V1.0.8
 
+- 关于静态页面开发
+- docker build 脚本 todo
+- 搜索页面点击下一页出来数据 bug todo
+- 日志组件升级 logback -> log4j2 todo
 - 社区相关跳转问题 TODO
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
-- 关于静态页面开发
 
 ## V1.0.9
 

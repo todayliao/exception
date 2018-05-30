@@ -18,6 +18,7 @@ public class QuestionDetailResponseVO implements Serializable {
     private Long id;
 
     private LocalDateTime createTime;
+    private String createDateStr;
     private String createTimeStr;
 
     private Long createUserId;

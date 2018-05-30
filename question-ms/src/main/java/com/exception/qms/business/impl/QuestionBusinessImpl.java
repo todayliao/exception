@@ -76,6 +76,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         QuestionDetailResponseVO questionDetailResponseVO = mapper.map(question, QuestionDetailResponseVO.class);
         // 日期格式转换
+        questionDetailResponseVO.setCreateDateStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(question.getCreateTime()));
         questionDetailResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(question.getCreateTime()));
 
         // quetion desc
