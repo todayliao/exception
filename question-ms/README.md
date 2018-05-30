@@ -58,12 +58,9 @@
 - 图片点击放大
 - 问题方案添加，问题修改，方案修改计入贡献
 - springboot 线上 docker 容器化
-- springboot 项目容器化后，无法访问宿主机 elasticsearch bug fixed 
-- nginx 流量统计 TODO
-- 回到顶部 TODO
-- 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
-- markdown editor 加载过慢的问题 TODO
-- 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
+- springboot 项目容器化后，无法访问宿主机 elasticsearch bug fixed
+- 新提交的问题显示 一年前 bug TODO
+
 
 ## V1.0.8
 
@@ -86,5 +83,13 @@
 - 用户中心，展示用户相关信息 TODO
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
+
+## V1.1.1
+
+- nginx 流量统计 TODO
+- 回到顶部 TODO
+- 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
+- markdown editor 加载过慢的问题 TODO
+- 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
 
 
