@@ -59,8 +59,9 @@
 - 问题方案添加，问题修改，方案修改计入贡献
 - springboot 线上 docker 容器化
 - springboot 项目容器化后，无法访问宿主机 elasticsearch bug fixed
-- 新提交的问题显示 一年前 bug TODO
+- 新提交的问题显示 一年前 bug
 - 搜索页面 UI 卡片化 todo
+- 问题详情页添加问题发布时间 todo
 
 ## V1.0.8
 

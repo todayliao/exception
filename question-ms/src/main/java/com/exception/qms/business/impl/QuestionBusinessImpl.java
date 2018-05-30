@@ -28,6 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -73,6 +75,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         }
 
         QuestionDetailResponseVO questionDetailResponseVO = mapper.map(question, QuestionDetailResponseVO.class);
+        // 日期格式转换
+        questionDetailResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(question.getCreateTime()));
 
         // quetion desc
         QuestionDesc questionDesc = questionService.queryQuestionDesc(questionId);

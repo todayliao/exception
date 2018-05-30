@@ -33,6 +33,11 @@
                         <h1 class="question-title" th:text="${response.titleCn}"></h1>
                         <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}">
                         </div>
+                        <div class="m-fade marginbottom-12px fs-14px">
+                            <a href="#" id="my" class="tooltip-a" data-toggle="tooltip" data-placement="top" th:title="'发布于 ' + ${response.createTimeStr}">
+                                发布于&nbsp;<span th:text="${response.createTimeStr}">2018-06-09</span>
+                            </a>
+                        </div>
                         <div class="question-tags">
                             <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#"
                                class="badge badge-secondary marginright-5px"></a>
@@ -75,8 +80,7 @@
                     <div th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
                         最新编辑者:
                         <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
-                            <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
-                                 data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                            <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px">
                         </a>
                     </div>
 
@@ -142,8 +146,7 @@
                         <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
                             最新编辑者:
                             <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
-                                <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px"
-                                     data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px">
                             </a>
                         </div>
                     </div>

@@ -110,3 +110,9 @@ blockquote {
 .rounded {
     border-radius: 2.25rem!important;
 }
+
+.tooltip-inner {
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: .15rem;
+}
