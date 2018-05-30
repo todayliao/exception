@@ -6,6 +6,8 @@ VOLUME /tmp
 ADD qms-1.0.0-SNAPSHOT.jar app.jar
 # RUN为初始化时运行的命令  touch更新app.jar
 RUN sh -c 'touch /app.jar'
+# 指定容器内的时区
+RUN echo "Asia/Shanghai" > /etc/timezone;
 # ENV为设置环境变量
 ENV JAVA_OPTS=""
 # ENTRYPOINT 为启动时运行的命令

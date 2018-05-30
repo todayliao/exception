@@ -41,13 +41,13 @@
                 </div>
                 <div class="card-footer">
                     <!-- 点赞 -->
-                    <a id="like-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == false}"
+                    <a id="like-this-question" class="gray-a fs-13px" href="#" th:if="${response.isCurrentUserVoteUp == false}"
                        th:onclick="'javascript:likeThisQuestion(1);'"
                        data-toggle="modal">
                         <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
                     </a>
 
-                    <a id="unlike-this-question" class="gray-a" href="#" th:if="${response.isCurrentUserVoteUp == true}"
+                    <a id="unlike-this-question" class="gray-a fs-13px" href="#" th:if="${response.isCurrentUserVoteUp == true}"
                        th:onclick="'javascript:likeThisQuestion(-1);'"
                        data-toggle="modal">
                         <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
@@ -59,7 +59,7 @@
                         <i class="fa fa-eye"></i>&nbsp;&nbsp;[[${response.viewNum}]]&nbsp;次浏览
                     </span>
                     <!-- 改进 -->
-                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px">
+                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
                         <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
                     </a>
 
@@ -119,14 +119,14 @@
                     </div>
                     <div class="card-footer">
                         <!-- 点赞 -->
-                        <a id="like-this-answer" class="gray-a" href="#"
+                        <a id="like-this-answer" class="gray-a fs-13px" href="#"
                            th:if="${answer.isCurrentUserVoteUp == false}"
                            th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
                            data-toggle="modal">
                             <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
                         </a>
 
-                        <a id="unlike-this-answer" class="gray-a" href="#"
+                        <a id="unlike-this-answer" class="gray-a fs-13px" href="#"
                            th:if="${answer.isCurrentUserVoteUp == true}"
                            th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
                            data-toggle="modal">
@@ -134,7 +134,7 @@
                         </a>
 
                         <!-- 改进 -->
-                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px">
+                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
                             <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
                         </a>
 
