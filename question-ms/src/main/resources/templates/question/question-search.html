@@ -39,55 +39,54 @@
                     </form>
                 </div>
             </div>
-            <ul id="tab-container" class="nav nav-tabs margintop-20px"  role="tablist">
-                <li class="nav-item">
-                    <a id="relevance" class="nav-link active fs-14px" th:href="@{'/search?tab=relevance&key=' + ${searchKey}}">相关度</a>
-                </li>
-                <li class="nav-item">
-                    <a id="vote" class="nav-link fs-14px" th:href="@{'/search?tab=vote&key=' + ${searchKey}}">点赞数</a>
-                </li>
-                <li class="nav-item">
-                    <a id="view" class="nav-link fs-14px" th:href="@{'/search?tab=view&key=' + ${searchKey}}">浏览数</a>
-                </li>
-                <li class="nav-item">
-                    <a id="new" class="nav-link fs-14px" th:href="@{'/search?tab=new&key=' + ${searchKey}}">最新</a>
-                </li>
-            </ul>
-            <!--<div class="list-group">-->
 
-            <!--</div>-->
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active margintop-20px" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="card margintop-20px">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a id="relevance" class="nav-link fs-14px" th:href="@{'/search?tab=relevance&key=' + ${searchKey}}">相关度</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="vote" class="nav-link fs-14px" th:href="@{'/search?tab=vote&key=' + ${searchKey}}">点赞数</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="view" class="nav-link fs-14px" th:href="@{'/search?tab=view&key=' + ${searchKey}}">浏览数</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="new" class="nav-link fs-14px" th:href="@{'/search?tab=new&key=' + ${searchKey}}">最新</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body padding0">
                     <div class="list-group">
-                            <div th:each="question : ${response.data}" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item">
-                                <!--<div class="media-left marginleft-5px">-->
-                                <!--<img th:src="${question.userAvatar}" class="rounded media-img">-->
-                                <!--</div>-->
-                                <h5 class="mb-1"><a th:href="@{'/question/' + ${question.questionId}}" th:utext="${question.titleCn}" class="gray-dark"></a></h5>
-                                <div class="d-flex w-100 justify-content-between">
-                                </div>
-                                <!--<small>Donec id elit non mi porta.</small>-->
-                                <div th:utext="${question.descriptionCn}">
-                                </div>
-                                <!--其他信息-->
-                                <div class="margintop-10px">
-                                    <a th:each="tag : ${question.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
-                                    <span class="m-fade fs-12px" style="margin-left: -2px;">
+                        <div th:each="question : ${response.data}" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item">
+                            <!--<div class="media-left marginleft-5px">-->
+                            <!--<img th:src="${question.userAvatar}" class="rounded media-img">-->
+                            <!--</div>-->
+                            <h5 class="mb-1"><a th:href="@{'/question/' + ${question.questionId}}" th:utext="${question.titleCn}" class="gray-dark"></a></h5>
+                            <div class="d-flex w-100 justify-content-between">
+                            </div>
+                            <!--<small>Donec id elit non mi porta.</small>-->
+                            <div th:utext="${question.descriptionCn}">
+                            </div>
+                            <!--其他信息-->
+                            <div class="margintop-10px">
+                                <a th:each="tag : ${question.tags}" th:text="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
+                                <span class="m-fade fs-12px" style="margin-left: -2px;">
                                         •&nbsp;<strong th:text="${question.createUserName}"></strong>
                                         &nbsp;•&nbsp;[[${question.createTime}]]
                                         </span>
-                                </div>
                             </div>
+                        </div>
                     </div>
+
+                    <!-- 分页 -->
+                    <nav aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination justify-content-center margintop-30px marginbottom-30px">
+                        </ul>
+                    </nav>
                 </div>
-
             </div>
-
-            <!-- 分页 -->
-            <nav aria-label="Page navigation example">
-                <ul id="pagination" class="pagination justify-content-center margintop-30px">
-                </ul>
-            </nav>
         </div>
 
         <!-- 右边栏 -->

@@ -60,8 +60,8 @@
 - springboot 线上 docker 容器化
 - springboot 项目容器化后，无法访问宿主机 elasticsearch bug fixed
 - 新提交的问题显示 一年前 bug
-- 搜索页面 UI 卡片化 todo
-- 问题详情页添加问题发布时间 todo
+- 搜索页面 UI 卡片化 
+- 问题详情页添加问题发布时间
 
 ## V1.0.8
 
