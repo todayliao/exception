@@ -68,7 +68,6 @@
 - 关于静态页面开发
 - docker build 脚本 todo
 - 搜索页面点击下一页出来数据 bug todo
-- 日志组件升级 logback -> log4j2 todo
 - 社区相关跳转问题 TODO
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
@@ -95,5 +94,6 @@
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
 - 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
+- 日志组件升级 logback -> log4j2 todo
 
 
