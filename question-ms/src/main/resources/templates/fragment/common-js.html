@@ -9,6 +9,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script th:src="@{/plugins/nprogress/nprogress.js}"></script>
     <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
+    <script th:src="@{/js/jquery.toTop.min.js}"></script>
     <script >
         $(document).ready(function() {
             // top nav
@@ -24,6 +25,19 @@
                 $('#header-search').animate({width: '500px'});
             }).blur(function() {
                 $('#header-search').animate({width: '300px'});
+            });
+
+
+            // 回到顶部
+            // 可定制选项
+            $('.to-top').toTop({
+                //以下是选项默认参数，您可以根据自己的需求修改
+                autohide: true,  //是否自动隐藏
+                offset: 420,     //距离顶部多少距离时自动隐藏按钮
+                speed: 500,      //滚动持续时间
+                position: true,   //如果设置为 false，则需要手动在 css 中设置“按钮”的位置
+                right: 20,       //右侧距离
+                bottom: 150       //底部距离
             });
 
         });

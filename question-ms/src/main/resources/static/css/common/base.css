@@ -300,3 +300,21 @@ body {
     color: #8590a6;
 }
 
+.to-top {
+    background: #fff;
+    border-radius: 2px;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    color: #8590a6;
+    text-align: center;
+    font-size: 14px;
+    padding: 0;
+    border: 0;
+}
+
+.to-top:hover {
+    background: #d3d3d3;
+}
+
+

@@ -18,7 +18,7 @@
 <!-- main content -->
 <div class="container main-content">
     <div class="row">
-        <div class="col-9 br-3px">
+        <div class="col-md-9 br-3px">
 
             <!-- search -->
             <div class="card">
@@ -92,7 +92,7 @@
         </div>
 
         <!-- 右边栏 -->
-        <div class="col br-3px">
+        <div class="col-md-3 br-3px">
             <!-- 热门标签 -->
             <div class="card">
                 <div class="card-header m-card-header">
@@ -124,7 +124,8 @@
             </div>
         </div>
     </div>
-
+    <!-- 回到顶部 -->
+    <button th:replace="fragment/common :: backToTop"></button>
 </div>
 <!-- footer -->
 <div th:replace="fragment/common :: footer"></div>
