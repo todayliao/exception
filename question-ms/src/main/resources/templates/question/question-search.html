@@ -3,12 +3,14 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <title>问题解决方案搜索 - Exception 程序员问题解决方案分享社区</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/css/question/question-search.css}">
-
-    <title>Exception问答社区</title>
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
 </head>
 <body>
 <!-- 顶部导航栏 -->
@@ -108,7 +110,7 @@
             </div>
 
             <!-- 热门问题-->
-            <div class="card margintop-20px">
+            <div class="card margintop-10px">
                 <div class="card-header m-card-header">
                     <h3 class="card-title">热门问题</h3>
                 </div>

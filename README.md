@@ -66,6 +66,9 @@
 ## V1.0.8
 
 - 关于静态页面开发
+- 首页 seo title 优化
+- 接入百度站长统计 todo
+- 问题详情页 md ui 展示模仿 github 样式 todo
 - docker build 脚本 todo
 - 搜索页面点击下一页出来数据 bug todo
 - 社区相关跳转问题 TODO

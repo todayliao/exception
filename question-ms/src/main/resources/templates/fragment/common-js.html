@@ -48,4 +48,15 @@
         NProgress.done()
     });
 </script>
+
+<!-- 百度统计 -->
+<script th:fragment="baiduStatistics" th:inline="javascript">
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4442b22cf891556abc24108829356be4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </html>
