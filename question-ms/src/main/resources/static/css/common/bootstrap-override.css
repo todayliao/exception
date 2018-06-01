@@ -15,7 +15,7 @@ pre {
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #eff0f1;
+    background-color: #f6f8fa;
     border-radius: 3px;
     overflow-x: auto;
 }
@@ -29,7 +29,7 @@ code {
 }
 
 pre code {
-    background-color: #eff0f1;
+    background-color: #f6f8fa;
 }
 
 .form-control {
@@ -82,11 +82,9 @@ pre code {
 }
 
 blockquote {
-    color: #666;
-    border-left: 4px solid #ddd;
-    padding: 0 10px;
-    margin-left: 0;
-    font-size: 14px;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
 }
 
 .dropdown-menu {
