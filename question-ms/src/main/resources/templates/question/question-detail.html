@@ -186,6 +186,7 @@
 <script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
 <script th:src="@{/plugins/zoomify/zoomify.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
@@ -197,6 +198,12 @@
 
         // 图片放大
         $('p img').zoomify();
+
+        // 相关问题栏滑动固定
+        $("#about-question-card").sticky({
+            topSpacing: 70,
+            bottomSpacing: 153
+        });
 
         var questionTitle = [[${response.titleCn}]];
         var questionId = [[${response.id}]];

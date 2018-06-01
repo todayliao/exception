@@ -68,9 +68,15 @@
 - 关于静态页面开发
 - 首页 seo title 优化
 - 接入百度站长统计
+- 移动端布局错乱 bug fixed
+- 搜索页面点击下一页不能展示数据 bug
+- 问题详情页，滑动时，相关问题右边栏固定
+- 移动端栅格布局 col-md-9 和 col-md-3 间距黏在一起的问题 todo
 - 问题详情页 md ui 展示模仿 github 样式 todo
+- 问题详情页问题方案 UI 美化 todo
+- bootstrap container 宽度减小 todo
+- 右边栏热门问题添加多少次浏览 todo
 - docker build 脚本 todo
-- 搜索页面点击下一页出来数据 bug todo
 - 社区相关跳转问题 TODO
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
@@ -93,7 +99,7 @@
 ## V1.1.1
 
 - nginx 流量统计 TODO
-- 回到顶部 TODO
+- 回到顶部
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
 - 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO

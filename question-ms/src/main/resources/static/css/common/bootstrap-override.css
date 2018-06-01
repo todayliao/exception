@@ -108,7 +108,7 @@ blockquote {
 }
 
 .rounded {
-    border-radius: 2.25rem!important;
+    border-radius: 0.25rem!important;
 }
 
 .tooltip-inner {
@@ -116,3 +116,8 @@ blockquote {
     font-size: 13px;
     border-radius: .15rem;
 }
+
+.navbar-light .navbar-nav .nav-link {
+    color: #8590a6;
+}
+
