@@ -71,9 +71,13 @@
 - 移动端布局错乱 bug fixed
 - 搜索页面点击下一页不能展示数据 bug
 - 问题详情页，滑动时，相关问题右边栏固定
-- 移动端栅格布局 col-md-9 和 col-md-3 间距黏在一起的问题 todo
 - 问题详情页 md ui 展示模仿 github 样式
-- 问题详情页问题方案 UI 美化 todo
+- 问题详情页问题方案 UI 美化
+- 移动端栅格布局 col-md-9 和 col-md-3 间距黏在一起的问题 todo
+- 问题详情页点赞按钮 UI 需要突出 todo
+
+## V1.0.9
+
 - 问题 list 显示的多长时间之前有问题 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo
@@ -82,9 +86,6 @@
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
-
-## V1.0.9
-
 - 用户维护日排行，周排行，总排行 TODO
 - 登录页面 UI 美化 TODO
 - 短信登录功能 TODO

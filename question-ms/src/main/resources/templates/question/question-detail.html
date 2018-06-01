@@ -72,17 +72,17 @@
 
                     <!-- 问题创建者 -->
                     <div class="float-right gray fs-13px margintop-1px">
-                        &nbsp;&nbsp;&nbsp;发布者:
+                        <span class="border-right paddingright-5px">&nbsp;&nbsp;&nbsp;发布者</span>
                         <a th:href="@{'/user/' + ${response.createUserId}}">
-                            <img th:src="${response.createUserAvatar}" class="rounded float-right card-footer-image marginleft-5px" alt="...">
+                            <img th:src="${response.createUserAvatar}" class="float-right card-footer-image marginleft-5px" alt="...">
                         </a>
                     </div>
 
                     <!-- 问题编辑者 -->
                     <div th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
-                        最新编辑者:
+                        <span class="border-right paddingright-5px">&nbsp;&nbsp;&nbsp;最新编辑者</span>
                         <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
-                            <img th:src="${response.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px">
+                            <img th:src="${response.latestEditorUserAvatar}" class="float-right card-footer-image marginleft-5px">
                         </a>
                     </div>
 
@@ -90,66 +90,70 @@
                 </div>
             </div>
 
-            <!-- 方案区 -->
-            <div class="answers-header margintop-30px">
-                <h5>[[${response.answersCount}]]&nbsp;个解决方案</h5>
-            </div>
-
-            <div class="answers margintop-20px">
+            <!-- 问题方案 list -->
+            <div class="answers margintop-10px">
                 <div class="card" th:each="answer : ${response.answers}">
                     <div class="card-header m-card-header">
+                        <h4 class="card-title">[[${response.answersCount}]]&nbsp;个解决方案</h4>
+                    </div>
 
-                        <div class="answer-item-user">
-                            <div class="media-left">
-                                <a th:href="@{'/user/' + ${answer.user.id}}">
-                                    <img th:src="${answer.user.avatar}"
-                                         class="rounded media-img answer-item-user-img">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <strong><a th:href="@{'/user/' + ${answer.user.id}}" class="gray-dark"
-                                               th:text="${answer.user.name}">allen</a></strong>
-                                </div>
-                                <!--<small>Donec id elit non mi porta.</small>-->
-                                <div>
+                    <div class="card-body answer-card-body">
+                        <div class="answer-list-item">
+                            <!-- 贡献者信息 -->
+                            <div class="answer-item-meta">
+                                <div class="author-info">
+                                    <div class="media-left">
+                                        <a th:href="@{'/user/' + ${answer.user.id}}">
+                                            <img th:src="${answer.user.avatar}"
+                                                 class="rounded media-img answer-item-user-img" style="width: 42px;">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <strong><a th:href="@{'/user/' + ${answer.user.id}}" class="gray-dark"
+                                                       th:text="${answer.user.name}">allen</a></strong>
+                                        </div>
+                                        <!--<small>Donec id elit non mi porta.</small>-->
+                                        <div>
                                     <span class="m-fade fs-14px" th:utext="${answer.user.introduction}">
                                     自我介绍
                                     </span>
+                                        </div>
+                                        <!--其他信息-->
+                                    </div>
                                 </div>
-                                <!--其他信息-->
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-body answer-card-body" th:utext="${answer.descriptionCnHtml}">
-                    </div>
-                    <div class="card-footer">
-                        <!-- 点赞 -->
-                        <a id="like-this-answer" class="gray-a fs-13px" href="#"
-                           th:if="${answer.isCurrentUserVoteUp == false}"
-                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
-                           data-toggle="modal">
-                            <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
-                        </a>
+                            <!-- 问题方案内容 -->
+                            <div class="answer-content" th:utext="${answer.descriptionCnHtml}"></div>
+                            <div class="answer-list-item-footer">
+                                <!-- 点赞 -->
+                                <a id="like-this-answer" class="gray-a fs-13px" href="#"
+                                   th:if="${answer.isCurrentUserVoteUp == false}"
+                                   th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
+                                   data-toggle="modal">
+                                    <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
+                                </a>
 
-                        <a id="unlike-this-answer" class="gray-a fs-13px" href="#"
-                           th:if="${answer.isCurrentUserVoteUp == true}"
-                           th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
-                           data-toggle="modal">
-                            <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
-                        </a>
+                                <a id="unlike-this-answer" class="gray-a fs-13px" href="#"
+                                   th:if="${answer.isCurrentUserVoteUp == true}"
+                                   th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
+                                   data-toggle="modal">
+                                    <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
+                                </a>
 
-                        <!-- 改进 -->
-                        <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
-                            <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
-                        </a>
+                                <!-- 改进 -->
+                                <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
+                                    <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
+                                </a>
 
-                        <!-- 方案编辑者 -->
-                        <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
-                            最新编辑者:
-                            <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
-                                <img th:src="${answer.latestEditorUserAvatar}" class="rounded float-right card-footer-image marginleft-5px">
-                            </a>
+                                <!-- 方案编辑者 -->
+                                <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
+                                    <span class="border-right paddingright-5px">最新编辑者</span>
+                                    <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
+                                        <img th:src="${answer.latestEditorUserAvatar}" class="float-right card-footer-image marginleft-5px">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

@@ -30,12 +30,6 @@
     overflow: hidden;
 }
 
-.answer-card-body img {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-
 .answer-item-user-img {
     width: 42px;
     height: 42px;
@@ -87,4 +81,19 @@
 .card-footer-image {
     width: 18px;
     height: 18px;
+    border-radius: 2.25rem;
+}
+
+.answer-card-body img {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.answer-item-meta {
+    margin-bottom: 1rem;
+}
+
+.answer-list-item-footer {
+    margin-top: 1rem;
 }
