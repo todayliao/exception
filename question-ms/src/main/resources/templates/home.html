@@ -17,9 +17,9 @@
 </head>
 <body>
 <!-- 顶部导航栏 -->
-<div th:replace="fragment/common :: header"></div>
+<header th:replace="fragment/common :: header"></header>
 <!-- main content -->
-<div class="container main-content">
+<main class="container main-content">
     <div class="row">
         <div class="col-md-9 br-3px">
 
@@ -119,9 +119,9 @@
 
     <!-- 回到顶部 -->
     <button th:replace="fragment/common :: backToTop"></button>
-</div>
+</main>
 <!-- footer -->
-<div th:replace="fragment/common :: footer"></div>
+<footer th:replace="fragment/common :: footer"></footer>
 </body>
 
 <script th:replace="fragment/common-js :: js"></script>

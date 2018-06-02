@@ -18,9 +18,9 @@
 </head>
 <body>
 <!-- 顶部导航栏 -->
-<div th:replace="fragment/common :: header"></div>
+<header th:replace="fragment/common :: header"></header>
 <!-- main content -->
-<div class="container main-content">
+<main class="container main-content">
     <div class="row">
         <div class="col-md-12 br-3px">
             <div th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" class="alert alert-warning" role="alert">
@@ -68,9 +68,9 @@
         <!-- 右边栏 -->
     </div>
 
-</div>
+</main>
 <!-- footer -->
-<div th:replace="fragment/common :: footer"></div>
+<footer th:replace="fragment/common :: footer"></footer>
 </body>
 
 <script th:replace="fragment/common-js :: js"></script>
