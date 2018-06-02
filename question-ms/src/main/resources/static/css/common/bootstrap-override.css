@@ -96,13 +96,13 @@ blockquote {
 
 .badge-secondary {
     color: #175199;
-    background-color: #f1f8ff;
+    background-color: rgba(0,132,255,.1);
 }
 
 .badge-secondary[href]:focus, .badge-secondary[href]:hover {
     color: #175199;
     text-decoration: none;
-    background-color: #def;
+    background-color: rgba(0,132,255,.15);
 }
 
 .rounded {

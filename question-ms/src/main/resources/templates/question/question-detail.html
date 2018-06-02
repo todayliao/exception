@@ -33,60 +33,74 @@
                 <div class="card-body">
                     <div class="question">
                         <h1 class="question-title" th:text="${response.titleCn}"></h1>
-                        <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}">
-                        </div>
-                        <div class="m-fade marginbottom-12px fs-14px">
-                            <a href="#" id="my" class="tooltip-a" data-toggle="tooltip" data-placement="top" th:title="'发布于 ' + ${response.createTimeStr}">
+
+                        <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}"></div>
+                        <div class="m-fade marginbottom-1rem fs-14px">
+                            <a href="#" id="my" class="tooltip-a" data-toggle="tooltip" data-placement="top"
+                               th:title="'发布于 ' + ${response.createTimeStr}">
                                 发布于&nbsp;<span th:text="${response.createDateStr}">2018-06-09</span>
                             </a>
                         </div>
-                        <div class="question-tags">
+
+                        <div class="question-tags marginbottom-1rem">
                             <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#"
                                class="badge badge-secondary marginright-5px"></a>
                         </div>
+
+                        <div class="question-footer">
+                            <!-- 点赞 -->
+                            <button id="like-this-question" type="button" class="btn btn-primary vote-button fs-14px"
+                                    th:if="${response.isCurrentUserVoteUp == false}"
+                                    th:onclick="'javascript:likeThisQuestion(1);'"
+                                    data-toggle="modal">
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                &nbsp;[[${response.voteUp}]]&nbsp;次赞
+                            </button>
+
+                            <button id="unlike-this-question" type="button" class="btn btn-primary vote-button-active fs-14px"
+                                    th:if="${response.isCurrentUserVoteUp == true}"
+                                    th:onclick="'javascript:likeThisQuestion(-1);'"
+                                    data-toggle="modal">
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                &nbsp;[[${response.voteUp}]]&nbsp;次赞
+                            </button>
+
+                            <!-- 被浏览次数 -->
+                            <span class="gray marginleft-15px fs-14px" href="#">
+                                <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
+                                <i class="fa fa-eye"></i>&nbsp;[[${response.viewNum}]]&nbsp;次浏览
+                            </span>
+
+                            <!-- 改进 -->
+                            <a th:href="@{'/question/' + ${response.id} + '/edit'}"
+                               class="gray-a marginleft-15px fs-14px">
+                                <i class="fa fa-edit"></i>&nbsp;改进&nbsp;
+                            </a>
+
+                            <div class="contributor-avatars-container marginleft-15px border-left">
+                                <ul class="contributor-avatars">
+                                    <!-- 问题的发布者 -->
+                                    <li>
+                                        <a th:href="@{'/user/' + ${response.createUserId}}">
+                                            <img class="contributor-avatar" th:src="${response.createUserAvatar}"
+                                                 data-toggle="tooltip" data-placement="top"
+                                                 th:title="'发布 by ' + ${response.createUserName}"/>
+                                        </a>
+                                    </li>
+                                    <!-- 问题的最新编辑者 -->
+                                    <li th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}">
+                                        <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
+                                            <img class="contributor-avatar" th:src="${response.latestEditorUserAvatar}"
+                                                 data-toggle="tooltip" data-placement="top"
+                                                 th:title="'最新编辑 by ' + ${response.latestEditorUserName}"/>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <!-- 点赞 -->
-                    <a id="like-this-question" class="gray-a fs-13px" href="#" th:if="${response.isCurrentUserVoteUp == false}"
-                       th:onclick="'javascript:likeThisQuestion(1);'"
-                       data-toggle="modal">
-                        <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
-                    </a>
-
-                    <a id="unlike-this-question" class="gray-a fs-13px" href="#" th:if="${response.isCurrentUserVoteUp == true}"
-                       th:onclick="'javascript:likeThisQuestion(-1);'"
-                       data-toggle="modal">
-                        <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${response.voteUp}]]&nbsp;次点赞
-                    </a>
-
-                    <!-- 被浏览次数 -->
-                    <span class="gray marginleft-10px fs-13px" href="#">
-                        <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
-                        <i class="fa fa-eye"></i>&nbsp;&nbsp;[[${response.viewNum}]]&nbsp;次浏览
-                    </span>
-                    <!-- 改进 -->
-                    <a th:href="@{'/question/' + ${response.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
-                        <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
-                    </a>
-
-                    <!-- 问题创建者 -->
-                    <div class="float-right gray fs-13px margintop-1px">
-                        <span class="border-right paddingright-5px">&nbsp;&nbsp;&nbsp;发布者</span>
-                        <a th:href="@{'/user/' + ${response.createUserId}}">
-                            <img th:src="${response.createUserAvatar}" class="float-right card-footer-image marginleft-5px" alt="...">
-                        </a>
-                    </div>
-
-                    <!-- 问题编辑者 -->
-                    <div th:if="${response.latestEditorUserId != null && response.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
-                        <span class="border-right paddingright-5px">&nbsp;&nbsp;&nbsp;最新编辑者</span>
-                        <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
-                            <img th:src="${response.latestEditorUserAvatar}" class="float-right card-footer-image marginleft-5px">
-                        </a>
-                    </div>
-
-
                 </div>
             </div>
 
@@ -119,7 +133,6 @@
                                     自我介绍
                                     </span>
                                         </div>
-                                        <!--其他信息-->
                                     </div>
                                 </div>
                             </div>
@@ -127,32 +140,66 @@
                             <div class="answer-content" th:utext="${answer.descriptionCnHtml}"></div>
                             <div class="answer-list-item-footer">
                                 <!-- 点赞 -->
-                                <a id="like-this-answer" class="gray-a fs-13px" href="#"
-                                   th:if="${answer.isCurrentUserVoteUp == false}"
-                                   th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
-                                   data-toggle="modal">
-                                    <i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
-                                </a>
+                                <button id="like-this-answer" type="button" class="btn btn-primary vote-button fs-14px"
+                                        th:if="${answer.isCurrentUserVoteUp == false}"
+                                        th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
+                                        data-toggle="modal">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    &nbsp;[[${answer.voteUp}]]&nbsp;次赞
+                                </button>
 
-                                <a id="unlike-this-answer" class="gray-a fs-13px" href="#"
-                                   th:if="${answer.isCurrentUserVoteUp == true}"
-                                   th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
-                                   data-toggle="modal">
-                                    <i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞
-                                </a>
+                                <button id="unlike-this-answer" type="button" class="btn btn-primary vote-button-active fs-14px"
+                                        th:if="${answer.isCurrentUserVoteUp == true}"
+                                        th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
+                                        data-toggle="modal">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    &nbsp;[[${answer.voteUp}]]&nbsp;次赞
+                                </button>
+
+                                <!-- 点赞 -->
+                                <!--<a id="like-this-answer" class="gray-a fs-13px" href="#"-->
+                                   <!--th:if="${answer.isCurrentUserVoteUp == false}"-->
+                                   <!--th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"-->
+                                   <!--data-toggle="modal">-->
+                                    <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞-->
+                                <!--</a>-->
+
+                                <!--<a id="unlike-this-answer" class="gray-a fs-13px" href="#"-->
+                                   <!--th:if="${answer.isCurrentUserVoteUp == true}"-->
+                                   <!--th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"-->
+                                   <!--data-toggle="modal">-->
+                                    <!--<i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞-->
+                                <!--</a>-->
 
                                 <!-- 改进 -->
-                                <a th:href="@{'/answer/' + ${answer.id} + '/edit'}" class="gray-a marginleft-10px fs-13px">
+                                <a th:href="@{'/answer/' + ${answer.id} + '/edit'}"
+                                   class="gray-a marginleft-15px fs-14px">
                                     <i class="fa fa-edit"></i>&nbsp;&nbsp;改进&nbsp;
                                 </a>
 
-                                <!-- 方案编辑者 -->
-                                <div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}" class="float-right gray fs-13px margintop-1px">
-                                    <span class="border-right paddingright-5px">最新编辑者</span>
-                                    <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
-                                        <img th:src="${answer.latestEditorUserAvatar}" class="float-right card-footer-image marginleft-5px">
-                                    </a>
+                                <div class="contributor-avatars-container marginleft-15px border-left">
+                                    <ul class="contributor-avatars">
+                                        <!-- 方案的最新编辑者 -->
+                                        <li th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}">
+                                            <a th:href="@{'/user/' + ${answer.latestEditorUserId}}">
+                                                <img class="contributor-avatar"
+                                                     th:src="${answer.latestEditorUserAvatar}"
+                                                     data-toggle="tooltip" data-placement="top"
+                                                     th:title="'最新编辑 by ' + ${answer.latestEditorUserName}"/>
+                                            </a>
+                                        </li>
+
+                                    </ul>
                                 </div>
+
+                                <!--<div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}"-->
+                                     <!--class="float-right gray fs-14px margintop-1px">-->
+                                    <!--<span class="border-right paddingright-5px">最新编辑者</span>-->
+                                    <!--<a th:href="@{'/user/' + ${answer.latestEditorUserId}}">-->
+                                        <!--<img th:src="${answer.latestEditorUserAvatar}"-->
+                                             <!--class="float-right card-footer-image marginleft-5px">-->
+                                    <!--</a>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>

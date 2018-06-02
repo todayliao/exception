@@ -64,8 +64,16 @@ body {
     margin-left: 10px;
 }
 
+.marginleft-15px {
+    margin-left: 15px;
+}
+
 .marginleft-20px {
     margin-left: 20px;
+}
+
+.marginleft-24px {
+    margin-left: 24px;
 }
 
 .marginright-10px {
@@ -90,6 +98,10 @@ body {
 
 .marginbottom-40px {
     margin-bottom: 40px;
+}
+
+.marginbottom-1rem {
+    margin-bottom: 1rem;
 }
 
 .margintop-56px {

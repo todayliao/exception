@@ -111,7 +111,9 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             User createUser = userMap.get(question.getCreateUserId());
             User latestEditUser = userMap.get(question.getLatestEditorUserId());
             questionDetailResponseVO.setCreateUserAvatar(createUser == null ? null : createUser.getAvatar());
+            questionDetailResponseVO.setCreateUserName(createUser == null ? null : createUser.getName());
             questionDetailResponseVO.setLatestEditorUserAvatar(latestEditUser == null ? null : latestEditUser.getAvatar());
+            questionDetailResponseVO.setLatestEditorUserName(latestEditUser == null ? null : latestEditUser.getName());
         }
 
 

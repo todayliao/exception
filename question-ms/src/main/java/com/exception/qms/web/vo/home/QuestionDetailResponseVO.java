@@ -23,12 +23,15 @@ public class QuestionDetailResponseVO implements Serializable {
 
     private Long createUserId;
     private String createUserAvatar;
+    private String createUserName;
 
     /**
      * 最近一次编辑人id
      */
     private Long latestEditorUserId;
     private String latestEditorUserAvatar;
+    private String latestEditorUserName;
+    private String latestEditorTimeStr;
 
 
     private Integer voteUp;

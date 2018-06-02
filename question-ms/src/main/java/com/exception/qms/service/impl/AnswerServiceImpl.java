@@ -67,6 +67,7 @@ public class AnswerServiceImpl implements AnswerService {
                     // 方案的最新编辑人
                     User latestEditorUser = userIdUserMap.get(answer.getLatestEditorUserId());
                     answerResponseVO.setLatestEditorUserAvatar(latestEditorUser == null ? null : latestEditorUser.getAvatar());
+                    answerResponseVO.setLatestEditorUserName(latestEditorUser == null ? null : latestEditorUser.getName());
                 }
                 // default is false
                 answerResponseVO.setIsCurrentUserVoteUp(false);
