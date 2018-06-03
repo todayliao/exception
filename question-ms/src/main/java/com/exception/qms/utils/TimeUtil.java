@@ -1,8 +1,5 @@
 package com.exception.qms.utils;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import sun.util.resources.cldr.dav.LocaleNames_dav;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -15,6 +12,11 @@ import java.time.temporal.TemporalAdjusters;
  * @discription 时间工具类
  **/
 public class TimeUtil {
+
+    /** 一年的天数 **/
+    private final static int YEAR_DAYS_COUNT = 365;
+    /** 30天为一个月 **/
+    private final static int MONTH_DAYS_COUNT = 30;
 
     /**
      * 计算距离现在时间的时间差
@@ -29,17 +31,11 @@ public class TimeUtil {
         LocalDateTime now = LocalDateTime.now();
         // 时间在本日之内 -> 几秒前，几分钟前，几小时前
         LocalDateTime startTimeOfDay = now.with(LocalTime.MIN);
-        LocalDateTime startTimeOfMonth = now.with(TemporalAdjusters.firstDayOfMonth());
-        LocalDateTime startTimeOfYear = now.with(TemporalAdjusters.firstDayOfYear());
 
         boolean isTimeOnDay = (startTime.equals(startTimeOfDay) || startTime.isAfter(startTimeOfDay))
                 && startTime.isBefore(now);
 
-        boolean isTimeOnMonth = (startTime.equals(startTimeOfMonth) || startTime.isAfter(startTimeOfMonth))
-                && startTime.isBefore(now);
-
-        boolean isTimeOnYear = (startTime.equals(startTimeOfYear) || startTime.isAfter(startTimeOfYear))
-                && startTime.isBefore(now);
+        // 传入的时间在本日内
         if (isTimeOnDay) {
             LocalDateTime beforeOneMinutes = now.minusMinutes(1);
             LocalDateTime beforeOneHours = now.minusHours(1);
@@ -55,21 +51,26 @@ public class TimeUtil {
                 return String.format("%d 小时前", duration + 1);
             }
         }
-        // 时间在本月之内，显示 -> 几天前
-        else if (isTimeOnMonth) {
-            long duration = ChronoUnit.DAYS.between(startTime, now);
-            return String.format("%d 天前", duration + 1);
-        }
-        // 时间在本年内 -> 几月前
-        else if (isTimeOnYear) {
-            long duration = ChronoUnit.MONTHS.between(startTime, now);
-            return String.format("%d 个月前", duration + 1);
-        }
-        // 其他 -> 几年前
+
         else {
-            // todo 这里用 ChronoUnit 计算年发现一个 bug
-            long duration = ChronoUnit.YEARS.between(startTime, now);
-            return String.format("%d 年前", duration + 1);
+            long untilDays = startTime.toLocalDate().until(now, ChronoUnit.DAYS);
+            if (untilDays < MONTH_DAYS_COUNT) {
+                return String.format("%d 天前", untilDays);
+            }
+            else if (untilDays >= MONTH_DAYS_COUNT) {
+                return String.format("%d 个月前", untilDays / MONTH_DAYS_COUNT);
+            }
+            else if (untilDays >= YEAR_DAYS_COUNT) {
+                return startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            }
+
         }
+        return null;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(LocalDateTime.now().toLocalDate().until(LocalDate.parse("2018-06-01"), ChronoUnit.DAYS));
+        System.out.println(31 / MONTH_DAYS_COUNT + 1);
     }
 }

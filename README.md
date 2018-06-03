@@ -74,11 +74,13 @@
 - 问题详情页 md ui 展示模仿 github 样式
 - 问题详情页问题方案 UI 美化
 - 移动端栅格布局 col-md-9 和 col-md-3 间距黏在一起的问题
-- 问题详情页点赞次数 UI 需要突出 todo
+- 问题详情页点赞次数 UI 需要突出
 
 ## V1.0.9
 
-- 问题 list 显示的多长时间之前有问题 todo
+- 问题方案区添加 发布时间
+- 问题 list 显示的多长时间之前有问题
+- 登录 modal 框美化 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo
 - docker build 脚本 todo

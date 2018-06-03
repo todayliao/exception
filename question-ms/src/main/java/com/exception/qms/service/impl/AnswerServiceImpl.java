@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -58,9 +59,14 @@ public class AnswerServiceImpl implements AnswerService {
 
         List<AnswerResponseVO> answerResponseVOS = answers.stream().map(answer -> {
             AnswerResponseVO  answerResponseVO = mapper.map(answer, AnswerResponseVO.class);
+            // 方案创建时间日期处理
+            answerResponseVO.setCreateDateStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(answer.getCreateTime()));
+            answerResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(answer.getCreateTime()));
+
             if (!CollectionUtils.isEmpty(map) && map.get(answer.getId()) != null) {
                 String descriptionCn = map.get(answer.getId()).getDescriptionCn();
                 answerResponseVO.setDescriptionCnHtml(MarkdownUtil.parse2Html(descriptionCn));
+
                 // answer's user
                 if (!CollectionUtils.isEmpty(userIdUserMap)) {
                     answerResponseVO.setUser(userIdUserMap.get(answer.getCreateUserId()));
@@ -71,8 +77,6 @@ public class AnswerServiceImpl implements AnswerService {
                 }
                 // default is false
                 answerResponseVO.setIsCurrentUserVoteUp(false);
-
-
             }
             return answerResponseVO;
         }).collect(Collectors.toList());

@@ -116,7 +116,6 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             questionDetailResponseVO.setLatestEditorUserName(latestEditUser == null ? null : latestEditUser.getName());
         }
 
-
         // question answers
         List<AnswerResponseVO> answerResponseVOS = answerService.queryAnswersByQuestionId(questionId, userId);
         questionDetailResponseVO.setAnswers(answerResponseVOS);

@@ -35,8 +35,9 @@
                         <h1 class="question-title" th:text="${response.titleCn}"></h1>
 
                         <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}"></div>
+
                         <div class="m-fade marginbottom-1rem fs-14px">
-                            <a href="#" id="my" class="tooltip-a" data-toggle="tooltip" data-placement="top"
+                            <a href="#" class="tooltip-a" data-toggle="tooltip" data-placement="top"
                                th:title="'发布于 ' + ${response.createTimeStr}">
                                 发布于&nbsp;<span th:text="${response.createDateStr}">2018-06-09</span>
                             </a>
@@ -106,13 +107,13 @@
 
             <!-- 问题方案 list -->
             <div class="answers margintop-10px marginbottom-10px">
-                <div class="card" th:each="answer : ${response.answers}">
+                <div class="card">
                     <div class="card-header m-card-header">
                         <h4 class="card-title">[[${response.answersCount}]]&nbsp;个解决方案</h4>
                     </div>
 
                     <div class="card-body answer-card-body">
-                        <div class="answer-list-item">
+                        <div class="answer-list-item" th:each="answer : ${response.answers}">
                             <!-- 贡献者信息 -->
                             <div class="answer-item-meta">
                                 <div class="author-info">
@@ -138,6 +139,14 @@
                             </div>
                             <!-- 问题方案内容 -->
                             <div class="answer-content" th:utext="${answer.descriptionCnHtml}"></div>
+                            <!-- 方案的发布时间 -->
+                            <div class="m-fade marginbottom-1rem margintop-1rem fs-14px">
+                                <a href="#" class="tooltip-a" data-toggle="tooltip" data-placement="top"
+                                   th:title="'发布于 ' + ${answer.createTimeStr}">
+                                    发布于&nbsp;<span th:text="${answer.createDateStr}">2018-06-09</span>
+                                </a>
+                            </div>
+
                             <div class="answer-list-item-footer">
                                 <!-- 点赞 -->
                                 <button id="like-this-answer" type="button" class="btn btn-primary vote-button fs-14px"
@@ -155,21 +164,6 @@
                                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                     &nbsp;[[${answer.voteUp}]]&nbsp;次赞
                                 </button>
-
-                                <!-- 点赞 -->
-                                <!--<a id="like-this-answer" class="gray-a fs-13px" href="#"-->
-                                   <!--th:if="${answer.isCurrentUserVoteUp == false}"-->
-                                   <!--th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"-->
-                                   <!--data-toggle="modal">-->
-                                    <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞-->
-                                <!--</a>-->
-
-                                <!--<a id="unlike-this-answer" class="gray-a fs-13px" href="#"-->
-                                   <!--th:if="${answer.isCurrentUserVoteUp == true}"-->
-                                   <!--th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"-->
-                                   <!--data-toggle="modal">-->
-                                    <!--<i class="fa fa-heart"></i>&nbsp;&nbsp;[[${answer.voteUp}]]&nbsp;次点赞-->
-                                <!--</a>-->
 
                                 <!-- 改进 -->
                                 <a th:href="@{'/answer/' + ${answer.id} + '/edit'}"
@@ -191,15 +185,6 @@
 
                                     </ul>
                                 </div>
-
-                                <!--<div th:if="${answer.latestEditorUserId != null && answer.latestEditorUserId != 0}"-->
-                                     <!--class="float-right gray fs-14px margintop-1px">-->
-                                    <!--<span class="border-right paddingright-5px">最新编辑者</span>-->
-                                    <!--<a th:href="@{'/user/' + ${answer.latestEditorUserId}}">-->
-                                        <!--<img th:src="${answer.latestEditorUserAvatar}"-->
-                                             <!--class="float-right card-footer-image marginleft-5px">-->
-                                    <!--</a>-->
-                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -253,7 +238,7 @@
         // 相关问题栏滑动固定
         $("#about-question-card").sticky({
             topSpacing: 70,
-            bottomSpacing: 153
+            bottomSpacing: 163
         });
 
         var questionTitle = [[${response.titleCn}]];
