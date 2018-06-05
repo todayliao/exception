@@ -38,7 +38,7 @@ public class StringUtil {
     //----------------------------------------------------------------------
 
     private static final Pattern CJK_ANS = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([a-z0-9`~@\\$%\\^&\\-_\\+=\\|\\\\/])", 2);
-    private static final Pattern ANS_CJK = Pattern.compile("([a-z0-9`~!\\$%\\^&\\*\\-_\\+=\\|\\\\;:,\\./\\?])([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])", 2);
+    private static final Pattern ANS_CJK = Pattern.compile("([a-z0-9`~!\\$%\\^&\\-_\\+=\\|\\\\;:,\\./\\?])([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])", 2);
     private static final Pattern CJK_QUOTE = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([\"'])");
     private static final Pattern QUOTE_CJK = Pattern.compile("([\"'])([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])");
     private static final Pattern FIX_QUOTE = Pattern.compile("([\"'])(\\s*)(.+?)(\\s*)([\"'])");
@@ -91,5 +91,9 @@ public class StringUtil {
     //----------------------------------------------------------------------
     // 字符串格式化，易读性处理 - end
     //----------------------------------------------------------------------
+
+    public static void main(String[] args) {
+        System.out.println(spacingText("**内存不足**"));
+    }
 
 }

@@ -80,13 +80,15 @@
 
 - 问题方案区添加 发布时间
 - 问题 list 显示的多长时间之前有问题
+- 回到顶部
 - 代码高亮优化
+- 后台文档自动格式化，中文 md 加粗自动空一格 bug fixed
+- 页面上 pre code 拖动条太挤，交互优化
 - 登录 modal 框美化 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo
 - docker build 脚本 todo
 - 社区相关跳转问题 TODO
-- 后台文档自动格式化，中文 md 加粗自动空一格 bug TODO
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
 - 用户维护日排行，周排行，总排行 TODO
@@ -104,10 +106,11 @@
 ## V1.1.1
 
 - nginx 流量统计 TODO
-- 回到顶部
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
 - 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
 - 日志组件升级 logback -> log4j2 todo
+- 阿里云对象存储 oss 图片流量优化 todo
+- mysql 数据自动备份（非常重要）todo
 
 
