@@ -80,6 +80,7 @@
 
 - 问题方案区添加 发布时间
 - 问题 list 显示的多长时间之前有问题
+- 代码高亮优化
 - 登录 modal 框美化 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo
