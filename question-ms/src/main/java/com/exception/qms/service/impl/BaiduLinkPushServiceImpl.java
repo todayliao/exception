@@ -74,7 +74,7 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
             int responseCode = response.getStatusLine().getStatusCode();
 
             String responseJson = EntityUtils.toString(response.getEntity());
-            log.info("response json: ", responseJson);
+            log.info("response json: {}", responseJson);
 
             BaiduPushLinkResponseDTO baiduPushLinkResponseDTO = JsonUtil.toBean(responseJson, BaiduPushLinkResponseDTO.class);
 
