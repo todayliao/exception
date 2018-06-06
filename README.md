@@ -85,19 +85,21 @@
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug fixed
 - 页面上 pre code 拖动条太挤，交互优化
 - 用户展示页，贡献图表美化
+- 添加问题成功后，跳转问题的详情页，而不是首页
+- 百度 seo 主动推送（重要）
+
+
+## V1.1.0
+
 - 登录 modal 框美化 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo
 - docker build 脚本 todo
-- 社区相关跳转问题 TODO
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
 - 用户维护日排行，周排行，总排行 TODO
 - 登录页面 UI 美化 TODO
 - 短信登录功能 TODO
-
-## V1.1.0
-
 - 项目重构，maven 模块化拆分 TODO
 - 更改完问题和方案后跳转到首页的 bug TODO
 - 用户中心，展示用户相关信息 TODO
@@ -113,5 +115,6 @@
 - 日志组件升级 logback -> log4j2 todo
 - 阿里云对象存储 oss 图片流量优化 todo
 - mysql 数据自动备份（非常重要）todo
+- 网站地图 sitemap(重要) todo 
 
 

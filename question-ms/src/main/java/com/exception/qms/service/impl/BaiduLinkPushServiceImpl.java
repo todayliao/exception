@@ -81,7 +81,7 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
             BaiduQuestionLinkPush baiduQuestionLinkPush = new BaiduQuestionLinkPush();
             baiduQuestionLinkPush.setQuestionId(questionId);
             if (HttpStatus.SC_OK == responseCode) {
-                log.info("push the link of question detail page success, url ==> {}", questionDetailPageUrl);
+                log.info("push the link of question detail page success, url ==> {}, remain: {}", questionDetailPageUrl, baiduPushLinkResponseDTO.getRemain());
                 baiduQuestionLinkPush.setType(BaiduQuestionLinkPushTypeEnum.SUCCESS.getCode());
                 baiduQuestionLinkPush.setMessage("");
             } else {
