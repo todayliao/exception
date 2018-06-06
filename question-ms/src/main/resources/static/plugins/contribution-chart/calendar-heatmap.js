@@ -119,6 +119,14 @@ function calendarHeatmap() {
       .range(chart.colorRange())
       .domain([0, max]);
 
+    var colors = [
+        "rgb(235, 237, 240)",
+        "rgb(198, 228, 139)",
+        "rgb(123, 201, 111)",
+        "rgb(35, 154, 59)",
+        "rgb(25, 97, 39)"
+    ];
+
     var tooltip;
     var dayRects;
 
@@ -140,7 +148,20 @@ function calendarHeatmap() {
         .attr('class', 'day-cell')
         .attr('width', SQUARE_LENGTH)
         .attr('height', SQUARE_LENGTH)
-        .attr('fill', function(d) { return color(countForDate(d)); })
+        .attr('fill', function(d) {
+          var value = countForDate(d);
+          if (value == 0) {
+            return colors[0];
+          } else if (value <= 2) {
+            return colors[1];
+          } else if (value <= 6) {
+              return colors[2];
+          } else if (value <= 10) {
+              return colors[3];
+          } else {
+              return colors[4];
+          }
+        })
         .attr('x', function (d, i) {
           var cellDate = moment(d);
           var result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()));
@@ -174,9 +195,14 @@ function calendarHeatmap() {
       }
 
       if (chart.legendEnabled()) {
-        var colorRange = [color(0)];
-        for (var i = 3; i > 0; i--) {
-          colorRange.push(color(max / i));
+        // var colorRange = [color(0)];
+        var colorRange = [];
+        // for (var i = 4; i > 0; i--) {
+        //   colorRange.push(color(max / i));
+        // }
+
+        for (var i = 0; i < 5; i++) {
+            colorRange.push(colors[i]);
         }
 
         var legendGroup = svg.append('g');

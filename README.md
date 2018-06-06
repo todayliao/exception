@@ -84,6 +84,7 @@
 - 代码高亮优化
 - 后台文档自动格式化，中文 md 加粗自动空一格 bug fixed
 - 页面上 pre code 拖动条太挤，交互优化
+- 用户展示页，贡献图表美化
 - 登录 modal 框美化 todo
 - bootstrap container 宽度减小 todo
 - 右边栏热门问题添加多少次浏览 todo

@@ -28,20 +28,10 @@ public class HomeController extends BaseController {
     private HomeBusiness homeBusiness;
 
     /**
-     * 首页
-     * @return
-     */
-    @GetMapping("/")
-    @OperatorLog(description = "首页 -> forward")
-    public String queryQuestionList() {
-        return "forward:/home";
-    }
-
-    /**
      * 首页问题列表分页
      * @return
      */
-    @GetMapping("/home")
+    @GetMapping({"", "/home"})
     @OperatorLog(description = "首页问题列表分页")
     public String queryQuestionList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                     @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,

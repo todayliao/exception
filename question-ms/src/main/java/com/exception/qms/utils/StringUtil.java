@@ -92,8 +92,5 @@ public class StringUtil {
     // 字符串格式化，易读性处理 - end
     //----------------------------------------------------------------------
 
-    public static void main(String[] args) {
-        System.out.println(spacingText("**内存不足**"));
-    }
 
 }
