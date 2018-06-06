@@ -81,6 +81,12 @@ elasticsearch:
   cluster:
     name: exception
 
+domain: www.exception.site
+
+baidu:
+  linkPushHost: data.zz.baidu.com
+  linkPushToken: QMhwk26FQ15c6FPQ
+
 ---
 spring:
   profiles: dev

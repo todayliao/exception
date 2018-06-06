@@ -26,6 +26,8 @@ public interface QuestionMapper {
 
     List<Question> queryHotQuestions();
 
+    List<Question> queryAllQuestions();
+
 
     Question queryQuestionInfo(Long questionId);
 

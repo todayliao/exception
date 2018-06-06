@@ -31,6 +31,8 @@ public interface QuestionService {
 
     List<Question> queryHotQuestions();
 
+    List<Question> queryAllQuestions();
+
     Question queryQuestionInfo(Long questionId);
 
     QuestionDesc queryQuestionDesc(Long questionId);

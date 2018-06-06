@@ -64,6 +64,11 @@
     limit 10
   </select>
 
+  <select id="queryAllQuestions" resultMap="BaseResultMap">
+    select id from t_qms_question
+    where is_deleted = 0
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_question
     where id = #{id,jdbcType=BIGINT}

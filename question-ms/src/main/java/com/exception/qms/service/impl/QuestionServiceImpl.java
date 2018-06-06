@@ -57,6 +57,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<Question> queryAllQuestions() {
+        return questionMapper.queryAllQuestions();
+    }
+
+    @Override
     public Question queryQuestionInfo(Long questionId) {
         return questionMapper.queryQuestionInfo(questionId);
     }

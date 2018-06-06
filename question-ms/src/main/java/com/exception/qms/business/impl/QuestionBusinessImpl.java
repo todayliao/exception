@@ -58,6 +58,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Autowired
     private UserService userService;
     @Autowired
+    private BaiduLinkPushService baiduLinkPushService;
+    @Autowired
     private ExecutorService executorService;
     @Autowired
     private RedisService redisService;
@@ -161,7 +163,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BaseResponse addQuestion(QuestionForm questionForm, Long userId) {
+    public Long addQuestion(QuestionForm questionForm, Long userId) {
         List<Long> tagIds = questionForm.getTagIds().stream()
                 .filter(tagId -> tagId != null).distinct().collect(Collectors.toList());
 
@@ -222,7 +224,10 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         // 异步添加/更新 es index
         executorService.execute(() -> questionSearchService.index(questionId));
 
-        return new BaseResponse().success();
+        // 异步推送链接给百度，加快收录速度
+        executorService.execute(() -> baiduLinkPushService.pushQuestionDetailPageLink(questionId));
+
+        return questionId;
     }
 
     @Override

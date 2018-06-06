@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_ums_user_answer_contribution" domainObjectName="UserAnswerContribution"
+        <table tableName="t_sms_baidu_question_link_push" domainObjectName="BaiduQuestionLinkPush"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

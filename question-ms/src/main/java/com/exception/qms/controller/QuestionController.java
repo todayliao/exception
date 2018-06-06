@@ -69,8 +69,9 @@ public class QuestionController extends BaseController {
     @OperatorLog(description = "问题添加")
     public String addQuestion(@Validated QuestionForm questionForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
-        questionBusiness.addQuestion(questionForm, user == null ? null : user.getId());
-        return "redirect:/home";
+        Long questionId = questionBusiness.addQuestion(questionForm, user == null ? null : user.getId());
+        // 跳转问题展示页
+        return String.format("redirect:/question/%d", questionId);
     }
 
     /**
