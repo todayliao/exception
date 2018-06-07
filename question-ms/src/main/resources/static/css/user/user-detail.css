@@ -8,3 +8,8 @@
     border-left: 0;
     border-right: 0;
 }
+
+.question-list-footer {
+    padding: .75rem 1.25rem;
+    color: #8590a6;
+}
