@@ -120,7 +120,28 @@ blockquote {
     color: #8590a6;
 }
 
-.modal-header {
+.modal-content {
+    border: 0;
+    border-radius: 2px;
+}
 
+.modal-header {
+    background: #007bff;
+    color: #fff;
+    align-items: center;
+}
+
+.modal-body {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.close {
+    opacity: 1;
+}
+
+.close:focus, .close:hover {
+    color: #fff;
+    opacity: 1;
 }
 

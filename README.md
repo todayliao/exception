@@ -91,8 +91,7 @@
 
 ## V1.1.0
 
-- 登录 modal 框美化 todo
-- bootstrap container 宽度减小 todo
+- 登录 modal 框美化
 - 右边栏热门问题添加多少次浏览 todo
 - docker build 脚本 todo
 - es 搜索，拓展词典，stop 词典 TODO
@@ -105,6 +104,7 @@
 - 用户中心，展示用户相关信息 TODO
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
+- bootstrap container 宽度减小 todo
 
 ## V1.1.1
 

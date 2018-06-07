@@ -349,4 +349,50 @@ body {
     background: #d3d3d3;
 }
 
+.modal-close-btn {
+    position: absolute;
+    top: 8px;
+    right: -60px;
+    padding: 6px !important;
+    border: 1px solid #fff !important;
+    border-radius: 1.5rem;
+}
+
+.modal-close-icon {
+    vertical-align: top;
+    fill: #fff;
+}
+
+.modal-body-header {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.modal-logo {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.login-modal-header-slogan {
+    font-size: 20px;
+    margin-bottom: 38px;
+}
+
+.login-modal-footer {
+    justify-content: center;
+    background-color: #f6f6f6;
+    height: 58px;
+    border-top: 1px solid #ebebeb;
+    font-size: 16px;
+}
+
+.btn-modal-login {
+    margin-bottom: 28px;
+}
+
+.modal-register-a {
+    color: #175199;
+}
+
 
