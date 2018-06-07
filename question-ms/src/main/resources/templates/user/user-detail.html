@@ -6,6 +6,10 @@
     <title>用户详情 - Exception 开发者问题解决方案分享社区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/css/user/user-detail.css}">
     <link rel="stylesheet" th:href="@{/plugins/contribution-chart/calendar-heatmap.css}">
@@ -80,6 +84,7 @@
 </main>
 <!-- footer -->
 <footer th:replace="fragment/common :: footer"></footer>
+<div th:replace="fragment/common :: loginModal"></div>
 </body>
 
 <script th:replace="fragment/common-js :: js"></script>

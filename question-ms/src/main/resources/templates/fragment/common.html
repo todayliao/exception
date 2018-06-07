@@ -35,7 +35,11 @@
             </form>
 
 
-            <a class="nav-link login fs-15px" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" th:href="@{/user/login}">登录</a>
+            <a class="nav-link login fs-15px"
+               th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}"
+               href="#"
+               onclick="showLoginModal()"
+               data-toggle="modal">登录</a>
 
              <div class="dropdown" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}">
                 <a href="#" class="dropdown-toggle login-image-a" data-toggle="dropdown">
@@ -103,7 +107,7 @@
                             <label class="form-check-label" for="remember-me">记住我</label>
                         </div>
                         <!-- csrf -->
-                        <div th:replace="fragment/common :: csrfHiddenInput"></div>
+                        <!--<div th:replace="fragment/common :: csrfHiddenInput"></div>-->
                         <button type="button" class="btn btn-primary btn-block btn-modal-login" onclick="ajaxLogin()">登&nbsp;&nbsp;录</button>
                     </form>
                 </div>
@@ -124,7 +128,18 @@
     </div>
 
     <script th:inline="javascript">
+        function showLoginModal() {
+            $('#loginModal').modal('show');
+        }
+
         function ajaxLogin() {
+            // csrf
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function (e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
             var formParam = $('#login-form').serialize();
             $.ajax({
                 type: "post",

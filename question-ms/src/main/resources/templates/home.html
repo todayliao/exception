@@ -10,6 +10,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="baidu-site-verification" content="x0xb4LGIXQ" />
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/css/home/home.css}">
@@ -122,10 +125,12 @@
 </main>
 <!-- footer -->
 <footer th:replace="fragment/common :: footer"></footer>
+<div th:replace="fragment/common :: loginModal"></div>
 </body>
 
 <script th:replace="fragment/common-js :: js"></script>
 <script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
 <!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
