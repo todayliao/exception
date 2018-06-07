@@ -51,8 +51,9 @@ public class AnswerController extends BaseController {
     @PostMapping("/answer/edit")
     public String updateAnswer(@Validated AnswerUpdateForm answerUpdateForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
-        answerBusiness.updateAnswer(answerUpdateForm, user.getId());
-        return "redirect:/home";
+        Long questionId = answerBusiness.updateAnswer(answerUpdateForm, user.getId());
+        // 跳转问题展示页
+        return String.format("redirect:/question/%d", questionId);
     }
 
     /**

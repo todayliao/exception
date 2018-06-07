@@ -56,7 +56,7 @@ public class AnswerBusinessImpl implements AnswerBusiness {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BaseResponse updateAnswer(AnswerUpdateForm answerUpdateForm, Long userId) {
+    public Long updateAnswer(AnswerUpdateForm answerUpdateForm, Long userId) {
         if (userId == null) {
             log.error("the userId is null");
             throw new QMSException(QmsResponseCodeEnum.USER_IS_NULL);
@@ -74,6 +74,10 @@ public class AnswerBusinessImpl implements AnswerBusiness {
         }
 
         Answer answerTmp = answerService.queryAnswerInfo(answerId);
+
+        // 方案所属的问题id
+        Long belongQuestionId = answerTmp.getQuestionId();
+
         AnswerEditHistory answerEditHistory = new AnswerEditHistory();
         answerEditHistory.setAnswerId(answerId);
         answerEditHistory.setAnswerCreateTime(answerTmp.getUpdateTime());
@@ -99,7 +103,7 @@ public class AnswerBusinessImpl implements AnswerBusiness {
         // 异步添加贡献数据
         executorService.execute(() -> userService.addAnswerContribution(answerId, userId, UserAnswerContributionTypeEnum.EDIT.getCode()));
 
-        return new BaseResponse().success();
+        return belongQuestionId;
     }
 
     @Override
