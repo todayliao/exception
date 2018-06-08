@@ -1,3 +1,9 @@
+${AnsiColor.RED}
+${application.version}
+${application.formatted-version}
+${spring-boot.version}
+${spring-boot.formatted-version}
+
 
                                      __
                                     /\ \__    __
@@ -10,9 +16,8 @@
        \/_/
 
 
-${AnsiColor.BLUE}
-${application.version}
-${application.formatted-version}
-${spring-boot.version}
-${spring-boot.formatted-version}
+
+
+
+
 

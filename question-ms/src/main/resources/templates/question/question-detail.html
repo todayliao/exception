@@ -55,7 +55,7 @@
                                     th:onclick="'javascript:likeThisQuestion(1);'"
                                     data-toggle="modal">
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                &nbsp;[[${response.voteUp}]]
+                                &nbsp;[[${response.voteUp}]]&nbsp;
                             </button>
 
                             <button id="unlike-this-question" type="button" class="btn btn-primary vote-button-active fs-14px"
@@ -63,7 +63,7 @@
                                     th:onclick="'javascript:likeThisQuestion(-1);'"
                                     data-toggle="modal">
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                &nbsp;[[${response.voteUp}]]
+                                &nbsp;[[${response.voteUp}]]&nbsp;
                             </button>
 
                             <!-- 被阅读次数 -->
@@ -154,7 +154,7 @@
                                         th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
                                         data-toggle="modal">
                                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    &nbsp;[[${answer.voteUp}]]
+                                    &nbsp;[[${answer.voteUp}]]&nbsp;
                                 </button>
 
                                 <button id="unlike-this-answer" type="button" class="btn btn-primary vote-button-active fs-14px"
@@ -162,7 +162,7 @@
                                         th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
                                         data-toggle="modal">
                                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    &nbsp;[[${answer.voteUp}]]
+                                    &nbsp;[[${answer.voteUp}]]&nbsp;
                                 </button>
 
                                 <!-- 改进 -->

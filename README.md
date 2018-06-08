@@ -93,8 +93,23 @@
 - 登录 modal 框美化
 - 更改完问题和方案后跳转到首页的优化
 - 用户中心，展示用户相关信息
-- safari 浏览器 pre 样式错乱问题 todo
-- 右边栏热门问题添加多少次浏览 todo
+- safari 浏览器 pre 样式错乱问题
+- 首页右边栏热门问题添加多少次阅读
+- 问题详情页右边栏热门问题添加多少次点赞
+- 网站 http -> https  todo
+- 问题添加页面优化 todo
+
+
+## V1.1.1
+
+- 网站地图 sitemap(重要) todo 
+- nginx 流量统计 TODO
+- 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
+- markdown editor 加载过慢的问题 TODO
+- 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
+- 日志组件升级 logback -> log4j2 todo
+- 阿里云对象存储 oss 图片流量优化 todo
+- mysql 数据自动备份（非常重要）todo
 - 问题详情页最近一次 tooltips 中添加编辑时间 todo
 - docker build 脚本 todo
 - es 搜索，拓展词典，stop 词典 TODO
@@ -105,16 +120,5 @@
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
 - bootstrap container 宽度减小 todo
-
-## V1.1.1
-
-- nginx 流量统计 TODO
-- 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
-- markdown editor 加载过慢的问题 TODO
-- 页面交互优化，点赞后，异步更新页面数据，而不是刷新页面 TODO
-- 日志组件升级 logback -> log4j2 todo
-- 阿里云对象存储 oss 图片流量优化 todo
-- mysql 数据自动备份（非常重要）todo
-- 网站地图 sitemap(重要) todo 
 
 

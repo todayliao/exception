@@ -62,7 +62,7 @@ logging:
 # 关闭 http 基本验证
 security:
   basic:
-    enabled: false
+    enabled: true
 
 # 阿里云OSS
 aliyunoss:
@@ -126,6 +126,10 @@ spring:
 # elastic search
 elasticsearch:
   host: 172.17.0.1
+
+security:
+  require-ssl: true
+
 
 
 
