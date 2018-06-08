@@ -88,20 +88,20 @@
 - 添加问题成功后，跳转问题的详情页，而不是首页
 - 百度 seo 主动推送（重要）
 
-
 ## V1.1.0
 
 - 登录 modal 框美化
+- 更改完问题和方案后跳转到首页的优化
+- 用户中心，展示用户相关信息
+- safari 浏览器 pre 样式错乱问题 todo
 - 右边栏热门问题添加多少次浏览 todo
+- 问题详情页最近一次 tooltips 中添加编辑时间 todo
 - docker build 脚本 todo
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
 - 用户维护日排行，周排行，总排行 TODO
-- 登录页面 UI 美化 TODO
 - 短信登录功能 TODO
 - 项目重构，maven 模块化拆分 TODO
-- 更改完问题和方案后跳转到首页的 bug TODO
-- 用户中心，展示用户相关信息 TODO
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
 - bootstrap container 宽度减小 todo

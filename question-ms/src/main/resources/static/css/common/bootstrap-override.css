@@ -17,6 +17,7 @@ pre {
     background-color: #f6f8fa;
     border-radius: 3px;
     overflow-x: auto;
+    padding: 16px;
 }
 
 code {
@@ -30,7 +31,6 @@ code {
 
 pre code {
     background-color: #f6f8fa;
-    padding: 16px;
 }
 
 .form-control {
