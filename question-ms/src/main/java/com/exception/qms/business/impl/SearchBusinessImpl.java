@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.primitives.Longs;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.core.util.Integers;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -226,6 +227,7 @@ public class SearchBusinessImpl implements SearchBusiness {
                 SearchAboutQuestionResponseDTO searchAboutQuestionResponseDTO = new SearchAboutQuestionResponseDTO();
                 searchAboutQuestionResponseDTO.setId(hitQuestionId);
                 searchAboutQuestionResponseDTO.setTitle(searchHitFields.getSource().get(QuestionIndexKey.TITLE).toString());
+                searchAboutQuestionResponseDTO.setVoteUp(Integers.parseInt(String.valueOf(searchHitFields.getSource().get(QuestionIndexKey.VOTE_UP))));
                 searchAboutQuestionResponseDTOS.add(searchAboutQuestionResponseDTO);
             }
         });

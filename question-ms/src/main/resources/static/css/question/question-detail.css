@@ -186,4 +186,18 @@
     padding-left: 15px;
 }
 
+.about-question-item {
+    line-height: 21px;
+    color: #8590a6;
+    font-size: 14px;
+}
+
+.about-question-card-body .about-question-item {
+    margin-bottom: 10px;
+}
+
+.about-question-card-body .about-question-item:last-child {
+    margin-bottom: 0;
+}
+
 

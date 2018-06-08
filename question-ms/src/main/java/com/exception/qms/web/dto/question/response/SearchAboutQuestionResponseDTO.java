@@ -14,4 +14,5 @@ import java.io.Serializable;
 public class SearchAboutQuestionResponseDTO implements Serializable {
     private Long id;
     private String title;
+    private Integer voteUp;
 }

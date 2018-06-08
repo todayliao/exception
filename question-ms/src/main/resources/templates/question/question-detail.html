@@ -55,7 +55,7 @@
                                     th:onclick="'javascript:likeThisQuestion(1);'"
                                     data-toggle="modal">
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                &nbsp;[[${response.voteUp}]]&nbsp;次赞
+                                &nbsp;[[${response.voteUp}]]
                             </button>
 
                             <button id="unlike-this-question" type="button" class="btn btn-primary vote-button-active fs-14px"
@@ -63,13 +63,13 @@
                                     th:onclick="'javascript:likeThisQuestion(-1);'"
                                     data-toggle="modal">
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                &nbsp;[[${response.voteUp}]]&nbsp;次赞
+                                &nbsp;[[${response.voteUp}]]
                             </button>
 
-                            <!-- 被浏览次数 -->
+                            <!-- 被阅读次数 -->
                             <span class="gray marginleft-15px fs-14px" href="#">
                                 <!--<i class="fa fa-heart-o"></i>&nbsp;&nbsp;90&nbsp;次点赞-->
-                                <i class="fa fa-eye"></i>&nbsp;[[${response.viewNum}]]&nbsp;次浏览
+                                <i class="fa fa-eye"></i>&nbsp;[[${response.viewNum}]]&nbsp;次阅读
                             </span>
 
                             <!-- 改进 -->
@@ -154,7 +154,7 @@
                                         th:onclick="'javascript:likeThisAnswer('+${answer.id}+', 1)'"
                                         data-toggle="modal">
                                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    &nbsp;[[${answer.voteUp}]]&nbsp;次赞
+                                    &nbsp;[[${answer.voteUp}]]
                                 </button>
 
                                 <button id="unlike-this-answer" type="button" class="btn btn-primary vote-button-active fs-14px"
@@ -162,7 +162,7 @@
                                         th:onclick="'javascript:likeThisAnswer('+${answer.id}+', -1)'"
                                         data-toggle="modal">
                                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    &nbsp;[[${answer.voteUp}]]&nbsp;次赞
+                                    &nbsp;[[${answer.voteUp}]]
                                 </button>
 
                                 <!-- 改进 -->
@@ -198,12 +198,11 @@
                 <div class="card-header m-card-header">
                     <div class="card-title">相似问题</div>
                 </div>
-                <div class="card-body">
-                    <ul id="about-question-list" class="list-group list-group-flush">
-                        <!--<li class="list-group-item d-flex justify-content-between align-items-center border0">-->
-                        <!--<a class="fs-14px blue-a" href="#">fsfsdjfljdsofjdosfjosdjf奇偶水电费是否就搜地方</a>-->
-                        <!--</li>-->
-                    </ul>
+                <div class="card-body about-question-card-body" id="about-question-list">
+                    <!--<div class="about-question-item">-->
+                        <!--<a class="fs-14px blue-a" href="#">bootstrap 如何实现滑动页面时，右边栏保持位置固定，类似知乎首页</a>-->
+                        <!--&nbsp;&nbsp;123&nbsp;次赞-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -243,8 +242,7 @@
 
 
         $('#about-question-card').show();
-        // 右边栏数据，异步加载
-        // hot tags
+        // 右边栏相似问题，异步加载
         $.ajax({
             type: "GET",
             async: true,
@@ -255,9 +253,12 @@
                     var html = '';
                     var data = response.data;
                     $.each(data, function (i, question) {
-                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<div class=\"about-question-item\">";
                         html += "<a class=\"fs-14px blue-a\" href=\"/question/" + question.id + "\">" + question.title + "</a>";
-                        html += "</li>"
+                        if (question.voteUp > 0) {
+                            html += "&nbsp;&nbsp;"+question.voteUp+"&nbsp;赞";
+                        }
+                        html += "</div>";
                     });
                     $('#about-question-list').html(html);
                 }

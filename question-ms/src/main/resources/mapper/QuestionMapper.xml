@@ -58,7 +58,7 @@
   </select>
 
   <select id="queryHotQuestions" resultMap="BaseResultMap">
-    select id, title_cn from t_qms_question
+    select id, title_cn, view_num from t_qms_question
     where is_deleted = 0
     order by view_num desc
     limit 10

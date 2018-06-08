@@ -89,7 +89,7 @@
             </div>
 
             <!-- 热门标签 -->
-            <div class="card margintop-10px">
+            <div id="hot-tag-card" class="card margintop-10px" style="display: none;">
                 <div class="card-header m-card-header">
                     <div class="card-title">热门标签</div>
                     <!--<span class="pull-right">更多>></span>-->
@@ -105,16 +105,15 @@
             </div>
 
             <!-- 热门问题-->
-            <div class="card margintop-10px">
+            <div id="hot-question-card" class="card margintop-10px" style="display: none;">
                 <div class="card-header m-card-header">
                     <div class="card-title">热门问题</div>
                 </div>
-                <div class="card-body">
-                    <ul id="hot-question-list" class="list-group list-group-flush">
-                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
-                        <!--<a class="fs-14px gray-dark" href="#">沃尔夫圣诞节福利的时间反馈了电视剧反垄断法</a>-->
-                        <!--</li>-->
-                    </ul>
+                <div class="card-body hot-question-card-body" id="hot-question-list">
+                    <!--<div class="hot-question-item">-->
+                        <!--<a class="fs-14px blue-a" href="#">bootstrap 如何实现滑动页面时，右边栏保持位置固定，类似知乎首页</a>-->
+                            <!--&nbsp;123&nbsp;次阅读-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -153,6 +152,7 @@
 
         // 右边栏数据，异步加载
         // hot tags
+        $('#hot-tag-card').show();
         $.ajax({
             type: "GET",
             async: true,
@@ -174,6 +174,7 @@
         });
 
         // hot questions
+        $('#hot-question-card').show();
         $.ajax({
             type: "GET",
             async: true,
@@ -184,9 +185,10 @@
                     var html = '';
                     var data = response.data;
                     $.each(data, function (i, question) {
-                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<div class=\"hot-question-item\">";
                         html += "<a class=\"fs-14px blue-a\" href='/question/" + question.id + "'>" + question.titleCn + "</a>";
-                        html += "</li>"
+                        html += "&nbsp;&nbsp;&nbsp;" + question.viewNum + "&nbsp;次阅读";
+                        html += "</div>";
                     });
                     $('#hot-question-list').html(html);
                 }
