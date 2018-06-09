@@ -395,4 +395,15 @@ body {
     color: #175199;
 }
 
+.paddingtop-0 {
+    padding-top: 0;
+}
+
+.gray-nav-link {
+    color: #8590a6;
+}
+
+.gray-nav-link:hover {
+    color: #8590a6;
+}
 

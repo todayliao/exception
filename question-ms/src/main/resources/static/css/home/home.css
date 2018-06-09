@@ -46,3 +46,7 @@
 .hot-question-card-body .hot-question-item:last-child {
     margin-bottom: 0;
 }
+
+.home-question-list-card-header {
+    border: 1px solid #f6f6f6;
+}

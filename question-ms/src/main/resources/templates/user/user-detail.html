@@ -3,7 +3,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>用户详情 - Exception 开发者问题解决方案分享社区</title>
+    <title th:utext="${response.data.userName} + ' - Exception 开发者问题解决方案分享社区'">title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta name="_csrf" th:content="${_csrf.getToken()}">
@@ -44,7 +44,7 @@
         <!-- 用户详情展示 -->
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header question-list-card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
                             <a id="new" class="nav-link fs-14px active border-bottom-0" href="#">问题方案
