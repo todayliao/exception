@@ -186,7 +186,12 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // add questionDesc
         QuestionDesc questionDesc = new QuestionDesc();
-        questionDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getQuestionDesc()));
+        // 判断用户是否填写问题描述
+        if (questionForm.getQuestionDesc().isEmpty()) {
+            questionDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getTitle()));
+        } else {
+            questionDesc.setDescriptionCn(StringUtil.spacingText(questionForm.getQuestionDesc()));
+        }
         questionDesc.setQuestionId(questionId);
         questionService.addQuestionDesc(questionDesc);
 

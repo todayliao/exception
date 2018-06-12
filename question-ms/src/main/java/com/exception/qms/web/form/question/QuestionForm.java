@@ -17,7 +17,6 @@ import java.util.List;
 public class QuestionForm implements Serializable {
     @NotBlank
     private String title;
-    @NotBlank
     private String questionDesc;
     @NotBlank
     private String answerDesc;
