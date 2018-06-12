@@ -51,7 +51,7 @@
                                     <h2 class="mb-1 home-question-title"><a th:href="@{'/question/' + ${question.id}}" th:text="${question.titleCn}" class="gray-dark"></a></h2>
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->
-                                <div class="margintop-3px">
+                                <div class="margintop-2px">
                                     <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
                                     <span class="m-fade fs-12px" style="margin-left: -2px;">
                                         •&nbsp;

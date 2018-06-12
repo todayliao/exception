@@ -16,6 +16,9 @@ spring:
     mode: HTML
   session:
     store-type: hash_map # session 会话的存储类型
+  http:
+    multipart:
+      max-file-size: 4MB
 
 server:
   port: 8090

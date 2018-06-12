@@ -96,9 +96,10 @@
 - safari 浏览器 pre 样式错乱问题
 - 首页右边栏热门问题添加多少次阅读
 - 问题详情页右边栏热门问题添加多少次点赞
-- 网站 http -> https  todo
-- 问题添加页面优化 todo
-
+- 网站 http -> https, 转 http 2.0
+- 问题添加页面优化
+- 问题添加改异步提交 todo
+- 火狐浏览器贡献图表样式错乱问题 todo
 
 ## V1.1.1
 
@@ -120,5 +121,6 @@
 - elasticsearch 容器化 TODO
 - 支持 github 登录 TODO
 - bootstrap container 宽度减小 todo
+- seo 优化之 meta og: twitter: todo
 
 

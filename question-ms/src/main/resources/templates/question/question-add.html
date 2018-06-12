@@ -31,11 +31,11 @@
 
             <form th:action="#{/question}" id="form" method="post">
                 <div class="form-group">
-                    <label>问题标题</label>
+                    <label>问题标题 <i>(标题应是疑问句，且简明扼要，如：如何创建 mysql 数据库表索引?)</i></label>
                     <input type="text" class="form-control" name="title">
                 </div>
                 <div class="form-group">
-                    <label>问题出现的场景描述</label>
+                    <label>问题出现的场景描述 <i>（可选，若为空，则默认为问题标题）</i></label>
                     <div id="editormd1" class="editor-md">
                         <textarea class="editormd-markdown-textarea" name="questionDesc"></textarea>
                     </div>
@@ -88,12 +88,20 @@
         var editormd1, editormd2;
         editormd1 = editormd("editormd1", {
             width   : "100%",
-            height  : 400,
+            height  : 350,
             syncScrolling : "single",
             path    : "/plugins/editor-md/lib/", // 依赖的 lib 目录
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/file/editorMdImg/upload" // 依赖的 lib 目录
+            imageUploadURL : "/file/editorMdImg/upload", // 依赖的 lib 目录
+            autoFocus : false,
+            toolbarIcons : function() {
+                // Or return editormd.toolbarModes[name]; // full, simple, mini
+                // Using "||" set icons align right.
+                return ["bold", "del", "italic","quote", "|", "h2", "h3", "h4", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|", "link", "image", "code", "preformatted-text", "table",
+                    "datetime", "|",  "watch", "preview"]
+            }
         });
 
         editormd2 = editormd("editormd2", {
@@ -103,7 +111,8 @@
             path    : "/plugins/editor-md/lib/", // 依赖的 lib 目录
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/file/editorMdImg/upload" // 依赖的 lib 目录
+            imageUploadURL : "/file/editorMdImg/upload", // 依赖的 lib 目录
+            autoFocus : false
         });
 
         // 标签模糊查询
@@ -171,13 +180,6 @@
         $('#hidden-' + tagName).remove();
         delete tagIdsMap[tagId];
     }
-
-
-
-
-
-
-
 
 </script>
 </html>
