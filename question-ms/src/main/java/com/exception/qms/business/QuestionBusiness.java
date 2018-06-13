@@ -27,7 +27,7 @@ public interface QuestionBusiness {
      * @param questionForm
      * @return
      */
-    Long addQuestion(QuestionForm questionForm, Long userId);
+    BaseResponse addQuestion(QuestionForm questionForm, Long userId);
 
     BaseResponse updateQuestion(QuestionUpdateForm questionUpdateForm, Long userId);
 

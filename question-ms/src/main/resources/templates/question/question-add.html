@@ -29,21 +29,22 @@
             <!-- csrf -->
             <div th:replace="fragment/common :: csrfHiddenInput"></div>
 
-            <form th:action="#{/question}" id="form" method="post">
+            <form id="form">
+            <!--<form>-->
                 <div class="form-group">
                     <label>问题标题 <i>(标题应是疑问句，且简明扼要，如：如何创建 mysql 数据库表索引?)</i></label>
-                    <input type="text" class="form-control" name="title">
+                    <input id="title" type="text" class="form-control" name="title">
                 </div>
                 <div class="form-group">
                     <label>问题出现的场景描述 <i>（可选，若为空，则默认为问题标题）</i></label>
                     <div id="editormd1" class="editor-md">
-                        <textarea class="editormd-markdown-textarea" name="questionDesc"></textarea>
+                        <textarea id="questionDesc" class="editormd-markdown-textarea" name="questionDesc"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>解决方案</label>
                     <div id="editormd2" class="editor-md">
-                        <textarea class="editormd-markdown-textarea" name="answerDesc"></textarea>
+                        <textarea id="answerDesc" class="editormd-markdown-textarea" name="answerDesc"></textarea>
                     </div>
                 </div>
                 <div id="added-question-tags" style="margin-bottom: 10px;">
@@ -61,7 +62,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-success btn-block" onclick="submitQuestion()">提交</button>
             </form>
         </div>
 
@@ -76,12 +77,10 @@
 
 <script th:replace="fragment/common-js :: js"></script>
 <script th:src="@{/plugins/editor-md/editormd.min.js}"></script>
-<script th:src="@{/js/jquery.form.js}"></script>
-<script th:src="@{/plugins/validate/jquery.validate.min.js}"></script>
-<script th:src="@{/plugins/validate/messages_zh.min.js}"></script>
+<!--<script th:src="@{/js/jquery.form.js}"></script>-->
+<!--<script th:src="@{/plugins/validate/jquery.validate.min.js}"></script>-->
+<!--<script th:src="@{/plugins/validate/messages_zh.min.js}"></script>-->
 <script th:src="@{/plugins/layer/layer.js}"></script>
-
-<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
 
 <script th:inline="javascript">
     $(function() {
@@ -153,8 +152,6 @@
                 }
             });
         });
-
-        // 表单验证 todo
     });
 
     var tagIdsMap = {};
@@ -163,7 +160,7 @@
     // add tag
     function chooseTag(tagId, tagName) {
         if (tagId in tagIdsMap) {
-            alert("该标签已经添加了呢！")
+            layer.msg("该标签已经添加了哦！");
             return;
         }
         var html = "<span class=\"badge badge-secondary marginright-5px\" id='"+tagName+"'>" + tagName
@@ -180,6 +177,50 @@
         $('#hidden-' + tagName).remove();
         delete tagIdsMap[tagId];
     }
+    
+    function submitQuestion() {
+        var title = $('#title').val();
+        var answerDesc = $('#answerDesc').val();
+        var tagSize = $('#tag-ids-hidden').children().length;
+        if (title.trim() == '') {
+            layer.msg("问题标题不能为空");
+            return;
+        }
 
+        if (title.indexOf("?") == -1 && title.indexOf("？") == -1) {
+            layer.msg("你还没有给问题添加问号");
+            return;
+        }
+
+        if (answerDesc.trim() == '') {
+            layer.msg("解决法案不能为空");
+            return;
+        }
+
+        if (tagSize < 1) {
+            layer.msg("请为问题打上正确的标签");
+            return;
+        }
+
+        if (tagSize > 5) {
+            layer.msg("最多只能打五个标签");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            async: true,
+            url: "/question",
+            data: $('#form').serialize(),
+            success: function (response) {
+                if (response.success == true) {
+                    layer.msg("提交成功");
+                    location.href = "/question/" + response.data;
+                } else {
+                    layer.msg("提交失败");
+                }
+            }
+        });
+    }
 </script>
 </html>

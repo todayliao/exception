@@ -21,4 +21,5 @@ public class QMSException extends BaseException {
     public QMSException(QmsResponseCodeEnum qmsResponseCodeEnum) {
         super(qmsResponseCodeEnum.getErrorCode(), qmsResponseCodeEnum.getErrorMessage());
     }
+
 }

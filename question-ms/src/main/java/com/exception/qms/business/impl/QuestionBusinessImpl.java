@@ -163,7 +163,13 @@ public class QuestionBusinessImpl implements QuestionBusiness {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long addQuestion(QuestionForm questionForm, Long userId) {
+    public BaseResponse addQuestion(QuestionForm questionForm, Long userId) {
+        // 判断问题标题是否包含 ？
+        if (!questionForm.getTitle().contains("?")) {
+            log.warn("the question not contains ?");
+            throw new QMSException(QmsResponseCodeEnum.NOT_CONTAIN_QUESTION_MARK);
+        }
+
         List<Long> tagIds = questionForm.getTagIds().stream()
                 .filter(tagId -> tagId != null).distinct().collect(Collectors.toList());
 
@@ -232,7 +238,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         // 异步推送链接给百度，加快收录速度
         executorService.execute(() -> baiduLinkPushService.pushQuestionDetailPageLink(questionId));
 
-        return questionId;
+        return new BaseResponse().success(questionId);
     }
 
     @Override
@@ -242,6 +248,13 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             log.error("the userId is null");
             throw new QMSException(QmsResponseCodeEnum.USER_IS_NULL);
         }
+
+        // 判断问题标题是否包含 ？
+        if (!questionUpdateForm.getTitle().contains("?")) {
+            log.warn("the question not contains ?");
+            throw new QMSException(QmsResponseCodeEnum.NOT_CONTAIN_QUESTION_MARK);
+        }
+
         // 老数据入问题历史表
         long questionId = questionUpdateForm.getId();
         Question tmpQuestion = questionService.queryQuestionInfo(questionId);
@@ -288,7 +301,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // 异步添加/更新 es index
         executorService.execute(() -> questionSearchService.index(questionUpdateForm.getId()));
-        return new BaseResponse().success();
+        return new BaseResponse().success(questionId);
     }
 
     @Override

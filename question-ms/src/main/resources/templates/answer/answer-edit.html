@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">提交</button>
+                <button type="submit" class="btn btn-success btn-block">提交</button>
             </form>
         </div>
 
@@ -73,7 +73,15 @@
             path: "/plugins/editor-md/lib/", // 依赖的 lib 目录
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/file/editorMdImg/upload" // 依赖的 lib 目录
+            imageUploadURL : "/file/editorMdImg/upload",
+            autoFocus : false,
+            toolbarIcons : function() {
+                // Or return editormd.toolbarModes[name]; // full, simple, mini
+                // Using "||" set icons align right.
+                return ["bold", "del", "italic","quote", "|", "h2", "h3", "h4", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|", "link", "image", "code", "preformatted-text", "table",
+                    "datetime", "|",  "watch", "preview"]
+            }
         });
     });
 

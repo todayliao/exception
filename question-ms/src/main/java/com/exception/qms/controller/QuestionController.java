@@ -67,11 +67,10 @@ public class QuestionController extends BaseController {
      */
     @PostMapping("/question")
     @OperatorLog(description = "问题添加")
-    public String addQuestion(@Validated QuestionForm questionForm, HttpSession session) {
+    @ResponseBody
+    public BaseResponse addQuestion(@Validated QuestionForm questionForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
-        Long questionId = questionBusiness.addQuestion(questionForm, user == null ? null : user.getId());
-        // 跳转问题展示页
-        return String.format("redirect:/question/%d", questionId);
+        return questionBusiness.addQuestion(questionForm, user == null ? null : user.getId());
     }
 
     /**
@@ -94,11 +93,10 @@ public class QuestionController extends BaseController {
      * @return
      */
     @PostMapping("/question/edit")
-    public String updateQuestion(@Validated QuestionUpdateForm questionUpdateForm, HttpSession session) {
+    @ResponseBody
+    public BaseResponse updateQuestion(@Validated QuestionUpdateForm questionUpdateForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
-        questionBusiness.updateQuestion(questionUpdateForm, user.getId());
-        // 跳转问题展示页
-        return String.format("redirect:/question/%d", questionUpdateForm.getId());
+        return questionBusiness.updateQuestion(questionUpdateForm, user.getId());
     }
 
     /**
