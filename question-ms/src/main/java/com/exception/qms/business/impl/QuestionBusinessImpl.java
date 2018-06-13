@@ -165,7 +165,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Transactional(rollbackFor = Exception.class)
     public BaseResponse addQuestion(QuestionForm questionForm, Long userId) {
         // 判断问题标题是否包含 ？
-        if (!questionForm.getTitle().contains("?")) {
+        if (!questionForm.getTitle().contains("?") && !questionForm.getTitle().contains("？")) {
             log.warn("the question not contains ?");
             throw new QMSException(QmsResponseCodeEnum.NOT_CONTAIN_QUESTION_MARK);
         }
@@ -250,7 +250,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         }
 
         // 判断问题标题是否包含 ？
-        if (!questionUpdateForm.getTitle().contains("?")) {
+        if (!questionUpdateForm.getTitle().contains("?") && !questionUpdateForm.getTitle().contains("？")) {
             log.warn("the question not contains ?");
             throw new QMSException(QmsResponseCodeEnum.NOT_CONTAIN_QUESTION_MARK);
         }

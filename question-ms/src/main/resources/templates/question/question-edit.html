@@ -118,7 +118,7 @@
                         layer.msg("编辑成功");
                         location.href = "/question/" + response.data;
                     } else {
-                        layer.msg("编辑失败");
+                        layer.msg("编辑失败 - " + response.errorMessage);
                     }
                 }
             });

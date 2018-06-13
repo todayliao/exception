@@ -217,7 +217,7 @@
                     layer.msg("提交成功");
                     location.href = "/question/" + response.data;
                 } else {
-                    layer.msg("提交失败");
+                    layer.msg("提交失败 - " + response.errorMessage);
                 }
             }
         });
