@@ -90,4 +90,12 @@
     })();
 </script>
 
+<!-- 360链接推送 -->
+<script th:fragment="360LinkPush" th:inline="javascript">
+    (function(){
+        var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?a1b421285d25d7d0a4a634b637de24fe":"https://jspassport.ssl.qhimg.com/11.0.1.js?a1b421285d25d7d0a4a634b637de24fe";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+</script>
+
 </html>

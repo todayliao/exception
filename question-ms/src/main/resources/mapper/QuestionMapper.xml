@@ -65,7 +65,7 @@
   </select>
 
   <select id="queryAllQuestions" resultMap="BaseResultMap">
-    select id from t_qms_question
+    select id, update_time from t_qms_question
     where is_deleted = 0
   </select>
 

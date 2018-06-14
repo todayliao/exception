@@ -99,11 +99,12 @@
 - 网站 http -> https, 转 http 2.0
 - 问题添加页面优化
 - 问题添加改异步提交, ? 号判断
-- 火狐浏览器贡献图表样式错乱问题 todo
+- 网站提交收录 - google, bing, 360, 搜狗
+- 加入 360 自动提交连接 
 
 ## V1.1.1
 
-- 网站地图 sitemap(重要) todo 
+- 网站地图 sitemap(重要)
 - nginx 流量统计 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
@@ -112,6 +113,10 @@
 - 阿里云对象存储 oss 图片流量优化 todo
 - mysql 数据自动备份（非常重要）todo
 - 问题详情页最近一次 tooltips 中添加编辑时间 todo
+- 360 ie 分页插件 css 错乱 bug todo
+
+## V1.1.2
+
 - docker build 脚本 todo
 - es 搜索，拓展词典，stop 词典 TODO
 - 搜索页面，未搜索到内容，提示字添加 TODO
@@ -122,5 +127,6 @@
 - 支持 github 登录 TODO
 - bootstrap container 宽度减小 todo
 - seo 优化之 meta og: twitter: todo
+- 火狐浏览器贡献图表样式错乱问题 todo(未找到解决办法)
 
 

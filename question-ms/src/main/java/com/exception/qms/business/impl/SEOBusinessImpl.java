@@ -22,18 +22,25 @@ import com.exception.qms.web.vo.user.QueryUserDetailQuestionItemResponseVO;
 import com.exception.qms.web.vo.user.QueryUserDetailResponseVO;
 import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
 import com.google.common.collect.Lists;
+import com.redfin.sitemapgenerator.ChangeFreq;
+import com.redfin.sitemapgenerator.W3CDateFormat;
+import com.redfin.sitemapgenerator.WebSitemapGenerator;
+import com.redfin.sitemapgenerator.WebSitemapUrl;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +52,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SEOBusinessImpl implements SEOBusiness {
+
+    @Value("${domain}")
+    private String domain;
 
     @Autowired
     private QuestionService questionService;
@@ -58,5 +68,32 @@ public class SEOBusinessImpl implements SEOBusiness {
             baiduLinkPushService.pushQuestionDetailPageLink(question.getId());
         });
         return new BaseResponse().success();
+    }
+
+    @Override
+    public String createSiteMapXmlContent() {
+        String baseUrl = String.format("https://%s", domain);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        WebSitemapGenerator wsg = null;
+        try {
+            wsg = new WebSitemapGenerator(baseUrl);
+            // home page
+            WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl + "/home")
+                    .lastMod(dateTimeFormatter.format(LocalDateTime.now())).priority(1.0).changeFreq(ChangeFreq.DAILY).build();
+            wsg.addUrl(url);
+
+            // question detail pages
+            List<Question> questions = questionService.queryAllQuestions();
+
+            for (Question question : questions) {
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + question.getId())
+                        .lastMod(dateTimeFormatter.format(question.getUpdateTime())).priority(0.9).changeFreq(ChangeFreq.DAILY).build();
+                wsg.addUrl(tmpUrl);
+            }
+        } catch (Exception e) {
+            log.error("create sitemap xml error: ", e);
+        }
+        return String.join("", wsg.writeAsStrings());
     }
 }

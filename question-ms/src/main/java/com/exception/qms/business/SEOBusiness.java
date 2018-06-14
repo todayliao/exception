@@ -13,4 +13,6 @@ import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
 public interface SEOBusiness {
 
     BaseResponse pushAllQuestion();
+
+    String createSiteMapXmlContent();
 }

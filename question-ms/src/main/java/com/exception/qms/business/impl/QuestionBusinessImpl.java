@@ -124,7 +124,13 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         questionDetailResponseVO.setAnswersCount(CollectionUtils.isEmpty(answerResponseVOS) ? 0 : answerResponseVOS.size());
 
         // seo
-        questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn());
+        String descriptionCn = questionDesc.getDescriptionCn();
+        // description 最多显示 80 字符
+        if (descriptionCn.length() > 80) {
+            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn().substring(0, 80));
+        } else {
+            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn());
+        }
         List<TagResponseVO> tagResponseVOS = questionDetailResponseVO.getTags();
         if (!CollectionUtils.isEmpty(tagResponseVOS)) {
             questionDetailResponseVO.setSeoKeywords(
