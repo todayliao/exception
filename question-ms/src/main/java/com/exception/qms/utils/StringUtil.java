@@ -45,7 +45,7 @@ public class StringUtil {
     private static final Pattern CJK_BRACKET_CJK = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([\\({\\[]+(.*?)[\\)}\\]]+)([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])");
     private static final Pattern CJK_BRACKET = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])([\\(\\){}\\[\\]<>])");
     private static final Pattern BRACKET_CJK = Pattern.compile("([\\(\\){}\\[\\]<>])([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])");
-    private static final Pattern FIX_BRACKET = Pattern.compile("([(\\({\\[)]+)(\\s*)(.+?)(\\s*)([\\)}\\]]+)");
+    private static final Pattern FIX_BRACKET = Pattern.compile("([(\\(\\[)]+)(\\s*)(.+?)(\\s*)([\\)}\\]]+)");
     private static final Pattern CJK_HASH = Pattern.compile("([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])(#(\\S+))");
     private static final Pattern HASH_CJK = Pattern.compile("((\\S+)#)([\\p{InHiragana}\\p{InKatakana}\\p{InBopomofo}\\p{InCJKCompatibilityIdeographs}\\p{InCJKUnifiedIdeographs}])");
 
@@ -93,7 +93,13 @@ public class StringUtil {
     //----------------------------------------------------------------------
 
     public static void main(String[] args) {
-        System.out.println(spacingText("1.首先检查 linux 有没有安装 python-pip 包，终端执行"));
+
+        System.out.println(spacingText(
+                "        public void createSiteMapXml(HttpServletResponse response) throws IOException {\n" +
+                "\t\tresponse.setContentType(MediaType.APPLICATION_XML_VALUE);\n" +
+                "            Writer writer = response.getWriter();\n" +
+                "            writer.append(seoService.createSiteMapXmlContent());\n" +
+                "        }"));
     }
 
 }
