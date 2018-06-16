@@ -62,8 +62,6 @@
 <script th:src="@{/plugins/validate/messages_zh.min.js}"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
 
-<!--<script th:replace="fragment/common-js :: nprogress"></script>-->
-
 <script th:inline="javascript">
     $(function() {
         editormd("editormd1", {
@@ -75,6 +73,7 @@
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "/file/editorMdImg/upload",
             autoFocus : false,
+            watch: false,
             toolbarIcons : function() {
                 // Or return editormd.toolbarModes[name]; // full, simple, mini
                 // Using "||" set icons align right.
