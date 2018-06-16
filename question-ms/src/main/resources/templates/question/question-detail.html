@@ -241,8 +241,6 @@
         var questionTitle = [[${response.titleCn}]];
         var questionId = [[${response.id}]];
 
-
-        $('#about-question-card').show();
         // 右边栏相似问题，异步加载
         $.ajax({
             type: "GET",
@@ -251,6 +249,7 @@
             datatype: "json",
             success: function (response) {
                 if (response.success == true) {
+                    $('#about-question-card').show();
                     var html = '';
                     var data = response.data;
                     $.each(data, function (i, question) {

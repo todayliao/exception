@@ -29,7 +29,7 @@
             <div class="card-body user-wall-card-body">
                 <div class="grid-layout">
 
-                    <div th:each="user : ${response.data}" class="item float-left">
+                    <div th:each="user : ${response.data}" class="grid-layout-cell float-left">
                         <div class="media-left user-wall-media-left">
                             <a th:href="@{'/user/' + ${user.userId}}">
                                 <img class="user-wall-avatar" th:src="${user.userAvatar}">

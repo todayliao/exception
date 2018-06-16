@@ -30,7 +30,6 @@
             <div th:replace="fragment/common :: csrfHiddenInput"></div>
 
             <form id="form">
-            <!--<form>-->
                 <div class="form-group">
                     <label>问题标题 <i>(标题应是疑问句，且简明扼要，如：如何创建 mysql 数据库表索引?)</i></label>
                     <input id="title" type="text" class="form-control" name="title">
@@ -98,7 +97,7 @@
             toolbarIcons : function() {
                 // Or return editormd.toolbarModes[name]; // full, simple, mini
                 // Using "||" set icons align right.
-                return ["bold", "del", "italic","quote", "|", "h2", "h3", "h4", "h5", "h6", "|",
+                return ["bold", "italic","quote", "|", "h2", "h3", "h4", "h5", "h6", "|",
                     "list-ul", "list-ol", "hr", "|", "link", "image", "code", "preformatted-text", "table",
                     "datetime", "|",  "watch", "preview"]
             }
@@ -179,7 +178,7 @@
         $('#hidden-' + tagName).remove();
         delete tagIdsMap[tagId];
     }
-    
+
     function submitQuestion() {
         var title = $('#title').val();
         var answerDesc = $('#answerDesc').val();

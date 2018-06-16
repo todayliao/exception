@@ -431,3 +431,9 @@ input::-webkit-input-placeholder{
     color: #8590a6;
 }
 
+.grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
