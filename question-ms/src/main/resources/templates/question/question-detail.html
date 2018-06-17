@@ -85,7 +85,7 @@
                                         <a th:href="@{'/user/' + ${response.createUserId}}">
                                             <img class="contributor-avatar" th:src="${response.createUserAvatar}"
                                                  data-toggle="tooltip" data-placement="top"
-                                                 th:title="'发布 by ' + ${response.createUserName}"/>
+                                                 th:title="${response.createUserName} + ' 发布于 ' + ${response.createTimeStr}"/>
                                         </a>
                                     </li>
                                     <!-- 问题的最新编辑者 -->
@@ -93,7 +93,7 @@
                                         <a th:href="@{'/user/' + ${response.latestEditorUserId}}">
                                             <img class="contributor-avatar" th:src="${response.latestEditorUserAvatar}"
                                                  data-toggle="tooltip" data-placement="top"
-                                                 th:title="'最新编辑 by ' + ${response.latestEditorUserName}"/>
+                                                 th:title="${response.latestEditorUserName} + ' 最新编辑于 ' + ${response.latestEditorTimeStr}"/>
                                         </a>
                                     </li>
 
@@ -179,7 +179,7 @@
                                                 <img class="contributor-avatar"
                                                      th:src="${answer.latestEditorUserAvatar}"
                                                      data-toggle="tooltip" data-placement="top"
-                                                     th:title="'最新编辑 by ' + ${answer.latestEditorUserName}"/>
+                                                     th:title="${answer.latestEditorUserName} + ' 最新编辑于 ' + ${answer.latestEditorTimeStr}"/>
                                             </a>
                                         </li>
                                     </ul>

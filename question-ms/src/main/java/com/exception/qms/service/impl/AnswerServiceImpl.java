@@ -72,8 +72,12 @@ public class AnswerServiceImpl implements AnswerService {
                     answerResponseVO.setUser(userIdUserMap.get(answer.getCreateUserId()));
                     // 方案的最新编辑人
                     User latestEditorUser = userIdUserMap.get(answer.getLatestEditorUserId());
-                    answerResponseVO.setLatestEditorUserAvatar(latestEditorUser == null ? null : latestEditorUser.getAvatar());
-                    answerResponseVO.setLatestEditorUserName(latestEditorUser == null ? null : latestEditorUser.getName());
+                    if (latestEditorUser != null) {
+                        answerResponseVO.setLatestEditorUserAvatar(latestEditorUser.getAvatar());
+                        answerResponseVO.setLatestEditorUserName(latestEditorUser.getName());
+                        AnswerEditHistory answerEditHistory = answerEditHistoryMapper.queryLatestRecordByAnswerIdAndUserId(answer.getId(), latestEditorUser.getId());
+                        answerResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(answerEditHistory.getCreateTime()));
+                    }
                 }
                 // default is false
                 answerResponseVO.setIsCurrentUserVoteUp(false);

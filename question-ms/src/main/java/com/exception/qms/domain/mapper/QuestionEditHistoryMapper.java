@@ -1,6 +1,7 @@
 package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.entity.QuestionEditHistory;
+import org.apache.ibatis.annotations.Param;
 
 public interface QuestionEditHistoryMapper {
     int deleteByPrimaryKey(Long id);
@@ -10,6 +11,8 @@ public interface QuestionEditHistoryMapper {
     int insertSelective(QuestionEditHistory record);
 
     QuestionEditHistory selectByPrimaryKey(Long id);
+
+    QuestionEditHistory queryLatestRecordByQuestionIdAndUserId(@Param("questionId") Long questionId, @Param("userId") Long userId);
 
     int updateByPrimaryKeySelective(QuestionEditHistory record);
 

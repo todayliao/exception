@@ -25,6 +25,13 @@
     from t_qms_answer_edit_history
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="queryLatestRecordByAnswerIdAndUserId" resultMap="BaseResultMap">
+    select id, create_time from t_qms_answer_edit_history
+    where answer_id = #{answerId} and create_user_id = #{userId} and is_deleted = 0
+    order by create_time desc limit 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_answer_edit_history
     where id = #{id,jdbcType=BIGINT}

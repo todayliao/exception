@@ -25,6 +25,7 @@ public class AnswerResponseVO implements Serializable {
     private Long latestEditorUserId;
     private String latestEditorUserAvatar;
     private String latestEditorUserName;
+    private String latestEditorTimeStr;
 
     private Long questionId;
 

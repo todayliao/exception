@@ -106,6 +106,7 @@
 
 - 网站地图 sitemap(重要)
 - 360 ie 分页插件 css, 兼容性问题
+- 问题详情页最近一次 tooltips 中添加编辑时间
 - nginx 流量统计 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
@@ -113,7 +114,6 @@
 - 日志组件升级 logback -> log4j2 todo
 - 阿里云对象存储 oss 图片流量优化 todo
 - mysql 数据自动备份（非常重要）todo
-- 问题详情页最近一次 tooltips 中添加编辑时间 todo
 
 ## V1.1.2
 

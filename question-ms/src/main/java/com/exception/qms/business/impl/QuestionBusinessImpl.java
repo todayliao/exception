@@ -58,6 +58,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Autowired
     private UserService userService;
     @Autowired
+    private QuestionEditHistoryService questionEditHistoryService;
+    @Autowired
     private BaiduLinkPushService baiduLinkPushService;
     @Autowired
     private ExecutorService executorService;
@@ -114,8 +116,15 @@ public class QuestionBusinessImpl implements QuestionBusiness {
             User latestEditUser = userMap.get(question.getLatestEditorUserId());
             questionDetailResponseVO.setCreateUserAvatar(createUser == null ? null : createUser.getAvatar());
             questionDetailResponseVO.setCreateUserName(createUser == null ? null : createUser.getName());
-            questionDetailResponseVO.setLatestEditorUserAvatar(latestEditUser == null ? null : latestEditUser.getAvatar());
-            questionDetailResponseVO.setLatestEditorUserName(latestEditUser == null ? null : latestEditUser.getName());
+
+            // 存在最新的编辑者
+            if (latestEditUser != null) {
+                questionDetailResponseVO.setLatestEditorUserAvatar(latestEditUser.getAvatar());
+                questionDetailResponseVO.setLatestEditorUserName(latestEditUser.getName());
+                // 查询最新编辑者的编辑时间
+                QuestionEditHistory questionEditHistory = questionEditHistoryService.query(questionId, latestEditUser.getId());
+                questionDetailResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(questionEditHistory.getCreateTime()));
+            }
         }
 
         // question answers
