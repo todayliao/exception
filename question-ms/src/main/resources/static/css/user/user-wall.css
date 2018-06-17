@@ -39,22 +39,6 @@
     padding-top: 0;
 }
 
-.grid-layout {
-    display: grid;
-    grid-gap: 8px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.grid-layout-cell {
-    margin-top: 1.25rem;
-}
-
-.grid-layout >.grid-layout-cell {
-    flex: 1 1 25%;
-    min-width: 250px;
-    width: auto;
-}
-
 .card-header-small {
     color: #646464;
 }

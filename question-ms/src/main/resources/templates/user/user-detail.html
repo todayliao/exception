@@ -48,7 +48,7 @@
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
                             <a id="new" class="nav-link fs-14px active border-bottom-0" href="#">问题方案
-                                <span class="badge badge-dark" th:text="${response.data.totalQuestionCount}">4</span>
+                                <span class="badge badge-secondary" th:text="${response.data.totalQuestionCount}">4</span>
                             </a>
                         </li>
                     </ul>
@@ -60,7 +60,7 @@
                                 <h5 class="mb-1"><a th:href="@{'/question/' + ${question.id}}" class="gray-dark" th:text="${question.titleCn}">title</a></h5>
                             </div>
                             <div class="margintop-3px">
-                                <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-secondary marginright-5px">android</a>
+                                <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-light-blue marginright-5px">android</a>
                                 <span class="m-fade fs-12px" style="margin-left: -2px;">
                                         •&nbsp;[[${question.beforeTimeStr}]]
                                 </span>

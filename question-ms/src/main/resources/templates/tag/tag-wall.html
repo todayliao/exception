@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>标签墙 - Exception 开发者问题解决方案分享社区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/css/tag/tag-wall.css}">
+
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header th:replace="fragment/common :: header"></header>
+<!-- main content -->
+<main class="container main-content">
+    <div class="row">
+        <div class="card tag-wall-card">
+            <div class="card-header m-card-header">
+                标签墙
+            </div>
+            <div class="card-body tag-wall-card-body">
+                <div class="grid-layout">
+                    <div class="grid-layout-cell">
+                        <div class="tag-cell-header">
+                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>1632088</span>
+                            </span>
+                        </div>
+                        <div class="tag-cell-body">
+                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        </div>
+                    </div>
+
+                    <div class="grid-layout-cell">
+                        <div class="tag-cell-header">
+                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>1632088</span>
+                            </span>
+                        </div>
+                        <div class="tag-cell-body">
+                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        </div>
+                    </div>
+
+                    <div class="grid-layout-cell">
+                        <div class="tag-cell-header">
+                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>1632088</span>
+                            </span>
+                        </div>
+                        <div class="tag-cell-body">
+                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        </div>
+                    </div>
+
+                    <div class="grid-layout-cell">
+                        <div class="tag-cell-header">
+                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>1632088</span>
+                            </span>
+                        </div>
+                        <div class="tag-cell-body">
+                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        </div>
+                    </div>
+
+                    <div class="grid-layout-cell">
+                        <div class="tag-cell-header">
+                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>1632088</span>
+                            </span>
+                        </div>
+                        <div class="tag-cell-body">
+                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分页 -->
+                <div class="tag-wall-pagination">
+                    <nav aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination justify-content-center" style="margin-bottom: 10px;">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- footer -->
+<footer th:replace="fragment/common :: footer"></footer>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        // 分页
+        $('#pagination').twbsPagination({
+            totalPages: 234,
+            visiblePages: 7,
+            startPage: 1,
+            initiateStartPageClick: false,
+            first: '首页',
+            prev: '上一页',
+            next: '下一页',
+            last: '尾页',
+            onPageClick: function (event, pageIndex) {
+                // $('#page-content').text('Page ' + page);
+                location.href = "/user?pageIndex=" + pageIndex;
+            }
+        });
+    });
+
+
+
+</script>
+
+
+
+</html>

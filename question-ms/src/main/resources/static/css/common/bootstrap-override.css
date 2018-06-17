@@ -96,12 +96,12 @@ blockquote {
     margin: .5rem 0 0;
 }
 
-.badge-secondary {
+.badge-light-blue {
     color: #175199;
     background-color: rgba(0,132,255,.1);
 }
 
-.badge-secondary[href]:focus, .badge-secondary[href]:hover {
+.badge-light-blue[href]:focus, .badge-light-blue[href]:hover {
     color: #175199;
     text-decoration: none;
     background-color: rgba(0,132,255,.15);
