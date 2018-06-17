@@ -1,6 +1,7 @@
 package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.entity.Tag;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,6 +17,10 @@ public interface TagMapper {
     Tag selectTagInfoByPrimaryKey(Long tagId);
 
     List<Tag> queryTagsByTagName(String tagName);
+
+    int queryTagTotalCount();
+
+    List<Tag> queryTagPageList(@Param("start") int start, @Param("pageSize") Integer pageSize);
 
     int updateByPrimaryKeySelective(Tag record);
 

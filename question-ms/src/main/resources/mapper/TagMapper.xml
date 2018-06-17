@@ -7,7 +7,8 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="question_count" property="questionCount" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.exception.qms.domain.entity.Tag" extends="BaseResultMap" >
@@ -34,6 +35,15 @@
   <select id="queryTagsByTagName" resultMap="BaseResultMap">
     select id, name from t_qms_tag where name like concat('%', #{tagName}, '%') and is_deleted = 0
   </select>
+
+  <select id="queryTagTotalCount" resultType="int">
+    select count(*) from t_qms_tag
+  </select>
+
+    <select id="queryTagPageList" resultMap="ResultMapWithBLOBs">
+        select id, name, description_cn, question_count from t_qms_tag
+        limit #{start}, #{pageSize}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_tag

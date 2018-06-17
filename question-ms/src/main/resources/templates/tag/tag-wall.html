@@ -27,68 +27,16 @@
             </div>
             <div class="card-body tag-wall-card-body">
                 <div class="grid-layout">
-                    <div class="grid-layout-cell">
+                    <div th:each="tag : ${response.data}" class="grid-layout-cell">
                         <div class="tag-cell-header">
-                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
+                            <a href="#" class="badge badge-light-blue marginright-5px" th:text="${tag.name}">java</a>
                             <span class="cell-multiplier">
                                 <span>×</span>&nbsp;
-                                <span>1632088</span>
+                                <span th:text="${tag.questionCount}">0</span>
                             </span>
                         </div>
-                        <div class="tag-cell-body">
-                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
-                        </div>
-                    </div>
-
-                    <div class="grid-layout-cell">
-                        <div class="tag-cell-header">
-                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
-                            <span class="cell-multiplier">
-                                <span>×</span>&nbsp;
-                                <span>1632088</span>
-                            </span>
-                        </div>
-                        <div class="tag-cell-body">
-                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
-                        </div>
-                    </div>
-
-                    <div class="grid-layout-cell">
-                        <div class="tag-cell-header">
-                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
-                            <span class="cell-multiplier">
-                                <span>×</span>&nbsp;
-                                <span>1632088</span>
-                            </span>
-                        </div>
-                        <div class="tag-cell-body">
-                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
-                        </div>
-                    </div>
-
-                    <div class="grid-layout-cell">
-                        <div class="tag-cell-header">
-                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
-                            <span class="cell-multiplier">
-                                <span>×</span>&nbsp;
-                                <span>1632088</span>
-                            </span>
-                        </div>
-                        <div class="tag-cell-body">
-                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
-                        </div>
-                    </div>
-
-                    <div class="grid-layout-cell">
-                        <div class="tag-cell-header">
-                            <a  href="#" class="badge badge-light-blue marginright-5px">java</a>
-                            <span class="cell-multiplier">
-                                <span>×</span>&nbsp;
-                                <span>1632088</span>
-                            </span>
-                        </div>
-                        <div class="tag-cell-body">
-                            Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                        <div class="tag-cell-body" th:utext="${tag.descriptionCn}">
+                            Java（不要与JavaScript或JScript混淆
                         </div>
                     </div>
                 </div>
@@ -114,9 +62,9 @@
     $(document).ready(function() {
         // 分页
         $('#pagination').twbsPagination({
-            totalPages: 234,
+            totalPages: [[${response.totalPage}]],
             visiblePages: 7,
-            startPage: 1,
+            startPage: [[${response.currentPage}]],
             initiateStartPageClick: false,
             first: '首页',
             prev: '上一页',
@@ -124,7 +72,7 @@
             last: '尾页',
             onPageClick: function (event, pageIndex) {
                 // $('#page-content').text('Page ' + page);
-                location.href = "/user?pageIndex=" + pageIndex;
+                location.href = "/tag?pageIndex=" + pageIndex;
             }
         });
     });

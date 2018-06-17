@@ -5,6 +5,7 @@ import com.exception.qms.domain.entity.Tag;
 import com.exception.qms.domain.mapper.QuestionTagRelMapper;
 import com.exception.qms.domain.mapper.TagMapper;
 import com.exception.qms.service.TagService;
+import com.exception.qms.utils.PageUtil;
 import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +33,16 @@ public class TagServiceImpl implements TagService {
             return null;
         }
         return tagMapper.queryTagsByTagName(queryTagsByNameRequestDTO.getTagName());
+    }
+
+    @Override
+    public int queryTagTotalCount() {
+        return tagMapper.queryTagTotalCount();
+    }
+
+    @Override
+    public List<Tag> queryTagPageList(Integer pageIndex, Integer pageSize) {
+        return tagMapper.queryTagPageList(PageUtil.calculateLimitSelectSqlStart(pageIndex, pageSize), pageSize);
     }
 
 }

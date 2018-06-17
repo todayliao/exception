@@ -16,4 +16,7 @@ public interface TagService {
 
     List<Tag> queryTagsByTagName(QueryTagsByNameRequestDTO queryTagsByNameRequestDTO);
 
+    int queryTagTotalCount();
+
+    List<Tag> queryTagPageList(Integer pageIndex, Integer pageSize);
 }

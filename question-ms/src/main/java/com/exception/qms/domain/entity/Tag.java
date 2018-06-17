@@ -21,7 +21,9 @@ public class Tag implements Serializable {
 
     private LocalDateTime updateTime;
 
-    private Integer createUserId;
+    private Long createUserId;
+
+    private Integer questionCount;
 
     private Boolean isDeleted;
 

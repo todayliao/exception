@@ -31,7 +31,7 @@ public class TagController extends BaseController {
     public String showUserWall(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                @RequestParam(value = "pageSize", defaultValue = "36") Integer pageSize,
                                Model model) {
-//        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), userBusiness.queryUserPageList(pageIndex, pageSize, tab));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), tagBusiness.queryTagPageList(pageIndex, pageSize));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.TAG.getCode());
         return "tag/tag-wall";
     }
