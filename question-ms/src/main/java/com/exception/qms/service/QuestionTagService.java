@@ -1,6 +1,7 @@
 package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.QuestionTagRel;
+import com.exception.qms.domain.entity.Tag;
 import com.exception.qms.web.vo.common.TagResponseVO;
 import com.exception.qms.web.vo.home.HomeHotTagResponseVO;
 
@@ -17,9 +18,11 @@ public interface QuestionTagService {
 
     Map<Long, List<TagResponseVO>> queryTagInfoByQuestionIds(List<Long> questionIds);
 
-//    List<TagResponseVO> queryTagInfoByQuestionId(Long questionId);
 
+//    List<TagResponseVO> queryTagInfoByQuestionId(Long questionId);
     List<HomeHotTagResponseVO> queryHotTags();
+
+    List<Tag> queryByTagId(Long tagId);
 
     void batchAddQuestionTagRel(List<QuestionTagRel> questionTagRels);
 }

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.cell-multiplier {
+    color: #8590a6;
+    font-size: 13px;
+}
+
+.question-item {
+    padding-left: 15px;
+    padding-right: 15px;
+}

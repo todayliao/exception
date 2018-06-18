@@ -122,4 +122,22 @@ public class QuestionController extends BaseController {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
         return questionBusiness.changeQuestionVoteUp(changeQuestionVoteUpRequestDTO, user.getId());
     }
+
+    /**
+     * 问题标签页面展示
+     *
+     * @return
+     */
+    @GetMapping("/question/tag/{tagId}")
+    @OperatorLog(description = "问题标签页面展示")
+    public String showQuestionTagPage(@PathVariable("tagId") Long tagId,
+                                      @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+                                      @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                      @RequestParam(value = "tab", defaultValue = "new") String tab,
+                                      Model model) {
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), questionBusiness.queryQuestionTagPageList(tagId, pageIndex, pageSize, tab));
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.TAG.getCode());
+        model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
+        return "question/question-tag-list";
+    }
 }

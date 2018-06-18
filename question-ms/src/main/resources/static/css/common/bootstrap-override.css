@@ -146,3 +146,7 @@ blockquote {
     opacity: 1;
 }
 
+.list-group-item {
+    border: 1px solid rgba(144, 143, 143, 0.125);
+}
+

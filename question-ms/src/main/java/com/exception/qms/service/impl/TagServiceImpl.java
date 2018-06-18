@@ -45,4 +45,9 @@ public class TagServiceImpl implements TagService {
         return tagMapper.queryTagPageList(PageUtil.calculateLimitSelectSqlStart(pageIndex, pageSize), pageSize);
     }
 
+    @Override
+    public Tag queryById(Long tagId) {
+        return tagMapper.selectByPrimaryKey(tagId);
+    }
+
 }

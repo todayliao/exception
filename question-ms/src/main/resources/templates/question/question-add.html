@@ -143,7 +143,7 @@
                         var data = response.data;
                         $('#response-tags-container').html('');
                         $.each(data, function (i, tag) {
-                            var html = "<span class=\"badge badge-secondary marginright-5px\" onclick=\"chooseTag('"
+                            var html = "<span class=\"badge badge-light-blue marginright-5px\" onclick=\"chooseTag('"
                                 + tag.tagId + "', '"
                                 + tag.tagName + "');\">"
                                 + tag.tagName + "</span>";
@@ -164,7 +164,7 @@
             layer.msg("该标签已经添加了哦！");
             return;
         }
-        var html = "<span class=\"badge badge-secondary marginright-5px\" id='"+tagName+"'>" + tagName
+        var html = "<span class=\"badge badge-light-blue marginright-5px\" id='"+tagName+"'>" + tagName
             + "<i class=\"fa fa-times-circle marginleft-5px\" onclick=\"deleteTag('"+tagId+"','"+tagName+"')\"></i></span>";
         $('#added-question-tags').append(html)
         var html2 = " <input id='hidden-"+tagName+"' name=\"tagIds["+(index++)+"]\" value='"+tagId+"'>";

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>标签问题页 - Exception 开发者问题解决方案分享社区</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/css/question/question-tag-list.css}">
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header th:replace="fragment/common :: header"></header>
+<!-- main content -->
+<main class="container main-content">
+    <div class="row">
+        <div class="col-md-9 br-3px">
+
+            <!-- search -->
+            <div class="card">
+                <div class="card-header m-card-header">
+                    <a href="#" class="badge badge-light-blue marginright-5px">java</a>
+                    <!--<span class="badge badge-secondary float-right">999</span>-->
+                    <span class="cell-multiplier">
+                                <span>×</span>&nbsp;
+                                <span>0</span>
+                            </span>
+                </div>
+                <div class="card-body">
+                    Java（不要与JavaScript或JScript混淆）是一种旨在与Java虚拟机（JVM）结合使用的通用面向对象编程语言。 “Java平台”是已经安装开发和运行Java程序的工具的计算系统的名称。参考Java编程语言或Java平台工具的问题使用此标签。
+                </div>
+            </div>
+
+            <div class="card margintop-10px marginbottom-10px">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a id="new" class="nav-link gray-nav-link fs-14px">最新</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="hot" class="nav-link gray-nav-link fs-14px">最热</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body padding0">
+                    <div class="list-group">
+                        <div  href="#" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item question-item">
+                            <div class="media-left marginleft-5px">
+                                <a href="#">
+                                    <img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526" class="rounded media-img">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h2 class="mb-1 fs-16px"><a href="#" class="gray-dark">docker 启动容器时，映射端口报错，如何解决？</a></h2>
+                                </div>
+                                <!--<small>Donec id elit non mi porta.</small>-->
+                                <div class="margintop-2px">
+                                    <a href="#" class="badge badge-light-blue marginright-5px">android</a>
+                                    <span class="m-fade fs-12px" style="margin-left: -2px;">
+                                        •&nbsp;
+                                        <a href="#" class="gray-a fs-12px">
+                                            <strong>AllenJiang</strong>
+                                        </a>
+                                        &nbsp;•&nbsp;3天前
+                                        </span>
+                                </div>
+                                <!--其他信息-->
+                            </div>
+                        </div>
+
+                        <div  href="#" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item question-item">
+                            <div class="media-left marginleft-5px">
+                                <a href="#">
+                                    <img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526" class="rounded media-img">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h2 class="mb-1 fs-16px"><a href="#" class="gray-dark">docker 启动容器时，映射端口报错，如何解决？</a></h2>
+                                </div>
+                                <!--<small>Donec id elit non mi porta.</small>-->
+                                <div class="margintop-2px">
+                                    <a href="#" class="badge badge-light-blue marginright-5px">android</a>
+                                    <span class="m-fade fs-12px" style="margin-left: -2px;">
+                                        •&nbsp;
+                                        <a href="#" class="gray-a fs-12px">
+                                            <strong>AllenJiang</strong>
+                                        </a>
+                                        &nbsp;•&nbsp;3天前
+                                        </span>
+                                </div>
+                                <!--其他信息-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--&lt;!&ndash; 分页 &ndash;&gt;-->
+                    <!--<div class="margintop-30px marginbottom-30px">-->
+                        <!--<nav aria-label="Page navigation example">-->
+                            <!--<ul id="pagination" class="pagination justify-content-center">-->
+                            <!--</ul>-->
+                        <!--</nav>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 右边栏 -->
+        <div class="col-md-3 br-3px">
+            <!-- 热门标签 -->
+            <div class="card">
+                <div class="card-header m-card-header">
+                    <div class="card-title">热门标签</div>
+                    <!--<span class="pull-right">更多>></span>-->
+                </div>
+                <div class="card-body hot-tag-card-body">
+                    <ul id="hot-tag-list" class="list-group list-group-flush">
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
+                        <!--<span class="badge badge-secondary">android</span>-->
+                        <!--<span class="badge badge-light badge-pill">14</span>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 热门问题-->
+            <div class="card margintop-10px">
+                <div class="card-header m-card-header">
+                    <div class="card-title">热门问题</div>
+                </div>
+                <div class="card-body">
+                    <ul id="hot-question-list" class="list-group list-group-flush">
+                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
+                        <!--<a class="fs-14px gray-dark" href="#">沃尔夫圣诞节福利的时间反馈了电视剧反垄断法</a>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 回到顶部 -->
+    <button th:replace="fragment/common :: backToTop"></button>
+</main>
+<!-- footer -->
+<footer th:replace="fragment/common :: footer"></footer>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+
+        // 右边栏数据，异步加载
+        // hot tags
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/home/hot/tag/list",
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, tag) {
+                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<a href='#' class=\"badge badge-light-blue\">" + tag.tagName + "</a>";
+                        html += "<span class=\"badge badge-light badge-pill m-fade\">" + tag.questionCount + "</span>";
+                        html += "</li>"
+                    });
+                    $('#hot-tag-list').html(html);
+                }
+            }
+        });
+
+        // hot questions
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/home/hot/question/list",
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, question) {
+                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<a class=\"fs-14px blue-a\" href='/question/" + question.id + "'>" + question.titleCn + "</a>";
+                        html += "</li>"
+                    });
+                    $('#hot-question-list').html(html);
+                }
+            }
+        });
+    });
+
+</script>
+</html>

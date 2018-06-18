@@ -2,6 +2,7 @@ package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.enhancement.HotQuestionTagRel;
 import com.exception.qms.domain.entity.QuestionTagRel;
+import com.exception.qms.domain.entity.Tag;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface QuestionTagRelMapper {
     List<QuestionTagRel> queryTagsByQuestionIds(List<Long> questionIds);
 
     List<Long> selectTagIdByQuestionId(Long questionId);
+
+    List<Tag> queryByTagId(Long tagId);
 
     List<HotQuestionTagRel> selectHotTags();
 

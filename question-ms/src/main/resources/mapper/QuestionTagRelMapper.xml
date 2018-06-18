@@ -28,6 +28,12 @@
     from t_qms_question_tag_rel
     where question_id = #{questionId}
   </select>
+  
+  <select id="queryByTagId" resultMap="BaseResultMap">
+    select id, question_id from t_qms_question_tag_rel
+    where tag_id = #{tagId} group by tag_id
+  </select>
+  
   <select id="selectHotTags" resultMap="HotTagResultMap">
     select tag_id, count(id) as question_count
     from t_qms_question_tag_rel group by tag_id

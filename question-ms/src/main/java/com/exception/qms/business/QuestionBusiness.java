@@ -1,12 +1,14 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
 import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
+import com.exception.qms.web.vo.tag.QueryQuestionTagPageListResponseVO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,4 +36,6 @@ public interface QuestionBusiness {
     BaseResponse increaseQuestionViewNum(QuestionViewNumIncreaseRequestDTO questionViewNumIncreaseDTO, HttpServletRequest request);
 
     BaseResponse changeQuestionVoteUp(ChangeQuestionVoteUpRequestDTO changeQuestionVoteUpRequestDTO, Long userId);
+
+    PageQueryResponse<QueryQuestionTagPageListResponseVO> queryQuestionTagPageList(Long tagId, Integer pageIndex, Integer pageSize, String tab);
 }

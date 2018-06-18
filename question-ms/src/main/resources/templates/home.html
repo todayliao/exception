@@ -57,7 +57,10 @@
                                 </div>
                                 <!--<small>Donec id elit non mi porta.</small>-->
                                 <div class="margintop-2px">
-                                    <a th:each="tag : ${question.tags}" th:utext="${tag.tagName}" href="#" class="badge badge-light-blue marginright-5px">android</a>
+                                    <a th:each="tag : ${question.tags}"
+                                       th:utext="${tag.tagName}"
+                                       th:href="@{'/question/tag/' + ${tag.tagId}}"
+                                       class="badge badge-light-blue marginright-5px">android</a>
                                     <span class="m-fade fs-12px" style="margin-left: -2px;">
                                         •&nbsp;
                                         <a th:href="@{'/user/' + ${question.createUserId}}" class="gray-a fs-12px">

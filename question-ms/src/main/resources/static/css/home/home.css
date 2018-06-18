@@ -16,10 +16,6 @@
     padding-right: 10px;
 }
 
-.hot-tag-card-body ul li {
-    margin-bottom: 20px;
-}
-
 .hot-tag-card-body ul li:last-child {
     margin-bottom: 0;
 }

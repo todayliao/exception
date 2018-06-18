@@ -2,6 +2,7 @@ package com.exception.qms.business.impl;
 
 import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.*;
 import com.exception.qms.exception.QMSException;
@@ -18,6 +19,7 @@ import com.exception.qms.web.vo.common.TagResponseVO;
 import com.exception.qms.web.vo.home.AnswerResponseVO;
 import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
+import com.exception.qms.web.vo.tag.QueryQuestionTagPageListResponseVO;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
@@ -61,6 +63,8 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     private QuestionEditHistoryService questionEditHistoryService;
     @Autowired
     private BaiduLinkPushService baiduLinkPushService;
+    @Autowired
+    private TagService tagService;
     @Autowired
     private ExecutorService executorService;
     @Autowired
@@ -134,9 +138,9 @@ public class QuestionBusinessImpl implements QuestionBusiness {
 
         // seo
         String descriptionCn = questionDesc.getDescriptionCn();
-        // description 最多显示 80 字符
-        if (descriptionCn.length() > 80) {
-            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn().substring(0, 80));
+        // description 最多显示 120 字符
+        if (descriptionCn.length() > 120) {
+            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn().substring(0, 120));
         } else {
             questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn());
         }
@@ -382,6 +386,34 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         }
 
         return new BaseResponse().success();
+    }
+
+    @Override
+    public PageQueryResponse<QueryQuestionTagPageListResponseVO> queryQuestionTagPageList(Long tagId, Integer pageIndex, Integer pageSize, String tab) {
+        // tag info
+        Tag tag = tagService.queryById(tagId);
+
+        if (tag == null) {
+            log.error("the tagId is not exited, tagId: {}", tagId);
+            throw new QMSException(QmsResponseCodeEnum.TAG_NOT_EXIST);
+        }
+
+        QueryQuestionTagPageListResponseVO queryQuestionTagPageListResponseVO = new QueryQuestionTagPageListResponseVO();
+        queryQuestionTagPageListResponseVO.setId(tag.getId());
+        queryQuestionTagPageListResponseVO.setName(tag.getName());
+        queryQuestionTagPageListResponseVO.setQuestionCount(tag.getQuestionCount());
+        queryQuestionTagPageListResponseVO.setDescriptionCn(tag.getDescriptionCn());
+
+        int totalCount = 0;
+
+
+
+
+//        List<Tag> tags = questionTagService.queryByTagId(tagId);
+
+
+        return new PageQueryResponse<QueryQuestionTagPageListResponseVO>().successPage(queryQuestionTagPageListResponseVO,
+                pageIndex, totalCount, pageSize);
     }
 
 }

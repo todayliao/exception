@@ -26,6 +26,7 @@ public enum QmsResponseCodeEnum {
     ALREADY_VOTE_DOWN("QMS100011", "您已经踩过了哦"),
     UPDATE_CONTENT_NOT_CHANGE("QMS100012", "修改内容未发生实质改变"),
     NOT_CONTAIN_QUESTION_MARK("QMS100013", "你还没有给问题添加问号"),
+    TAG_NOT_EXIST("QMS100014", "该标签不存在"),
     ;
 
     private final String errorCode;

@@ -104,6 +104,11 @@ public class QuestionTagServiceImpl implements QuestionTagService {
     }
 
     @Override
+    public List<Tag> queryByTagId(Long tagId) {
+        return questionTagRelMapper.queryByTagId(tagId);
+    }
+
+    @Override
     public void batchAddQuestionTagRel(List<QuestionTagRel> questionTagRels) {
         questionTagRelMapper.batchAddQuestionTagRel(questionTagRels);
     }

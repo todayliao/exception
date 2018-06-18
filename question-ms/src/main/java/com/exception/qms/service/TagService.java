@@ -19,4 +19,6 @@ public interface TagService {
     int queryTagTotalCount();
 
     List<Tag> queryTagPageList(Integer pageIndex, Integer pageSize);
+
+    Tag queryById(Long tagId);
 }
