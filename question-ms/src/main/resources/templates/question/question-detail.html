@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="question-tags marginbottom-1rem">
-                            <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" href="#"
+                            <a th:each="tag : ${response.tags}" th:text="${tag.tagName}" th:href="@{'/question/tag/' + ${tag.tagId}}"
                                class="badge badge-light-blue marginright-5px"></a>
                         </div>
 

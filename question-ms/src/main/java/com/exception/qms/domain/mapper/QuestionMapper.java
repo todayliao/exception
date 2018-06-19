@@ -24,6 +24,13 @@ public interface QuestionMapper {
 
     int queryQuestionTotalCountByUser(Long userId);
 
+    int queryQuestionTagTotalCount(List<Long> questionIds);
+
+    List<Question> queryQuestionTagPageList(@Param("questionIds") List<Long> questionIds,
+                                            @Param("start") int start,
+                                            @Param("pageSize") int pageSize,
+                                            @Param("orderByColumn") String orderByColumn);
+
     List<Question> queryHotQuestions();
 
     List<Question> queryAllQuestions();

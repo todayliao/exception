@@ -7,16 +7,15 @@ import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.*;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.*;
-import com.exception.qms.utils.ConstantsUtil;
-import com.exception.qms.utils.IpUtil;
-import com.exception.qms.utils.MarkdownUtil;
-import com.exception.qms.utils.StringUtil;
+import com.exception.qms.utils.*;
 import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.web.form.question.QuestionForm;
 import com.exception.qms.web.form.question.QuestionUpdateForm;
+import com.exception.qms.web.vo.common.QuestionListItemResponseVO;
 import com.exception.qms.web.vo.common.TagResponseVO;
 import com.exception.qms.web.vo.home.AnswerResponseVO;
+import com.exception.qms.web.vo.home.QueryHomeQuestionPageListResponseVO;
 import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
 import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
 import com.exception.qms.web.vo.tag.QueryQuestionTagPageListResponseVO;
@@ -389,7 +388,7 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     }
 
     @Override
-    public PageQueryResponse<QueryQuestionTagPageListResponseVO> queryQuestionTagPageList(Long tagId, Integer pageIndex, Integer pageSize, String tab) {
+    public QueryQuestionTagPageListResponseVO queryQuestionTagPageList(Long tagId, Integer pageIndex, Integer pageSize, String tab) {
         // tag info
         Tag tag = tagService.queryById(tagId);
 
@@ -405,15 +404,67 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         queryQuestionTagPageListResponseVO.setDescriptionCn(tag.getDescriptionCn());
 
         int totalCount = 0;
+        List<QuestionListItemResponseVO> questionListItemResponseVOS = null;
 
+        List<QuestionTagRel> questionTagRels = questionTagService.queryByTagId(tagId);
 
+        if (!CollectionUtils.isEmpty(questionTagRels)) {
+            List<Long> questionTagIds = questionTagRels.stream().map(QuestionTagRel::getQuestionId).collect(Collectors.toList());
 
+            totalCount = questionService.queryQuestionTagTotalCount(questionTagIds);
 
-//        List<Tag> tags = questionTagService.queryByTagId(tagId);
+            if (totalCount > 0) {
+                QuestionTabEnum questionTabEnum = QuestionTabEnum.codeOf(tab);
 
+                String orderByColumn = null;
+                // 根据 tab 获取需要排序的字段
+                switch (questionTabEnum) {
+                    case NEW:
+                        orderByColumn = "create_time";
+                        break;
+                    case HOT:
+                        orderByColumn = "view_num";
+                        break;
+                    default:
+                        break;
+                }
 
-        return new PageQueryResponse<QueryQuestionTagPageListResponseVO>().successPage(queryQuestionTagPageListResponseVO,
-                pageIndex, totalCount, pageSize);
+                List<Question> questions = questionService.queryQuestionTagPageList(questionTagIds, pageIndex, pageSize, orderByColumn);
+
+                // 关联相关标签信息
+                // 获取问题 ids
+                List<Long> questionIds = questions.stream().map(Question::getId).collect(Collectors.toList());
+                Map<Long, List<TagResponseVO>> questionIdTagIdsMap = questionTagService.queryTagInfoByQuestionIds(questionIds);
+
+                // 用户信息
+                List<Long> createUserIds = questions.stream().map(Question::getCreateUserId).distinct().collect(Collectors.toList());
+                List<User> users = userService.queryUsersByUserIds(createUserIds);
+                Map<Long, User> userIdUserMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
+
+                if (!CollectionUtils.isEmpty(questionIdTagIdsMap)) {
+                    questionListItemResponseVOS = questions.stream().map(question -> {
+                        QuestionListItemResponseVO questionListItemResponseVO = mapper.map(question, QuestionListItemResponseVO.class);
+                        questionListItemResponseVO.setBeforeTimeStr(TimeUtil.calculateTimeDifference(question.getCreateTime()));
+                        Long createUserId = question.getCreateUserId();
+
+                        boolean isUserExist =
+                                createUserId != null
+                                        && !CollectionUtils.isEmpty(userIdUserMap)
+                                        && userIdUserMap.get(createUserId) != null;
+
+                        if (isUserExist) {
+                            questionListItemResponseVO.setCreateUserName(userIdUserMap.get(createUserId).getName());
+                            questionListItemResponseVO.setCreateUserAvatar(userIdUserMap.get(createUserId).getAvatar());
+                        }
+                        questionListItemResponseVO.setTags(questionIdTagIdsMap.get(question.getId()));
+                        return questionListItemResponseVO;
+                    }).collect(Collectors.toList());
+                }
+            }
+        }
+
+        return (QueryQuestionTagPageListResponseVO) queryQuestionTagPageListResponseVO
+                .successPage(questionListItemResponseVOS, pageIndex, totalCount, pageSize);
     }
 
 }

@@ -31,7 +31,7 @@
   
   <select id="queryByTagId" resultMap="BaseResultMap">
     select id, question_id from t_qms_question_tag_rel
-    where tag_id = #{tagId} group by tag_id
+    where tag_id = #{tagId}
   </select>
   
   <select id="selectHotTags" resultMap="HotTagResultMap">

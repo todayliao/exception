@@ -104,7 +104,7 @@ public class QuestionTagServiceImpl implements QuestionTagService {
     }
 
     @Override
-    public List<Tag> queryByTagId(Long tagId) {
+    public List<QuestionTagRel> queryByTagId(Long tagId) {
         return questionTagRelMapper.queryByTagId(tagId);
     }
 

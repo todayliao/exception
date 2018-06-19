@@ -175,7 +175,7 @@
                     var data = response.data;
                     $.each(data, function (i, tag) {
                         html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
-                        html += "<a href=\"#\" class=\"badge badge-light-blue\">" + tag.tagName + "</a>";
+                        html += "<a href=\"/question/tag/" + tag.tagId + "\" class=\"badge badge-light-blue\">" + tag.tagName + "</a>";
                         html += "<span class=\"badge badge-light badge-pill m-fade\">" + tag.questionCount + "</span>";
                         html += "</li>"
                     });

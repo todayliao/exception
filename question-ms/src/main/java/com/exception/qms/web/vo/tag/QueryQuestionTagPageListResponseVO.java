@@ -1,5 +1,6 @@
 package com.exception.qms.web.vo.tag;
 
+import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.web.vo.common.QuestionListItemResponseVO;
 import lombok.Data;
 
@@ -13,10 +14,9 @@ import java.util.List;
  * @discription
  **/
 @Data
-public class QueryQuestionTagPageListResponseVO implements Serializable {
+public class QueryQuestionTagPageListResponseVO<T> extends PageQueryResponse<T> implements Serializable {
     private Long id;
     private String name;
     private String descriptionCn;
     private Integer questionCount;
-    private List<QuestionListItemResponseVO> questions;
 }

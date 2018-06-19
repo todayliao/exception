@@ -76,7 +76,10 @@
                             </div>
                             <!--其他信息-->
                             <div class="margintop-10px">
-                                <a th:each="tag : ${question.tags}" th:text="${tag.tagName}" href="#" class="badge badge-light-blue marginright-5px">android</a>
+                                <a th:each="tag : ${question.tags}"
+                                   th:text="${tag.tagName}"
+                                   th:href="'/question/tag/' + ${tag.tagId}"
+                                   class="badge badge-light-blue marginright-5px">android</a>
                                 <span class="m-fade fs-12px" style="margin-left: -2px;">
                                         •&nbsp;<strong th:text="${question.createUserName}"></strong>
                                         &nbsp;•&nbsp;[[${question.createTime}]]
@@ -171,7 +174,7 @@
                     var data = response.data;
                     $.each(data, function (i, tag) {
                         html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
-                        html += "<a href='#' class=\"badge badge-light-blue\">" + tag.tagName + "</a>";
+                        html += "<a href=\"/question/tag/" + tag.tagId + "\" class=\"badge badge-light-blue\">" + tag.tagName + "</a>";
                         html += "<span class=\"badge badge-light badge-pill m-fade\">" + tag.questionCount + "</span>";
                         html += "</li>"
                     });

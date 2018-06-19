@@ -52,6 +52,16 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public int queryQuestionTagTotalCount(List<Long> questionIds) {
+        return questionMapper.queryQuestionTagTotalCount(questionIds);
+    }
+
+    @Override
+    public List<Question> queryQuestionTagPageList(List<Long> questionIds, Integer pageIndex, Integer pageSize, String orderByColumn) {
+        return questionMapper.queryQuestionTagPageList(questionIds, PageUtil.calculateLimitSelectSqlStart(pageIndex, pageSize), pageSize, orderByColumn);
+    }
+
+    @Override
     public List<Question> queryHotQuestions() {
         return questionMapper.queryHotQuestions();
     }

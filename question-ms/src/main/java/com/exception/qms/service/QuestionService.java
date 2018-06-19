@@ -29,6 +29,10 @@ public interface QuestionService {
 
     int queryQuestionTotalCountByUser(Long userId);
 
+    int queryQuestionTagTotalCount(List<Long> questionIds);
+
+    List<Question> queryQuestionTagPageList(List<Long> questionIds, Integer pageIndex, Integer pageSize, String orderByColumn);
+
     List<Question> queryHotQuestions();
 
     List<Question> queryAllQuestions();

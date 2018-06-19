@@ -21,7 +21,7 @@ public interface QuestionTagRelMapper {
 
     List<Long> selectTagIdByQuestionId(Long questionId);
 
-    List<Tag> queryByTagId(Long tagId);
+    List<QuestionTagRel> queryByTagId(Long tagId);
 
     List<HotQuestionTagRel> selectHotTags();
 

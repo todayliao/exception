@@ -22,7 +22,7 @@ public interface QuestionTagService {
 //    List<TagResponseVO> queryTagInfoByQuestionId(Long questionId);
     List<HomeHotTagResponseVO> queryHotTags();
 
-    List<Tag> queryByTagId(Long tagId);
+    List<QuestionTagRel> queryByTagId(Long tagId);
 
     void batchAddQuestionTagRel(List<QuestionTagRel> questionTagRels);
 }
