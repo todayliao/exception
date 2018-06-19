@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author jiangbing(江冰)
  * @date 2017/12/22
@@ -25,4 +27,5 @@ public class QuestionDescServiceImpl implements QuestionDescService {
 //        return questionDecMapper.selectByQuestionId(questionId);
         return null;
     }
+
 }

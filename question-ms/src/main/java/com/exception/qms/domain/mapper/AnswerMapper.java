@@ -15,6 +15,8 @@ public interface AnswerMapper {
 
     List<Answer> queryByQuestionId(Long questionId);
 
+    List<Answer> queryByQuestionIds(List<Long> questionIds);
+
     int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);

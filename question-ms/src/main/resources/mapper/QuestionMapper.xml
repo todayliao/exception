@@ -87,7 +87,7 @@
 
   <select id="queryAllQuestions" resultMap="BaseResultMap">
     select id, update_time from t_qms_question
-    where is_deleted = 0
+    where is_deleted = 0 order by create_time desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

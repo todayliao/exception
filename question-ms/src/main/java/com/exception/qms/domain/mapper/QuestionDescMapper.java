@@ -2,6 +2,8 @@ package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.entity.QuestionDesc;
 
+import java.util.List;
+
 public interface QuestionDescMapper {
     int deleteByPrimaryKey(Long id);
 

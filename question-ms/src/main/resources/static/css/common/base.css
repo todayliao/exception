@@ -461,3 +461,17 @@ input::-webkit-input-placeholder{
     margin-bottom: 20px;
 }
 
+.hot-question-item {
+    line-height: 21px;
+    color: #8590a6;
+    font-size: 14px;
+}
+
+.hot-question-card-body .hot-question-item {
+    margin-bottom: 10px;
+}
+
+.hot-question-card-body .hot-question-item:last-child {
+    margin-bottom: 0;
+}
+

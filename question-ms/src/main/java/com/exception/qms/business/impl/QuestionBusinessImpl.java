@@ -126,7 +126,9 @@ public class QuestionBusinessImpl implements QuestionBusiness {
                 questionDetailResponseVO.setLatestEditorUserName(latestEditUser.getName());
                 // 查询最新编辑者的编辑时间
                 QuestionEditHistory questionEditHistory = questionEditHistoryService.query(questionId, latestEditUser.getId());
-                questionDetailResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(questionEditHistory.getCreateTime()));
+                if (questionEditHistory != null) {
+                    questionDetailResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(questionEditHistory.getCreateTime()));
+                }
             }
         }
 

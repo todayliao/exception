@@ -55,7 +55,7 @@
                             <a id="vote" class="nav-link gray-nav-link fs-14px" th:href="@{'/search?tab=vote&key=' + ${searchKey}}">点赞数</a>
                         </li>
                         <li class="nav-item">
-                            <a id="view" class="nav-link gray-nav-link fs-14px" th:href="@{'/search?tab=view&key=' + ${searchKey}}">浏览数</a>
+                            <a id="view" class="nav-link gray-nav-link fs-14px" th:href="@{'/search?tab=view&key=' + ${searchKey}}">阅读数</a>
                         </li>
                         <li class="nav-item">
                             <a id="new" class="nav-link gray-nav-link fs-14px" th:href="@{'/search?tab=new&key=' + ${searchKey}}">最新</a>
@@ -123,12 +123,7 @@
                 <div class="card-header m-card-header">
                     <div class="card-title">热门问题</div>
                 </div>
-                <div class="card-body">
-                    <ul id="hot-question-list" class="list-group list-group-flush">
-                        <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
-                        <!--<a class="fs-14px gray-dark" href="#">沃尔夫圣诞节福利的时间反馈了电视剧反垄断法</a>-->
-                        <!--</li>-->
-                    </ul>
+                <div class="card-body hot-question-card-body" id="hot-question-list">
                 </div>
             </div>
         </div>
@@ -194,9 +189,10 @@
                     var html = '';
                     var data = response.data;
                     $.each(data, function (i, question) {
-                        html += "<li class=\"list-group-item d-flex justify-content-between align-items-center border0 padding0\">";
+                        html += "<div class=\"hot-question-item\">";
                         html += "<a class=\"fs-14px blue-a\" href='/question/" + question.id + "'>" + question.titleCn + "</a>";
-                        html += "</li>"
+                        html += "&nbsp;&nbsp;&nbsp;" + question.viewNum + "&nbsp;次阅读";
+                        html += "</div>";
                     });
                     $('#hot-question-list').html(html);
                 }

@@ -25,6 +25,8 @@ public interface AnswerService {
 
     AnswerDesc queryAnswerDescInfo(Long answerId);
 
+    List<Answer> queryByQuestionIds(List<Long> questionIds);
+
     int updateAnswer(Answer answer);
 
     int updateAnswerDesc(AnswerDesc answerDesc);

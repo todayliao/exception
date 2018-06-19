@@ -76,7 +76,9 @@ public class AnswerServiceImpl implements AnswerService {
                         answerResponseVO.setLatestEditorUserAvatar(latestEditorUser.getAvatar());
                         answerResponseVO.setLatestEditorUserName(latestEditorUser.getName());
                         AnswerEditHistory answerEditHistory = answerEditHistoryMapper.queryLatestRecordByAnswerIdAndUserId(answer.getId(), latestEditorUser.getId());
-                        answerResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(answerEditHistory.getCreateTime()));
+                        if (answerEditHistory != null) {
+                            answerResponseVO.setLatestEditorTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(answerEditHistory.getCreateTime()));
+                        }
                     }
                 }
                 // default is false
@@ -119,6 +121,11 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public AnswerDesc queryAnswerDescInfo(Long answerId) {
         return answerDescMapper.queryAnswerDescInfo(answerId);
+    }
+
+    @Override
+    public List<Answer> queryByQuestionIds(List<Long> questionIds) {
+        return answerMapper.queryByQuestionIds(questionIds);
     }
 
     @Override

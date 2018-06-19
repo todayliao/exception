@@ -107,6 +107,15 @@
 - 网站地图 sitemap(重要)
 - 360 ie 分页插件 css, 兼容性问题
 - 问题详情页最近一次 tooltips 中添加编辑时间
+- 标签墙页面展示，占不统计标签下的问题数
+- 点击标签，展示相应问题 todo
+- 鼠标悬停在用户，弹出用户信息展示 todo
+- 后台解析无法解析 markdown 表格的问题 todo
+- 用户详情展示页，展示用户技能六芒星 todo
+- 用户页其他信息展示，包括 email, 所居住地址等 todo
+- 代码优化 - 通用的异步请求，如热门标签，热门问题提取 todo
+- 用户读书页 todo
+- 定时任务统计，标签下问题数 todo
 - nginx 流量统计 TODO
 - 日志切面改良，request 参数无法打印问题，lambada 表达式 TODO
 - markdown editor 加载过慢的问题 TODO
@@ -128,5 +137,6 @@
 - bootstrap container 宽度减小 todo
 - seo 优化之 meta og: twitter: todo
 - 火狐浏览器贡献图表样式错乱问题 todo(未找到解决办法)
+- 交互优化之，下拉时，header 动态显示问题标题 todo
 
 

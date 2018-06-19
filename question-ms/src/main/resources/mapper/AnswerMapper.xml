@@ -30,6 +30,16 @@
     where question_id = #{questionId} and is_deleted = 0
   </select>
 
+  <select id="queryByQuestionIds" resultMap="BaseResultMap">
+    select question_id, max(update_time) as update_time from t_qms_answer
+    where question_id in
+    <foreach collection="list" item="questionId" open="(" separator="," close=")">
+      #{questionId}
+    </foreach>
+    and is_deleted = 0
+    group by question_id
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_answer
     where id = #{id,jdbcType=BIGINT}

@@ -6,14 +6,8 @@ import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.enhancement.UserAnswerContributionStatistics;
 import com.exception.qms.domain.enhancement.UserQuestionContributionStatistics;
-import com.exception.qms.domain.entity.Question;
-import com.exception.qms.domain.entity.User;
-import com.exception.qms.domain.entity.UserAnswerContribution;
-import com.exception.qms.domain.entity.UserQuestionContribution;
-import com.exception.qms.service.BaiduLinkPushService;
-import com.exception.qms.service.QuestionService;
-import com.exception.qms.service.QuestionTagService;
-import com.exception.qms.service.UserService;
+import com.exception.qms.domain.entity.*;
+import com.exception.qms.service.*;
 import com.exception.qms.utils.TimeUtil;
 import com.exception.qms.web.dto.user.response.QueryContributionDataItemDTO;
 import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
@@ -59,14 +53,14 @@ public class SEOBusinessImpl implements SEOBusiness {
     @Autowired
     private QuestionService questionService;
     @Autowired
+    private AnswerService answerService;
+    @Autowired
     private BaiduLinkPushService baiduLinkPushService;
 
     @Override
     public BaseResponse pushAllQuestion() {
         List<Question> questions = questionService.queryAllQuestions();
-        questions.parallelStream().forEach(question -> {
-            baiduLinkPushService.pushQuestionDetailPageLink(question.getId());
-        });
+        questions.parallelStream().forEach(question -> baiduLinkPushService.pushQuestionDetailPageLink(question.getId()));
         return new BaseResponse().success();
     }
 
@@ -80,15 +74,32 @@ public class SEOBusinessImpl implements SEOBusiness {
             wsg = new WebSitemapGenerator(baseUrl);
             // home page
             WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl + "/home")
-                    .lastMod(dateTimeFormatter.format(LocalDateTime.now())).priority(1.0).changeFreq(ChangeFreq.DAILY).build();
+                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
+                    .priority(1.0)
+                    .changeFreq(ChangeFreq.DAILY)
+                    .build();
+
             wsg.addUrl(url);
 
             // question detail pages
             List<Question> questions = questionService.queryAllQuestions();
+            List<Long> questionIds = questions.stream().map(Question::getId).collect(Collectors.toList());
+
+            List<Answer> answers = answerService.queryByQuestionIds(questionIds);
+            Map<Long, Answer> map = answers.stream().collect(Collectors.toMap(Answer::getQuestionId, answer -> answer));
 
             for (Question question : questions) {
+                Long questionId = question.getId();
+                LocalDateTime answerLatestUpdateTime = map.get(questionId).getUpdateTime();
+                LocalDateTime questionLatestUpdateTime = question.getUpdateTime();
+                LocalDateTime updateTime =
+                        questionLatestUpdateTime.isBefore(answerLatestUpdateTime) ? answerLatestUpdateTime : questionLatestUpdateTime;
+
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + question.getId())
-                        .lastMod(dateTimeFormatter.format(question.getUpdateTime())).priority(0.9).changeFreq(ChangeFreq.DAILY).build();
+                        .lastMod(dateTimeFormatter.format(updateTime))
+                        .priority(0.9)
+                        .changeFreq(ChangeFreq.DAILY)
+                        .build();
                 wsg.addUrl(tmpUrl);
             }
         } catch (Exception e) {
