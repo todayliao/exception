@@ -151,3 +151,21 @@ blockquote {
     border: 1px solid rgba(144, 143, 143, 0.125);
 }
 
+table {
+    margin-bottom: 1rem;
+}
+
+table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
