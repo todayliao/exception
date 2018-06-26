@@ -2,16 +2,27 @@
 
 .question-title {
     font-size: 22px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #f6f6f6;
+    padding-bottom: 1.25rem;
     font-weight: 600;
     line-height: 32px;
     color: #1a1a1a;
     margin-bottom: 0;
 }
 
+.question-header {
+    border-bottom: 1px solid #f6f6f6;
+    margin-bottom: 1rem;
+}
+
 .question-desc {
     font-size: 15px;
+}
+
+.answer-list-header {
+    align-items: center;
+    border-bottom: 1px solid #f6f6f6;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
 }
 
 .answers-header {
@@ -40,6 +51,10 @@
     padding-bottom: 6px;
 }
 
+.answer-card-body {
+    padding-top: 0;
+}
+
 .answer-card-body p:last-child {
     margin-bottom: 0;
 }
@@ -65,7 +80,7 @@
 
 .answer-card-body h4 {
     font-size: 15px;
-    margin-bottom: 1rem;
+    padding: 1rem 0;
 }
 
 .answer-card-body h5 {

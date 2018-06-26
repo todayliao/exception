@@ -37,7 +37,7 @@ public class MarkdownUtil {
                 StrikethroughExtension.create()));
 
         // convert soft-breaks to hard breaks
-        options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
+//        options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
 
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).build();
@@ -54,7 +54,7 @@ public class MarkdownUtil {
             Node document = parser.parse(mdStr);
             return renderer.render(document);
         } catch (Exception e) {
-            log.error("markdonw parse to html exception: ", e);
+            log.error("markdown parse to html exception: ", e);
             return null;
         }
     }

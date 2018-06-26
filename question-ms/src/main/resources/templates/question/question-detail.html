@@ -32,9 +32,11 @@
             <div class="card question-card">
                 <div class="card-body">
                     <div class="question">
-                        <h1 class="question-title" th:text="${response.titleCn}"></h1>
+                        <div class="question-header">
+                            <h1 class="question-title" th:text="${response.titleCn}"></h1>
+                        </div>
 
-                        <div class="question-desc margintop-20px" th:utext="${response.questionDescHtml}"></div>
+                        <div class="question-desc" th:utext="${response.questionDescHtml}"></div>
 
                         <div class="m-fade marginbottom-1rem fs-14px">
                             <a href="#" class="tooltip-a" data-toggle="tooltip" data-placement="top"
@@ -108,11 +110,11 @@
             <!-- 问题方案 list -->
             <div class="answers margintop-10px marginbottom-10px">
                 <div class="card">
-                    <div class="card-header m-card-header">
-                        <h4 class="card-title">[[${response.answersCount}]]&nbsp;个解决方案</h4>
-                    </div>
-
                     <div class="card-body answer-card-body">
+                        <div class="answer-list-header">
+                            <h4 class="card-title"><span>[[${response.answersCount}]]&nbsp;个解决方案</span></h4>
+                        </div>
+
                         <div class="answer-list-item" th:each="answer : ${response.answers}">
                             <!-- 贡献者信息 -->
                             <div class="answer-item-meta">
