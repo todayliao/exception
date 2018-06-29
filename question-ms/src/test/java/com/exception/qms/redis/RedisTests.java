@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 /**
  * @author jiangbing(江冰)
@@ -26,7 +27,10 @@ public class RedisTests {
 
     @Test
     public void testRedis() {
-        stringRedisTemplate.opsForValue().set("1", "jiangbing");
+//        stringRedisTemplate.opsForValue().set("1", "jiangbing");
+
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        System.out.println(jedis.set("name", "allen"));
     }
 
 }
