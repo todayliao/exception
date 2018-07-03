@@ -25,6 +25,8 @@ public interface QuestionTagRelMapper {
 
     List<HotQuestionTagRel> selectHotTags();
 
+    List<Tag> tagQuestionCountStatistics();
+
     int updateByPrimaryKeySelective(QuestionTagRel record);
 
     int updateByPrimaryKey(QuestionTagRel record);

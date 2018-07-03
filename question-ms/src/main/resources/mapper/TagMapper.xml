@@ -147,4 +147,11 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <update id="updateQuestionCountByTagId">
+    update t_qms_tag
+    set question_count = #{questionCount}
+    where id = #{id}
+  </update>
+
 </mapper>

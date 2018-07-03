@@ -27,4 +27,6 @@ public interface TagMapper {
     int updateByPrimaryKeyWithBLOBs(Tag record);
 
     int updateByPrimaryKey(Tag record);
+
+    int updateQuestionCountByTagId(@Param("id") Long id, @Param("questionCount") Integer questionCount);
 }

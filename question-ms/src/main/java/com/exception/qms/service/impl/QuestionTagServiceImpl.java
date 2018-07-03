@@ -113,5 +113,10 @@ public class QuestionTagServiceImpl implements QuestionTagService {
         questionTagRelMapper.batchAddQuestionTagRel(questionTagRels);
     }
 
+    @Override
+    public List<Tag> tagQuestionCountStatistics() {
+        return questionTagRelMapper.tagQuestionCountStatistics();
+    }
+
 
 }

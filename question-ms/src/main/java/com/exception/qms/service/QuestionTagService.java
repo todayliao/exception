@@ -25,4 +25,6 @@ public interface QuestionTagService {
     List<QuestionTagRel> queryByTagId(Long tagId);
 
     void batchAddQuestionTagRel(List<QuestionTagRel> questionTagRels);
+
+    List<Tag> tagQuestionCountStatistics();
 }

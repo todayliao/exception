@@ -12,6 +12,12 @@
   <resultMap id="HotTagResultMap" type="com.exception.qms.domain.enhancement.HotQuestionTagRel" extends="BaseResultMap">
     <result column="question_count" property="questionCount" jdbcType="BIGINT"/>
   </resultMap>
+
+    <resultMap id="TagMap" type="com.exception.qms.domain.entity.Tag">
+        <result column="tag_id" property="id" jdbcType="BIGINT" />
+        <result column="question_count" property="questionCount" jdbcType="INTEGER" />
+    </resultMap>
+
   <sql id="Base_Column_List" >
     id, question_id, tag_id, create_time, update_time
   </sql>
@@ -47,10 +53,17 @@
         #{questionId}
       </foreach>
     </select>
+    
+    <select id="tagQuestionCountStatistics" resultMap="TagMap">
+        select count(question_id) as question_count, tag_id
+        from t_qms_question_tag_rel group by tag_id
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_question_tag_rel
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.exception.qms.domain.entity.QuestionTagRel" >
     insert into t_qms_question_tag_rel (id, question_id, tag_id, 
       create_time, update_time)

@@ -50,4 +50,9 @@ public class TagServiceImpl implements TagService {
         return tagMapper.selectByPrimaryKey(tagId);
     }
 
+    @Override
+    public int updateTagQuestionCount(Tag tag) {
+        return tagMapper.updateQuestionCountByTagId(tag.getId(), tag.getQuestionCount());
+    }
+
 }
