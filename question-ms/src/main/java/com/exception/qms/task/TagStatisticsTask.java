@@ -1,6 +1,5 @@
 package com.exception.qms.task;
 
-import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.domain.entity.Tag;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.service.TagService;
@@ -29,7 +28,7 @@ public class TagStatisticsTask {
     /**
      * 每天凌晨4点统计一次标签下的问题数量
      */
-    @Scheduled(cron = "0 58 21 * * ?")
+    @Scheduled(cron = "0 0 4 * * ?")
     public void tagQuestionCountStatistics() {
         log.info("task for tagQuestionCountStatistics start ==>");
 
