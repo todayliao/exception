@@ -145,7 +145,6 @@ input::-webkit-input-placeholder{
 }
 
 .card-title {
-    font-size: 14px;
     margin-bottom: 0;
     font-weight: 600;
     line-height: 1.2;
@@ -474,4 +473,9 @@ input::-webkit-input-placeholder{
 .hot-question-card-body .hot-question-item:last-child {
     margin-bottom: 0;
 }
+
+a {
+    color: #175199;
+}
+
 

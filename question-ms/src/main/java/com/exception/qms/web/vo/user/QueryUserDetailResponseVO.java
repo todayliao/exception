@@ -21,6 +21,15 @@ public class QueryUserDetailResponseVO implements Serializable {
     private String userIntroduction;
     private String userAvatar;
 
+    private Boolean isUserDetailInfoAllNull;
+    private String email;
+    private String githubUrl;
+    /**
+     * 个人链接
+     */
+    private String linkUrl;
+    private String location;
+
     /**
      * 用户提交的问题总数
      */

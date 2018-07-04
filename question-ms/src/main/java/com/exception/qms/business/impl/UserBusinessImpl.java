@@ -12,6 +12,7 @@ import com.exception.qms.domain.entity.UserQuestionContribution;
 import com.exception.qms.service.QuestionService;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.service.UserService;
+import com.exception.qms.utils.StringUtil;
 import com.exception.qms.utils.TimeUtil;
 import com.exception.qms.web.dto.user.response.QueryContributionDataItemDTO;
 import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
@@ -26,6 +27,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -171,6 +173,16 @@ public class UserBusinessImpl implements UserBusiness {
         queryUserDetailResponseVO.setUserName(currentUser.getName());
         queryUserDetailResponseVO.setUserIntroduction(currentUser.getIntroduction());
         queryUserDetailResponseVO.setUserAvatar(currentUser.getAvatar());
+
+        boolean isUserDetailInfoAllNull = StringUtils.isEmpty(currentUser.getEmail())
+                && StringUtils.isEmpty(currentUser.getGithubUrl())
+                && StringUtils.isEmpty(currentUser.getLinkUrl())
+                && StringUtils.isEmpty(currentUser.getLocation());
+        queryUserDetailResponseVO.setIsUserDetailInfoAllNull(isUserDetailInfoAllNull);
+        queryUserDetailResponseVO.setEmail(StringUtils.isEmpty(currentUser.getEmail()) ? null : currentUser.getEmail());
+        queryUserDetailResponseVO.setGithubUrl(StringUtils.isEmpty(currentUser.getGithubUrl()) ? null : currentUser.getGithubUrl());
+        queryUserDetailResponseVO.setLinkUrl(StringUtils.isEmpty(currentUser.getLinkUrl()) ? null : currentUser.getLinkUrl());
+        queryUserDetailResponseVO.setLocation(StringUtils.isEmpty(currentUser.getLocation()) ? null : currentUser.getLocation());
 
         // 用户维护的问题
         int totalQuestionCount = questionService.queryQuestionTotalCountByUser(userId);

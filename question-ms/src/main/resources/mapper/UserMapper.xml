@@ -15,6 +15,9 @@
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="github_url" property="githubUrl" jdbcType="VARCHAR" />
+    <result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, password, email, phone, create_time, update_time, is_deleted, last_login_time,
@@ -33,7 +36,7 @@
   </select>
 
     <select id="queryUsersByUserIds" resultMap="BaseResultMap">
-      select id, name, avatar, introduction from t_ums_user
+      select id, name, avatar, introduction, location, email, github_url, link_url from t_ums_user
       where id in
       <foreach collection="list" item="id" open="(" separator="," close=")">
         #{id}

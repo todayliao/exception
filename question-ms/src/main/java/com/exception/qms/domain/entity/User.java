@@ -36,4 +36,10 @@ public class User implements Serializable {
     private String introduction;
 
     private Integer status;
+
+    private String githubUrl;
+
+    private String linkUrl;
+
+    private String location;
 }

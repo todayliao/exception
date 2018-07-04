@@ -32,13 +32,28 @@
                     <p class="card-text m-fade" th:utext="${response.data.userIntroduction}">Java 工程师, 专注于分布式&高并发</p>
                     <a href="#" class="btn btn-primary follow">关&nbsp;&nbsp;&nbsp;&nbsp;注</a>
                 </div>
-                <!--<ul class="list-group list-group-flush">-->
-                <!--<li class="list-group-item">Cras justo odio</li>-->
-                <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
-                <!--<li class="list-group-item">Vestibulum at eros</li>-->
-                <!--</ul>-->
-                <!--<div class="card-body">-->
-                <!--</div>-->
+            </div>
+
+            <div th:if="${response?.data?.isUserDetailInfoAllNull == false}" class="card margintop-10px">
+                <ul class="list-group list-group-flush" >
+                    <!-- 坐标 -->
+                    <li th:if="${response?.data?.location != null}" class="list-group-item user-info-item">
+                        <i class="fa fa-map-marker location"></i>
+                        [[${response.data.location}]]
+                    </li>
+                    <li th:if="${response?.data?.email != null}" class="list-group-item user-info-item">
+                        <i class="fa fa-envelope-o fa-fw"></i>
+                        <a th:href="'mailto:' + ${response.data.email}" th:utext="${response.data.email}">weiwosuoai1991@gmail.com</a>
+                    </li>
+                    <li th:if="${response?.data?.githubUrl != null}" class="list-group-item user-info-item">
+                        <i class="fa fa-github github"></i>
+                        <a th:href="${response.data.githubUrl}" target="_blank" th:utext="${response.data.githubUrl}">github.com/weiwosuoai</a>
+                    </li>
+                    <li th:if="${response?.data?.linkUrl != null}" class="list-group-item user-info-item">
+                        <i class="fa fa-link link"></i>
+                        <a th:href="${response.data.linkUrl}" target="_blank" th:utext="${response.data.linkUrl}">www.exception.site</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- 用户详情展示 -->
@@ -78,7 +93,9 @@
 
             <!-- 贡献图表 -->
             <div class="card margintop-10px">
-                <div class="card-header m-card-header">本月贡献值 <span id="totalCountOfMonth">0</span></div>
+                <div class="card-header m-card-header">
+                    <div class="card-title">本月贡献值 <span id="totalCountOfMonth">0</span></div>
+                </div>
                 <div class="card-body">
                     <div class="contribution-chart-container"></div>
                 </div>
