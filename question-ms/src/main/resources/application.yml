@@ -19,6 +19,9 @@ spring:
   http:
     multipart:
       max-file-size: 4MB
+  mvc:
+    favicon:
+      enabled: false # 禁用 springboot 自带的 favicon
 
 server:
   port: 8090
