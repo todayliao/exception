@@ -211,7 +211,7 @@ input::-webkit-input-placeholder{
     vertical-align: top;
 }
 
-.m-fade {
+.text-gray {
     color: #8590a6;
 }
 
@@ -475,7 +475,7 @@ input::-webkit-input-placeholder{
 }
 
 a {
-    color: #175199;
+    color: #0366d6;
 }
 
 

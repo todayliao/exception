@@ -169,3 +169,9 @@ table tr:nth-child(2n) {
     background-color: #f6f8fa;
 }
 
+.badge-secondary {
+    color: #586069;
+    background-color: rgba(27,31,35,0.08);
+    border-radius: 20px;
+}
+

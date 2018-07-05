@@ -29,28 +29,31 @@
                 <img class="card-img-top" th:src="${response.data.userAvatar}">
                 <div class="card-body">
                     <h5 class="card-title fs-20px" th:utext="${response.data.userName}">Allen Jiang</h5>
-                    <p class="card-text m-fade" th:utext="${response.data.userIntroduction}">Java 工程师, 专注于分布式&高并发</p>
+                    <p class="card-text text-gray" th:utext="${response.data.userIntroduction}">Java 工程师, 专注于分布式&高并发</p>
                     <a href="#" class="btn btn-primary follow">关&nbsp;&nbsp;&nbsp;&nbsp;注</a>
                 </div>
             </div>
 
             <div th:if="${response?.data?.isUserDetailInfoAllNull == false}" class="card margintop-10px">
                 <ul class="list-group list-group-flush" >
-                    <!-- 坐标 -->
+                    <!-- location -->
                     <li th:if="${response?.data?.location != null}" class="list-group-item user-info-item">
-                        <i class="fa fa-map-marker location"></i>
+                        <i class="fa fa-map-marker location text-gray"></i>
                         [[${response.data.location}]]
                     </li>
+                    <!-- email -->
                     <li th:if="${response?.data?.email != null}" class="list-group-item user-info-item">
-                        <i class="fa fa-envelope-o fa-fw"></i>
+                        <i class="fa fa-envelope-o fa-fw text-gray"></i>
                         <a th:href="'mailto:' + ${response.data.email}" th:utext="${response.data.email}">weiwosuoai1991@gmail.com</a>
                     </li>
+                    <!-- github -->
                     <li th:if="${response?.data?.githubUrl != null}" class="list-group-item user-info-item">
-                        <i class="fa fa-github github"></i>
+                        <i class="fa fa-github github text-gray"></i>
                         <a th:href="${response.data.githubUrl}" target="_blank" th:utext="${response.data.githubUrl}">github.com/weiwosuoai</a>
                     </li>
+                    <!-- link -->
                     <li th:if="${response?.data?.linkUrl != null}" class="list-group-item user-info-item">
-                        <i class="fa fa-link link"></i>
+                        <i class="fa fa-link link text-gray"></i>
                         <a th:href="${response.data.linkUrl}" target="_blank" th:utext="${response.data.linkUrl}">www.exception.site</a>
                     </li>
                 </ul>
@@ -79,7 +82,7 @@
                                    th:utext="${tag.tagName}"
                                    th:href="'/question/tag/' + ${tag.tagId}"
                                    class="badge badge-light-blue marginright-5px">android</a>
-                                <span class="m-fade fs-12px" style="margin-left: -2px;">
+                                <span class="text-gray fs-12px" style="margin-left: -2px;">
                                         •&nbsp;[[${question.beforeTimeStr}]]
                                 </span>
                             </div>
