@@ -64,32 +64,44 @@
 }
 
 .answer-card-body h1 {
-    font-size: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .answer-card-body h2 {
-    font-size: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .answer-card-body h3 {
-    font-size: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .answer-card-body h4 {
-    font-size: 15px;
-    padding: 1rem 0;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .answer-card-body h5 {
-    font-size: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .answer-card-body h6 {
-    font-size: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
