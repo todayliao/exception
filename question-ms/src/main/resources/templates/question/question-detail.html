@@ -7,13 +7,13 @@
     <meta name="description" th:content="${response.seoDescription}">
     <meta name="keywords" th:content="${response.seoKeywords}">
 
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github.css}">
     <!--<link rel="stylesheet" th:href="@{/plugins/google-code-prettify/prettify.css}">-->
@@ -103,7 +103,6 @@
 
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                 <div class="card">
                     <div class="card-body answer-card-body">
                         <div class="answer-list-header">
-                            <h4 class="card-title"><span>[[${response.answersCount}]]&nbsp;个解决方案</span></h4>
+                            <h4 class="answer-list-card-title"><span>[[${response.answersCount}]]&nbsp;个解决方案</span></h4>
                         </div>
 
                         <div class="answer-list-item" th:each="answer : ${response.answers}">
