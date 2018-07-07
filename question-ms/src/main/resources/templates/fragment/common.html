@@ -15,9 +15,9 @@
                 <li class="nav-item" id="question" >
                     <a class="nav-link fs-15px" th:href="@{/home}">问题方案 <span class="sr-only">(current)</span></a>
                 </li>
-                <!--<li class="nav-item" id="blog">-->
-                    <!--<a class="nav-link fs-15px" href="#">博客</a>-->
-                <!--</li>-->
+                <li class="nav-item" id="article">
+                    <a class="nav-link fs-15px" th:href="@{/article}">博客</a>
+                </li>
                 <li class="nav-item" id="tag">
                     <a class="nav-link fs-15px" th:href="@{/tag}">标签</a>
                 </li>
@@ -57,11 +57,19 @@
                 </div>
             </div>
 
-            <!-- 提交问答 -->
-            <a th:href="@{/question}">
+            <!-- 分享方案 -->
+            <a th:if="${topNav != 'article'}" th:href="@{/question}">
                 <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                    贡献方案
+                    分享方案
+                </button>
+            </a>
+
+            <!-- 写博客 -->
+            <a th:if="${topNav == 'article'}" th:href="@{/article/writer}">
+                <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    写博客
                 </button>
             </a>
         </div>

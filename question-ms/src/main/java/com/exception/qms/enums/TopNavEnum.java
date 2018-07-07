@@ -14,7 +14,7 @@ public enum TopNavEnum {
     QUESTION("question", "问答"),
     USER("user", "用户墙"),
     TAG("tag", "标签墙"),
-    BLOG("blog", "博客"),
+    ARTICLE("article", "博客"),
     ABOUT("about", "关于"),
     ;
 
