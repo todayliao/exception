@@ -175,3 +175,10 @@ table tr:nth-child(2n) {
     border-radius: 20px;
 }
 
+hr {
+    height: .25em;
+    padding: 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+

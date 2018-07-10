@@ -34,12 +34,12 @@ public class HomeController extends BaseController {
     @GetMapping({"", "/home"})
     @OperatorLog(description = "首页问题列表分页")
     public String queryQuestionList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                    @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
-                                    @RequestParam(value = "tab", defaultValue = "new") String tab,
+                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+//                                    @RequestParam(value = "tab", defaultValue = "new") String tab,
                                     Model model) {
-         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), homeBusiness.queryQuestionPageList(pageIndex, pageSize, tab));
+         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), homeBusiness.queryQuestionPageList(pageIndex, pageSize));
          model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
-         model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
+//         model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
          return "home";
     }
 

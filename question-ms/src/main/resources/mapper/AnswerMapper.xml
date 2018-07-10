@@ -40,6 +40,16 @@
     group by question_id
   </select>
 
+  <select id="queryMaxVoteAnswerIdsByQuestionIds" resultMap="BaseResultMap">
+    select t.id, t.question_id from (
+      select id, question_id, vote_up from t_qms_answer where question_id in
+    <foreach collection="list" item="questionId" open="(" separator="," close=")">
+      #{questionId}
+    </foreach>
+     order by vote_up desc limit 1000) t
+      group by t.question_id
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_qms_answer
     where id = #{id,jdbcType=BIGINT}

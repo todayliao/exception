@@ -13,15 +13,23 @@ import java.util.List;
  * @discription
  **/
 @Data
-public class QueryHomeQuestionPageListResponseVO implements Serializable {
+public class QueryHomeItemPageListResponseVO implements Serializable {
     private Long id;
     private String titleCn;
     private Long createUserId;
     private String createUserName;
     private String createUserAvatar;
+    private String createUserIntroduction;
+
+    /**
+     * item 内容快照
+     */
+    private String shortContent;
     /**
      * 时间差
      */
+    @Deprecated
     private String beforeTimeStr;
+    @Deprecated
     private List<TagResponseVO> tags;
 }

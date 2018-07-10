@@ -286,6 +286,8 @@ input::-webkit-input-placeholder{
     padding-left: 0;
 }
 
+
+
 .border0 {
     border: 0;
 }
@@ -422,8 +424,12 @@ input::-webkit-input-placeholder{
     color: #175199;
 }
 
-.paddingtop-0 {
+.paddingtop0 {
     padding-top: 0;
+}
+
+.paddingbottom0 {
+    padding-bottom: 0;
 }
 
 .gray-nav-link {

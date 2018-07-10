@@ -13,11 +13,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" id="top-nav">
                 <li class="nav-item" id="question" >
-                    <a class="nav-link fs-15px" th:href="@{/home}">问题方案 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link fs-15px" th:href="@{/home}">首页 <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" id="article">
-                    <a class="nav-link fs-15px" th:href="@{/article}">博客</a>
-                </li>
+                <!--<li class="nav-item" id="article">-->
+                    <!--<a class="nav-link fs-15px" th:href="@{/article}">博客</a>-->
+                <!--</li>-->
                 <li class="nav-item" id="tag">
                     <a class="nav-link fs-15px" th:href="@{/tag}">标签</a>
                 </li>
@@ -61,12 +61,12 @@
             <a th:if="${topNav != 'article'}" th:href="@{/question}">
                 <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                    分享方案
+                    分享问题
                 </button>
             </a>
 
             <!-- 写博客 -->
-            <a th:if="${topNav == 'article'}" th:href="@{/article/writer}">
+            <a th:if="${topNav == 'article'}" th:href="@{/article/write}">
                 <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                     写博客

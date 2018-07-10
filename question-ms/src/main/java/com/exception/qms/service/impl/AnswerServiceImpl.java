@@ -129,6 +129,16 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    public List<AnswerDesc> queryDescByAnswerIds(List<Long> answerIds) {
+        return answerDescMapper.queryByAnswerIds(answerIds);
+    }
+
+    @Override
+    public List<Answer> queryMaxVoteAnswerIdsByQuestionIds(List<Long> questionIds) {
+        return answerMapper.queryMaxVoteAnswerIdsByQuestionIds(questionIds);
+    }
+
+    @Override
     public int updateAnswer(Answer answer) {
         return answerMapper.updateByPrimaryKeySelective(answer);
     }

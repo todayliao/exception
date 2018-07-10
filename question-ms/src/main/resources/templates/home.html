@@ -32,74 +32,76 @@
 <main class="container main-content">
     <div class="row">
         <div class="col-md-9 br-3px">
-            <div class="card marginbottom-10px">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a id="new" class="nav-link gray-nav-link fs-14px" th:href="@{/home}">最新</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="hot" class="nav-link gray-nav-link fs-14px" th:href="@{/home?tab=hot}">最热</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body padding0">
-                    <div class="list-group">
-                        <div th:each="question : ${response.data}" href="#" class="list-group-item list-group-item-action flex-column align-items-start home-list-group-item question-item">
-                            <div class="media-left marginleft-5px">
-                                <a th:href="@{'/user/' + ${question.createUserId}}">
-                                    <img th:src="${question.createUserAvatar}" class="rounded media-img">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h2 class="mb-1 home-question-title"><a th:href="@{'/question/' + ${question.id}}" th:text="${question.titleCn}" class="gray-dark"></a></h2>
-                                </div>
-                                <!--<small>Donec id elit non mi porta.</small>-->
-                                <div class="margintop-2px">
-                                    <a th:each="tag : ${question.tags}"
-                                       th:utext="${tag.tagName}"
-                                       th:href="@{'/question/tag/' + ${tag.tagId}}"
-                                       class="badge badge-light-blue marginright-5px">android</a>
-                                    <span class="text-gray fs-12px" style="margin-left: -2px;">
-                                        •&nbsp;
-                                        <a th:href="@{'/user/' + ${question.createUserId}}" class="gray-a fs-12px">
-                                            <strong th:utext="${question.createUserName}"></strong>
-                                        </a>
-                                        &nbsp;•&nbsp;[[${question.beforeTimeStr}]]
-                                        </span>
-                                </div>
-                                <!--其他信息-->
+
+            <!--<div class="card marginbottom-10px">-->
+                <!--<div class="card-body">-->
+                    <!--<div class="item-author-info">-->
+                        <!--<div>-->
+                            <!--<a href="#"><img class="avatar" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526"></a>-->
+                        <!--</div>-->
+                        <!--<div>-->
+                            <!--<a href="#" class="author-name">AllenJiang</a>-->
+                        <!--</div>-->
+                        <!--<div>-->
+                            <!--<span class="author-introduce">,&nbsp;&nbsp;三流程序员</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="item-content">-->
+                        <!--<h2 class="item-title"><a href="#" >30岁之前，请逼自己成为这种人</a></h2>-->
+                        <!--<div class="item-snapshoot">-->
+                            <!--<img class="float-left item-snapshoot-img" src="https://img.mukewang.com/5b1e47160001d8a918720632.jpg" alt="cover">-->
+                            <!--<div class="item-snapshoot-content">-->
+                                <!--我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，-->
+                                <!--我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，-->
+                                <!--霸占着器材又不拉屎。来了一个欧美的留学生，不太会中文，就跟那些人杠上了。-->
+                                <!--混混们操着一口不知道哪里的脏话就要开打，然后…-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div th:each="item : ${response.data}" class="card marginbottom-10px">
+                <div class="card-body">
+                    <div class="item-author-info">
+                        <a th:href="@{'/user/' + ${item.createUserId}}"><img class="avatar" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526"></a>
+                        <a th:href="@{'/user/' + ${item.createUserId}}" class="author-name" th:utext="${item.createUserName}">AllenJiang</a>
+                        <span class="author-introduce">,&nbsp;&nbsp;[[${item.createUserIntroduction}]]</span>
+                    </div>
+                    <div class="item-content">
+                        <h2 class="item-title"><a th:href="@{'/question/' + ${item.id}}" th:text="${item.titleCn}">30岁之前，请逼自己成为这种人</a></h2>
+                        <div class="item-snapshoot">
+                            <div class="item-snapshoot-content" th:utext="${item.shortContent}">
+                                我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，霸占着器材又不拉屎。来了一个欧美的留学生，不太会中文，就跟那些人杠上了。混混们操着一口不知道哪里的脏话就要开打，然后…
                             </div>
                         </div>
                     </div>
-
-                    <!-- 分页 -->
-                    <div class="margintop-30px marginbottom-30px">
-                        <nav aria-label="Page navigation example">
-                            <ul id="pagination" class="pagination justify-content-center">
-                            </ul>
-                        </nav>
-                    </div>
                 </div>
             </div>
+
+            <div class="card marginbottom-10px">
+                <div class="card-body paddingtop0 paddingbottom0">
+                    <a th:href="@{'/home?pageIndex=' + ${response.pageIndex+1}}" class="pull-up-loading-more">点击加载下一页</a>
+                </div>
+            </div>
+
         </div>
 
         <!-- 右边栏 -->
         <div class="col-md-3 br-3px">
             <!-- 问题方案总数 -->
-            <div class="card">
-                <div class="card-header m-card-header">
-                    <div class="card-title">问题总数</div>
-                    <!--<span class="pull-right">更多>></span>-->
-                </div>
-                <div class="card-body text-gray">
-                    Exception 社区目前共维护了 <strong class="gray-dark">[[${response.totalCount}]]</strong> 个问题场景下的解决方案
-                </div>
-            </div>
+            <!--<div class="card">-->
+                <!--<div class="card-header m-card-header">-->
+                    <!--<div class="card-title">问题总数</div>-->
+                    <!--&lt;!&ndash;<span class="pull-right">更多>></span>&ndash;&gt;-->
+                <!--</div>-->
+                <!--<div class="card-body text-gray">-->
+                    <!--Exception 社区目前共维护了 <strong class="gray-dark">[[${response.totalCount}]]</strong> 个问题场景下的解决方案-->
+                <!--</div>-->
+            <!--</div>-->
 
             <!-- 热门标签 -->
-            <div id="hot-tag-card" class="card margintop-10px" style="display: none;">
+            <div id="hot-tag-card" class="card" style="display: none;">
                 <div class="card-header m-card-header">
                     <div class="card-title">热门标签</div>
                     <!--<span class="pull-right">更多>></span>-->

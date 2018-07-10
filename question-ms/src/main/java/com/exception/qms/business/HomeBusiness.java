@@ -2,7 +2,7 @@ package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
-import com.exception.qms.web.vo.home.QueryHomeQuestionPageListResponseVO;
+import com.exception.qms.web.vo.home.QueryHomeItemPageListResponseVO;
 
 /**
  * @author jiangbing(江冰)
@@ -16,7 +16,7 @@ public interface HomeBusiness {
      * 展示首页问题列表
      * @return
      */
-    PageQueryResponse<QueryHomeQuestionPageListResponseVO> queryQuestionPageList(Integer pageIndex, Integer pageSize, String tab);
+    PageQueryResponse<QueryHomeItemPageListResponseVO> queryQuestionPageList(Integer pageIndex, Integer pageSize);
 
     BaseResponse queryHotTags();
 

@@ -27,6 +27,10 @@ public interface AnswerService {
 
     List<Answer> queryByQuestionIds(List<Long> questionIds);
 
+    List<AnswerDesc> queryDescByAnswerIds(List<Long> answerIds);
+
+    List<Answer> queryMaxVoteAnswerIdsByQuestionIds(List<Long> questionIds);
+
     int updateAnswer(Answer answer);
 
     int updateAnswerDesc(AnswerDesc answerDesc);

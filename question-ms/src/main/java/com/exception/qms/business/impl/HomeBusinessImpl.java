@@ -3,22 +3,23 @@ package com.exception.qms.business.impl;
 import com.exception.qms.business.HomeBusiness;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
+import com.exception.qms.domain.entity.Answer;
+import com.exception.qms.domain.entity.AnswerDesc;
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.User;
-import com.exception.qms.enums.QuestionTabEnum;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.service.QuestionService;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.service.UserService;
 import com.exception.qms.utils.TimeUtil;
-import com.exception.qms.web.vo.common.TagResponseVO;
 import com.exception.qms.web.vo.home.HomeHotTagResponseVO;
-import com.exception.qms.web.vo.home.QueryHomeQuestionPageListResponseVO;
+import com.exception.qms.web.vo.home.QueryHomeItemPageListResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -46,61 +47,74 @@ public class HomeBusinessImpl implements HomeBusiness {
     private Mapper mapper;
 
     @Override
-    public PageQueryResponse<QueryHomeQuestionPageListResponseVO> queryQuestionPageList(Integer pageIndex, Integer pageSize, String tab) {
+    public PageQueryResponse<QueryHomeItemPageListResponseVO> queryQuestionPageList(Integer pageIndex, Integer pageSize) {
         int totalCount = questionService.queryQuestionTotalCount();
 
-        List<QueryHomeQuestionPageListResponseVO> homeQuestionPageListResponseVOS = null;
+        List<QueryHomeItemPageListResponseVO> homeQuestionPageListResponseVOS = null;
 
         if (totalCount > 0) {
-            QuestionTabEnum questionTabEnum = QuestionTabEnum.codeOf(tab);
-
-            String orderByColumn = null;
-            // 根据 tab 获取需要排序的字段
-            switch (questionTabEnum) {
-                case NEW:
-                    orderByColumn = "create_time";
-                    break;
-                case HOT:
-                    orderByColumn = "view_num";
-                    break;
-                default:
-                    break;
-            }
+            // 根据创建时间倒序
+            String orderByColumn = "create_time";
 
             List<Question> questionList = questionService.queryQuestionPageList(pageIndex, pageSize, orderByColumn);
 
             // 关联相关标签信息
             // 获取问题 ids
             List<Long> questionIds = questionList.stream().map(Question::getId).collect(Collectors.toList());
-            Map<Long, List<TagResponseVO>> questionIdTagIdsMap = questionTagService.queryTagInfoByQuestionIds(questionIds);
+//            Map<Long, List<TagResponseVO>> questionIdTagIdsMap = questionTagService.queryTagInfoByQuestionIds(questionIds);
 
             // 用户信息
             List<Long> createUserIds = questionList.stream().map(Question::getCreateUserId).distinct().collect(Collectors.toList());
             List<User> users = userService.queryUsersByUserIds(createUserIds);
             Map<Long, User> userIdUserMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
 
-            if (!CollectionUtils.isEmpty(questionIdTagIdsMap)) {
-                homeQuestionPageListResponseVOS = questionList.stream().map(question -> {
-                    QueryHomeQuestionPageListResponseVO homeQuestionPageListResponseVO = mapper.map(question, QueryHomeQuestionPageListResponseVO.class);
-                    homeQuestionPageListResponseVO.setBeforeTimeStr(TimeUtil.calculateTimeDifference(question.getCreateTime()));
-                    Long createUserId = question.getCreateUserId();
+            List<Answer> answers = answerService.queryMaxVoteAnswerIdsByQuestionIds(questionIds);
+            List<Long> answerIds = answers.stream().map(Answer::getId).collect(Collectors.toList());
+            // 问题解决方案内容快照
+            List<AnswerDesc> answerDescs = answerService.queryDescByAnswerIds(answerIds);
 
-                    boolean isUserExist =
-                            createUserId != null
-                            && !CollectionUtils.isEmpty(userIdUserMap)
-                            && userIdUserMap.get(createUserId) != null;
+//            if (!CollectionUtils.isEmpty(questionIdTagIdsMap)) {
+//
+//            }
 
-                    if (isUserExist) {
-                        homeQuestionPageListResponseVO.setCreateUserName(userIdUserMap.get(createUserId).getName());
-                        homeQuestionPageListResponseVO.setCreateUserAvatar(userIdUserMap.get(createUserId).getAvatar());
+            Map<Long, Long> questionIdAnswerIdMap = answers.stream().collect(Collectors.toMap(Answer::getQuestionId, Answer::getId));
+            Map<Long, AnswerDesc> answerIdAnswerDescMap = answerDescs.stream().collect(Collectors.toMap(AnswerDesc::getAnswerId, answerDesc -> answerDesc));
+
+            homeQuestionPageListResponseVOS = questionList.stream().map(question -> {
+                QueryHomeItemPageListResponseVO homeItemPageListResponseVO = mapper.map(question, QueryHomeItemPageListResponseVO.class);
+
+                // 设置快照内容
+                Long questionId = question.getId();
+                Long answerId = questionIdAnswerIdMap.get(questionId);
+                if (answerId != null) {
+                    AnswerDesc answerDesc = answerIdAnswerDescMap.get(answerId);
+                    if (answerDesc != null) {
+                        String descriptionCn = answerDesc.getDescriptionCn();
+                        String shortContent = descriptionCn.length() > 300 ? descriptionCn.substring(0, 300) : descriptionCn;
+                        homeItemPageListResponseVO.setShortContent(HtmlUtils.htmlEscape(shortContent) + " ...");
                     }
-                    homeQuestionPageListResponseVO.setTags(questionIdTagIdsMap.get(question.getId()));
-                    return homeQuestionPageListResponseVO;
-                }).collect(Collectors.toList());
-            }
+                }
+
+//                homeItemPageListResponseVO.setBeforeTimeStr(TimeUtil.calculateTimeDifference(question.getCreateTime()));
+                Long createUserId = question.getCreateUserId();
+
+                boolean isUserExist =
+                        createUserId != null
+                                && !CollectionUtils.isEmpty(userIdUserMap)
+                                && userIdUserMap.get(createUserId) != null;
+
+                if (isUserExist) {
+                    homeItemPageListResponseVO.setCreateUserName(userIdUserMap.get(createUserId).getName());
+                    homeItemPageListResponseVO.setCreateUserAvatar(userIdUserMap.get(createUserId).getAvatar());
+                    homeItemPageListResponseVO.setCreateUserIntroduction(userIdUserMap.get(createUserId).getIntroduction());
+                }
+//                homeQuestionPageListResponseVO.setTags(questionIdTagIdsMap.get(question.getId()));
+                return homeItemPageListResponseVO;
+            }).collect(Collectors.toList());
+
         }
 
-        return new PageQueryResponse<QueryHomeQuestionPageListResponseVO>()
+        return new PageQueryResponse<QueryHomeItemPageListResponseVO>()
                 .successPage(homeQuestionPageListResponseVOS, pageIndex, totalCount, pageSize);
     }
 

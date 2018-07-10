@@ -17,6 +17,8 @@ public interface AnswerMapper {
 
     List<Answer> queryByQuestionIds(List<Long> questionIds);
 
+    List<Answer> queryMaxVoteAnswerIdsByQuestionIds(List<Long> questionIds);
+
     int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
