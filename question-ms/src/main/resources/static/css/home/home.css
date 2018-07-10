@@ -111,5 +111,46 @@
     text-decoration: none;
 }
 
+.share-question-btn {
+    border: none;
+    display: inline-block;
+    transition: color .2s ease-in;
+    font-size: 16px;
+    color: #1a1a1a;
+}
 
+.share-question-btn:hover {
+    color: #175199;
+    cursor: pointer;
+}
+
+.write-article-btn {
+    border: none;
+    display: inline-block;
+    transition: color .2s ease-in;
+    font-size: 16px;
+    color: #1a1a1a;
+    margin-left: 10px;
+}
+
+.write-article-btn:hover {
+    color: #175199;
+    cursor: pointer;
+}
+
+.share-question-image {
+    color: #8590a6;
+}
+
+.write-article-image {
+    color: #8590a6;
+}
+
+.share-question-a:hover {
+    text-decoration: none;
+}
+
+.write-article-a:hover {
+    text-decoration: none;
+}
 

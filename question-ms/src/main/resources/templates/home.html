@@ -61,12 +61,32 @@
                 <!--</div>-->
             <!--</div>-->
 
+            <!-- 操作 card, 包括分享问题解决方案以及写博客-->
+            <div class="card marginbottom-10px">
+                <div class="card-body">
+                    <a th:href="@{/question}" class="share-question-a">
+                        <button class="share-question-btn">
+                            <i class="fa fa-question-circle-o share-question-image" aria-hidden="true"></i>
+                            分享问题
+                        </button>
+                    </a>
+
+                    <a href="#" class="write-article-a">
+                        <button class="write-article-btn">
+                            <i class="fa fa-pencil-square-o write-article-image" aria-hidden="true"></i>
+                            写博客
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+
             <div th:each="item : ${response.data}" class="card marginbottom-10px">
                 <div class="card-body">
                     <div class="item-author-info">
                         <a th:href="@{'/user/' + ${item.createUserId}}"><img class="avatar" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526"></a>
                         <a th:href="@{'/user/' + ${item.createUserId}}" class="author-name" th:utext="${item.createUserName}">AllenJiang</a>
-                        <span class="author-introduce">,&nbsp;&nbsp;[[${item.createUserIntroduction}]]</span>
+                        <span class="author-introduce">&nbsp;,&nbsp;&nbsp;[[${item.createUserIntroduction}]]</span>
                     </div>
                     <div class="item-content">
                         <h2 class="item-title"><a th:href="@{'/question/' + ${item.id}}" th:text="${item.titleCn}">30岁之前，请逼自己成为这种人</a></h2>
