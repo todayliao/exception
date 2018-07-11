@@ -29,7 +29,6 @@ public class ArticleController extends BaseController {
                                   @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                   @RequestParam(value = "tab", defaultValue = "new") String tab,
                                   Model model) {
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.ARTICLE.getCode());
         model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
         return "article/article-list";
     }

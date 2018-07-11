@@ -39,7 +39,7 @@ public class SearchController extends BaseController {
                                  @RequestParam(value = "tab", required = false, defaultValue = "relevance") String tab,
                                  Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), searchBusiness.searchQuestion(pageIndex, pageSize, key, tab));
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.HOME.getCode());
         model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
         model.addAttribute("searchKey", key);
         return "question/question-search";

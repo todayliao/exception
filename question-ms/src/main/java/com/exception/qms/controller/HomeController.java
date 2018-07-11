@@ -38,7 +38,7 @@ public class HomeController extends BaseController {
 //                                    @RequestParam(value = "tab", defaultValue = "new") String tab,
                                     Model model) {
          model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), homeBusiness.queryQuestionPageList(pageIndex, pageSize));
-         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
+         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.HOME.getCode());
 //         model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
          return "home";
     }

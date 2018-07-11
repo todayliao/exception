@@ -5,73 +5,78 @@
 <header th:fragment="header">
     <!-- Content here -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light m-navbar">
-        <a class="navbar-brand" th:href="@{/home}">Exception</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container">
+            <a class="navbar-brand m-navbar-brand" th:href="@{/home}">
+                <img th:src="@{/images/logo.jpg}" width="30" height="30" class="d-inline-block align-top" alt="">
+                Exception
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto" id="top-nav">
-                <li class="nav-item" id="question" >
-                    <a class="nav-link fs-15px" th:href="@{/home}">首页 <span class="sr-only">(current)</span></a>
-                </li>
-                <!--<li class="nav-item" id="article">-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" id="top-nav">
+                    <li class="nav-item" id="home" >
+                        <a class="nav-link fs-15px" th:href="@{/home}">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!--<li class="nav-item" id="article">-->
                     <!--<a class="nav-link fs-15px" th:href="@{/article}">博客</a>-->
-                <!--</li>-->
-                <li class="nav-item" id="tag">
-                    <a class="nav-link fs-15px" th:href="@{/tag}">标签</a>
-                </li>
-                <li class="nav-item" id="user">
-                    <a class="nav-link fs-15px" th:href="@{/user}">用户</a>
-                </li>
-                <li class="nav-item" id="about">
-                    <a class="nav-link fs-15px" th:href="@{/about}">关于</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
-                <div class="form-group">
-                    <div class="form-group-search">
-                        <input id="header-search" name="key" class="form-control mr-sm-2 header-search" type="search" placeholder="搜索你遇到的问题 ..." aria-label="Search" style="width: 300px;">
-                        <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+                    <!--</li>-->
+                    <li class="nav-item" id="tag">
+                        <a class="nav-link fs-15px" th:href="@{/tag}">标签</a>
+                    </li>
+                    <li class="nav-item" id="user">
+                        <a class="nav-link fs-15px" th:href="@{/user}">用户</a>
+                    </li>
+                    <li class="nav-item" id="about">
+                        <a class="nav-link fs-15px" th:href="@{/about}">关于</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
+                    <div class="form-group">
+                        <div class="form-group-search">
+                            <input id="header-search" name="key" class="form-control mr-sm-2 header-search" type="search" placeholder="搜索你遇到的问题 ..." aria-label="Search" style="width: 300px;">
+                            <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+
+                <a class="nav-link login fs-15px"
+                   th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}"
+                   href="#"
+                   onclick="showLoginModal()"
+                   data-toggle="modal">登录</a>
+
+                <div class="dropdown" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}">
+                    <a href="#" class="dropdown-toggle login-image-a" data-toggle="dropdown">
+                        <img th:src="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.avatar}"
+                             class="rounded float-right login-image m-login-image" >
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" th:href="@{/logout}">
+                            <i class="fa fa-power-off" aria-hidden="true"></i>
+                            安全退出
+                        </a>
                     </div>
                 </div>
-            </form>
 
-
-            <a class="nav-link login fs-15px"
-               th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}"
-               href="#"
-               onclick="showLoginModal()"
-               data-toggle="modal">登录</a>
-
-             <div class="dropdown" th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}">
-                <a href="#" class="dropdown-toggle login-image-a" data-toggle="dropdown">
-                    <img th:src="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.avatar}"
-                         class="rounded float-right login-image m-login-image" >
-                </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" th:href="@{/logout}">
-                        <i class="fa fa-power-off" aria-hidden="true"></i>
-                        安全退出
-                    </a>
-                </div>
-            </div>
-
-            <!-- 分享方案 -->
-            <a th:if="${topNav != 'article'}" th:href="@{/question}">
-                <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
+                <!-- 分享方案 -->
+                <a th:if="${topNav == 'question'}" th:href="@{/question}">
+                    <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                     分享问题
-                </button>
-            </a>
+                    </button>
+                </a>
 
-            <!-- 写博客 -->
-            <a th:if="${topNav == 'article'}" th:href="@{/article/write}">
-                <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
+                <!-- 写博客 -->
+                <a th:if="${topNav == 'article'}" th:href="@{/article/write}">
+                    <button  type="button" class="btn btn-outline-primary" style="margin-left: .5rem">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                     写博客
-                </button>
-            </a>
+                    </button>
+                </a>
+            </div>
         </div>
     </nav>
 </header>

@@ -39,7 +39,6 @@ public class AnswerController extends BaseController {
     @OperatorLog(description = "方案添加页面展示")
     public String showAnswerEditPage(@PathVariable("answerId") Long answerId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), answerBusiness.queryAnswerInfo(answerId));
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
         return "answer/answer-edit";
     }
 

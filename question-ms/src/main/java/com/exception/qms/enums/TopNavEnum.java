@@ -11,10 +11,10 @@ import lombok.Getter;
 @Getter
 public enum TopNavEnum {
 
-    QUESTION("question", "问答"),
+    HOME("home", "首页"),
+    QUESTION("question", "问题详情页"),
     USER("user", "用户墙"),
     TAG("tag", "标签墙"),
-    ARTICLE("article", "博客"),
     ABOUT("about", "关于"),
     ;
 

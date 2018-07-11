@@ -56,7 +56,6 @@ public class QuestionController extends BaseController {
     @GetMapping("/question")
     @OperatorLog(description = "问题添加页面展示")
     public String showQuestionAddPage(Model model) {
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
         return "question/question-add";
     }
 
@@ -82,7 +81,6 @@ public class QuestionController extends BaseController {
     @OperatorLog(description = "问题改进页面展示")
     public String showQuestionEditPage(@PathVariable("questionId") Long quesitonId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), questionBusiness.queryQuestionInfo(quesitonId));
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.QUESTION.getCode());
         return "question/question-edit";
     }
 
