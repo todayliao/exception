@@ -64,6 +64,15 @@
       </if>
     </trim>
   </insert>
+
+  <insert id="batchAddArticleTagRel">
+    insert into t_ams_article_tag_rel (article_id, tag_id,
+      create_time, update_time) values
+      <foreach collection="list" item="item" separator=",">
+        (#{item.articleId}, #{item.tagId}, NOW(), NOW())
+      </foreach>
+  </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.ArticleTagRel" >
     update t_ams_article_tag_rel
     <set >

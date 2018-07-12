@@ -28,9 +28,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.exception.qms.domain.entity.ArticleContent" >
-    insert into t_ams_article_content (id, article_id, is_deleted, 
+    insert into t_ams_article_content (article_id, is_deleted,
       content)
-    values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{isDeleted,jdbcType=BIT}, 
+    values (#{articleId,jdbcType=BIGINT}, 0,
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.ArticleContent" >
