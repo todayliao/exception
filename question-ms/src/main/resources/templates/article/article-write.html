@@ -30,7 +30,7 @@
             <!-- csrf -->
             <div th:replace="fragment/common :: csrfHiddenInput"></div>
 
-            <form id="form">
+            <form id="form" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="0" checked>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-success btn-block" onclick="submitQuestion()">提交</button>
+                <button type="button" class="btn btn-success btn-block" onclick="submitArticle()">发布</button>
             </form>
         </div>
     </div>
@@ -119,25 +119,20 @@
 
     function submitArticle() {
         var title = $('#title').val();
-        var answerDesc = $('#answerDesc').val();
+        var content = $('#content').val();
         var tagSize = $('#tag-ids-hidden').children().length;
         if (title.trim() == '') {
-            layer.msg("问题标题不能为空");
+            layer.msg("文章标题不能为空");
             return;
         }
 
-        if (title.indexOf("?") == -1 && title.indexOf("？") == -1) {
-            layer.msg("你还没有给问题添加问号");
-            return;
-        }
-
-        if (answerDesc.trim() == '') {
-            layer.msg("解决法案不能为空");
+        if (content.trim() == '') {
+            layer.msg("文章正文不能为空");
             return;
         }
 
         if (tagSize < 1) {
-            layer.msg("请为问题打上正确的标签");
+            layer.msg("请为文章打上合适的标签");
             return;
         }
 
@@ -146,17 +141,21 @@
             return;
         }
 
+        var formData = new FormData($("#form")[0]);
         $.ajax({
             type: "POST",
+            url: "/article",
+            data: formData,
             async: true,
-            url: "/question",
-            data: $('#form').serialize(),
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (response) {
                 if (response.success == true) {
-                    layer.msg("提交成功");
-                    location.href = "/question/" + response.data;
+                    layer.msg("发布成功");
+                    location.href = "/article/" + response.data;
                 } else {
-                    layer.msg("提交失败 - " + response.errorMessage);
+                    layer.msg("发布失败 - " + response.errorMessage);
                 }
             }
         });

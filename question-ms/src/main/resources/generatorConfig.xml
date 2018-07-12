@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_sms_baidu_question_link_push" domainObjectName="BaiduQuestionLinkPush"
+        <table tableName="t_ams_article_tag_rel" domainObjectName="ArticleTagRel"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
