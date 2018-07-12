@@ -23,15 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ArticleController extends BaseController {
 
-    @GetMapping("/article")
-    @OperatorLog(description = "博客展示页")
-    public String showArticlePage(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
-                                  @RequestParam(value = "tab", defaultValue = "new") String tab,
-                                  Model model) {
-        model.addAttribute(ResponseModelKeyEnum.TAB.getCode(), tab);
-        return "article/article-list";
+    @GetMapping("/article/write")
+    @OperatorLog(description = "博客写作页")
+    public String showArticleWritePage() {
+        return "article/article-write";
     }
-
 
 }

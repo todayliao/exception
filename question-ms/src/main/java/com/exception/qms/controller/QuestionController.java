@@ -53,7 +53,7 @@ public class QuestionController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/question")
+    @GetMapping("/question/write")
     @OperatorLog(description = "问题添加页面展示")
     public String showQuestionAddPage(Model model) {
         return "question/question-add";

@@ -3,7 +3,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>贡献问题解决方案 - Exception开发者社区</title>
+    <title>写博客 - Exception开发者社区</title>
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
@@ -12,7 +12,7 @@
 
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/plugins/editor-md/editormd.css}">
-    <link rel="stylesheet" th:href="@{/css/question/question-add.css}">
+    <link rel="stylesheet" th:href="@{/css/article/article-write.css}">
 
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>
@@ -32,19 +32,31 @@
 
             <form id="form">
                 <div class="form-group">
-                    <label>问题标题 <i>(标题应是疑问句，且简明扼要，如：如何创建 mysql 数据库表索引?)</i></label>
-                    <input id="title" type="text" class="form-control" name="title">
-                </div>
-                <div class="form-group">
-                    <label>问题出现的场景描述 <i>（可选，若为空，则默认为问题标题）</i></label>
-                    <div id="editormd1" class="editor-md">
-                        <textarea id="questionDesc" class="editormd-markdown-textarea" name="questionDesc"></textarea>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="0" checked>
+                        <label class="form-check-label" for="inlineRadio1">原创</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="1">
+                        <label class="form-check-label" for="inlineRadio2">翻译</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio3" value="2">
+                        <label class="form-check-label" for="inlineRadio2">转载</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>解决方案</label>
-                    <div id="editormd2" class="editor-md">
-                        <textarea id="answerDesc" class="editormd-markdown-textarea" name="answerDesc"></textarea>
+                    <label>添加题图<i>(可为空)</i></label>
+                    <input type="file" class="form-control-file" name="titleImage" accept=".jpeg, .jpg, .png">
+                </div>
+                <div class="form-group">
+                    <label>博客标题</label>
+                    <input id="title" type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label>博客正文</label>
+                    <div id="editormd1" class="editor-md">
+                        <textarea id="content" class="editormd-markdown-textarea" name="content"></textarea>
                     </div>
                 </div>
                 <div id="added-question-tags" style="margin-bottom: 10px;">
@@ -65,8 +77,6 @@
                 <button type="button" class="btn btn-success btn-block" onclick="submitQuestion()">提交</button>
             </form>
         </div>
-
-        <!-- 右边栏 -->
     </div>
 
 </main>
@@ -85,7 +95,7 @@
 
 <script th:inline="javascript">
     $(function() {
-        var editormd1, editormd2;
+        var editormd1;
         editormd1 = editormd("editormd1", {
             width   : "100%",
             height  : 350,
@@ -105,21 +115,9 @@
             }
         });
 
-        editormd2 = editormd("editormd2", {
-            width   : "100%",
-            height  : 600,
-            syncScrolling : "single",
-            path    : "/plugins/editor-md/lib/", // 依赖的 lib 目录
-            imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/file/editorMdImg/upload", // 依赖的 lib 目录
-            watch: false,
-            autoFocus : false,
-        });
-
     });
 
-    function submitQuestion() {
+    function submitArticle() {
         var title = $('#title').val();
         var answerDesc = $('#answerDesc').val();
         var tagSize = $('#tag-ids-hidden').children().length;

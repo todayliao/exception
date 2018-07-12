@@ -123,4 +123,72 @@
     });
 </script>
 
+<!-- 标签选择 -->
+<script th:fragment="chooseTag" th:inline="javascript">
+    $(document).ready(function() {
+        // 标签模糊查询
+        $("#input-tag-name").bind("input propertychange", function () {
+            var inputStr = $(this).val();
+            if ($.trim(inputStr).length < 3) {
+                return;
+            }
+
+            // csrf
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
+            var jsonStr = {"tagName": inputStr};
+
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "/tag/queryByName",
+                datatype: "json",
+                contentType: "application/json",
+                data: JSON.stringify(jsonStr),
+                success: function (response) {
+                    if (response.success == true) {
+                        var data = response.data;
+                        $('#response-tags-container').html('');
+                        $.each(data, function (i, tag) {
+                            var html = "<span class=\"badge badge-light-blue marginright-5px\" onclick=\"chooseTag('"
+                                + tag.tagId + "', '"
+                                + tag.tagName + "');\">"
+                                + tag.tagName + "</span>";
+                            $('#response-tags-container').append(html);
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+    var tagIdsMap = {};
+    var index = 0;
+
+    // add tag
+    function chooseTag(tagId, tagName) {
+        if (tagId in tagIdsMap) {
+            layer.msg("该标签已经添加了哦！");
+            return;
+        }
+        var html = "<span class=\"badge badge-light-blue marginright-5px\" id='"+tagName+"'>" + tagName
+            + "<i class=\"fa fa-times-circle marginleft-5px\" onclick=\"deleteTag('"+tagId+"','"+tagName+"')\"></i></span>";
+        $('#added-question-tags').append(html)
+        var html2 = " <input id='hidden-"+tagName+"' name=\"tagIds["+(index++)+"]\" value='"+tagId+"'>";
+        $('#tag-ids-hidden').append(html2);
+        // add to map
+        tagIdsMap[tagId] = tagId;
+    }
+
+    function deleteTag(tagId, tagName) {
+        $('#' + tagName).remove();
+        $('#hidden-' + tagName).remove();
+        delete tagIdsMap[tagId];
+    }
+</script>
+
 </html>

@@ -64,14 +64,14 @@
             <!-- 操作 card, 包括分享问题解决方案以及写博客-->
             <div class="card marginbottom-10px">
                 <div class="card-body">
-                    <a th:href="@{/question}" class="share-question-a">
+                    <a th:href="@{/question/write}" class="share-question-a">
                         <button class="share-question-btn">
                             <i class="fa fa-question-circle-o share-question-image" aria-hidden="true"></i>
                             分享问题
                         </button>
                     </a>
 
-                    <a href="#" class="write-article-a">
+                    <a th:href="@{/article/write}" class="write-article-a">
                         <button class="write-article-btn">
                             <i class="fa fa-pencil-square-o write-article-image" aria-hidden="true"></i>
                             写博客
