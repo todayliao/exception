@@ -2,6 +2,7 @@ package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.domain.entity.UserAnswerContribution;
+import com.exception.qms.domain.entity.UserArticleContribution;
 import com.exception.qms.domain.entity.UserQuestionContribution;
 
 import java.time.LocalDate;
@@ -36,9 +37,11 @@ public interface UserService {
      */
     int updateLastLoginTime(Long userId);
 
-    List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate today, LocalDate lastYearToday);
+    List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate tomorrow, LocalDate lastYearToday);
 
-    List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday);
+    List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate tomorrow, LocalDate lastYearToday);
+
+    List<UserArticleContribution> queryUserArticleContribution(Long userId, LocalDate tomorrow, LocalDate lastYearYesterday);
 
     /**
      * 添加问题的贡献记录
@@ -53,4 +56,6 @@ public interface UserService {
      * @return
      */
     int addAnswerContribution(Long answerId, Long userId, int type);
+
+    int addArticleContribution(Long articleId, Long userId);
 }

@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_ams_article_tag_rel" domainObjectName="ArticleTagRel"
+        <table tableName="t_ums_user_article_contribution" domainObjectName="UserArticleContribution"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

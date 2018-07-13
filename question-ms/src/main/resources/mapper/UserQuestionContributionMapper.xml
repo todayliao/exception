@@ -21,7 +21,8 @@
   
   <select id="queryUserQuestionContribution" resultMap="BaseResultMap">
     select id, create_time from t_ums_user_question_contribution
-    where user_id = #{userId} and create_time <![CDATA[<=]]> #{today} and create_time <![CDATA[>=]]> #{lastYearToday} and is_deleted = 0
+    where user_id = #{userId} and create_time <![CDATA[<=]]> #{tomorrow}
+    and create_time <![CDATA[>=]]> #{lastYearToday} and is_deleted = 0
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

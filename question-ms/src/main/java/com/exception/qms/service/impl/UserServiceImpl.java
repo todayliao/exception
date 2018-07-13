@@ -2,8 +2,10 @@ package com.exception.qms.service.impl;
 
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.domain.entity.UserAnswerContribution;
+import com.exception.qms.domain.entity.UserArticleContribution;
 import com.exception.qms.domain.entity.UserQuestionContribution;
 import com.exception.qms.domain.mapper.UserAnswerContributionMapper;
+import com.exception.qms.domain.mapper.UserArticleContributionMapper;
 import com.exception.qms.domain.mapper.UserMapper;
 import com.exception.qms.domain.mapper.UserQuestionContributionMapper;
 import com.exception.qms.enums.UserAnswerContributionTypeEnum;
@@ -35,6 +37,8 @@ public class UserServiceImpl implements UserService {
     private UserQuestionContributionMapper userQuestionContributionMapper;
     @Autowired
     private UserAnswerContributionMapper userAnswerContributionMapper;
+    @Autowired
+    private UserArticleContributionMapper userArticleContributionMapper;
 
     @Override
     public List<User> queryUsersByUserIds(List<Long> userIds) {
@@ -69,13 +73,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate today, LocalDate lastYearToday) {
-        return userQuestionContributionMapper.queryUserQuestionContribution(userId, today, lastYearToday);
+    public List<UserQuestionContribution> queryUserQuestionContribution(long userId, LocalDate tomorrow, LocalDate lastYearToday) {
+        return userQuestionContributionMapper.queryUserQuestionContribution(userId, tomorrow, lastYearToday);
     }
 
     @Override
-    public List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate today, LocalDate lastYearToday) {
-        return userAnswerContributionMapper.queryUserAnswerContribution(userId, today, lastYearToday);
+    public List<UserAnswerContribution> queryUserAnswerContribution(Long userId, LocalDate tomorrow, LocalDate lastYearToday) {
+        return userAnswerContributionMapper.queryUserAnswerContribution(userId, tomorrow, lastYearToday);
+    }
+
+    @Override
+    public List<UserArticleContribution> queryUserArticleContribution(Long userId, LocalDate tomorrow, LocalDate lastYearYesterday) {
+        return userArticleContributionMapper.queryUserArticleContribution(userId, tomorrow, lastYearYesterday);
     }
 
     /**
@@ -108,5 +117,13 @@ public class UserServiceImpl implements UserService {
         userAnswerContribution.setUserId(userId);
         userAnswerContribution.setType(type);
         return userAnswerContributionMapper.insert(userAnswerContribution);
+    }
+
+    @Override
+    public int addArticleContribution(Long articleId, Long userId) {
+        UserArticleContribution userArticleContribution = new UserArticleContribution();
+        userArticleContribution.setArticleId(articleId);
+        userArticleContribution.setUserId(userId);
+        return userArticleContributionMapper.insert(userArticleContribution);
     }
 }

@@ -4,11 +4,9 @@ import com.exception.qms.business.UserBusiness;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.enhancement.UserAnswerContributionStatistics;
+import com.exception.qms.domain.enhancement.UserArticleContributionStatistics;
 import com.exception.qms.domain.enhancement.UserQuestionContributionStatistics;
-import com.exception.qms.domain.entity.Question;
-import com.exception.qms.domain.entity.User;
-import com.exception.qms.domain.entity.UserAnswerContribution;
-import com.exception.qms.domain.entity.UserQuestionContribution;
+import com.exception.qms.domain.entity.*;
 import com.exception.qms.service.QuestionService;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.service.UserService;
@@ -83,6 +81,7 @@ public class UserBusinessImpl implements UserBusiness {
         LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
         LocalDate lastYearToday = LocalDate.now().minus(1, ChronoUnit.YEARS);
         LocalDate lastYearYesterday = lastYearToday.minus(1, ChronoUnit.DAYS);
+        // 问题
         List<UserQuestionContribution> userQuestionContributions = userService.queryUserQuestionContribution(userId, tomorrow, lastYearYesterday);
 
         List<UserQuestionContributionStatistics> userQuestionContributionStatisticsList
@@ -93,8 +92,10 @@ public class UserBusinessImpl implements UserBusiness {
                         return userQuestionContributionStatistics;
                     }).collect(Collectors.toList());
 
-        Map<LocalDate, Long> userQuestionContributionMap = userQuestionContributionStatisticsList.stream().collect(Collectors.groupingBy(UserQuestionContributionStatistics::getContributeDate, Collectors.counting()));
+        Map<LocalDate, Long> userQuestionContributionMap = userQuestionContributionStatisticsList.stream()
+                .collect(Collectors.groupingBy(UserQuestionContributionStatistics::getContributeDate, Collectors.counting()));
 
+        // 方案
         List<UserAnswerContribution> userAnswerContributions = userService.queryUserAnswerContribution(userId, tomorrow, lastYearYesterday);
 
         List<UserAnswerContributionStatistics> userAnswerContributionStatisticsList = userAnswerContributions.stream()
@@ -104,9 +105,25 @@ public class UserBusinessImpl implements UserBusiness {
                     return userAnswerContributionStatistics;
                 }).collect(Collectors.toList());
 
+        Map<LocalDate, Long> userAnswerContributionMap = userAnswerContributionStatisticsList.stream()
+                .collect(Collectors.groupingBy(UserAnswerContributionStatistics::getContributeDate, Collectors.counting()));
+
+        // 文章
+        List<UserArticleContribution> userArticleContributions = userService.queryUserArticleContribution(userId, tomorrow, lastYearYesterday);
+        List<UserArticleContributionStatistics> userArticleContributionStatisticsList = userArticleContributions.stream()
+                .map(userArticleContribution -> {
+                    UserArticleContributionStatistics userArticleContributionStatistics = mapper.map(userArticleContribution, UserArticleContributionStatistics.class);
+                    userArticleContributionStatistics.setContributeDate(userArticleContribution.getCreateTime().toLocalDate());
+                    return userArticleContributionStatistics;
+                }).collect(Collectors.toList());
+
+        Map<LocalDate, Long> userArticleContributionMap = userArticleContributionStatisticsList.stream()
+                .collect(Collectors.groupingBy(UserArticleContributionStatistics::getContributeDate, Collectors.counting()));
+
+
         QueryContributionDataResponseDTO queryContributionDataResponseDTO = new QueryContributionDataResponseDTO();
 
-        Map<LocalDate, Long> userAnswerContributionMap = userAnswerContributionStatisticsList.stream().collect(Collectors.groupingBy(UserAnswerContributionStatistics::getContributeDate, Collectors.counting()));
+
         LocalDate date = null;
         List<QueryContributionDataItemDTO> queryContributionDataItemDTOS = Lists.newArrayList();
         for (int i = 0; i < 370; i++) {
@@ -125,6 +142,11 @@ public class UserBusinessImpl implements UserBusiness {
             if (!CollectionUtils.isEmpty(userAnswerContributionMap)
                     && userAnswerContributionMap.get(date) != null) {
                 contributionCount += userAnswerContributionMap.get(date);
+            }
+
+            if (!CollectionUtils.isEmpty(userArticleContributionMap)
+                    && userArticleContributionMap.get(date) != null) {
+                contributionCount += userArticleContributionMap.get(date);
             }
 
             contributionItem.setCount(contributionCount);

@@ -16,7 +16,7 @@ public interface UserQuestionContributionMapper {
     UserQuestionContribution selectByPrimaryKey(Long id);
 
     List<UserQuestionContribution> queryUserQuestionContribution(@Param("userId") long userId,
-                                                                 @Param("today") LocalDate today,
+                                                                 @Param("tomorrow") LocalDate tomorrow,
                                                                  @Param("lastYearToday") LocalDate lastYearToday);
 
     int updateByPrimaryKeySelective(UserQuestionContribution record);

@@ -9,7 +9,7 @@ import lombok.Getter;
  * @discription
  **/
 @Getter
-public enum BaiduQuestionLinkPushTypeEnum {
+public enum BaiduLinkPushTypeEnum {
 
     SUCCESS(0),
     FAIL(1),
@@ -17,7 +17,7 @@ public enum BaiduQuestionLinkPushTypeEnum {
 
     private final int code;
 
-    BaiduQuestionLinkPushTypeEnum(int code) {
+    BaiduLinkPushTypeEnum(int code) {
         this.code = code;
     }
 }

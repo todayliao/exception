@@ -17,4 +17,6 @@ public interface BaiduLinkPushService {
 
     void pushQuestionDetailPageLink(long questionId);
 
+    void pushArticleDetailPageLink(long articleId);
+
 }

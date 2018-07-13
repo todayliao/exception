@@ -4,8 +4,11 @@ import com.exception.qms.business.ArticleBusiness;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.QmsResponseCodeEnum;
+import com.exception.qms.enums.UserQuestionContributionTypeEnum;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.ArticleService;
+import com.exception.qms.service.BaiduLinkPushService;
+import com.exception.qms.service.UserService;
 import com.exception.qms.utils.AliyunOSSClient;
 import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.utils.KeyUtil;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +39,12 @@ public class ArticleBusinessImpl implements ArticleBusiness {
     private AliyunOSSClient aliyunOSSClient;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ExecutorService executorService;
+    @Autowired
+    private BaiduLinkPushService baiduLinkPushService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private Mapper mapper;
 
@@ -93,7 +103,11 @@ public class ArticleBusinessImpl implements ArticleBusiness {
 
         // 异步 es 索引 todo
 
-        // 异步推送百度 todo
+        // 异步添加记录贡献
+        executorService.execute(() -> userService.addArticleContribution(articleId, userId));
+
+        // 异步推送链接给百度，加快收录速度
+//        executorService.execute(() -> baiduLinkPushService.pushArticleDetailPageLink(articleId));
 
         return new BaseResponse().success();
     }
