@@ -23,6 +23,12 @@
     from t_ams_article_content
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByArticleId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+    select id, article_id, content from t_ams_article_content
+    where article_id = #{articleId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_ams_article_content
     where id = #{id,jdbcType=BIGINT}

@@ -45,4 +45,14 @@ public class ArticleServiceImpl implements ArticleService {
     public void batchAddArticleTagRel(List<ArticleTagRel> articleTagRels) {
         articleTagRelMapper.batchAddArticleTagRel(articleTagRels);
     }
+
+    @Override
+    public Article queryArticleInfo(Long articleId) {
+        return articleMapper.selectByPrimaryKey(articleId);
+    }
+
+    @Override
+    public ArticleContent queryArticleContent(Long articleId) {
+        return articleContentMapper.selectByArticleId(articleId);
+    }
 }

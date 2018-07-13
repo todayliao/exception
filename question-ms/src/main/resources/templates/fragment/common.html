@@ -83,7 +83,7 @@
 
 
 <!-- footer -->
-<footer class="footer bg-white margintop-30px" th:fragment="footer">
+<footer th:if="${topNav != 'article'}" class="footer bg-white margintop-30px" th:fragment="footer">
     <div class="container">
         <p class="copy-right">Copy right © 2017-2018 by <a href="#">Jiang Bing</a>. All Rights Reserved.</p>
         <p class="for-open-source margintop-10px">Thanks for the <a href="https://getbootstrap.com/">Bootstrap4</a>, loving the open source, it changed the world.</p>

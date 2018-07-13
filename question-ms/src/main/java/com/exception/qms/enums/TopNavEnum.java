@@ -13,6 +13,7 @@ public enum TopNavEnum {
 
     HOME("home", "首页"),
     QUESTION("question", "问题详情页"),
+    ARTICLE("article", "文章详情页"),
     USER("user", "用户墙"),
     TAG("tag", "标签墙"),
     ABOUT("about", "关于"),

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title th:text="${response.title} + 'Exception开发者社区'">title</title>
+    <!--<meta name="description" th:content="${response.seoDescription}">-->
+    <!--<meta name="keywords" th:content="${response.seoKeywords}">-->
+
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link th:include="fragment/common-css :: cssLink">
+    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github.css}">
+    <!--<link rel="stylesheet" th:href="@{/plugins/google-code-prettify/prettify.css}">-->
+    <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
+    <link rel="stylesheet" th:href="@{/css/article/article-detail.css}">
+
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header th:replace="fragment/common :: header"></header>
+<!-- main content -->
+<main class="container-fluid main-content">
+    <!--<div class="row">-->
+        <!--<div class="title-image">-->
+            <img th:if="${response.titleImage != ''}" class="title-image" th:src="${response.titleImage}">
+        <!--</div>-->
+        <article class="article-container">
+            <div class="article-header">
+                <h1 class="article-title" th:utext="${response.title}">博客标题</h1>
+                <div class="author-info-container">
+                    <!--<div >-->
+                        <img class="author-info-image float-left" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526">
+                    <!--</div>-->
+                    <div class="author-info-content float-left">
+                        <div>
+                            <a class="author-info-name" href="#">AllenJiang</a>
+                        </div>
+                        <div class="author-info-introduction">微信内搜索“AllenJiang”，或者搜索“open163”，我在等着你哦！</div>
+                    </div>
+                </div>
+                <a href="#">
+                    <button type="button" class="btn btn-outline-primary float-right follow-btn">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    关注
+                    </button>
+                </a>
+            </div>
+
+            <!-- 文章正文 -->
+            <div>
+                <div class="article-content" th:utext="${response.contentHtml}">
+                    正文
+                </div>
+            </div>
+
+            <!-- 发布时间 -->
+            <div class="text-gray marginbottom-1rem fs-14px article-share-time">
+                <a href="#" class="tooltip-a" data-toggle="tooltip" data-placement="top"
+                   th:title="'发布于 ' + ${response.createTimeStr}">
+                    发布于&nbsp;<span th:text="${response.createDateStr}">2018-06-09</span>
+                </a>
+            </div>
+
+
+        </article>
+    <!--</div>-->
+    <!-- 回到顶部 -->
+    <button th:replace="fragment/common :: backToTop"></button>
+</main>
+<!-- footer -->
+<footer th:replace="fragment/common :: footer"></footer>
+<div th:replace="fragment/common :: loginModal"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<!--<script th:src="@{/plugins/google-code-prettify/prettify.js}"></script>-->
+<script th:src="@{/plugins/layer/layer.js}"></script>
+<script th:src="@{/plugins/zoomify/zoomify.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:replace="fragment/common-js :: baiduLinkPush"></script>
+<script th:replace="fragment/common-js :: 360LinkPush"></script>
+
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        // 代码高亮
+        hljs.initHighlightingOnLoad();
+        // $("pre").addClass("prettyprint");
+        // prettyPrint();
+
+        // 图片放大
+        $('p img').zoomify();
+
+
+    });
+
+</script>
+</html>

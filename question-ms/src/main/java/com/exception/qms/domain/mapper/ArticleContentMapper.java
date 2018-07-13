@@ -11,6 +11,8 @@ public interface ArticleContentMapper {
 
     ArticleContent selectByPrimaryKey(Long id);
 
+    ArticleContent selectByArticleId(Long articleId);
+
     int updateByPrimaryKeySelective(ArticleContent record);
 
     int updateByPrimaryKeyWithBLOBs(ArticleContent record);

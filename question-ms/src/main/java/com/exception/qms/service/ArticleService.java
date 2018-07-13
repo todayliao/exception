@@ -18,4 +18,8 @@ public interface ArticleService {
     int addArticleContent(ArticleContent articleContent);
 
     void batchAddArticleTagRel(List<ArticleTagRel> articleTagRels);
+
+    Article queryArticleInfo(Long articleId);
+
+    ArticleContent queryArticleContent(Long articleId);
 }

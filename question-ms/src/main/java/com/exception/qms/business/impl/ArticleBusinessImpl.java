@@ -9,11 +9,9 @@ import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.ArticleService;
 import com.exception.qms.service.BaiduLinkPushService;
 import com.exception.qms.service.UserService;
-import com.exception.qms.utils.AliyunOSSClient;
-import com.exception.qms.utils.ConstantsUtil;
-import com.exception.qms.utils.KeyUtil;
-import com.exception.qms.utils.StringUtil;
+import com.exception.qms.utils.*;
 import com.exception.qms.web.form.article.ArticleForm;
+import com.exception.qms.web.vo.article.ArticleDetailResponseVO;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
@@ -21,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
@@ -110,5 +109,26 @@ public class ArticleBusinessImpl implements ArticleBusiness {
 //        executorService.execute(() -> baiduLinkPushService.pushArticleDetailPageLink(articleId));
 
         return new BaseResponse().success();
+    }
+
+    @Override
+    public ArticleDetailResponseVO queryArticleDetail(Long articleId) {
+        Article article = articleService.queryArticleInfo(articleId);
+
+        if (article == null) {
+            log.warn("the article doesn't exist, article id : {}", articleId);
+            throw new QMSException(QmsResponseCodeEnum.ARTICLE_NOT_EXIST);
+        }
+
+        ArticleDetailResponseVO articleDetailResponseVO = mapper.map(article, ArticleDetailResponseVO.class);
+        // 日期格式转换
+        articleDetailResponseVO.setCreateDateStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(article.getCreateTime()));
+        articleDetailResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(article.getCreateTime()));
+
+        ArticleContent articleContent = articleService.queryArticleContent(articleId);
+
+        articleDetailResponseVO.setContentHtml(MarkdownUtil.parse2Html(articleContent.getContent()));
+
+        return articleDetailResponseVO;
     }
 }

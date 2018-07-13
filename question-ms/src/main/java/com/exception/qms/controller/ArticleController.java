@@ -45,4 +45,12 @@ public class ArticleController extends BaseController {
         return articleBusiness.commitArticle(articleForm, user == null ? null : user.getId());
     }
 
+    @GetMapping("/article/{articleId}")
+    @OperatorLog(description = "博客展示页")
+    public String showArticleDetail(@PathVariable("articleId") Long articleId, Model model) {
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), articleBusiness.queryArticleDetail(articleId));
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.ARTICLE.getCode());
+        return "article/article-detail";
+    }
+
 }
