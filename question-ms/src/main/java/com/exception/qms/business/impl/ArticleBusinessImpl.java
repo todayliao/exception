@@ -64,25 +64,14 @@ public class ArticleBusinessImpl implements ArticleBusiness {
             throw new QMSException(QmsResponseCodeEnum.QUESTION_TAGS_OVER);
         }
 
-        String titleImageUrl = null;
-        // 当题图不为空时，先上传图片到阿里云对象存储服务
-        if (articleForm.getTitleImage() != null) {
-            String fileKey = KeyUtil.genUniqueKey();
-            boolean isSuccess = aliyunOSSClient.uploadFile(fileKey, articleForm.getTitleImage());
 
-            if (!isSuccess) {
-                log.error("upload the title image fail.");
-                throw new QMSException(QmsResponseCodeEnum.UPLOAD_FILE_FAIL);
-            }
-
-            titleImageUrl = String.format("https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/%s", fileKey);
-            log.info("titleImageUrl ==> {}", titleImageUrl);
-        }
+        String content = articleForm.getContent();
+        String titleImageUrl = StringUtil.getFirstImageUrlFromMarkdown(content);
 
         Article article = new Article();
         article.setCreateUserId(userId);
         article.setTitle(StringUtil.spacingText(articleForm.getTitle()));
-        article.setTitleImage(titleImageUrl);
+        article.setTitleImage(titleImageUrl == null ? "" : titleImageUrl);
         article.setType(articleForm.getType());
         articleService.addArticle(article);
 

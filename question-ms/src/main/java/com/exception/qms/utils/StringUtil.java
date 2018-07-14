@@ -88,18 +88,43 @@ public class StringUtil {
         return text;
     }
 
+    public static String getFirstImageUrlFromMarkdown(String mdStr) {
+        String pattern= "!\\[(.*?)\\]\\((.*?)\\)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(mdStr);
+
+        String imageUrl = null;
+        if (m.find()) {
+            String tmp = m.group(0);
+            int startIndex = tmp.indexOf("(");
+            tmp = tmp.substring(startIndex + 1);
+            imageUrl = tmp.substring(0, tmp.length() - 1);
+        }
+
+        return imageUrl;
+    }
+
     //----------------------------------------------------------------------
     // 字符串格式化，易读性处理 - end
     //----------------------------------------------------------------------
 
     public static void main(String[] args) {
 
-        System.out.println(spacingText(
-                "        public void createSiteMapXml(HttpServletResponse response) throws IOException {\n" +
-                "\t\tresponse.setContentType(MediaType.APPLICATION_XML_VALUE);\n" +
-                "            Writer writer = response.getWriter();\n" +
-                "            writer.append(seoService.createSiteMapXmlContent());\n" +
-                "        }"));
+        String text = "其实，阿里云还是支持的，首先我们转到 [云盾证书服务的购物车](https://common-buy.aliyun.com/?spm=a2c4e.11155515.0.0.QFIx9e&commodityCode=cas#/buy \"云盾证书服务的购物车\")\n" +
+                "\n" +
+                "默认当前购物车仅显示 ` 专业版 OV SSL` 和 ` 通配符 DV SSL`，我们需要经过如下操作，才能将 ` 免费型 DV SSL` 的选项显示出来：\n" +
+                "\n" +
+                "**第一步：请点击 ` 选择品牌 ` 中的 `Symantec`**\n" +
+                "\n" +
+                "**第二步：![](https://ssexception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152845944491179)点击 ` 保护类型 ` 中的 `1 个域名 `**\n" +
+                "\n" +
+                "接下来，我们就能选择免费的 https ssl 证书了进行申请了：\n" +
+                "\n" +
+                "![](https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152845944491179)";
+
+//        String content = "<a href=\"URL\">";
+        System.out.println(getFirstImageUrlFromMarkdown(text));
+
     }
 
 }

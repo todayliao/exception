@@ -46,10 +46,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>添加题图<i>(可为空)</i></label>
-                    <input type="file" class="form-control-file" name="titleImage" accept=".jpeg, .jpg, .png">
-                </div>
-                <div class="form-group">
                     <label>博客标题</label>
                     <input id="title" type="text" class="form-control" name="title">
                 </div>
@@ -123,6 +119,11 @@
         var tagSize = $('#tag-ids-hidden').children().length;
         if (title.trim() == '') {
             layer.msg("文章标题不能为空");
+            return;
+        }
+
+        if (title.length > 30) {
+            layer.msg("文章标题不能超过30个字");
             return;
         }
 

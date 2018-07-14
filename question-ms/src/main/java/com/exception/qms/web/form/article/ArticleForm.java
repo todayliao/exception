@@ -23,12 +23,6 @@ public class ArticleForm implements Serializable {
     private String title;
 
     /**
-     * 题图
-     */
-    @NotNull
-    private MultipartFile titleImage;
-
-    /**
      * 文章类型
      */
     @NotNull
