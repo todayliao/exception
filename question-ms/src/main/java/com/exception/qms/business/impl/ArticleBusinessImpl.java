@@ -18,9 +18,12 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
@@ -128,6 +131,28 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         ArticleContent articleContent = articleService.queryArticleContent(articleId);
 
         articleDetailResponseVO.setContentHtml(MarkdownUtil.parse2Html(articleContent.getContent()));
+
+        // 作者信息
+        List<User> users = userService.queryUsersByUserIds(Arrays.asList(article.getCreateUserId()));
+        if (!CollectionUtils.isEmpty(users)) {
+            User createUser = users.get(0);
+            articleDetailResponseVO.setAuthorAvatar(createUser.getAvatar());
+            articleDetailResponseVO.setAuthorName(createUser.getName());
+            articleDetailResponseVO.setAuthorIntroduction(createUser.getIntroduction());
+        }
+
+        // seo
+        String content = articleContent.getContent();
+        // description 最多显示 200 字符
+        int limit = 200;
+        if (content.length() > limit) {
+            articleDetailResponseVO.setSeoDescription(content.substring(0, limit));
+        } else {
+            articleDetailResponseVO.setSeoDescription(content);
+        }
+
+        // keywords
+
 
         return articleDetailResponseVO;
     }

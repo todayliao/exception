@@ -22,9 +22,10 @@ public class ArticleDetailResponseVO implements Serializable {
     private String createDateStr;
     private String createTimeStr;
 
-    private Long createUserId;
-    private String createUserAvatar;
-    private String createUserName;
+    private Long authorId;
+    private String authorAvatar;
+    private String authorName;
+    private String authorIntroduction;
 
     private Integer voteUp;
 

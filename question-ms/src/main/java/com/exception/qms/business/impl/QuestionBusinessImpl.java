@@ -137,8 +137,9 @@ public class QuestionBusinessImpl implements QuestionBusiness {
         // seo
         String descriptionCn = questionDesc.getDescriptionCn();
         // description 最多显示 120 字符
-        if (descriptionCn.length() > 120) {
-            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn().substring(0, 120));
+        int limit = 200;
+        if (descriptionCn.length() > limit) {
+            questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn().substring(0, limit));
         } else {
             questionDetailResponseVO.setSeoDescription(questionDesc.getDescriptionCn());
         }
