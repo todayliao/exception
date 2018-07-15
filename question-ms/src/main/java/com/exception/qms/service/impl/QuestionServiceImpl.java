@@ -62,6 +62,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<Question> queryHomeQuestionList(int limit, String limitTime) {
+        return questionMapper.queryHomeQuestionList(limit, limitTime);
+    }
+
+    @Override
     public List<Question> queryHotQuestions() {
         return questionMapper.queryHotQuestions();
     }

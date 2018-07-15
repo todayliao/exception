@@ -55,4 +55,14 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleContent queryArticleContent(Long articleId) {
         return articleContentMapper.selectByArticleId(articleId);
     }
+
+    @Override
+    public List<Article> queryHomeArticleList(int limit, String limitTime) {
+        return articleMapper.queryHomeArticleList(limit, limitTime);
+    }
+
+    @Override
+    public List<ArticleContent> queryArticleContents(List<Long> articleIds) {
+        return articleContentMapper.queryArticleContents(articleIds);
+    }
 }

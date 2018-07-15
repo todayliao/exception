@@ -33,34 +33,6 @@
     <div class="row">
         <div class="col-md-9 br-3px">
 
-            <!--<div class="card marginbottom-10px">-->
-                <!--<div class="card-body">-->
-                    <!--<div class="item-author-info">-->
-                        <!--<div>-->
-                            <!--<a href="#"><img class="avatar" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526"></a>-->
-                        <!--</div>-->
-                        <!--<div>-->
-                            <!--<a href="#" class="author-name">AllenJiang</a>-->
-                        <!--</div>-->
-                        <!--<div>-->
-                            <!--<span class="author-introduce">,&nbsp;&nbsp;三流程序员</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="item-content">-->
-                        <!--<h2 class="item-title"><a href="#" >30岁之前，请逼自己成为这种人</a></h2>-->
-                        <!--<div class="item-snapshoot">-->
-                            <!--<img class="float-left item-snapshoot-img" src="https://img.mukewang.com/5b1e47160001d8a918720632.jpg" alt="cover">-->
-                            <!--<div class="item-snapshoot-content">-->
-                                <!--我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，-->
-                                <!--我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，-->
-                                <!--霸占着器材又不拉屎。来了一个欧美的留学生，不太会中文，就跟那些人杠上了。-->
-                                <!--混混们操着一口不知道哪里的脏话就要开打，然后…-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
             <!-- 操作 card, 包括分享问题解决方案以及写博客-->
             <div class="card marginbottom-10px">
                 <div class="card-body">
@@ -77,14 +49,14 @@
                             写博客
                         </button>
                     </a>
-
                 </div>
             </div>
 
             <div th:each="item : ${response.data}" class="card marginbottom-10px">
-                <div class="card-body">
+                <!-- 问题 -->
+                <div th:if="${item.type == 0}" class="card-body">
                     <div class="item-author-info">
-                        <a th:href="@{'/user/' + ${item.createUserId}}"><img class="avatar" src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152929087656526"></a>
+                        <a th:href="@{'/user/' + ${item.createUserId}}"><img class="avatar" th:src="${item.createUserAvatar}"></a>
                         <a th:href="@{'/user/' + ${item.createUserId}}" class="author-name" th:utext="${item.createUserName}">AllenJiang</a>
                         <span class="author-introduce">&nbsp;,&nbsp;&nbsp;[[${item.createUserIntroduction}]]</span>
                     </div>
@@ -97,11 +69,32 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 文章 -->
+                <div th:if="${item.type == 1}" class="card-body">
+                    <div class="item-author-info">
+                        <a th:href="@{'/user/' + ${item.createUserId}}"><img class="avatar" th:src="${item.createUserAvatar}"></a>
+                        <a th:href="@{'/user/' + ${item.createUserId}}" class="author-name" th:utext="${item.createUserName}">AllenJiang</a>
+                        <span class="author-introduce">&nbsp;,&nbsp;&nbsp;[[${item.createUserIntroduction}]]</span>
+                    </div>
+                    <div class="item-content">
+                        <h2 class="item-title"><a th:href="@{'/article/' + ${item.id}}" th:utext="${item.titleCn}">30岁之前，请逼自己成为这种人</a></h2>
+                        <div class="item-snapshoot">
+                            <img th:if="${item.titleImage != ''}" class="float-left item-snapshoot-img" th:src="${item.titleImage}">
+                            <div class="item-snapshoot-content" th:utext="${item.shortContent}">
+                                我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，
+                                我记得当年大学时一件事，有四个外面来的小混混无聊至极，跑到学校的健身房 “混社会”，
+                                霸占着器材又不拉屎。来了一个欧美的留学生，不太会中文，就跟那些人杠上了。
+                                混混们操着一口不知道哪里的脏话就要开打，然后…
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card marginbottom-10px">
                 <div class="card-body paddingtop0 paddingbottom0">
-                    <a th:href="@{'/home?pageIndex=' + ${response.pageIndex+1}}" class="pull-up-loading-more">点击加载下一页</a>
+                    <a th:href="@{'/home?qLimitTime=' + ${response.qLimitTime} + '&aLimitTime=' + ${response.aLimitTime}}" class="pull-up-loading-more">点击加载下一页</a>
                 </div>
             </div>
 
@@ -180,7 +173,7 @@
             last: '尾页',
             onPageClick: function (event, pageIndex) {
                 // $('#page-content').text('Page ' + page);
-                location.href = "/home?pageIndex=" + pageIndex + "&tab=" + [[${tab}]];
+                location.href = "/home?pageIndex=" + pageIndex;
             }
         });
 

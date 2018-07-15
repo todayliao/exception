@@ -29,6 +29,14 @@
     where article_id = #{articleId}
   </select>
 
+  <select id="queryArticleContents" resultMap="BaseResultMap">
+    select id, article_id, content from t_ams_article_content
+    where article_id IN
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_ams_article_content
     where id = #{id,jdbcType=BIGINT}

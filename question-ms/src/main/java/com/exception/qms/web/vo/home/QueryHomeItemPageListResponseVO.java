@@ -4,6 +4,7 @@ import com.exception.qms.web.vo.common.TagResponseVO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -22,9 +23,27 @@ public class QueryHomeItemPageListResponseVO implements Serializable {
     private String createUserIntroduction;
 
     /**
+     * 题图
+     */
+    private String titleImage;
+
+    /**
      * item 内容快照
      */
     private String shortContent;
+
+    /**
+     * 类型 0：问题 1：文章
+     */
+    private Integer type;
+
+    private LocalDateTime createTime;
+
+    /**
+     * 用来分页的时间
+     */
+    private String limitTime;
+
     /**
      * 时间差
      */

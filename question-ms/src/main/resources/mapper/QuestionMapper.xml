@@ -69,6 +69,13 @@
     </if>
     limit #{start}, #{pageSize}
   </select>
+
+  <select id="queryHomeQuestionList" resultMap="BaseResultMap">
+    select id, title_cn, create_time, create_user_id from t_qms_question
+    where is_deleted = 0 and create_time <![CDATA[<]]> #{limitTime}
+    order by create_time desc
+    limit #{limit}
+  </select>
   
   <select id="queryQuestionPageListByUser" resultMap="BaseResultMap">
     select id, title_cn, create_time, create_user_id from t_qms_question

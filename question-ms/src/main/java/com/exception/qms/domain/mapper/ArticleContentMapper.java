@@ -2,6 +2,8 @@ package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.entity.ArticleContent;
 
+import java.util.List;
+
 public interface ArticleContentMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -12,6 +14,8 @@ public interface ArticleContentMapper {
     ArticleContent selectByPrimaryKey(Long id);
 
     ArticleContent selectByArticleId(Long articleId);
+
+    List<ArticleContent> queryArticleContents(List<Long> articleIds);
 
     int updateByPrimaryKeySelective(ArticleContent record);
 

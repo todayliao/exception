@@ -18,6 +18,9 @@ public interface QuestionMapper {
                                          @Param("pageSize") int pageSize,
                                          @Param("orderByColumn") String orderByColumn);
 
+    List<Question> queryHomeQuestionList(@Param("limit") int limit,
+                                         @Param("limitTime") String limitTime);
+
     List<Question> queryQuestionPageListByUser(long userId);
 
     int queryQuestionTotalCount();

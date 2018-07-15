@@ -20,5 +20,9 @@ public class ConstantsUtil {
     public static final String EXCEPTION_INDEX = "exception";
     public static final String EXCEPTION_INDEX_TYPE = "question";
 
+    public static final String FORMATTER_DATE = "yyyy-MM-dd";
+
+    public static final String FORMATTER_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+
 
 }

@@ -33,6 +33,8 @@ public interface QuestionService {
 
     List<Question> queryQuestionTagPageList(List<Long> questionIds, Integer pageIndex, Integer pageSize, String orderByColumn);
 
+    List<Question> queryHomeQuestionList(int limit, String limitTime);
+
     List<Question> queryHotQuestions();
 
     List<Question> queryAllQuestions();

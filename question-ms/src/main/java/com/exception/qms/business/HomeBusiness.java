@@ -1,7 +1,7 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.BaseResponse;
-import com.exception.qms.common.PageQueryResponse;
+import com.exception.qms.common.HomePageQueryResponse;
 import com.exception.qms.web.vo.home.QueryHomeItemPageListResponseVO;
 
 /**
@@ -15,8 +15,10 @@ public interface HomeBusiness {
     /**
      * 展示首页问题列表
      * @return
+     * @param qLimitTime
+     * @param limitTime
      */
-    PageQueryResponse<QueryHomeItemPageListResponseVO> queryQuestionPageList(Integer pageIndex, Integer pageSize);
+    HomePageQueryResponse<QueryHomeItemPageListResponseVO> queryHomePageList(String qLimitTime, String limitTime);
 
     BaseResponse queryHotTags();
 
