@@ -161,21 +161,21 @@
 
 <script th:inline="javascript">
     $(document).ready(function() {
-        // 分页
-        $('#pagination').twbsPagination({
-            totalPages: [[${response.totalPage}]],
-            visiblePages: 7,
-            startPage: [[${response.currentPage}]],
-            initiateStartPageClick: false,
-            first: '首页',
-            prev: '上一页',
-            next: '下一页',
-            last: '尾页',
-            onPageClick: function (event, pageIndex) {
-                // $('#page-content').text('Page ' + page);
-                location.href = "/home?pageIndex=" + pageIndex;
-            }
-        });
+        // // 分页
+        // $('#pagination').twbsPagination({
+        //     totalPages: [[${response.totalPage}]],
+        //     visiblePages: 7,
+        //     startPage: [[${response.currentPage}]],
+        //     initiateStartPageClick: false,
+        //     first: '首页',
+        //     prev: '上一页',
+        //     next: '下一页',
+        //     last: '尾页',
+        //     onPageClick: function (event, pageIndex) {
+        //         // $('#page-content').text('Page ' + page);
+        //         location.href = "/home?pageIndex=" + pageIndex;
+        //     }
+        // });
 
         // hot questions
         $('#hot-question-card').show();
