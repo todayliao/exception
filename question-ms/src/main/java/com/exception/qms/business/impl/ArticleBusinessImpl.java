@@ -12,6 +12,7 @@ import com.exception.qms.service.UserService;
 import com.exception.qms.utils.*;
 import com.exception.qms.web.form.article.ArticleForm;
 import com.exception.qms.web.vo.article.ArticleDetailResponseVO;
+import com.exception.qms.web.vo.common.TagResponseVO;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
@@ -144,6 +145,15 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         List<Tag> tags = articleService.queryArticleTags(articleId);
         String keywords = tags.stream().map(Tag::getName).collect(Collectors.joining(","));
         articleDetailResponseVO.setSeoKeywords(keywords);
+
+        // tags
+        List<TagResponseVO> tagResponseVOS = tags.stream().map(tag -> {
+            TagResponseVO tagResponseVO = new TagResponseVO();
+            tagResponseVO.setTagId(tag.getId());
+            tagResponseVO.setTagName(tag.getName());
+            return tagResponseVO;
+        }).collect(Collectors.toList());
+        articleDetailResponseVO.setTags(tagResponseVOS);
 
         return articleDetailResponseVO;
     }

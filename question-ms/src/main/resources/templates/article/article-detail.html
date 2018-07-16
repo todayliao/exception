@@ -66,6 +66,13 @@
                 </a>
             </div>
 
+            <div class="tags">
+                <a th:each="tag : ${response.tags}"
+                      class="badge badge-primary badge-article marginright-5px"
+                      th:href="'/question/tag/' + ${tag.tagId}"
+                      th:utext="${tag.tagName}"></a>
+            </div>
+
         </article>
     <!-- 回到顶部 -->
     <button th:replace="fragment/common :: backToTop"></button>

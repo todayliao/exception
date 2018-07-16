@@ -135,3 +135,24 @@
 .article-share-time {
     margin-bottom: 2rem !important;
 }
+
+.tags {
+    margin-bottom: 3rem !important;
+}
+
+.badge-article {
+    background: rgba(0,132,255,.1);
+    color: #0084ff;
+    padding: 0 12px;
+    height: 33px;
+    font-size: 13px;
+    line-height: 33px;
+    overflow: hidden;
+    vertical-align: top;
+    border-radius: 100px;
+}
+
+.badge-article:hover {
+    color: #0084ff !important;
+    background-color: rgba(0,132,255,.15) !important;
+}

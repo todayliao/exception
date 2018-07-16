@@ -52,5 +52,4 @@ public class ArticleController extends BaseController {
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.ARTICLE.getCode());
         return "article/article-detail";
     }
-
 }
