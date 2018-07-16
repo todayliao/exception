@@ -26,4 +26,8 @@ public interface ArticleService {
     List<Article> queryHomeArticleList(int limit, String limitTime);
 
     List<ArticleContent> queryArticleContents(List<Long> articleIds);
+
+    List<Tag> queryArticleTags(Long articleId);
+
+    List<Article> queryAll();
 }

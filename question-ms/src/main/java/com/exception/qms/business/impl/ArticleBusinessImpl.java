@@ -98,7 +98,7 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         executorService.execute(() -> userService.addArticleContribution(articleId, userId));
 
         // 异步推送链接给百度，加快收录速度
-//        executorService.execute(() -> baiduLinkPushService.pushArticleDetailPageLink(articleId));
+        executorService.execute(() -> baiduLinkPushService.pushArticleDetailPageLink(articleId));
 
         return new BaseResponse().success();
     }
@@ -114,8 +114,8 @@ public class ArticleBusinessImpl implements ArticleBusiness {
 
         ArticleDetailResponseVO articleDetailResponseVO = mapper.map(article, ArticleDetailResponseVO.class);
         // 日期格式转换
-        articleDetailResponseVO.setCreateDateStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(article.getCreateTime()));
-        articleDetailResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:hh:ss").format(article.getCreateTime()));
+        articleDetailResponseVO.setCreateDateStr(DateTimeFormatter.ofPattern(ConstantsUtil.FORMATTER_DATE).format(article.getCreateTime()));
+        articleDetailResponseVO.setCreateTimeStr(DateTimeFormatter.ofPattern(ConstantsUtil.FORMATTER_DATE_TIME).format(article.getCreateTime()));
 
         ArticleContent articleContent = articleService.queryArticleContent(articleId);
 
@@ -141,7 +141,9 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         }
 
         // keywords
-
+        List<Tag> tags = articleService.queryArticleTags(articleId);
+        String keywords = tags.stream().map(Tag::getName).collect(Collectors.joining(","));
+        articleDetailResponseVO.setSeoKeywords(keywords);
 
         return articleDetailResponseVO;
     }

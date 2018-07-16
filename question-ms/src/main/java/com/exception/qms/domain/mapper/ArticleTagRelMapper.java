@@ -15,6 +15,8 @@ public interface ArticleTagRelMapper {
 
     ArticleTagRel selectByPrimaryKey(Long id);
 
+    List<ArticleTagRel> queryArticleTags(Long articleId);
+
     int updateByPrimaryKeySelective(ArticleTagRel record);
 
     int updateByPrimaryKey(ArticleTagRel record);

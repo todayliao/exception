@@ -17,6 +17,8 @@ public interface ArticleMapper {
 
     List<Article> queryHomeArticleList(@Param("limit") int limit, @Param("limitTime") String limitTime);
 
+    List<Article> queryAll();
+
     int updateByPrimaryKeySelective(Article record);
 
     int updateByPrimaryKey(Article record);

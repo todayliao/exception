@@ -17,6 +17,12 @@
     from t_ams_article_tag_rel
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="queryArticleTags" resultMap="BaseResultMap">
+    select id, article_id, tag_id from t_ams_article_tag_rel
+    where article_id = #{articleId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_ams_article_tag_rel
     where id = #{id,jdbcType=BIGINT}

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author jiangbing(江冰)
@@ -30,6 +31,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleContentMapper articleContentMapper;
     @Autowired
     private ArticleTagRelMapper articleTagRelMapper;
+    @Autowired
+    private TagMapper tagMapper;
 
     @Override
     public int addArticle(Article article) {
@@ -64,5 +67,19 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleContent> queryArticleContents(List<Long> articleIds) {
         return articleContentMapper.queryArticleContents(articleIds);
+    }
+
+    @Override
+    public List<Tag> queryArticleTags(Long articleId) {
+        List<ArticleTagRel> articleTagRels = articleTagRelMapper.queryArticleTags(articleId);
+        return articleTagRels.stream().map(articleTagRel -> {
+            Long tagId = articleTagRel.getTagId();
+            return tagMapper.selectByPrimaryKey(tagId);
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Article> queryAll() {
+        return articleMapper.queryAll();
     }
 }

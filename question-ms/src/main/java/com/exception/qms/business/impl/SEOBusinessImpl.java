@@ -8,6 +8,7 @@ import com.exception.qms.domain.enhancement.UserAnswerContributionStatistics;
 import com.exception.qms.domain.enhancement.UserQuestionContributionStatistics;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.service.*;
+import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.utils.TimeUtil;
 import com.exception.qms.web.dto.user.response.QueryContributionDataItemDTO;
 import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
@@ -56,6 +57,8 @@ public class SEOBusinessImpl implements SEOBusiness {
     private AnswerService answerService;
     @Autowired
     private BaiduLinkPushService baiduLinkPushService;
+    @Autowired
+    private ArticleService articleService;
 
     @Override
     public BaseResponse pushAllQuestion() {
@@ -67,7 +70,7 @@ public class SEOBusinessImpl implements SEOBusiness {
     @Override
     public String createSiteMapXmlContent() {
         String baseUrl = String.format("https://%s", domain);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(ConstantsUtil.FORMATTER_DATE);
 
         WebSitemapGenerator wsg = null;
         try {
@@ -95,7 +98,21 @@ public class SEOBusinessImpl implements SEOBusiness {
                 LocalDateTime updateTime =
                         questionLatestUpdateTime.isBefore(answerLatestUpdateTime) ? answerLatestUpdateTime : questionLatestUpdateTime;
 
-                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + question.getId())
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + questionId)
+                        .lastMod(dateTimeFormatter.format(updateTime))
+                        .priority(0.9)
+                        .changeFreq(ChangeFreq.DAILY)
+                        .build();
+                wsg.addUrl(tmpUrl);
+            }
+
+            // articles
+            List<Article> articles = articleService.queryAll();
+            for (Article article : articles) {
+                Long articleId = article.getId();
+                LocalDateTime updateTime = article.getUpdateTime();
+
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/article/" + articleId)
                         .lastMod(dateTimeFormatter.format(updateTime))
                         .priority(0.9)
                         .changeFreq(ChangeFreq.DAILY)
