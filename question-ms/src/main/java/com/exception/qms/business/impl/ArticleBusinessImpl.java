@@ -100,7 +100,7 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         // 异步推送链接给百度，加快收录速度
         executorService.execute(() -> baiduLinkPushService.pushArticleDetailPageLink(articleId));
 
-        return new BaseResponse().success();
+        return new BaseResponse().success(articleId);
     }
 
     @Override

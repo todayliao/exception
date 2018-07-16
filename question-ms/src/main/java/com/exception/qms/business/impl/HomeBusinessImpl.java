@@ -179,9 +179,6 @@ public class HomeBusinessImpl implements HomeBusiness {
         }
 
         // list 重新按时间倒序(内存排序)
-//        homeQuestionPageListResponseVOS = homeQuestionPageListResponseVOS.stream()
-//                .sorted(Comparator.comparing(QueryHomeItemPageListResponseVO::getCreateTime).reversed()).collect(Collectors.toList());
-
         homeQuestionPageListResponseVOS.sort(Comparator.comparing(QueryHomeItemPageListResponseVO::getCreateTime).reversed());
 
         return new HomePageQueryResponse<QueryHomeItemPageListResponseVO>()
