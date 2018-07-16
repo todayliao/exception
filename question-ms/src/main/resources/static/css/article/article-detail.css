@@ -19,7 +19,7 @@
 
 .article-header {
     overflow: hidden;
-    width: 690px;
+    /*width: 690px;*/
     margin: 0 auto;
 }
 
@@ -74,7 +74,7 @@
 
 .article-container>div {
     /*overflow: hidden;*/
-    width: 690px;
+    /*width: 690px;*/
     margin: 0 auto;
 }
 
@@ -90,38 +90,48 @@
 }
 
 .article-content h2 {
-    font-size: 1.2em;
+    margin-top: 1.66667em;
+    margin-bottom: 1rem;
+    font-size: 1.25em;
     line-height: 1.5;
     font-weight: 600;
-    margin-bottom: 1rem;
+    font-synthesis: style;
 }
 
 .article-content h3 {
-    font-size: 1.2em;
+    margin-top: 1.66667em;
+    margin-bottom: 1rem;
+    font-size: 1.25em;
     line-height: 1.5;
     font-weight: 600;
-    margin-bottom: 1rem;
+    font-synthesis: style;
 }
 
 .article-content h4 {
-    font-size: 1.2em;
+    margin-top: 1.66667em;
+    margin-bottom: 1rem;
+    font-size: 1.25em;
     line-height: 1.5;
     font-weight: 600;
-    margin-bottom: 1rem;
+    font-synthesis: style;
 }
 
 .article-content h5 {
-    font-size: 1.2em;
+    margin-top: 1.66667em;
+    margin-bottom: 1rem;
+    font-size: 1.25em;
     line-height: 1.5;
     font-weight: 600;
-    margin-bottom: 1rem;
+    font-synthesis: style;
 }
 
 .article-content h6 {
-    font-size: 1.2em;
+    margin-top: 1.66667em;
+    margin-bottom: 1rem;
+    font-size: 1.25em;
     line-height: 1.5;
     font-weight: 600;
-    margin-bottom: 1rem;
+    font-synthesis: style;
 }
 
 .article-content p img {
