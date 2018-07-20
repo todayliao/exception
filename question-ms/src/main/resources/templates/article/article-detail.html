@@ -79,7 +79,7 @@
 
                 <div class="tags">
                     <a th:each="tag : ${response.tags}"
-                       class="badge badge-primary badge-article marginright-5px"
+                       class="badge badge-primary badge-zhihu marginright-5px"
                        th:href="'/question/tag/' + ${tag.tagId}"
                        th:utext="${tag.tagName}"></a>
                 </div>

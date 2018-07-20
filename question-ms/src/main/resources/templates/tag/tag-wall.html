@@ -33,11 +33,13 @@
                 <div class="grid-layout">
                     <div th:each="tag : ${response.data}" class="grid-layout-cell">
                         <div class="tag-cell-header">
-                            <a th:href="'/question/tag/' + ${tag.id}" class="badge badge-light-blue marginright-5px" th:text="${tag.name}">java</a>
-                            <span class="cell-multiplier">
-                                <span>×</span>&nbsp;
-                                <span th:text="${tag.questionCount}">0</span>
-                            </span>
+                            <a th:href="'/question/tag/' + ${tag.id}"
+                               class="badge badge-light-blue marginright-5px badge-zhihu"
+                               th:text="${tag.name + ' × ' + tag.questionCount}">java</a>
+                            <!--<span class="cell-multiplier">-->
+                                <!--<span>×</span>&nbsp;-->
+                                <!--<span th:text="${tag.questionCount}">0</span>-->
+                            <!--</span>-->
                         </div>
                         <div class="tag-cell-body" th:utext="${tag.descriptionCn}">
                             Java（不要与JavaScript或JScript混淆
