@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 
 /**
  * @author jiangbing(江冰)
@@ -45,10 +47,26 @@ public class SEOController extends BaseController {
      * @return
      */
     @GetMapping("/sitemap.xml")
-    public void createSiteMapXml(HttpServletResponse response) throws IOException {
+    public void sitemapXml(HttpServletResponse response) throws IOException {
         response.setContentType(MediaType.APPLICATION_XML_VALUE);
         Writer writer = response.getWriter();
         writer.append(seoBusiness.createSiteMapXmlContent());
+    }
+
+    /**
+     * robots txt
+     *
+     * @return
+     */
+    @GetMapping("/robots.txt")
+    public void robotsTxt(HttpServletResponse response) throws IOException {
+        Writer writer = response.getWriter();
+        String lineSeparator = System.getProperty("line.separator", "\n");
+        writer.append("User-agent: *").append(lineSeparator);
+        writer.append("Disallow: ").append("/question/tag/*").append(lineSeparator);
+        writer.append("Disallow: ").append("/user/*").append(lineSeparator);
+        writer.append("Disallow: ").append("/answer/*/edit").append(lineSeparator);
+        writer.append("Disallow: ").append("/question/*/edit").append(lineSeparator);
     }
 
 }
