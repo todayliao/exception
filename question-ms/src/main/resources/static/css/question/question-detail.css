@@ -16,6 +16,7 @@
 
 .question-desc {
     font-size: 15px;
+    line-height: 1.6;
 }
 
 .answer-list-header {
@@ -302,6 +303,10 @@
     white-space: nowrap;
     color: #646464;
     word-break: break-word;
+    line-height: 1.6;
+}
+
+.answer-content {
     line-height: 1.6;
 }
 
