@@ -19,7 +19,7 @@ import java.util.List;
 @Data
 public class ArticleForm implements Serializable {
     @NotBlank
-    @Length(max = 30, message = "文章标题最多30个字")
+    @Length(max = 50, message = "文章标题最多30个字")
     private String title;
 
     /**
