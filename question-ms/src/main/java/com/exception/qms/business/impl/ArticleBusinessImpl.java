@@ -126,6 +126,7 @@ public class ArticleBusinessImpl implements ArticleBusiness {
         List<User> users = userService.queryUsersByUserIds(Arrays.asList(article.getCreateUserId()));
         if (!CollectionUtils.isEmpty(users)) {
             User createUser = users.get(0);
+            articleDetailResponseVO.setAuthorId(createUser.getId());
             articleDetailResponseVO.setAuthorAvatar(createUser.getAvatar());
             articleDetailResponseVO.setAuthorName(createUser.getName());
             articleDetailResponseVO.setAuthorIntroduction(createUser.getIntroduction());
