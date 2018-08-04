@@ -150,3 +150,7 @@
 .tags {
     margin-bottom: 3rem !important;
 }
+
+pre {
+    background-color: #282b2e;
+}
