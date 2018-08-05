@@ -20,8 +20,8 @@ services:
       - JAVA_OPTS=-Xms300m -Xmx300m -Dspring.profiles.active=prd
     ports:
       - 8090:8090
-#    volumes:
-#      - /app/logs/qms:/app/logs/qms
+    volumes:
+      - /app/logs/qms:/app/logs/qms
 
 
 
