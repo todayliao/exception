@@ -1,8 +1,18 @@
 package com.exception.qms.utils;
 
+import com.exception.qms.domain.entity.Answer;
+import com.google.common.collect.Lists;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
+import static java.util.Comparator.comparingLong;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
 
 /**
  * @author jiangbing(江冰)
@@ -49,5 +59,13 @@ public class IpUtil {
 
         return ipAddress;
     }
+
+
+    // 根据id去重
+    List<Answer> answers = Lists.newArrayList();
+    List<Answer> unique = answers.stream().collect(
+            collectingAndThen(
+                    toCollection(() -> new TreeSet<>(comparingLong(Answer::getId))), ArrayList::new)
+    );
 
 }

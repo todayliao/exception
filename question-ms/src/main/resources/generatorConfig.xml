@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_ums_user_article_contribution" domainObjectName="UserArticleContribution"
+        <table tableName="t_health_article_content" domainObjectName="HealthArticleContent"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
