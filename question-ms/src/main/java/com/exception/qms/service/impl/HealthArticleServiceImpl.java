@@ -46,4 +46,9 @@ public class HealthArticleServiceImpl implements HealthArticleService {
     public List<HealthArticle> queryHealthArticleList(Integer pageIndex, Integer pageSize) {
         return healthArticleMapper.queryHealthArticleList(PageUtil.calculateLimitSelectSqlStart(pageIndex, pageSize), pageSize);
     }
+
+    @Override
+    public int increaseReadNum(Long articleId) {
+        return healthArticleMapper.increaseReadNum(articleId);
+    }
 }

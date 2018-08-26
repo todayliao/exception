@@ -19,4 +19,6 @@ public interface HealthArticleService {
     int queryHealthArticleListCount();
 
     List<HealthArticle> queryHealthArticleList(Integer pageIndex, Integer pageSize);
+
+    int increaseReadNum(Long articleId);
 }

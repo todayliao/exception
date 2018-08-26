@@ -21,4 +21,6 @@ public interface HealthArticleMapper {
     int updateByPrimaryKeySelective(HealthArticle record);
 
     int updateByPrimaryKey(HealthArticle record);
+
+    int increaseReadNum(Long articleId);
 }
