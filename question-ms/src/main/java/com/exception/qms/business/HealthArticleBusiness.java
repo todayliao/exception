@@ -19,4 +19,8 @@ public interface HealthArticleBusiness {
     PageQueryResponse queryHealthArticleList(Integer pageIndex, Integer pageSize);
 
     BaseResponse increaseReadNum(Long articleId, HttpServletRequest request);
+
+    BaseResponse queryTestArticle();
+
+    BaseResponse queryVersion();
 }

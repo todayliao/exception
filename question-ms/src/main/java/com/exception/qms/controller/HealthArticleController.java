@@ -21,20 +21,19 @@ import javax.servlet.http.HttpServletRequest;
  * @discription 养生文章
  **/
 @RestController
-@RequestMapping("/health/article")
 public class HealthArticleController extends BaseController {
 
     @Autowired
     private HealthArticleBusiness healthArticleBusiness;
 
-    @GetMapping("/list")
+    @GetMapping("/health/article/list")
     @OperatorLog(description = "首页列表展示")
     public PageQueryResponse queryHealthArticleList(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                                     @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
         return healthArticleBusiness.queryHealthArticleList(pageIndex, pageSize);
     }
 
-    @GetMapping("/{articleId}")
+    @GetMapping("/health/article/{articleId}")
     @OperatorLog(description = "获取养生文章详情")
     public BaseResponse getHealthArticleContent(@PathVariable("articleId") Long articleId) {
         return healthArticleBusiness.queryHealthArticleContent(articleId);
@@ -45,10 +44,32 @@ public class HealthArticleController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/{articleId}/readNum/increase")
+    @GetMapping("/health/article/{articleId}/readNum/increase")
     @ResponseBody
     public BaseResponse increaseReadNum(@PathVariable("articleId") Long articleId, HttpServletRequest request) {
         return healthArticleBusiness.increaseReadNum(articleId, request);
+    }
+
+    /**
+     * 跳过小程序审核(查询版本号)
+     *
+     * @return
+     */
+    @GetMapping("/health/version")
+    @ResponseBody
+    public BaseResponse queryVersion() {
+        return healthArticleBusiness.queryVersion();
+    }
+
+    /**
+     * 跳过小程序审核（测试数据）
+     *
+     * @return
+     */
+    @GetMapping("/health/article/testData")
+    @ResponseBody
+    public BaseResponse queryTestArticle() {
+        return healthArticleBusiness.queryTestArticle();
     }
 
 }
