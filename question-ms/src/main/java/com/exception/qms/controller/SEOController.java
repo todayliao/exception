@@ -42,6 +42,17 @@ public class SEOController extends BaseController {
     }
 
     /**
+     * 主动推送所有优选博文的连接给百度
+     *
+     * @return
+     */
+    @GetMapping("/seo/baidu/pushAllRecommendedArticle")
+    @ResponseBody
+    public BaseResponse pushAllRecommendedArticle() {
+        return seoBusiness.pushAllRecommendedArticle();
+    }
+
+    /**
      * site map
      *
      * @return

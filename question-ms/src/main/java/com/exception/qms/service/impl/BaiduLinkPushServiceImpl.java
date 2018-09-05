@@ -143,4 +143,39 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
             log.error("push the link of article detail page error, ", e);
         }
     }
+
+    @Override
+    public void pushRecommendedArticleDetailPageLink(long articleId) {
+        String url = String.format("http://%s/urls?site=%s&token=%s", linkPushHost, domain, linkPushToken);
+        String articleDetailPageUrl = String.format("%s/recommended/article/%d", domain, articleId);
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("Content-Type", "text/plain");
+
+        // 设置 body
+        StringEntity entity = new StringEntity(articleDetailPageUrl, "UTF-8");
+        httpPost.setEntity(entity);
+        HttpResponse response = null;
+
+        try {
+            response = client.execute(httpPost);
+
+            int responseCode = response.getStatusLine().getStatusCode();
+
+            String responseJson = EntityUtils.toString(response.getEntity());
+            log.info("response json: {}", responseJson);
+
+            BaiduPushLinkResponseDTO baiduPushLinkResponseDTO = JsonUtil.toBean(responseJson, BaiduPushLinkResponseDTO.class);
+
+            if (HttpStatus.SC_OK == responseCode) {
+                log.info("push the link of recommended article detail page success, url ==> {}, remain: {}", articleDetailPageUrl, baiduPushLinkResponseDTO.getRemain());
+            } else {
+                log.info("push the link of recommended article detail page fail, url ==> {}", articleDetailPageUrl);
+            }
+
+        } catch (Exception e) {
+            log.error("push the link of article detail page error, ", e);
+        }
+    }
 }

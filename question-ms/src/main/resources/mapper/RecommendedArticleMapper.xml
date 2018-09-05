@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exception.qms.domain.mapper.RecommendedArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.RecommendedArticle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="date_time" property="dateTime" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="gzh" property="gzh" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    <result column="be_read_num" property="beReadNum" jdbcType="INTEGER" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, title, cover, date_time, author, gzh, status, is_deleted, 
+    be_read_num, summary
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    id, title, date_time, author, gzh
+    from t_ams_recommended_article
+    where id = #{id,jdbcType=BIGINT} and is_deleted = 0
+  </select>
+  
+  <select id="queryRecommendedArticleTotalCount" resultType="int">
+    select count(1) from  t_ams_recommended_article
+    where is_deleted = 0
+  </select>
+
+    <select id="queryRecommendedArticleList" resultMap="BaseResultMap">
+        select id, date_time, title, cover, summary from t_ams_recommended_article
+        where is_deleted = 0 order by date_time DESC
+        limit #{start}, #{pageSize}
+    </select>
+
+    <select id="queryAllArticles" resultMap="BaseResultMap">
+        select id, update_time from t_ams_recommended_article
+        where is_deleted = 0 order by create_time desc
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ams_recommended_article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.exception.qms.domain.entity.RecommendedArticle" >
+    insert into t_ams_recommended_article (id, create_time, update_time, 
+      title, cover, date_time, 
+      author, gzh, status, 
+      is_deleted, be_read_num, summary
+      )
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{dateTime,jdbcType=INTEGER}, 
+      #{author,jdbcType=VARCHAR}, #{gzh,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{isDeleted,jdbcType=BIT}, #{beReadNum,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.RecommendedArticle" >
+    insert into t_ams_recommended_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="cover != null" >
+        cover,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="gzh != null" >
+        gzh,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="beReadNum != null" >
+        be_read_num,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null" >
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="gzh != null" >
+        #{gzh,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="beReadNum != null" >
+        #{beReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exception.qms.domain.entity.RecommendedArticle" >
+    update t_ams_recommended_article
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null" >
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null" >
+        date_time = #{dateTime,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="gzh != null" >
+        gzh = #{gzh,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="beReadNum != null" >
+        be_read_num = #{beReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exception.qms.domain.entity.RecommendedArticle" >
+    update t_ams_recommended_article
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      date_time = #{dateTime,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      gzh = #{gzh,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      be_read_num = #{beReadNum,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

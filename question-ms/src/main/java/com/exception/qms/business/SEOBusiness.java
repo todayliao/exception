@@ -14,5 +14,7 @@ public interface SEOBusiness {
 
     BaseResponse pushAllQuestion();
 
+    BaseResponse pushAllRecommendedArticle();
+
     String createSiteMapXmlContent();
 }

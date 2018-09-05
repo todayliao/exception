@@ -59,11 +59,20 @@ public class SEOBusinessImpl implements SEOBusiness {
     private BaiduLinkPushService baiduLinkPushService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private RecommendedArticleService recommendedArticleService;
 
     @Override
     public BaseResponse pushAllQuestion() {
         List<Question> questions = questionService.queryAllQuestions();
         questions.parallelStream().forEach(question -> baiduLinkPushService.pushQuestionDetailPageLink(question.getId()));
+        return new BaseResponse().success();
+    }
+
+    @Override
+    public BaseResponse pushAllRecommendedArticle() {
+        List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
+        recommendedArticles.parallelStream().forEach(recommendedArticle -> baiduLinkPushService.pushRecommendedArticleDetailPageLink(recommendedArticle.getId()));
         return new BaseResponse().success();
     }
 
@@ -84,7 +93,7 @@ public class SEOBusinessImpl implements SEOBusiness {
 
             wsg.addUrl(url);
 
-            // question detail pages
+            // step1：question detail pages
             List<Question> questions = questionService.queryAllQuestions();
             List<Long> questionIds = questions.stream().map(Question::getId).collect(Collectors.toList());
 
@@ -106,7 +115,21 @@ public class SEOBusinessImpl implements SEOBusiness {
                 wsg.addUrl(tmpUrl);
             }
 
-            // articles
+            // step2: recommended article
+            List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
+            for (RecommendedArticle recommendedArticle : recommendedArticles) {
+                Long recommendedArticleId = recommendedArticle.getId();
+                LocalDateTime updateTime = recommendedArticle.getUpdateTime();
+
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article/" + recommendedArticleId)
+                        .lastMod(dateTimeFormatter.format(updateTime))
+                        .priority(0.9)
+                        .changeFreq(ChangeFreq.DAILY)
+                        .build();
+                wsg.addUrl(tmpUrl);
+            }
+
+            // step3: articles
             List<Article> articles = articleService.queryAll();
             for (Article article : articles) {
                 Long articleId = article.getId();

@@ -31,7 +31,7 @@ code {
 }
 
 pre code {
-    background-color: #f6f8fa;
+    /*background-color: #f6f8fa;*/
 }
 
 .form-control {
@@ -81,7 +81,7 @@ pre code {
 
 .card {
     border: 0;
-    box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    box-shadow: 0 1px 2px rgba(150,150,150,0.3);
 }
 
 blockquote {

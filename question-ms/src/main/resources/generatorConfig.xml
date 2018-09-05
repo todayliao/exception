@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_health_article_content" domainObjectName="HealthArticleContent"
+        <table tableName="t_ams_recommended_article_content" domainObjectName="RecommendedArticleContent"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
