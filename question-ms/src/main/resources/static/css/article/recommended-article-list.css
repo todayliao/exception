@@ -63,6 +63,7 @@
 .item-content {
     padding: 26px 15px;
     border-bottom: 1px solid #e5e5e7;
+    overflow: hidden;
 }
 
 .card-body:last-child .item-content{
@@ -90,3 +91,4 @@
 .article-content p {
     font-size: 15px !important;
 }
+

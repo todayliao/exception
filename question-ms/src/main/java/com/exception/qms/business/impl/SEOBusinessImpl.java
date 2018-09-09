@@ -90,8 +90,15 @@ public class SEOBusinessImpl implements SEOBusiness {
                     .priority(1.0)
                     .changeFreq(ChangeFreq.DAILY)
                     .build();
-
             wsg.addUrl(url);
+
+            // recommended article page
+            WebSitemapUrl recommendedArtcileUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article")
+                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
+                    .priority(0.9)
+                    .changeFreq(ChangeFreq.DAILY)
+                    .build();
+            wsg.addUrl(recommendedArtcileUrl);
 
             // step1：question detail pages
             List<Question> questions = questionService.queryAllQuestions();
