@@ -4,8 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <title th:text="${response.title} + ' | Exception 优选博文'">title</title>
-    <meta name="description" th:content="${response.title}">
     <meta name="keywords" th:content="${response.title}">
+    <meta name="description" th:content="${response.seoDescription}">
 
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->

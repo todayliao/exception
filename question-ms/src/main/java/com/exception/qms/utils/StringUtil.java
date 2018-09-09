@@ -1,6 +1,7 @@
 package com.exception.qms.utils;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.util.Assert;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,23 +109,28 @@ public class StringUtil {
     // 字符串格式化，易读性处理 - end
     //----------------------------------------------------------------------
 
+
+    private static Pattern p = Pattern.compile("[^\\x00-\\xff]");
+    /**
+     * 从 html 中抽取正文
+     * @param html
+     * @return
+     */
+    public static String getContentFromHtml(String html) {
+        Assert.hasText(html, "html 不能为空");
+        // 匹配双字节字符(包括汉字在内)
+        Matcher m = p.matcher(html);
+        StringBuilder sb = new StringBuilder();
+        while (m.find()) {
+            sb.append(m.group());
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
 
-        String text = "其实，阿里云还是支持的，首先我们转到 [云盾证书服务的购物车](https://common-buy.aliyun.com/?spm=a2c4e.11155515.0.0.QFIx9e&commodityCode=cas#/buy \"云盾证书服务的购物车\")\n" +
-                "\n" +
-                "默认当前购物车仅显示 ` 专业版 OV SSL` 和 ` 通配符 DV SSL`，我们需要经过如下操作，才能将 ` 免费型 DV SSL` 的选项显示出来：\n" +
-                "\n" +
-                "**第一步：请点击 ` 选择品牌 ` 中的 `Symantec`**\n" +
-                "\n" +
-                "**第二步：![](https://ssexception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152845944491179)点击 ` 保护类型 ` 中的 `1 个域名 `**\n" +
-                "\n" +
-                "接下来，我们就能选择免费的 https ssl 证书了进行申请了：\n" +
-                "\n" +
-                "![](https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/152845944491179)";
 
-//        String content = "<a href=\"URL\">";
-        System.out.println(getFirstImageUrlFromMarkdown(text));
-
+//        System.out.println(text);
     }
 
 }

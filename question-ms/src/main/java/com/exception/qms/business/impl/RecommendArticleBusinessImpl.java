@@ -68,12 +68,13 @@ public class RecommendArticleBusinessImpl implements RecommendedArticleBusiness 
 
         // seo
         // description 最多显示 200 字符
-//        int limit = 200;
-//        if (content.length() > limit) {
-//            articleDetailResponseVO.setSeoDescription(content.substring(0, limit));
-//        } else {
-//            articleDetailResponseVO.setSeoDescription(content);
-//        }
+        int limit = 200;
+        String content = StringUtil.getContentFromHtml(recommendedArticleContent.getContent());
+        if (content.length() > limit) {
+            recommendedArticleDetailResponseVO.setSeoDescription(content.substring(0, limit) + " ...");
+        } else {
+            recommendedArticleDetailResponseVO.setSeoDescription(content);
+        }
 
         return recommendedArticleDetailResponseVO;
     }
