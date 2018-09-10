@@ -28,7 +28,8 @@ input::-webkit-input-placeholder{
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.1);
     -moz-box-shadow: 0 1px 5px rgba(0,0,0,.1);
     box-shadow: 0 1px 2px hsla(0,0%,59%,.3);
-
+    padding: 0 1rem;
+    height: 72px;
 }
 
 .bg-light {
@@ -235,7 +236,7 @@ input::-webkit-input-placeholder{
 }
 
 .main-content {
-    margin-top: 70px;
+    margin-top: 83px;
     /*padding: 20px 0;*/
 }
 
@@ -314,7 +315,7 @@ input::-webkit-input-placeholder{
 
 .header-search {
     padding-left: 34px;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 2rem;
 }
 
