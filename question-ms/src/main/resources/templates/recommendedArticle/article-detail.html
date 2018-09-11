@@ -117,7 +117,7 @@
                     var data = response.data;
                     $.each(data, function (i, article) {
                         html += "<div class=\"about-recommended-article-item\">";
-                        html += "<a class='fs-14px blue-a' href='/recommended/article/" + articleId + "'>" + articleTitle + "</a>";
+                        html += "<a class='fs-14px blue-a' href='/recommended/article/" + article.id + "'>" + article.title + "</a>";
                         html += "</div>";
                     });
                     $('#about-recommended-article-list').html(html);

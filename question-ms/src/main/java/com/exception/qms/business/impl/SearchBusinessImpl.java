@@ -278,7 +278,7 @@ public class SearchBusinessImpl implements SearchBusiness {
                 .setTypes(ConstantsUtil.RECOMMENDED_ARTICLE_INDEX_TYPE)
                 .setQuery(boolQueryBuilder)
                 .setFrom(0)
-                .setSize(11);
+                .setSize(16);
 
         log.info("the search request builder: {}", requestBuilder.toString());
         SearchResponse response = requestBuilder.get();
