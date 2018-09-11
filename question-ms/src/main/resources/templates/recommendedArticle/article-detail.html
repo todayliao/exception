@@ -65,16 +65,18 @@
 
         </div>
 
-        <!--<div class="col-md-3">-->
-            <!--<div class="card">-->
-                <!--<div class="card-header m-card-header">-->
-                    <!--<div class="card-title">相关文章</div>-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="col-md-3">
+            <div id="about-recommended-article-list-card" class="card" style="display: none;">
+                <div class="card-header m-card-header">
+                    <div class="card-title">相关文章</div>
+                </div>
+                <div class="card-body" id="about-recommended-article-list">
+                    <!--<div class="about-recommended-article-item">-->
+                        <!--<a class="fs-14px blue-a" href="#">bootstrap 如何实现滑动页面时，右边栏保持位置固定，类似知乎首页</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- 回到顶部 -->
@@ -98,7 +100,33 @@
     $(document).ready(function () {
         // 图片放大
         $(' img').zoomify();
+
+        var articleTitle = [[${response.title}]];
+        var articleId = [[${response.id}]];
+
+        // 右边栏相似问题，异步加载
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/search/recommended/article/about?id=" + articleId + "&title=" + articleTitle,
+            datatype: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    $('#about-recommended-article-list-card').show();
+                    var html = '';
+                    var data = response.data;
+                    $.each(data, function (i, article) {
+                        html += "<div class=\"about-recommended-article-item\">";
+                        html += "<a class='fs-14px blue-a' href='/recommended/article/" + articleId + "'>" + articleTitle + "</a>";
+                        html += "</div>";
+                    });
+                    $('#about-recommended-article-list').html(html);
+                }
+            }
+        });
     });
+
+
 
 </script>
 </html>
