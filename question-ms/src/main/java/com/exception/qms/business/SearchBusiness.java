@@ -3,6 +3,7 @@ package com.exception.qms.business;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
+import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
 import com.exception.qms.web.vo.common.QuestionSearchResponseVO;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface SearchBusiness {
 
     PageQueryResponse<QuestionSearchResponseVO> searchQuestion(Integer pageIndex, Integer pageSize, String key, String tab);
 
-    BaseResponse<List<SearchAboutQuestionResponseDTO>> searchAboutQuestion(String s, Long title);
+    BaseResponse<List<SearchAboutQuestionResponseDTO>> searchAboutQuestion(String title, Long id);
+
+    BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>> searchAboutRecommendedArticle(String title, Long id);
 }

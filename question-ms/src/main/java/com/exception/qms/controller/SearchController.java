@@ -10,6 +10,7 @@ import com.exception.qms.enums.QuestionTabEnum;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
+import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,15 @@ public class SearchController extends BaseController {
             @RequestParam(value = "title") String title,
             @RequestParam(value = "id") Long id) {
         return searchBusiness.searchAboutQuestion(title, id);
+    }
+
+    @GetMapping("/search/recommended/article/about")
+    @OperatorLog(description = "优选文章相关搜索")
+    @ResponseBody
+    public BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>> searchAboutRecommendedArticle(
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "id") Long id) {
+        return searchBusiness.searchAboutRecommendedArticle(title, id);
     }
 
 

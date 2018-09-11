@@ -7,6 +7,7 @@ import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.RecommendedArticle;
 import com.exception.qms.elasticsearch.QuestionIndexKey;
+import com.exception.qms.elasticsearch.RecommendedArticleIndexKey;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.enums.QuestionSearchTabEnum;
 import com.exception.qms.exception.QMSException;
@@ -19,6 +20,7 @@ import com.exception.qms.utils.PageUtil;
 import com.exception.qms.utils.SearchUtil;
 import com.exception.qms.utils.StringUtil;
 import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
+import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
 import com.exception.qms.web.vo.common.QuestionSearchResponseVO;
 import com.exception.qms.web.vo.common.TagResponseVO;
 import com.google.common.collect.Lists;
@@ -98,7 +100,7 @@ public class SearchBusinessImpl implements SearchBusiness {
                         executorService.execute(() -> recommendedArticleSearchService.index(recommendedArticle.getId())));
             });
         }
-        return null;
+        return new BaseResponse().success();
     }
 
     @Override
@@ -254,5 +256,50 @@ public class SearchBusinessImpl implements SearchBusiness {
         });
 
         return new BaseResponse<List<SearchAboutQuestionResponseDTO>>().success(searchAboutQuestionResponseDTOS);
+    }
+
+    @Override
+    public BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>> searchAboutRecommendedArticle(String title, Long id) {
+        if (StringUtils.isBlank(title)) {
+            log.warn("the search title is empty");
+            return new BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>>()
+                    .fail(new QMSException(QmsResponseCodeEnum.SEARCH_KEY_EMPTY));
+        }
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+
+        boolQueryBuilder.must(
+                QueryBuilders.multiMatchQuery(title,
+                        RecommendedArticleIndexKey.TITLE,
+                        RecommendedArticleIndexKey.SUMMARY
+                ));
+
+        SearchRequestBuilder requestBuilder = esClient.prepareSearch(ConstantsUtil.RECOMMENDED_ARTICLE_INDEX)
+                .setTypes(ConstantsUtil.RECOMMENDED_ARTICLE_INDEX_TYPE)
+                .setQuery(boolQueryBuilder)
+                .setFrom(0)
+                .setSize(11);
+
+        log.info("the search request builder: {}", requestBuilder.toString());
+        SearchResponse response = requestBuilder.get();
+
+        if (response.status() != RestStatus.OK) {
+            log.warn("search status is not ok for: {}", requestBuilder.toString());
+            return new BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>>()
+                    .fail(new QMSException(QmsResponseCodeEnum.ES_STATUS_NOT_OK));
+        }
+
+        List<SearchAboutRecommendedArticleResponseDTO> searchAboutRecommendedArticleResponseDTOS = Lists.newArrayList();
+        response.getHits().forEach(searchHitFields -> {
+            Long hitRecommendedArticleId = Longs.tryParse(String.valueOf(searchHitFields.getSource().get(RecommendedArticleIndexKey.ID)));
+            if (!Objects.equals(id, hitRecommendedArticleId)) {
+                SearchAboutRecommendedArticleResponseDTO searchAboutRecommendedArticleResponseDTO = new SearchAboutRecommendedArticleResponseDTO();
+                searchAboutRecommendedArticleResponseDTO.setId(hitRecommendedArticleId);
+                searchAboutRecommendedArticleResponseDTO.setTitle(searchHitFields.getSource().get(RecommendedArticleIndexKey.TITLE).toString());
+                searchAboutRecommendedArticleResponseDTOS.add(searchAboutRecommendedArticleResponseDTO);
+            }
+        });
+
+        return new BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>>().success(searchAboutRecommendedArticleResponseDTOS);
     }
 }
