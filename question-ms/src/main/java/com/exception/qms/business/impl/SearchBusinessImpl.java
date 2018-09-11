@@ -5,12 +5,15 @@ import com.exception.qms.business.SearchBusiness;
 import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.entity.Question;
+import com.exception.qms.domain.entity.RecommendedArticle;
 import com.exception.qms.elasticsearch.QuestionIndexKey;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.enums.QuestionSearchTabEnum;
 import com.exception.qms.exception.QMSException;
 import com.exception.qms.service.QuestionSearchService;
 import com.exception.qms.service.QuestionService;
+import com.exception.qms.service.RecommendedArticleSearchService;
+import com.exception.qms.service.RecommendedArticleService;
 import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.utils.PageUtil;
 import com.exception.qms.utils.SearchUtil;
@@ -55,7 +58,11 @@ public class SearchBusinessImpl implements SearchBusiness {
     @Autowired
     private QuestionSearchService questionSearchService;
     @Autowired
+    private RecommendedArticleSearchService recommendedArticleSearchService;
+    @Autowired
     private QuestionService questionService;
+    @Autowired
+    private RecommendedArticleService recommendedArticleService;
     @Autowired
     private ExecutorService executorService;
     @Autowired
@@ -78,6 +85,20 @@ public class SearchBusinessImpl implements SearchBusiness {
             });
         }
         return new BaseResponse().success();
+    }
+
+    @Override
+    public BaseResponse updateAllRecommendedArticleIndex() {
+        int totalCount = recommendedArticleService.queryRecommendedArticleTotalCount();
+        if (totalCount > 0) {
+            int limit = (totalCount % MAX_QUERY == 0) ? (totalCount / MAX_QUERY) : (totalCount / MAX_QUERY + 1);
+            Stream.iterate(0, n -> n + 1).limit(limit).forEach(n -> {
+                List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryRecommendedArticleList(n + 1, MAX_QUERY);
+                recommendedArticles.parallelStream().forEach(recommendedArticle ->
+                        executorService.execute(() -> recommendedArticleSearchService.index(recommendedArticle.getId())));
+            });
+        }
+        return null;
     }
 
     @Override

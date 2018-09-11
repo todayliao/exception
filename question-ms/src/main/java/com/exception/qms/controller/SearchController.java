@@ -62,4 +62,11 @@ public class SearchController extends BaseController {
         return searchBusiness.updateAllQuestionIndex();
     }
 
+    @GetMapping("/search/recommended/article/allIndex/update")
+    @OperatorLog(description = "更新所有优选博文索引")
+    @ResponseBody
+    public BaseResponse updateAllRecommendedArticleIndex() {
+        return searchBusiness.updateAllRecommendedArticleIndex();
+    }
+
 }

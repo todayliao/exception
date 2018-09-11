@@ -1,0 +1,39 @@
+{
+  "settings": {
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "recommendedArticle": {
+      "dynamic": false,
+      "properties": {
+        "id": {
+          "type": "long"
+        },
+        "title": {
+          "type": "text",
+          "index": "analyzed",
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "summary": {
+          "type": "text",
+          "index": "analyzed",
+          "analyzer": "ik_smart",
+          "search_analyzer": "ik_smart"
+        },
+        "dateTime": {
+          "type": "integer"
+        },
+        "beReadNum": {
+          "type": "integer"
+        },
+        "author": {
+          "type": "keyword"
+        },
+        "gzh": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

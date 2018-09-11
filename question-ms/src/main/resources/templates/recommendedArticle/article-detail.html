@@ -3,7 +3,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title th:text="${response.title} + ' | Exception 优选博文'">title</title>
+    <title th:text="${response.title} + ' - Exception 优选博文'">title</title>
     <meta name="keywords" th:content="${response.title}">
     <meta name="description" th:content="${response.seoDescription}">
 
@@ -29,34 +29,52 @@
 <!-- 顶部导航栏 -->
 <header th:replace="fragment/common :: header"></header>
 <!-- main content -->
-<main class="container-fluid main-content">
+<main class="container main-content">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <article class="article-container">
+        <!--<div class="col-md-3"></div>-->
+        <div class="col-md-9">
+            <!-- 优选博文展示区 -->
 
-                <div class="article-header">
-                    <h1 class="article-title" th:text="${response.title}">博客标题</h1>
-                    <div class="article-extra-info">
-                        <blockquote>
-                            <p>文章出自微信公众号
-                                &nbsp;:&nbsp;[[${response.author}]]
-                                &nbsp;[[${response.gzh}]]
-                                &nbsp;&nbsp;&nbsp;[[${response.publishTime}]]</p>
-                        </blockquote>
-                    </div>
+
+            <div class="card">
+
+                <div class="card-body recommended-article-card-body">
+                    <article class="article-container">
+                        <div class="article-header">
+                            <h1 class="article-title" th:text="${response.title}">博客标题</h1>
+                            <div class="article-extra-info">
+                                <blockquote>
+                                    <p>文章出自微信公众号
+                                        &nbsp;:&nbsp;[[${response.author}]]
+                                        &nbsp;[[${response.gzh}]]
+                                        &nbsp;&nbsp;&nbsp;[[${response.publishTime}]]</p>
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <!-- 文章正文 -->
+                        <div>
+                            <div class="article-content" th:utext="${response.content}">
+                                contentHtml
+                            </div>
+                        </div>
+
+                    </article>
                 </div>
+            </div>
 
-                <!-- 文章正文 -->
-                <div>
-                    <div class="article-content" th:utext="${response.content}">
-                        contentHtml
-                    </div>
-                </div>
-
-            </article>
         </div>
-        <div class="col-md-3"></div>
+
+        <!--<div class="col-md-3">-->
+            <!--<div class="card">-->
+                <!--<div class="card-header m-card-header">-->
+                    <!--<div class="card-title">相关文章</div>-->
+                <!--</div>-->
+                <!--<div class="card-body">-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
     </div>
     <!-- 回到顶部 -->
@@ -79,7 +97,7 @@
 
     $(document).ready(function () {
         // 图片放大
-        $('.article-content img').zoomify();
+        $(' img').zoomify();
     });
 
 </script>

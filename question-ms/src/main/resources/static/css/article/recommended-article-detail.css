@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
 .main-content {
-    background: #fff;
     margin-top: 0;
-    padding-top: 70px;
+    padding-top: 83px;
 }
 
 .title-image {
@@ -14,7 +13,6 @@
 
 .article-container {
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 .article-header {
@@ -29,7 +27,7 @@
     margin-bottom: 30px;
     margin-top: 30px;
     word-wrap: break-word;
-    font-size: 34px;
+    font-size: 30px;
     font-weight: 700;
 }
 
@@ -167,4 +165,8 @@ pre {
 
 .article-extra-info {
     line-height: 1.75rem;
+}
+
+.recommended-article-card-body {
+    padding: 0 2rem;
 }

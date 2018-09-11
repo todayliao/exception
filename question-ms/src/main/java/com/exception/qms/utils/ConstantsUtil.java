@@ -18,7 +18,10 @@ public class ConstantsUtil {
 
     /** elasticsearch 相关 **/
     public static final String EXCEPTION_INDEX = "exception";
+    public static final String RECOMMENDED_ARTICLE_INDEX = "recommended_article";
+
     public static final String EXCEPTION_INDEX_TYPE = "question";
+    public static final String RECOMMENDED_ARTICLE_INDEX_TYPE = "recommendedArticle";
 
     public static final String FORMATTER_DATE = "yyyy-MM-dd";
 
