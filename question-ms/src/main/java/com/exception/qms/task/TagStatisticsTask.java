@@ -29,14 +29,14 @@ public class TagStatisticsTask {
      * 每天凌晨4点统计一次标签下的问题数量
      */
     @Scheduled(cron = "0 0 4 * * ?")
-    public void tagQuestionCountStatistics() {
-        log.info("task for tagQuestionCountStatistics start ==>");
+    public void pushRecommendedArticleIndex() {
+        log.info("task for pushRecommendedArticleIndex start ==>");
 
         List<Tag> tags = questionTagService.tagQuestionCountStatistics();
 
         // todo 待分片更新
         tags.forEach(tag -> tagService.updateTagQuestionCount(tag));
 
-        log.info("task for tagQuestionCountStatistics end ==>");
+        log.info("task for pushRecommendedArticleIndex end ==>");
     }
 }
