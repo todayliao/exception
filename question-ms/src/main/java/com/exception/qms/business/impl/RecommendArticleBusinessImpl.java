@@ -53,6 +53,7 @@ public class RecommendArticleBusinessImpl implements RecommendedArticleBusiness 
 
     @Override
     public RecommendedArticleDetailResponseVO queryArticleDetail(Long articleId) {
+        log.info("query the detail of recommended article, id ==> {}", articleId);
         RecommendedArticle recommendedArticle = recommendedArticleService.queryArticleDetail(articleId);
         if (recommendedArticle == null) {
             log.warn("the recommended article is not exited, id: {}", articleId);

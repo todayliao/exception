@@ -37,7 +37,7 @@ public class RecommendedArticleController extends BaseController {
     }
 
     @GetMapping("/recommended/article/{articleId}")
-    @OperatorLog(description = "优文详情展示页")
+//    @OperatorLog(description = "优文详情展示页")
     public String showArticleDetail(@PathVariable("articleId") Long articleId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), recommendedArticleBusiness.queryArticleDetail(articleId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.RECOMMENDED_ARTICLE.getCode());
