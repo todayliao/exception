@@ -88,7 +88,7 @@ public class SEOBusinessImpl implements SEOBusiness {
             WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl + "/home")
                     .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
                     .priority(1.0)
-                    .changeFreq(ChangeFreq.HOURLY)
+                    .changeFreq(ChangeFreq.ALWAYS)
                     .build();
             wsg.addUrl(url);
 
@@ -96,7 +96,7 @@ public class SEOBusinessImpl implements SEOBusiness {
             WebSitemapUrl recommendedArtcileUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article")
                     .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
                     .priority(0.9)
-                    .changeFreq(ChangeFreq.HOURLY)
+                    .changeFreq(ChangeFreq.ALWAYS)
                     .build();
             wsg.addUrl(recommendedArtcileUrl);
 
