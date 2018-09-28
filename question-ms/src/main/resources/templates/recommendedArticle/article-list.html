@@ -10,17 +10,17 @@
 
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="baidu-site-verification" content="x0xb4LGIXQ"/>
-    <meta name="google-site-verification" content="bZHTltjjXzU9m2UlCxmxYPuPu7OxRlWZH2cSwP0HhfA"/>
-    <meta name="msvalidate.01" content="66FB71AC88C4B58ECF64451775EC46DD"/>
-    <meta name="360-site-verification" content="44f08208659258e5240c7d07274e70d9"/>
-    <meta name="sogou_site_verification" content="Xpc2HrRO0L"/>
-
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
-    <link th:include="fragment/common-css :: cssLink">
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
     <link rel="stylesheet" th:href="@{/css/article/recommended-article-list.css}">
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>

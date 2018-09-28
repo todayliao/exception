@@ -21,7 +21,7 @@
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    id, title, date_time, author, gzh
+    id, title, date_time, author, gzh, cover
     from t_ams_recommended_article
     where id = #{id,jdbcType=BIGINT} and is_deleted = 0
   </select>

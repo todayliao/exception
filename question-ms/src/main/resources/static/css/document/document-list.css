@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.document-card-text {
+    margin-bottom: 0;
+}
+
+.document-card-title a {
+    color: #1a1a1a;
+}
+
+.document-card-title a:hover {
+    color: #175199;
+    text-decoration: none;
+}

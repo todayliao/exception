@@ -10,6 +10,14 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
+
     <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/css/user/user-wall.css}">
 

@@ -21,6 +21,8 @@ public class RecommendedArticleDetailResponseVO implements Serializable {
 
     private String title;
 
+    private String cover;
+
     /**
      * meta seo 字段
      */

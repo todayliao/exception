@@ -6,12 +6,17 @@
     <title th:utext="${response.data.userName} + '的个人空间 - Exception开发者社区'">title</title>
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
-    <link th:include="fragment/common-css :: cssLink">
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
     <link rel="stylesheet" th:href="@{/css/user/user-detail.css}">
     <link rel="stylesheet" th:href="@{/plugins/contribution-chart/calendar-heatmap.css}">
 

@@ -4,23 +4,26 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <title>Exception 开发者社区</title>
-
     <meta name="keywords" content="开发者社区,开发者分享社区,开发者博客,开发者问题,开发者解决方案,开发者编程知识">
     <meta name="description" content="Exception 开发者分享社区 - 开发者可以学习,写博客,分享自己平时自己工作中各种场景下遇到的问题,以及解决方案,编程知识">
-
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
     <meta name="baidu-site-verification" content="x0xb4LGIXQ" />
     <meta name="google-site-verification" content="bZHTltjjXzU9m2UlCxmxYPuPu7OxRlWZH2cSwP0HhfA" />
     <meta name="msvalidate.01" content="66FB71AC88C4B58ECF64451775EC46DD" />
     <meta name="360-site-verification" content="44f08208659258e5240c7d07274e70d9" />
     <meta name="sogou_site_verification" content="Xpc2HrRO0L"/>
-
-    <meta name="_csrf" th:content="${_csrf.getToken()}">
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-
-    <link th:include="fragment/common-css :: cssLink">
     <link rel="stylesheet" th:href="@{/css/home/home.css}">
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>

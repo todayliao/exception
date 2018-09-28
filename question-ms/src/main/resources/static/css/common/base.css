@@ -451,7 +451,7 @@ input::-webkit-input-placeholder{
 
 .grid-layout {
     display: grid;
-    grid-gap: 8px;
+    grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 

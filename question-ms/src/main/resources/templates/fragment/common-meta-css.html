@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="cssLink">
+<head th:fragment="metaCssLink">
+
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
     <!-- commoncBootstrap CSS -->
     <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
     <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
