@@ -117,6 +117,7 @@
     transition: color .2s ease-in;
     font-size: 16px;
     color: #1a1a1a;
+    background-color: #fff;
 }
 
 .share-question-btn:hover {

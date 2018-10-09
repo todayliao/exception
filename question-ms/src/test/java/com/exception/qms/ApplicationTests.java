@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ApplicationTests {
-
-    public static void main(String[] args) {
-        HashMap<Integer, String> hashMap = new HashMap();
-        hashMap.put(1, "jiangbing");
-    }
 
 
 }
