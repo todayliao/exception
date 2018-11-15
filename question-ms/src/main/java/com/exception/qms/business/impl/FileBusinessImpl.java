@@ -1,25 +1,15 @@
 package com.exception.qms.business.impl;
 
 import com.exception.qms.business.FileBusiness;
-import com.exception.qms.business.TagBusiness;
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.EditorMdUploadImageResponse;
-import com.exception.qms.domain.entity.Tag;
 import com.exception.qms.enums.QmsResponseCodeEnum;
-import com.exception.qms.exception.BaseException;
 import com.exception.qms.exception.QMSException;
-import com.exception.qms.service.TagService;
 import com.exception.qms.utils.AliyunOSSClient;
 import com.exception.qms.utils.KeyUtil;
-import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
-import com.exception.qms.web.dto.question.response.QueryTagsByNameResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author jiangbing(江冰)

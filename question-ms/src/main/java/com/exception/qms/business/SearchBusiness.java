@@ -1,10 +1,10 @@
 package com.exception.qms.business;
 
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
 import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
 import com.exception.qms.web.vo.common.QuestionSearchResponseVO;
+import site.exception.common.BaseResponse;
+import site.exception.common.PageQueryResponse;
 
 import java.util.List;
 

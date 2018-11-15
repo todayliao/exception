@@ -1,4 +1,4 @@
-package com.exception.qms.exception;
+package site.exception.exception;
 
 /**
  * @author jiangbing(江冰)

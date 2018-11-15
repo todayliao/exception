@@ -1,17 +1,15 @@
 package com.exception.qms.security;
 
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.enhancement.AuthUser;
-import com.exception.qms.domain.entity.User;
 import com.exception.qms.service.UserService;
 import com.exception.qms.utils.HttpUtil;
-import com.exception.qms.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.util.AntPathMatcher;
+import site.exception.common.BaseResponse;
+import site.exception.utils.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

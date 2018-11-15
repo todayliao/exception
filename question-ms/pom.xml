@@ -61,6 +61,13 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!-- 平台通用模块 -->
+		<dependency>
+			<groupId>site.exception</groupId>
+			<artifactId>framework-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 		<!-- SpringBoot自带热加载开发工具 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

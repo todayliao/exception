@@ -1,9 +1,9 @@
-package com.exception.qms.common;
+package site.exception.common;
+
+import lombok.Data;
+import site.exception.exception.BaseException;
 
 import java.io.Serializable;
-
-import com.exception.qms.exception.BaseException;
-import lombok.Data;
 
 /**
  * 服务响应 response

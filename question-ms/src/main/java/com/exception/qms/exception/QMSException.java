@@ -1,6 +1,7 @@
 package com.exception.qms.exception;
 
 import com.exception.qms.enums.QmsResponseCodeEnum;
+import site.exception.exception.BaseException;
 
 /**
  * @author jiangbing(江冰)

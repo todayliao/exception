@@ -1,6 +1,5 @@
 package com.exception.qms;
 
-import com.exception.qms.utils.JsonUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +9,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
+import site.exception.utils.JsonUtil;
 
 @SpringBootApplication
 @MapperScan("com.exception.qms.domain.mapper")

@@ -1,6 +1,7 @@
 package com.exception.qms.common;
 
 import lombok.Data;
+import site.exception.common.PageQueryResponse;
 
 import java.util.List;
 

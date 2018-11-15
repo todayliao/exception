@@ -2,8 +2,7 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.HomeBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import io.swagger.annotations.ApiOperation;
@@ -13,8 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.time.LocalDateTime;
+import site.exception.common.BaseResponse;
 
 /**
  * @author jiangbing(江冰)
@@ -23,7 +21,7 @@ import java.time.LocalDateTime;
  * @discription
  **/
 @Controller
-public class HomeController extends BaseController {
+public class HomeController {
 
     @Autowired
     private HomeBusiness homeBusiness;

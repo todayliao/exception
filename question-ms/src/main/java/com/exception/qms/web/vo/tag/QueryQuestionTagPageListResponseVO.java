@@ -1,11 +1,9 @@
 package com.exception.qms.web.vo.tag;
 
-import com.exception.qms.common.PageQueryResponse;
-import com.exception.qms.web.vo.common.QuestionListItemResponseVO;
 import lombok.Data;
+import site.exception.common.PageQueryResponse;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author jiangbing(江冰)

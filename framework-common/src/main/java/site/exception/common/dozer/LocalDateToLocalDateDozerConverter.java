@@ -1,4 +1,4 @@
-package com.exception.qms.common.dozer;
+package site.exception.common.dozer;
 
 import org.dozer.DozerConverter;
 

@@ -1,6 +1,5 @@
 package com.exception.qms.common;
 
-import com.exception.qms.exception.BaseException;
 import lombok.Data;
 
 import java.io.Serializable;

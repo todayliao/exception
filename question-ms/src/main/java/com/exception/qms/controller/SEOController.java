@@ -1,21 +1,18 @@
 package com.exception.qms.controller;
 
 import com.exception.qms.business.SEOBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.ControllerExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import site.exception.common.BaseResponse;
 
 import javax.servlet.http.HttpServletResponse;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Arrays;
 
 /**
  * @author jiangbing(江冰)
@@ -25,7 +22,7 @@ import java.util.Arrays;
  **/
 @Controller
 @Slf4j
-public class SEOController extends BaseController {
+public class SEOController {
 
     @Autowired
     private SEOBusiness seoBusiness;

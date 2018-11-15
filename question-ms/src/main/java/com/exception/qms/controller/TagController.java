@@ -2,8 +2,7 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.TagBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import site.exception.common.BaseResponse;
 
 /**
  * @author jiangbing(江冰)
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @discription
  **/
 @Controller
-public class TagController extends BaseController {
+public class TagController {
 
     @Autowired
     private TagBusiness tagBusiness;

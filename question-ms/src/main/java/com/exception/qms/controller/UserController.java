@@ -1,36 +1,15 @@
 package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
-import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.business.UserBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.domain.entity.Answer;
-import com.exception.qms.domain.entity.Question;
-import com.exception.qms.domain.entity.UserAnswerContribution;
-import com.exception.qms.domain.entity.UserQuestionContribution;
-import com.exception.qms.domain.mapper.AnswerMapper;
-import com.exception.qms.domain.mapper.QuestionMapper;
-import com.exception.qms.domain.mapper.UserAnswerContributionMapper;
-import com.exception.qms.domain.mapper.UserQuestionContributionMapper;
+import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
-import com.exception.qms.enums.UserAnswerContributionTypeEnum;
-import com.exception.qms.enums.UserQuestionContributionTypeEnum;
-import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
-import com.google.common.collect.Lists;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.List;
-import java.util.Random;
+import site.exception.common.BaseResponse;
 
 /**
  * @author jiangbing(江冰)
@@ -39,7 +18,7 @@ import java.util.Random;
  * @discription
  **/
 @Controller
-public class UserController extends BaseController {
+public class UserController {
 
     @Autowired
     private UserBusiness userBusiness;

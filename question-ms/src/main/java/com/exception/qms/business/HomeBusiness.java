@@ -1,8 +1,8 @@
 package com.exception.qms.business;
 
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.HomePageQueryResponse;
 import com.exception.qms.web.vo.home.QueryHomeItemPageListResponseVO;
+import site.exception.common.BaseResponse;
 
 /**
  * @author jiangbing(江冰)

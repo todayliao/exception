@@ -1,7 +1,6 @@
 package com.exception.qms.business.impl;
 
 import com.exception.qms.business.HomeBusiness;
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.common.HomePageQueryResponse;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.enums.HomeListItemTypeEnum;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.HtmlUtils;
+import site.exception.common.BaseResponse;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

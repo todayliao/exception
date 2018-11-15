@@ -1,4 +1,4 @@
-package com.exception.qms.exception;
+package site.exception.exception;
 
 import java.util.Map;
 

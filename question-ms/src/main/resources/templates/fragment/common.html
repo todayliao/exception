@@ -5,7 +5,7 @@
 <header th:fragment="header">
     <!-- Content here -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light m-navbar">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand m-navbar-brand" th:href="@{/home}">
                 <!--<img th:src="@{/images/logo.jpg}" width="30" height="30" class="d-inline-block align-top" alt="">-->
                 Exception
@@ -19,9 +19,9 @@
                     <li class="nav-item" id="home" >
                         <a class="nav-link fs-16px" th:href="@{/home}">首页 <span class="sr-only">(current)</span></a>
                     </li>
-                    <!--<li class="nav-item" id="document">-->
-                        <!--<a class="nav-link fs-16px" th:href="@{/document}">文档</a>-->
-                    <!--</li>-->
+                    <li class="nav-item" id="document">
+                        <a class="nav-link fs-16px" th:href="@{/document}">文档</a>
+                    </li>
                     <li class="nav-item" id="recommendedArticle">
                         <a class="nav-link fs-16px" th:href="@{/recommended/article}">优选博文</a>
                     </li>

@@ -2,13 +2,15 @@ package com.exception.qms.common;
 
 import com.alibaba.fastjson.JSON;
 import com.exception.qms.enums.QmsResponseCodeEnum;
-import com.exception.qms.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import site.exception.common.BaseResponse;
+import site.exception.exception.BaseException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -20,10 +22,11 @@ import java.util.Optional;
  * @author jiangbing(江冰)
  * @date 2017/12/20
  * @time 下午4:25
- * @discription baseController 封装统一的异常处理
+ * @discription controller 全局异常处理器
  **/
+@ControllerAdvice
 @Slf4j
-public class BaseController {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody

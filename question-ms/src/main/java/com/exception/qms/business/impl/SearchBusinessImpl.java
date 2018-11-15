@@ -2,8 +2,6 @@ package com.exception.qms.business.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.exception.qms.business.SearchBusiness;
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.common.PageQueryResponse;
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.RecommendedArticle;
 import com.exception.qms.elasticsearch.QuestionIndexKey;
@@ -39,6 +37,8 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import site.exception.common.BaseResponse;
+import site.exception.common.PageQueryResponse;
 
 import java.util.Arrays;
 import java.util.List;

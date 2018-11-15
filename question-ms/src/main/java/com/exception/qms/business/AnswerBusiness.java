@@ -1,9 +1,9 @@
 package com.exception.qms.business;
 
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
 import com.exception.qms.web.vo.home.AnswerInfoResponseVO;
+import site.exception.common.BaseResponse;
 
 /**
  * @author jiangbing(江冰)

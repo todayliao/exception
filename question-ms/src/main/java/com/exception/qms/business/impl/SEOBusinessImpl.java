@@ -1,41 +1,25 @@
 package com.exception.qms.business.impl;
 
 import com.exception.qms.business.SEOBusiness;
-import com.exception.qms.business.UserBusiness;
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.common.PageQueryResponse;
-import com.exception.qms.domain.enhancement.UserAnswerContributionStatistics;
-import com.exception.qms.domain.enhancement.UserQuestionContributionStatistics;
-import com.exception.qms.domain.entity.*;
+import com.exception.qms.domain.entity.Answer;
+import com.exception.qms.domain.entity.Article;
+import com.exception.qms.domain.entity.Question;
+import com.exception.qms.domain.entity.RecommendedArticle;
 import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
-import com.exception.qms.utils.TimeUtil;
-import com.exception.qms.web.dto.user.response.QueryContributionDataItemDTO;
-import com.exception.qms.web.dto.user.response.QueryContributionDataResponseDTO;
-import com.exception.qms.web.vo.common.TagResponseVO;
-import com.exception.qms.web.vo.user.QueryUserDetailQuestionItemResponseVO;
-import com.exception.qms.web.vo.user.QueryUserDetailResponseVO;
-import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
-import com.google.common.collect.Lists;
 import com.redfin.sitemapgenerator.ChangeFreq;
-import com.redfin.sitemapgenerator.W3CDateFormat;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
 import com.redfin.sitemapgenerator.WebSitemapUrl;
 import lombok.extern.slf4j.Slf4j;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
+import site.exception.common.BaseResponse;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

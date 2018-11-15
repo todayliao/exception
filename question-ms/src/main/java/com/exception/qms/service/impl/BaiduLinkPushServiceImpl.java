@@ -6,7 +6,6 @@ import com.exception.qms.domain.mapper.BaiduArticleLinkPushMapper;
 import com.exception.qms.domain.mapper.BaiduQuestionLinkPushMapper;
 import com.exception.qms.enums.BaiduLinkPushTypeEnum;
 import com.exception.qms.service.BaiduLinkPushService;
-import com.exception.qms.utils.JsonUtil;
 import com.exception.qms.web.dto.seo.BaiduPushLinkResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
@@ -19,6 +18,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import site.exception.utils.JsonUtil;
 
 
 /**

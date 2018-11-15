@@ -1,11 +1,8 @@
 package com.exception.qms.business;
 
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.common.PageQueryResponse;
-import com.exception.qms.web.form.article.ArticleForm;
-import com.exception.qms.web.vo.article.ArticleDetailResponseVO;
 import com.exception.qms.web.vo.article.QueryRecommendedArticleListItemResponseVO;
 import com.exception.qms.web.vo.article.RecommendedArticleDetailResponseVO;
+import site.exception.common.PageQueryResponse;
 
 /**
  * @author jiangbing(江冰)

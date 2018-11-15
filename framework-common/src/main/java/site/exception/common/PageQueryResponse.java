@@ -1,4 +1,4 @@
-package com.exception.qms.common;
+package site.exception.common;
 
 import lombok.Data;
 

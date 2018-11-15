@@ -1,22 +1,19 @@
 package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
-import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.business.SearchBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
-import com.exception.qms.enums.QuestionSearchTabEnum;
-import com.exception.qms.enums.QuestionTabEnum;
+import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
 import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
-import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import site.exception.common.BaseResponse;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ import java.util.List;
  * @discription
  **/
 @Controller
-public class SearchController extends BaseController {
+public class SearchController {
 
     @Autowired
     private SearchBusiness searchBusiness;

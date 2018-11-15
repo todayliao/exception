@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body {
+    background: #fff;
+}
+
+.main-content {
+    margin-top: 0;
+    /*padding-top: 100px;*/
+}
+
+.sidebar {
+    position: sticky;
+    top: 4rem;
+    z-index: 1000;
+    border-right: 1px solid rgba(0,0,0,.1);
+    padding-top: 80px;
+}
+
+.document-content {
+    position: relative;
+    overflow: auto;
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.catalog li {
+    list-style: none;
+}
+
+.sidebar-header {
+    transition: color .15s ease;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    padding-left: 1.5rem;
+    margin-top: 0;
+    margin-bottom: .5rem;
+}

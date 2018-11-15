@@ -1,15 +1,14 @@
 package com.exception.qms.controller;
 
-import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.FileBusiness;
-import com.exception.qms.business.QuestionBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
+import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.common.EditorMdUploadImageResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -21,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/file")
 @Slf4j
-public class FileController extends BaseController {
+public class FileController {
 
     @Autowired
     private FileBusiness fileBusiness;

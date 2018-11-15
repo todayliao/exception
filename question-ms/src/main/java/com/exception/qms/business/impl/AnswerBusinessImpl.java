@@ -1,7 +1,6 @@
 package com.exception.qms.business.impl;
 
 import com.exception.qms.business.AnswerBusiness;
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
 import com.exception.qms.domain.entity.AnswerEditHistory;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.exception.common.BaseResponse;
 
 import java.util.concurrent.ExecutorService;
 

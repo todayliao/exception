@@ -2,11 +2,8 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.AnswerBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
-import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.utils.SpringMVCUtil;
 import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
 import com.exception.qms.web.form.answer.AnswerUpdateForm;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import site.exception.common.BaseResponse;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @discription
  **/
 @Controller
-public class AnswerController extends BaseController {
+public class AnswerController {
 
     @Autowired
     private AnswerBusiness answerBusiness;

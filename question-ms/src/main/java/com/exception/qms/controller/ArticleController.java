@@ -2,20 +2,19 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.ArticleBusiness;
-import com.exception.qms.business.UserBusiness;
-import com.exception.qms.common.BaseController;
-import com.exception.qms.common.BaseResponse;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.utils.SpringMVCUtil;
 import com.exception.qms.web.form.article.ArticleForm;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import site.exception.common.BaseResponse;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @discription 博客（文章）
  **/
 @Controller
-public class ArticleController extends BaseController {
+public class ArticleController {
 
     @Autowired
     private ArticleBusiness articleBusiness;

@@ -1,7 +1,6 @@
 package com.exception.qms.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.exception.qms.utils.JsonUtil;
 import com.exception.qms.domain.entity.Question;
 import com.exception.qms.domain.entity.QuestionDesc;
 import com.exception.qms.domain.entity.User;
@@ -14,7 +13,6 @@ import com.exception.qms.service.QuestionSearchService;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.utils.ConstantsUtil;
 import com.exception.qms.web.vo.common.TagResponseVO;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.elasticsearch.action.index.IndexResponse;
@@ -31,6 +29,7 @@ import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import site.exception.utils.JsonUtil;
 
 import java.util.Arrays;
 import java.util.List;

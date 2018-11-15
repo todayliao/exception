@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!--<title th:text="${response.title} + ' - Exception 文档'">title</title>-->
+    <!--<meta name="description" th:content="${response.seoDescription}">-->
+    <!--<meta name="keywords" th:content="${response.seoKeywords}">-->
+
+    <!-- og start -->
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:type" content="article">
+    <!--<meta property="og:title" th:content="${response.title} + ' - Exception 博客'">-->
+    <!--<meta property="og:description" th:content="${response.seoDescription}">-->
+    <!--<meta property="og:url" th:content="'https://www.exception.site/article/' + ${response.id}">-->
+    <meta property="og:site_name" content="Exception">
+    <!--<meta property="article:published_time" th:content="${response.createTimeStr}">-->
+    <!-- og end -->
+
+    <!-- twitter start -->
+    <meta name="twitter:card" content="summary">
+    <!--<meta name="twitter:description" th:content="${response.seoDescription}">-->
+    <!--<meta name="twitter:title" th:content="${response.title} + ' - Exception 博客'">-->
+    <meta name="twitter:site" content="@Exception">
+    <meta name="twitter:creator" content="@Exception">
+    <!-- twitter end -->
+
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
+    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/androidstudio.css}">
+    <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
+    <link rel="stylesheet" th:href="@{/css/document/document-detail.css}">
+
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
+    <!-- google 统计 -->
+    <script th:replace="fragment/common-js :: gtagjs"></script>
+    <script th:replace="fragment/common-js :: googleStatistics"></script>
+</head>
+<body style="background: #fff;">
+<!-- 顶部导航栏 -->
+<header th:replace="fragment/common :: header"></header>
+<!-- main content -->
+<main class="container-fluid main-content">
+    <div class="row">
+        <div class="col-3">
+            <div id="list-example" class="sidebar">
+                <div class="sidebar-header">教程标题</div>
+                <ul class="catalog">
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li><a class="" href="#list-item-1">Item 1</a></li>
+                    <li><a class="" href="#list-item-2">Item 2</a></li>
+                    <li><a class="" href="#list-item-3">Item 3</a></li>
+                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="document-content">
+                <h4 id="item-1">Item 1</h4>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h5 id="item-1-1">Item 1-1</h5>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h5 id="item-1-2">Item 2-2</h5>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h4 id="item-2">Item 2</h4>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h4 id="item-3">Item 3</h4>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h5 id="item-3-1">Item 3-1</h5>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+                <h5 id="item-3-2">Item 3-2</h5>
+                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- 回到顶部 -->
+    <button th:replace="fragment/common :: backToTop"></button>
+</main>
+<!-- footer -->
+<!--<footer th:replace="fragment/common :: footer"></footer>-->
+<div th:replace="fragment/common :: loginModal"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script src="https://lib.baomitu.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
+<script th:src="@{/plugins/zoomify/zoomify.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:replace="fragment/common-js :: baiduLinkPush"></script>
+<script th:replace="fragment/common-js :: 360LinkPush"></script>
+
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        // 代码高亮
+        hljs.initHighlightingOnLoad();
+        // $("pre").addClass("prettyprint");
+        // prettyPrint();
+
+        // 图片放大
+        $('p img').zoomify();
+    });
+
+</script>
+</html>
