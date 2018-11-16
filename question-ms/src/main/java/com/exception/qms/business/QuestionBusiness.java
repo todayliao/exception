@@ -1,13 +1,13 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.dto.question.request.ChangeQuestionVoteUpRequestDTO;
-import com.exception.qms.web.dto.question.request.QuestionViewNumIncreaseRequestDTO;
-import com.exception.qms.web.form.question.QuestionForm;
-import com.exception.qms.web.form.question.QuestionUpdateForm;
-import com.exception.qms.web.vo.common.QuestionListItemResponseVO;
-import com.exception.qms.web.vo.home.QuestionDetailResponseVO;
-import com.exception.qms.web.vo.home.QuestionInfoResponseVO;
-import com.exception.qms.web.vo.tag.QueryQuestionTagPageListResponseVO;
+import com.exception.qms.model.dto.question.request.ChangeQuestionVoteUpRequestDTO;
+import com.exception.qms.model.dto.question.request.QuestionViewNumIncreaseRequestDTO;
+import com.exception.qms.model.form.question.QuestionForm;
+import com.exception.qms.model.form.question.QuestionUpdateForm;
+import com.exception.qms.model.vo.common.QuestionListItemResponseVO;
+import com.exception.qms.model.vo.home.QuestionDetailResponseVO;
+import com.exception.qms.model.vo.home.QuestionInfoResponseVO;
+import com.exception.qms.model.vo.tag.QueryQuestionTagPageListResponseVO;
 import site.exception.common.BaseResponse;
 
 import javax.servlet.http.HttpServletRequest;

@@ -5,7 +5,7 @@ import com.exception.qms.domain.mapper.*;
 import com.exception.qms.enums.VoteOperationTypeEnum;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.utils.MarkdownUtil;
-import com.exception.qms.web.vo.home.AnswerResponseVO;
+import com.exception.qms.model.vo.home.AnswerResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.vo.user.QueryUserPageListResponseVO;
+import com.exception.qms.model.vo.user.QueryUserPageListResponseVO;
 import site.exception.common.BaseResponse;
 import site.exception.common.PageQueryResponse;
 

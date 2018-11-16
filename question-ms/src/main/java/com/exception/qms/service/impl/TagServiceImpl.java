@@ -6,7 +6,7 @@ import com.exception.qms.domain.mapper.QuestionTagRelMapper;
 import com.exception.qms.domain.mapper.TagMapper;
 import com.exception.qms.service.TagService;
 import com.exception.qms.utils.PageUtil;
-import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
+import com.exception.qms.model.dto.question.request.QueryTagsByNameRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

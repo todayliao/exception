@@ -4,11 +4,25 @@
     margin-bottom: 0;
 }
 
-.document-card-title a {
+.course-title {
     color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
 }
 
-.document-card-title a:hover {
+.course-title:hover {
     color: #175199;
+}
+
+.card-body h2:hover {
+    text-decoration: none !important;
+}
+
+.course-summary {
+    color: #646464;
+}
+
+.course-container-a:hover {
     text-decoration: none;
 }

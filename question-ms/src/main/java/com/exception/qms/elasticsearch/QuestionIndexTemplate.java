@@ -1,7 +1,7 @@
 package com.exception.qms.elasticsearch;
 
 import com.exception.qms.domain.entity.Tag;
-import com.exception.qms.web.vo.common.TagResponseVO;
+import com.exception.qms.model.vo.common.TagResponseVO;
 import lombok.Data;
 
 import java.time.LocalDateTime;

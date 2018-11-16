@@ -12,7 +12,7 @@ import com.exception.qms.elasticsearch.QuestionIndexTemplate;
 import com.exception.qms.service.QuestionSearchService;
 import com.exception.qms.service.QuestionTagService;
 import com.exception.qms.utils.ConstantsUtil;
-import com.exception.qms.web.vo.common.TagResponseVO;
+import com.exception.qms.model.vo.common.TagResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.elasticsearch.action.index.IndexResponse;

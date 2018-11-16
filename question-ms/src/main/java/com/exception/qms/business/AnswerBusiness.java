@@ -1,8 +1,8 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.dto.question.request.ChangeAnswerVoteUpRequestDTO;
-import com.exception.qms.web.form.answer.AnswerUpdateForm;
-import com.exception.qms.web.vo.home.AnswerInfoResponseVO;
+import com.exception.qms.model.dto.question.request.ChangeAnswerVoteUpRequestDTO;
+import com.exception.qms.model.form.answer.AnswerUpdateForm;
+import com.exception.qms.model.vo.home.AnswerInfoResponseVO;
 import site.exception.common.BaseResponse;
 
 /**

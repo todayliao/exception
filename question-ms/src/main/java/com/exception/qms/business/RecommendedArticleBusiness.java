@@ -1,7 +1,7 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.vo.article.QueryRecommendedArticleListItemResponseVO;
-import com.exception.qms.web.vo.article.RecommendedArticleDetailResponseVO;
+import com.exception.qms.model.vo.article.QueryRecommendedArticleListItemResponseVO;
+import com.exception.qms.model.vo.article.RecommendedArticleDetailResponseVO;
 import site.exception.common.PageQueryResponse;
 
 /**

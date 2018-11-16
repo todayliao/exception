@@ -40,6 +40,7 @@
     <link rel="stylesheet" th:href="@{/css/common/base.css}">
     <link rel="stylesheet" th:href="@{/plugins/highlight/styles/androidstudio.css}">
     <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
+    <link rel="stylesheet" th:href="@{/css/article/article-detail.css}">
     <link rel="stylesheet" th:href="@{/css/course/course-detail.css}">
 
     <!-- 百度统计 -->
@@ -54,85 +55,28 @@
 <!-- main content -->
 <main class="container-fluid main-content">
     <div class="row">
-        <div class="col-3">
+        <div class="col-md-3">
             <div id="list-example" class="sidebar">
-                <div class="sidebar-header">Spring boot 整合各种技术栈教程系列</div>
+                <div class="sidebar-header" th:utext="${response.title}">Spring boot 整合各种技术栈教程系列</div>
                 <ul class="catalog">
-                    <li><a class="sidebar-link" href="#list-item-1">(一) Springboot 整合 mybatis</a></li>
-                    <li><a class="sidebar-link" href="#list-item-2">(二) Springboot 整合 redis</a></li>
-                    <li><a class="sidebar-link" href="#list-item-3">(三) Springboot 整合 shiro</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
-                    <li><a class="" href="#list-item-1">Item 1</a></li>
-                    <li><a class="" href="#list-item-2">Item 2</a></li>
-                    <li><a class="" href="#list-item-3">Item 3</a></li>
-                    <li><a class="" href="#list-item-4">Item 4</a></li>
+                    <li th:each="item : ${response.chapters}">
+                        <a th:if="${item.isSelected == true}" class="sidebar-link selected"
+                           th:href="@{'/course/' + ${response.id} + '?chapter=' + ${item.chapterNum}}"
+                           th:utext="${item.title}">(一) Springboot 整合 mybatis</a>
+                        <a th:if="${item.isSelected == false}" class="sidebar-link"
+                           th:href="@{'/course/' + ${response.id} + '?chapter=' + ${item.chapterNum}}"
+                           th:utext="${item.title}">(一) Springboot 整合 mybatis</a>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="col-9">
-            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="document-content">
-                <h4 id="item-1">Item 1</h4>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h5 id="item-1-1">Item 1-1</h5>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h5 id="item-1-2">Item 2-2</h5>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h4 id="item-2">Item 2</h4>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h4 id="item-3">Item 3</h4>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h5 id="item-3-1">Item 3-1</h5>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
-                <h5 id="item-3-2">Item 3-2</h5>
-                <p>Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.</p>
+        <div class="col-md-9">
+            <div data-spy="scroll" data-target="#list-example" data-offset="0"
+                 class="course-content">
+                <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
+                <div th:utext="${response.contentHtml}"></div>
             </div>
         </div>
-
-
 
     </div>
     <!-- 回到顶部 -->

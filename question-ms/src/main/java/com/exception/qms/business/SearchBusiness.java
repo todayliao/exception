@@ -1,8 +1,8 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.dto.question.response.SearchAboutQuestionResponseDTO;
-import com.exception.qms.web.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
-import com.exception.qms.web.vo.common.QuestionSearchResponseVO;
+import com.exception.qms.model.dto.question.response.SearchAboutQuestionResponseDTO;
+import com.exception.qms.model.dto.question.response.SearchAboutRecommendedArticleResponseDTO;
+import com.exception.qms.model.vo.common.QuestionSearchResponseVO;
 import site.exception.common.BaseResponse;
 import site.exception.common.PageQueryResponse;
 

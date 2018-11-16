@@ -3,7 +3,7 @@ package com.exception.qms.service;
 import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.AnswerDesc;
 import com.exception.qms.domain.entity.AnswerEditHistory;
-import com.exception.qms.web.vo.home.AnswerResponseVO;
+import com.exception.qms.model.vo.home.AnswerResponseVO;
 
 import java.util.List;
 

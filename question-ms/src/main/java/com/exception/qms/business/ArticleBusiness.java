@@ -1,8 +1,8 @@
 package com.exception.qms.business;
 
 import com.exception.qms.domain.entity.User;
-import com.exception.qms.web.form.article.ArticleForm;
-import com.exception.qms.web.vo.article.ArticleDetailResponseVO;
+import com.exception.qms.model.form.article.ArticleForm;
+import com.exception.qms.model.vo.article.ArticleDetailResponseVO;
 import site.exception.common.BaseResponse;
 
 /**

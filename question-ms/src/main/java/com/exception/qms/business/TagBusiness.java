@@ -1,7 +1,7 @@
 package com.exception.qms.business;
 
-import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
-import com.exception.qms.web.vo.tag.QueryTagPageListResponseVO;
+import com.exception.qms.model.dto.question.request.QueryTagsByNameRequestDTO;
+import com.exception.qms.model.vo.tag.QueryTagPageListResponseVO;
 import site.exception.common.BaseResponse;
 import site.exception.common.PageQueryResponse;
 

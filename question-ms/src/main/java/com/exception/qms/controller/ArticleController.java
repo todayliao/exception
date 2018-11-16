@@ -6,7 +6,7 @@ import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.utils.SpringMVCUtil;
-import com.exception.qms.web.form.article.ArticleForm;
+import com.exception.qms.model.form.article.ArticleForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

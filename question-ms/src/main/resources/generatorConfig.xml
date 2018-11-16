@@ -58,7 +58,7 @@
                <!--enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="t_ams_recommended_article_content" domainObjectName="RecommendedArticleContent"
+        <table tableName="t_cms_course_chapter_content" domainObjectName="CourseChapterContent"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

@@ -2,8 +2,8 @@ package com.exception.qms.service;
 
 import com.exception.qms.domain.entity.QuestionTagRel;
 import com.exception.qms.domain.entity.Tag;
-import com.exception.qms.web.vo.common.TagResponseVO;
-import com.exception.qms.web.vo.home.HomeHotTagResponseVO;
+import com.exception.qms.model.vo.common.TagResponseVO;
+import com.exception.qms.model.vo.home.HomeHotTagResponseVO;
 
 import java.util.List;
 import java.util.Map;

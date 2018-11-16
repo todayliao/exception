@@ -6,7 +6,7 @@ import com.exception.qms.domain.mapper.BaiduArticleLinkPushMapper;
 import com.exception.qms.domain.mapper.BaiduQuestionLinkPushMapper;
 import com.exception.qms.enums.BaiduLinkPushTypeEnum;
 import com.exception.qms.service.BaiduLinkPushService;
-import com.exception.qms.web.dto.seo.BaiduPushLinkResponseDTO;
+import com.exception.qms.model.dto.seo.BaiduPushLinkResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;

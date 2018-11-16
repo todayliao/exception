@@ -15,7 +15,7 @@ public enum TopNavEnum {
     QUESTION("question", "问题详情页"),
     ARTICLE("article", "文章详情页"),
     RECOMMENDED_ARTICLE("recommendedArticle", "优文详情页"),
-    DOCUMENT("document", "文档页"),
+    COURSE("course", "教程页"),
     USER("user", "用户墙"),
     TAG("tag", "标签墙"),
     ABOUT("about", "关于"),

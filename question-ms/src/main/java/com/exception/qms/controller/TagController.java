@@ -5,7 +5,7 @@ import com.exception.qms.business.TagBusiness;
 import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
-import com.exception.qms.web.dto.question.request.QueryTagsByNameRequestDTO;
+import com.exception.qms.model.dto.question.request.QueryTagsByNameRequestDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

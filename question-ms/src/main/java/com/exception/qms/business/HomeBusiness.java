@@ -1,7 +1,7 @@
 package com.exception.qms.business;
 
 import com.exception.qms.common.HomePageQueryResponse;
-import com.exception.qms.web.vo.home.QueryHomeItemPageListResponseVO;
+import com.exception.qms.model.vo.home.QueryHomeItemPageListResponseVO;
 import site.exception.common.BaseResponse;
 
 /**
