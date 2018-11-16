@@ -15,24 +15,24 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @discription 文档
  **/
 @Controller
-public class DocumentController {
+public class CourseController {
 
 //    @Autowired
 //    private RecommendedArticleBusiness recommendedArticleBusiness;
 
-    @GetMapping("/document")
+    @GetMapping("/course")
     @OperatorLog(description = "文档页展示")
     public String showDocumentPage(Model model) {
 //        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), recommendedArticleBusiness.queryRecommendedArticleList(pageIndex, pageSize));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.DOCUMENT.getCode());
-        return "document/document-list";
+        return "course/course-list";
     }
 
-    @GetMapping("/document/{documentId}")
+    @GetMapping("/course/{courseId}")
 //    @OperatorLog(description = "优文详情展示页")
-    public String showArticleDetail(@PathVariable("documentId") Long documentId, Model model) {
+    public String showArticleDetail(@PathVariable("courseId") Long courseId, Model model) {
 //        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), recommendedArticleBusiness.queryArticleDetail(articleId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.DOCUMENT.getCode());
-        return "document/document-detail";
+        return "course/course-detail";
     }
 }

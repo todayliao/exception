@@ -14,7 +14,9 @@ body {
     top: 4rem;
     z-index: 1000;
     border-right: 1px solid rgba(0,0,0,.1);
-    padding-top: 80px;
+    padding-top: 35px;
+    height: calc(100vh - 4rem);
+    overflow: scroll;
 }
 
 .document-content {
@@ -37,4 +39,14 @@ body {
     padding-left: 1.5rem;
     margin-top: 0;
     margin-bottom: .5rem;
+}
+
+.sidebar-link {
+    font-weight: 400;
+    display: inline-block;
+    border-left: .25rem solid transparent;
+    padding: .35rem 1rem .35rem 0;
+    line-height: 1.4;
+    width: 100%;
+    box-sizing: border-box;
 }
