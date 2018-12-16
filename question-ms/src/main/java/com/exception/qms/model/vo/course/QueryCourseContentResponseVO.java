@@ -13,7 +13,7 @@ import java.util.List;
  **/
 @Data
 public class QueryCourseContentResponseVO implements Serializable {
-    private Long id;
+    private String enTitle;
     private String title;
     private String contentHtml;
     private String chapterTitle;

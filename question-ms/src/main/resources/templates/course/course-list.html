@@ -39,7 +39,7 @@
             <div class="grid-layout">
 
                 <div class="grid-layout-cell" th:each="item : ${response.data}">
-                    <a th:href="@{'/course/' + ${item.id}}" class="course-container-a">
+                    <a th:href="@{'/course/' + ${item.enTitle}}" class="course-container-a">
                         <div class="card">
                             <img class="card-img-top" th:src="${item.titleImage}">
                             <div class="card-body">

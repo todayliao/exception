@@ -16,4 +16,5 @@ public class CourseChapterResponseVO implements Serializable {
     private String title;
     private Integer chapterNum;
     private Boolean isSelected;
+    private String enTitle;
 }

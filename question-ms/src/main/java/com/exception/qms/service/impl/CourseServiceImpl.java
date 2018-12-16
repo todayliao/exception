@@ -55,4 +55,19 @@ public class CourseServiceImpl implements CourseService {
     public CourseChapterContent findContentByChaperId(Long chapterId) {
         return courseChapterContentMapper.findContentByChaperId(chapterId);
     }
+
+    @Override
+    public Course findTitleByEnTitle(String enTitle) {
+        return courseMapper.findTitleByEnTitle(enTitle);
+    }
+
+    @Override
+    public int addCourseRecord(Course course) {
+        return courseMapper.insert(course);
+    }
+
+    @Override
+    public int addCourseChapterBatch(List<CourseChapter> courseChapters) {
+        return courseChapterMapper.addCourseChapterBatch(courseChapters);
+    }
 }

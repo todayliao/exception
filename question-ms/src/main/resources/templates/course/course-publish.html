@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>贡献问题解决方案 - Exception 开发者社区</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <!-- commoncBootstrap CSS -->
+    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/css/common/base.css}">
+    <link rel="stylesheet" th:href="@{/css/question/course-publish.css}">
+
+    <!-- 百度统计 -->
+    <script th:replace="fragment/common-js :: baiduStatistics"></script>
+    <!-- google 统计 -->
+    <script th:replace="fragment/common-js :: gtagjs"></script>
+    <script th:replace="fragment/common-js :: googleStatistics"></script>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header th:replace="fragment/common :: header"></header>
+<!-- main content -->
+<main class="container main-content">
+    <div class="row">
+        <div class="col-md-12 br-3px">
+            <div th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username == null}" class="alert alert-warning" role="alert">
+                您还没登录呢! 教程将无法发布哦! 去<a href="#" onclick="showLoginModal()">登陆</a>
+            </div>
+
+            <!-- csrf -->
+            <div th:replace="fragment/common :: csrfHiddenInput"></div>
+
+            <form id="form">
+                <div class="form-group">
+                    <label>教程标题</label>
+                    <input id="title" type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label>教程图片URL</label>
+                    <input id="titleImage" type="text" class="form-control" name="titleImage">
+                </div>
+                <div class="form-group">
+                    <label>教程描述</label>
+                    <textarea id="summary" type="text" class="form-control" name="summary"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>章节JSON</label>
+                    <textarea id="chapterJson" class="form-control" name="chapterJson"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="1">
+                        <label class="form-check-label" for="inlineRadio1">原创</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="2" checked>
+                        <label class="form-check-label" for="inlineRadio2">翻译</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="inlineRadio3" value="3">
+                        <label class="form-check-label" for="inlineRadio2">整理</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success btn-block" onclick="publish()">发布</button>
+            </form>
+        </div>
+
+        <!-- 右边栏 -->
+    </div>
+
+</main>
+<!-- footer -->
+<footer th:replace="fragment/common :: footer"></footer>
+<div th:replace="fragment/common :: loginModal"></div>
+</body>
+
+<script th:replace="fragment/common-js :: js"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
+<script th:src="@{/plugins/editor-md/editormd.min.js}"></script>
+
+<script th:inline="javascript">
+    function publish() {
+        // csrf
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+        $.ajax({
+            type: "POST",
+            async: true,
+            url: "/course/publish",
+            data: $('#form').serialize(),
+            success: function (response) {
+                if (response.success == true) {
+                    layer.msg("发布成功");
+                    location.href = "/question/" + response.data;
+                } else {
+                    layer.msg("发布失败 - " + response.errorMessage);
+                }
+            }
+        });
+    }
+</script>
+</html>

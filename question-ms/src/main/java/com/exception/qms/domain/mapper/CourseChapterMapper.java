@@ -11,6 +11,8 @@ public interface CourseChapterMapper {
 
     int insertSelective(CourseChapter record);
 
+    int addCourseChapterBatch(List<CourseChapter> courseChapters);
+
     CourseChapter selectByPrimaryKey(Long id);
 
     List<CourseChapter> findChaptersByCourseId(Long courseId);

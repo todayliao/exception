@@ -1,7 +1,8 @@
 package com.exception.qms.business;
 
+import com.exception.qms.domain.entity.User;
+import com.exception.qms.model.form.course.PublishCourseForm;
 import com.exception.qms.model.vo.course.QueryCourseContentResponseVO;
-import com.exception.qms.model.vo.user.QueryUserPageListResponseVO;
 import site.exception.common.BaseResponse;
 import site.exception.common.PageQueryResponse;
 
@@ -15,5 +16,7 @@ public interface CourseBusiness {
 
     PageQueryResponse queryCoursePageList(Integer pageIndex, Integer pageSize);
 
-    QueryCourseContentResponseVO queryCourseContent(Long courseId, Integer chapter);
+    abstract QueryCourseContentResponseVO queryCourseContent(String enTitle, String chapterEnTitle);
+
+    BaseResponse publishCourse(PublishCourseForm publishCourseDTO, User user);
 }

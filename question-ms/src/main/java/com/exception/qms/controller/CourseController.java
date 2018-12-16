@@ -2,14 +2,19 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.CourseBusiness;
+import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
+import com.exception.qms.model.form.course.PublishCourseForm;
+import com.exception.qms.utils.SpringMVCUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import site.exception.common.BaseResponse;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author jiangbing(江冰)
@@ -33,13 +38,41 @@ public class CourseController {
         return "course/course-list";
     }
 
-    @GetMapping("/course/{courseId}")
+    @GetMapping("/course/{enTitle}")
     @OperatorLog(description = "教程详情展示")
-    public String showCourseContent(@PathVariable("courseId") Long courseId,
-                                    @RequestParam(value = "chapter", defaultValue = "1") Integer chapter,
+    public String showCourseContent(@PathVariable("enTitle") String enTitle,
                                     Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseId, chapter));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(enTitle, null));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }
+
+    @GetMapping("/course/{enTitle}/{chapterEnTitle}")
+    @OperatorLog(description = "教程详情展示(带标题)")
+    public String showCourseContent2(@PathVariable("enTitle") String enTitle,
+                                    @PathVariable("chapterEnTitle") String chapterEnTitle,
+                                    Model model) {
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(enTitle, chapterEnTitle));
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
+        return "course/course-detail";
+    }
+
+    @PostMapping("/course/publish")
+    @OperatorLog(description = "发布教程")
+    @ResponseBody
+    public BaseResponse publishCourse(@Validated PublishCourseForm publishCourseDTO, HttpSession session) {
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
+        return courseBusiness.publishCourse(publishCourseDTO, user);
+    }
+
+    @GetMapping("/course/publish")
+    @OperatorLog(description = "教程发布页")
+    public String showCoursePublishPage(Model model) {
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
+        return "course/course-publish";
+    }
+
+
+
+
 }

@@ -21,6 +21,8 @@ public interface CourseMapper {
 
     Course findTitleById(Long courseId);
 
+    Course findTitleByEnTitle(String enTitle);
+
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);

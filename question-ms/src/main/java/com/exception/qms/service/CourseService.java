@@ -23,4 +23,10 @@ public interface CourseService {
     List<CourseChapter> findChaptersByCourseId(Long courseId);
 
     CourseChapterContent findContentByChaperId(Long chapterId);
+
+    Course findTitleByEnTitle(String enTitle);
+
+    int addCourseRecord(Course course);
+
+    int addCourseChapterBatch(List<CourseChapter> courseChapters);
 }

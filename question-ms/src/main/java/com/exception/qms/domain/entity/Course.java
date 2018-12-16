@@ -28,4 +28,6 @@ public class Course {
     private LocalDateTime updateTime;
 
     private Boolean isDeleted;
+
+    private String enTitle;
 }

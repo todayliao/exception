@@ -1,11 +1,8 @@
 package com.exception.qms.model.vo.course;
 
-import com.exception.qms.model.vo.common.TagResponseVO;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author jiangbing(江冰)
@@ -15,7 +12,7 @@ import java.util.List;
  **/
 @Data
 public class QueryCoursePageListResponseVO implements Serializable {
-    private Long id;
+    private String enTitle;
     private String title;
     private String titleImage;
     private String summary;
