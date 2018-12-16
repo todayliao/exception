@@ -2,11 +2,14 @@ package com.exception.qms.service.impl;
 
 import com.exception.qms.domain.entity.BaiduArticleLinkPush;
 import com.exception.qms.domain.entity.BaiduQuestionLinkPush;
+import com.exception.qms.domain.entity.Course;
+import com.exception.qms.domain.entity.CourseChapter;
 import com.exception.qms.domain.mapper.BaiduArticleLinkPushMapper;
 import com.exception.qms.domain.mapper.BaiduQuestionLinkPushMapper;
 import com.exception.qms.enums.BaiduLinkPushTypeEnum;
 import com.exception.qms.service.BaiduLinkPushService;
 import com.exception.qms.model.dto.seo.BaiduPushLinkResponseDTO;
+import com.exception.qms.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -42,6 +45,8 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
     private BaiduQuestionLinkPushMapper baiduQuestionLinkPushMapper;
     @Autowired
     private BaiduArticleLinkPushMapper baiduArticleLinkPushMapper;
+    @Autowired
+    private CourseService courseService;
 
     /**
      * 推送问题详情页连接
@@ -139,6 +144,48 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
 
             // 提交记录，数据入库（不论成功或者失败）
             baiduArticleLinkPushMapper.insert(baiduArticleLinkPush);
+        } catch (Exception e) {
+            log.error("push the link of article detail page error, ", e);
+        }
+    }
+
+    @Override
+    public void pushCourseChapterPageLink(long chapterId) {
+        String url = String.format("http://%s/urls?site=%s&token=%s", linkPushHost, domain, linkPushToken);
+
+        CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
+        String chapterEnTitle = courseChapter.getEnTitle();
+
+        Long courseId = courseChapter.getCourseId();
+        Course course = courseService.findCourseById(courseId);
+        String courseEnTitle = course.getEnTitle();
+
+        String courseChapterPageUrl = String.format("%s/course/%s/%s", domain, courseEnTitle, chapterEnTitle);
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("Content-Type", "text/plain");
+
+        // 设置 body
+        StringEntity entity = new StringEntity(courseChapterPageUrl, "UTF-8");
+        httpPost.setEntity(entity);
+        HttpResponse response = null;
+
+        try {
+            response = client.execute(httpPost);
+
+            int responseCode = response.getStatusLine().getStatusCode();
+
+            String responseJson = EntityUtils.toString(response.getEntity());
+            log.info("response json: {}", responseJson);
+
+            BaiduPushLinkResponseDTO baiduPushLinkResponseDTO = JsonUtil.toBean(responseJson, BaiduPushLinkResponseDTO.class);
+
+            if (HttpStatus.SC_OK == responseCode) {
+                log.info("push the link of course chapter content page success, url ==> {}, remain: {}", courseChapterPageUrl, baiduPushLinkResponseDTO.getRemain());
+            } else {
+                log.info("push the link of course chapter content page fail, url ==> {}", courseChapterPageUrl);
+            }
         } catch (Exception e) {
             log.error("push the link of article detail page error, ", e);
         }

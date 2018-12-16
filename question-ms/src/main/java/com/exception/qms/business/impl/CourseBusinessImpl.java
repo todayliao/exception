@@ -8,10 +8,13 @@ import com.exception.qms.domain.entity.CourseChapterContent;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.QmsResponseCodeEnum;
 import com.exception.qms.exception.QMSException;
+import com.exception.qms.model.form.course.EditCourseChapterForm;
 import com.exception.qms.model.form.course.PublishCourseForm;
 import com.exception.qms.model.vo.course.CourseChapterResponseVO;
+import com.exception.qms.model.vo.course.EditCourseChapterResponseVO;
 import com.exception.qms.model.vo.course.QueryCourseContentResponseVO;
 import com.exception.qms.model.vo.course.QueryCoursePageListResponseVO;
+import com.exception.qms.service.BaiduLinkPushService;
 import com.exception.qms.service.CourseService;
 import com.exception.qms.utils.MarkdownUtil;
 import com.google.common.base.Objects;
@@ -27,6 +30,7 @@ import site.exception.common.PageQueryResponse;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +47,10 @@ public class CourseBusinessImpl implements CourseBusiness {
     private CourseService courseService;
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private ExecutorService executorService;
+    @Autowired
+    private BaiduLinkPushService baiduLinkPushService;
 
     @Override
     public PageQueryResponse queryCoursePageList(Integer pageIndex, Integer pageSize) {
@@ -78,10 +86,14 @@ public class CourseBusinessImpl implements CourseBusiness {
         // 获取对应章节的 chapterId
         Long chapterId = courseChapters.get(0).getId();
         String chapterTitle = courseChapters.get(0).getTitle();
+        if (StringUtils.isBlank(chapterEnTitle)) {
+            chapterEnTitle = courseChapters.get(0).getEnTitle();
+        }
 
         if (StringUtils.isNotBlank(chapterEnTitle)) {
+            String finalChapterEnTitle = chapterEnTitle;
             List<CourseChapter> tmpList = courseChapters.stream()
-                    .filter(p -> Objects.equal(p.getEnTitle(), chapterEnTitle)).collect(Collectors.toList());
+                    .filter(p -> Objects.equal(p.getEnTitle(), finalChapterEnTitle)).collect(Collectors.toList());
 
             if (CollectionUtils.isEmpty(tmpList)) {
                 log.warn("the chapter enTitle of the course not exited, courseId: {}, enTitle: {}", enTitle, chapterEnTitle);
@@ -109,6 +121,7 @@ public class CourseBusinessImpl implements CourseBusiness {
         if (chapterContent != null) {
             queryCourseContentResponseVO = mapper.map(chapterContent, QueryCourseContentResponseVO.class);
             queryCourseContentResponseVO.setContentHtml(MarkdownUtil.parse2Html(chapterContent.getContent()));
+            queryCourseContentResponseVO.setChapterSEOKeywords(chapterContent.getSeoKeywords());
         } else {
             queryCourseContentResponseVO = new QueryCourseContentResponseVO();
             queryCourseContentResponseVO.setContentHtml("// TODO 正在努力憋稿中, 内容会尽快上线与您见面 ...");
@@ -117,6 +130,7 @@ public class CourseBusinessImpl implements CourseBusiness {
         queryCourseContentResponseVO.setEnTitle(course.getEnTitle());
         queryCourseContentResponseVO.setChapterTitle(chapterTitle);
         queryCourseContentResponseVO.setChapters(courseChapterResponseVOS);
+        queryCourseContentResponseVO.setChapterEnTitle(chapterEnTitle);
 
         return queryCourseContentResponseVO;
     }
@@ -146,6 +160,49 @@ public class CourseBusinessImpl implements CourseBusiness {
         }).collect(Collectors.toList());
 
         courseService.addCourseChapterBatch(courseChapters);
+        return new BaseResponse().success();
+    }
+
+    @Override
+    public EditCourseChapterResponseVO showEditChapterPage(String enTitle, String chapterEnTitle) {
+        CourseChapter courseChapter = courseService.findChapterByEnTitle(chapterEnTitle);
+        EditCourseChapterResponseVO editCourseChapterResponseVO = null;
+        if (courseChapter != null) {
+            editCourseChapterResponseVO = mapper.map(courseChapter, EditCourseChapterResponseVO.class);
+            Long chapterId = courseChapter.getId();
+            CourseChapterContent chapterContent = courseService.findContentByChaperId(chapterId);
+            editCourseChapterResponseVO.setSeoKeywords(chapterContent == null ? null : chapterContent.getSeoKeywords());
+            editCourseChapterResponseVO.setContent(chapterContent == null ? null : chapterContent.getContent());
+        }
+        return editCourseChapterResponseVO;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public BaseResponse editChapter(EditCourseChapterForm editCourseChapterForm, User user) {
+        // 先更新章节表
+        CourseChapter courseChapter = mapper.map(editCourseChapterForm, CourseChapter.class);
+        courseService.updateCourseChapter(courseChapter);
+
+        Long chapterId = editCourseChapterForm.getId();
+        // 在判断是否是插入章节内容表，还是更新
+        CourseChapterContent courseChapterContent = courseService.findContentByChaperId(chapterId);
+
+        if (courseChapterContent == null) {
+            // 生成章节content记录
+            CourseChapterContent tmp = mapper.map(editCourseChapterForm, CourseChapterContent.class);
+            tmp.setChapterId(chapterId);
+            courseService.addCourseChapterContent(tmp);
+            // 异步推送百度新增内容
+            executorService.submit(() -> baiduLinkPushService.pushCourseChapterPageLink(chapterId));
+        } else {
+            // 更新章节content记录
+            String seoKeywords = editCourseChapterForm.getSeoKeywords();
+            String content = editCourseChapterForm.getContent();
+            courseService.updateCourseChapterContent(seoKeywords, content, chapterId);
+            // todo 异步推送百度更新内容
+        }
+
         return new BaseResponse().success();
     }
 }

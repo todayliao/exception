@@ -17,6 +17,10 @@ public interface CourseChapterMapper {
 
     List<CourseChapter> findChaptersByCourseId(Long courseId);
 
+    CourseChapter findChaptersByEnTitle(String chapterEnTitle);
+
+    CourseChapter findChapterByChapterId(long chapterId);
+
     int updateByPrimaryKeySelective(CourseChapter record);
 
     int updateByPrimaryKey(CourseChapter record);

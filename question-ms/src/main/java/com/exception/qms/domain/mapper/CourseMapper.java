@@ -19,7 +19,7 @@ public interface CourseMapper {
     List<Course> findCourseList(@Param("start") int start,
                                 @Param("pageSize") int pageSize);
 
-    Course findTitleById(Long courseId);
+    Course findCourseById(Long courseId);
 
     Course findTitleByEnTitle(String enTitle);
 

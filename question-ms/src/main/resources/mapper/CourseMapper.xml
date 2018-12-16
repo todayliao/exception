@@ -33,8 +33,8 @@
         where is_deleted = 0 order by create_time desc limit #{start}, #{pageSize}
     </select>
 
-    <select id="findTitleById" resultMap="BaseResultMap">
-        select id, title from t_cms_course where id = #{courseId} and is_deleted = 0
+    <select id="findCourseById" resultMap="BaseResultMap">
+        select id, en_title from t_cms_course where id = #{courseId} and is_deleted = 0
     </select>
 
   <select id="findTitleByEnTitle" resultMap="BaseResultMap">

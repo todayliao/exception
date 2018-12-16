@@ -77,12 +77,12 @@ public class SEOBusinessImpl implements SEOBusiness {
             wsg.addUrl(url);
 
             // recommended article list page
-            WebSitemapUrl recommendedArtcileUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article")
-                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
-                    .priority(0.9)
-                    .changeFreq(ChangeFreq.ALWAYS)
-                    .build();
-            wsg.addUrl(recommendedArtcileUrl);
+//            WebSitemapUrl recommendedArtcileUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article")
+//                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
+//                    .priority(0.9)
+//                    .changeFreq(ChangeFreq.ALWAYS)
+//                    .build();
+//            wsg.addUrl(recommendedArtcileUrl);
 
             // step1：question detail pages
             List<Question> questions = questionService.queryAllQuestions();
@@ -107,18 +107,18 @@ public class SEOBusinessImpl implements SEOBusiness {
             }
 
             // step2: recommended article
-            List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
-            for (RecommendedArticle recommendedArticle : recommendedArticles) {
-                Long recommendedArticleId = recommendedArticle.getId();
-                LocalDateTime updateTime = recommendedArticle.getUpdateTime();
-
-                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article/" + recommendedArticleId)
-                        .lastMod(dateTimeFormatter.format(updateTime))
-                        .priority(0.9)
-                        .changeFreq(ChangeFreq.DAILY)
-                        .build();
-                wsg.addUrl(tmpUrl);
-            }
+//            List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
+//            for (RecommendedArticle recommendedArticle : recommendedArticles) {
+//                Long recommendedArticleId = recommendedArticle.getId();
+//                LocalDateTime updateTime = recommendedArticle.getUpdateTime();
+//
+//                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article/" + recommendedArticleId)
+//                        .lastMod(dateTimeFormatter.format(updateTime))
+//                        .priority(0.9)
+//                        .changeFreq(ChangeFreq.DAILY)
+//                        .build();
+//                wsg.addUrl(tmpUrl);
+//            }
 
             // step3: articles
             List<Article> articles = articleService.queryAll();

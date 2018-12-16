@@ -5,6 +5,7 @@ import com.exception.qms.business.CourseBusiness;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
+import com.exception.qms.model.form.course.EditCourseChapterForm;
 import com.exception.qms.model.form.course.PublishCourseForm;
 import com.exception.qms.utils.SpringMVCUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class CourseController {
 
     @GetMapping("/course/{enTitle}/{chapterEnTitle}")
     @OperatorLog(description = "教程详情展示(带标题)")
-    public String showCourseContent2(@PathVariable("enTitle") String enTitle,
-                                    @PathVariable("chapterEnTitle") String chapterEnTitle,
-                                    Model model) {
+    public String showCourseContentWithChapterEnTitle(@PathVariable("enTitle") String enTitle,
+                                                      @PathVariable("chapterEnTitle") String chapterEnTitle,
+                                                      Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(enTitle, chapterEnTitle));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
@@ -72,7 +73,22 @@ public class CourseController {
         return "course/course-publish";
     }
 
+    @GetMapping("/course/{enTitle}/{chapterEnTitle}/edit")
+    @OperatorLog(description = "章节编辑页")
+    public String showEditChapterPage(@PathVariable("enTitle") String enTitle,
+                              @PathVariable("chapterEnTitle") String chapterEnTitle,
+                              Model model) {
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.showEditChapterPage(enTitle, chapterEnTitle));
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
+        return "chapter/chapter-edit";
+    }
 
+    @PostMapping("/chapter/edit")
+    @ResponseBody
+    public BaseResponse editChapter(@Validated EditCourseChapterForm editCourseChapterForm, HttpSession session) {
+        User user = SpringMVCUtil.getCurrentLoginUser(session);
+        return courseBusiness.editChapter(editCourseChapterForm, user);
+    }
 
 
 }

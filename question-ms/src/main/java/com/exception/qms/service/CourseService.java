@@ -18,7 +18,7 @@ public interface CourseService {
 
     List<Course> findCourseList(Integer pageIndex, Integer pageSize);
 
-    Course findTitleById(Long courseId);
+    Course findCourseById(Long courseId);
 
     List<CourseChapter> findChaptersByCourseId(Long courseId);
 
@@ -26,7 +26,17 @@ public interface CourseService {
 
     Course findTitleByEnTitle(String enTitle);
 
+    CourseChapter findChapterByEnTitle(String chapterEnTitle);
+
+    CourseChapter findChapterByChapterId(long chapterId);
+
     int addCourseRecord(Course course);
 
     int addCourseChapterBatch(List<CourseChapter> courseChapters);
+
+    int addCourseChapterContent(CourseChapterContent courseChapterContent);
+
+    int updateCourseChapter(CourseChapter courseChapter);
+
+    int updateCourseChapterContent(String seoKeywords, String content, Long chapterId);
 }

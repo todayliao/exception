@@ -45,6 +45,16 @@
       #{viewNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{isDeleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR})
   </insert>
+
+  <insert id="addCourseChapterContent">
+    insert into t_cms_course_chapter_content (chapter_id, seo_keywords,
+      view_num, create_time, update_time,
+      is_deleted, content)
+    values (#{chapterId,jdbcType=BIGINT}, #{seoKeywords,jdbcType=VARCHAR},
+      1, NOW(), NOW(),
+      0, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
   <insert id="insertSelective" parameterType="com.exception.qms.domain.entity.CourseChapterContent" >
     insert into t_cms_course_chapter_content
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -147,5 +157,13 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateCourseChapterContent">
+  update t_cms_course_chapter_content
+    set
+      seo_keywords = #{seoKeywords,jdbcType=VARCHAR},
+      content = #{content}
+    where chapter_id = #{chapterId}
   </update>
 </mapper>

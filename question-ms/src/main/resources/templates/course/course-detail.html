@@ -3,26 +3,26 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <!--<title th:text="${response.title} + ' - Exception 文档'">title</title>-->
-    <!--<meta name="description" th:content="${response.seoDescription}">-->
-    <!--<meta name="keywords" th:content="${response.seoKeywords}">-->
+    <title th:text="${response.chapterTitle} + ' | Exception 教程'">title</title>
+    <meta name="description" th:content="${response.chapterTitle}">
+    <meta name="keywords" th:content="${response.chapterSEOKeywords}">
 
     <!-- og start -->
-    <meta property="og:locale" content="zh_CN">
-    <meta property="og:type" content="article">
-    <!--<meta property="og:title" th:content="${response.title} + ' - Exception 博客'">-->
-    <!--<meta property="og:description" th:content="${response.seoDescription}">-->
+    <!--<meta property="og:locale" content="zh_CN">-->
+    <!--<meta property="og:type" content="article">-->
+    <!--<meta property="og:title" th:content="${response.chapterTitle} + ' - Exception 博客'">-->
+    <!--<meta property="og:description" th:content="${response.chapterTitle}">-->
     <!--<meta property="og:url" th:content="'https://www.exception.site/article/' + ${response.id}">-->
-    <meta property="og:site_name" content="Exception">
+    <!--<meta property="og:site_name" content="Exception">-->
     <!--<meta property="article:published_time" th:content="${response.createTimeStr}">-->
     <!-- og end -->
 
     <!-- twitter start -->
-    <meta name="twitter:card" content="summary">
-    <!--<meta name="twitter:description" th:content="${response.seoDescription}">-->
-    <!--<meta name="twitter:title" th:content="${response.title} + ' - Exception 博客'">-->
-    <meta name="twitter:site" content="@Exception">
-    <meta name="twitter:creator" content="@Exception">
+    <!--<meta name="twitter:card" content="summary">-->
+    <!--&lt;!&ndash;<meta name="twitter:description" th:content="${response.seoDescription}">&ndash;&gt;-->
+    <!--&lt;!&ndash;<meta name="twitter:title" th:content="${response.title} + ' - Exception 博客'">&ndash;&gt;-->
+    <!--<meta name="twitter:site" content="@Exception">-->
+    <!--<meta name="twitter:creator" content="@Exception">-->
     <!-- twitter end -->
 
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
@@ -75,7 +75,7 @@
                  class="course-content">
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                    >edit</a>
+                   th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">edit</a>
                 <div th:utext="${response.contentHtml}"></div>
             </div>
         </div>

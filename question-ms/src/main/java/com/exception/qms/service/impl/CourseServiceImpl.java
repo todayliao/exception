@@ -3,15 +3,11 @@ package com.exception.qms.service.impl;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.domain.mapper.*;
 import com.exception.qms.service.CourseService;
-import com.exception.qms.service.UserService;
 import com.exception.qms.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -42,8 +38,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findTitleById(Long courseId) {
-        return courseMapper.findTitleById(courseId);
+    public Course findCourseById(Long courseId) {
+        return courseMapper.findCourseById(courseId);
     }
 
     @Override
@@ -62,6 +58,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public CourseChapter findChapterByEnTitle(String chapterEnTitle) {
+        return courseChapterMapper.findChaptersByEnTitle(chapterEnTitle);
+    }
+
+    @Override
+    public CourseChapter findChapterByChapterId(long chapterId) {
+        return courseChapterMapper.findChapterByChapterId(chapterId);
+    }
+
+    @Override
     public int addCourseRecord(Course course) {
         return courseMapper.insert(course);
     }
@@ -69,5 +75,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public int addCourseChapterBatch(List<CourseChapter> courseChapters) {
         return courseChapterMapper.addCourseChapterBatch(courseChapters);
+    }
+
+    @Override
+    public int addCourseChapterContent(CourseChapterContent courseChapterContent) {
+        return courseChapterContentMapper.addCourseChapterContent(courseChapterContent);
+    }
+
+    @Override
+    public int updateCourseChapter(CourseChapter courseChapter) {
+        return courseChapterMapper.updateByPrimaryKeySelective(courseChapter);
+    }
+
+    @Override
+    public int updateCourseChapterContent(String seoKeywords, String content, Long chapterId) {
+        return courseChapterContentMapper.updateCourseChapterContent(seoKeywords, content, chapterId);
     }
 }
