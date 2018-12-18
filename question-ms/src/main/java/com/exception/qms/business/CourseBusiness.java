@@ -18,11 +18,11 @@ public interface CourseBusiness {
 
     PageQueryResponse queryCoursePageList(Integer pageIndex, Integer pageSize);
 
-    QueryCourseContentResponseVO queryCourseContent(String enTitle, String chapterEnTitle);
+    QueryCourseContentResponseVO queryCourseContent(Long courseId, Long chapterId);
 
     BaseResponse publishCourse(PublishCourseForm publishCourseDTO, User user);
 
-    EditCourseChapterResponseVO showEditChapterPage(String enTitle, String chapterEnTitle);
+    EditCourseChapterResponseVO showEditChapterPage(Long courseId, Long chapterId);
 
     BaseResponse editChapter(EditCourseChapterForm editCourseChapterForm, User user);
 }

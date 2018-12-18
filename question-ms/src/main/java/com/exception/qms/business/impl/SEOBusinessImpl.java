@@ -4,7 +4,6 @@ import com.exception.qms.business.SEOBusiness;
 import com.exception.qms.domain.entity.Answer;
 import com.exception.qms.domain.entity.Article;
 import com.exception.qms.domain.entity.Question;
-import com.exception.qms.domain.entity.RecommendedArticle;
 import com.exception.qms.service.*;
 import com.exception.qms.utils.ConstantsUtil;
 import com.redfin.sitemapgenerator.ChangeFreq;
@@ -43,20 +42,11 @@ public class SEOBusinessImpl implements SEOBusiness {
     private BaiduLinkPushService baiduLinkPushService;
     @Autowired
     private ArticleService articleService;
-    @Autowired
-    private RecommendedArticleService recommendedArticleService;
 
     @Override
     public BaseResponse pushAllQuestion() {
         List<Question> questions = questionService.queryAllQuestions();
         questions.parallelStream().forEach(question -> baiduLinkPushService.pushQuestionDetailPageLink(question.getId()));
-        return new BaseResponse().success();
-    }
-
-    @Override
-    public BaseResponse pushAllRecommendedArticle() {
-        List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
-        recommendedArticles.parallelStream().forEach(recommendedArticle -> baiduLinkPushService.pushRecommendedArticleDetailPageLink(recommendedArticle.getId()));
         return new BaseResponse().success();
     }
 

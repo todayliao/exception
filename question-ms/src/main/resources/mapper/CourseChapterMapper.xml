@@ -23,7 +23,7 @@
   </select>
 
   <select id="findChaptersByCourseId" resultMap="BaseResultMap">
-    select id, course_id, title, chapter_num, en_title from t_cms_course_chapter
+    select id, course_id, title, chapter_num from t_cms_course_chapter
     where course_id = #{courseId} and is_deleted = 0 order by chapter_num
   </select>
 
@@ -33,7 +33,7 @@
   </select>
 
   <select id="findChapterByChapterId" resultMap="BaseResultMap">
-    select id, course_id, title, en_title from t_cms_course_chapter
+    select id, course_id, title from t_cms_course_chapter
     where id = #{chapterId} and is_deleted = 0
   </select>
 

@@ -39,21 +39,21 @@ public class CourseController {
         return "course/course-list";
     }
 
-    @GetMapping("/course/{enTitle}")
+    @GetMapping("/course/{courseId}")
     @OperatorLog(description = "教程详情展示")
-    public String showCourseContent(@PathVariable("enTitle") String enTitle,
+    public String showCourseContent(@PathVariable("courseId") Long courseId,
                                     Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(enTitle, null));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseId, null));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }
 
-    @GetMapping("/course/{enTitle}/{chapterEnTitle}")
+    @GetMapping("/course/{courseId}/chapter/{chapterId}")
     @OperatorLog(description = "教程详情展示(带标题)")
-    public String showCourseContentWithChapterEnTitle(@PathVariable("enTitle") String enTitle,
-                                                      @PathVariable("chapterEnTitle") String chapterEnTitle,
+    public String showCourseContentWithChapterEnTitle(@PathVariable("courseId") Long courseId,
+                                                      @PathVariable("chapterId") Long chapterId,
                                                       Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(enTitle, chapterEnTitle));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseId, chapterId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }
@@ -73,12 +73,12 @@ public class CourseController {
         return "course/course-publish";
     }
 
-    @GetMapping("/course/{enTitle}/{chapterEnTitle}/edit")
+    @GetMapping("/course/{courseId}/chapter/{chapterId}/edit")
     @OperatorLog(description = "章节编辑页")
-    public String showEditChapterPage(@PathVariable("enTitle") String enTitle,
-                              @PathVariable("chapterEnTitle") String chapterEnTitle,
-                              Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.showEditChapterPage(enTitle, chapterEnTitle));
+    public String showEditChapterPage(@PathVariable("courseId") Long courseId,
+                                      @PathVariable("chapterId") Long chapterId,
+                                      Model model) {
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.showEditChapterPage(courseId, chapterId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "chapter/chapter-edit";
     }

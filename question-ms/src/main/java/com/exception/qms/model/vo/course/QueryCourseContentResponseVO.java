@@ -13,11 +13,11 @@ import java.util.List;
  **/
 @Data
 public class QueryCourseContentResponseVO implements Serializable {
-    private String enTitle;
+    private Long id;
     private String title;
     private String contentHtml;
     private String chapterTitle;
-    private String chapterEnTitle;
+    private Long chapterId;
     private String chapterSEOKeywords;
     private List<CourseChapterResponseVO> chapters;
 }

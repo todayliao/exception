@@ -19,7 +19,6 @@ import com.exception.qms.service.CourseService;
 import com.exception.qms.utils.MarkdownUtil;
 import com.google.common.base.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,34 +71,33 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public QueryCourseContentResponseVO queryCourseContent(String enTitle, String chapterEnTitle) {
-        Course course = courseService.findTitleByEnTitle(enTitle);
-        Long courseId = course.getId();
+    public QueryCourseContentResponseVO queryCourseContent(Long courseId, Long chapterId) {
+        Course course = courseService.findCourseById(courseId);
 
         if (course == null) {
-            log.warn("the course not exited, courseId: {}", enTitle);
+            log.warn("the course not exited, courseId: {}", courseId);
             throw new QMSException(QmsResponseCodeEnum.PARAM_ERROR);
         }
 
         List<CourseChapter> courseChapters = courseService.findChaptersByCourseId(courseId);
 
-        // 获取对应章节的 chapterId
-        Long chapterId = courseChapters.get(0).getId();
+        // 获取对应章节的 chapterId, 默认第一章节
         String chapterTitle = courseChapters.get(0).getTitle();
-        if (StringUtils.isBlank(chapterEnTitle)) {
-            chapterEnTitle = courseChapters.get(0).getEnTitle();
+        // chapterId 为空的情况，设置为第一章节 id
+        if (chapterId == null) {
+            chapterId = courseChapters.get(0).getCourseId();
         }
 
-        if (StringUtils.isNotBlank(chapterEnTitle)) {
-            String finalChapterEnTitle = chapterEnTitle;
+        // 如果 chapterId 不为空
+        if (chapterId != null) {
+            Long finalChapterId1 = chapterId;
             List<CourseChapter> tmpList = courseChapters.stream()
-                    .filter(p -> Objects.equal(p.getEnTitle(), finalChapterEnTitle)).collect(Collectors.toList());
+                    .filter(p -> Objects.equal(p.getId(), finalChapterId1)).collect(Collectors.toList());
 
             if (CollectionUtils.isEmpty(tmpList)) {
-                log.warn("the chapter enTitle of the course not exited, courseId: {}, enTitle: {}", enTitle, chapterEnTitle);
+                log.warn("the chapter of the course not exited, courseId: {}, chapterId: {}", courseId, chapterId);
                 throw new QMSException(QmsResponseCodeEnum.PARAM_ERROR);
             }
-            chapterId = tmpList.get(0).getId();
             chapterTitle = tmpList.get(0).getTitle();
         }
 
@@ -126,11 +124,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             queryCourseContentResponseVO = new QueryCourseContentResponseVO();
             queryCourseContentResponseVO.setContentHtml("// TODO 正在努力憋稿中, 内容会尽快上线与您见面 ...");
         }
+        queryCourseContentResponseVO.setId(courseId);
         queryCourseContentResponseVO.setTitle(course.getTitle());
-        queryCourseContentResponseVO.setEnTitle(course.getEnTitle());
+        queryCourseContentResponseVO.setChapterId(chapterId);
         queryCourseContentResponseVO.setChapterTitle(chapterTitle);
         queryCourseContentResponseVO.setChapters(courseChapterResponseVOS);
-        queryCourseContentResponseVO.setChapterEnTitle(chapterEnTitle);
 
         return queryCourseContentResponseVO;
     }
@@ -164,12 +162,11 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public EditCourseChapterResponseVO showEditChapterPage(String enTitle, String chapterEnTitle) {
-        CourseChapter courseChapter = courseService.findChapterByEnTitle(chapterEnTitle);
+    public EditCourseChapterResponseVO showEditChapterPage(Long courseId, Long chapterId) {
+        CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
         EditCourseChapterResponseVO editCourseChapterResponseVO = null;
         if (courseChapter != null) {
             editCourseChapterResponseVO = mapper.map(courseChapter, EditCourseChapterResponseVO.class);
-            Long chapterId = courseChapter.getId();
             CourseChapterContent chapterContent = courseService.findContentByChaperId(chapterId);
             editCourseChapterResponseVO.setSeoKeywords(chapterContent == null ? null : chapterContent.getSeoKeywords());
             editCourseChapterResponseVO.setContent(chapterContent == null ? null : chapterContent.getContent());

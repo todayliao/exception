@@ -12,7 +12,7 @@ import java.io.Serializable;
  **/
 @Data
 public class QueryCoursePageListResponseVO implements Serializable {
-    private String enTitle;
+    private Long id;
     private String title;
     private String titleImage;
     private String summary;

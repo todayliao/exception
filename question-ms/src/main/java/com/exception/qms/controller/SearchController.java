@@ -2,7 +2,6 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.SearchBusiness;
-import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.model.dto.question.response.SearchAboutQuestionResponseDTO;
@@ -67,13 +66,6 @@ public class SearchController {
     @ResponseBody
     public BaseResponse updateAllQuestionIndex() {
         return searchBusiness.updateAllQuestionIndex();
-    }
-
-    @GetMapping("/search/recommended/article/allIndex/update")
-    @OperatorLog(description = "更新所有优选博文索引")
-    @ResponseBody
-    public BaseResponse updateAllRecommendedArticleIndex() {
-        return searchBusiness.updateAllRecommendedArticleIndex();
     }
 
 }

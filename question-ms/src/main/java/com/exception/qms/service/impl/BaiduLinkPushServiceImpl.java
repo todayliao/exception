@@ -154,13 +154,10 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
         String url = String.format("http://%s/urls?site=%s&token=%s", linkPushHost, domain, linkPushToken);
 
         CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
-        String chapterEnTitle = courseChapter.getEnTitle();
 
         Long courseId = courseChapter.getCourseId();
-        Course course = courseService.findCourseById(courseId);
-        String courseEnTitle = course.getEnTitle();
 
-        String courseChapterPageUrl = String.format("%s/course/%s/%s", domain, courseEnTitle, chapterEnTitle);
+        String courseChapterPageUrl = String.format("%s/course/%s/%s", domain, courseId, chapterId);
 
         HttpClient client = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);

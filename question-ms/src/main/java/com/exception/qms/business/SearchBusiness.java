@@ -18,8 +18,6 @@ public interface SearchBusiness {
 
     BaseResponse updateAllQuestionIndex();
 
-    BaseResponse updateAllRecommendedArticleIndex();
-
     PageQueryResponse<QuestionSearchResponseVO> searchQuestion(Integer pageIndex, Integer pageSize, String key, String tab);
 
     BaseResponse<List<SearchAboutQuestionResponseDTO>> searchAboutQuestion(String title, Long id);

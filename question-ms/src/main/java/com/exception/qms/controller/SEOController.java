@@ -1,7 +1,6 @@
 package com.exception.qms.controller;
 
 import com.exception.qms.business.SEOBusiness;
-import com.exception.qms.common.ControllerExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -36,17 +35,6 @@ public class SEOController {
     @ResponseBody
     public BaseResponse pushAllQuestion() {
         return seoBusiness.pushAllQuestion();
-    }
-
-    /**
-     * 主动推送所有优选博文的连接给百度
-     *
-     * @return
-     */
-    @GetMapping("/seo/baidu/pushAllRecommendedArticle")
-    @ResponseBody
-    public BaseResponse pushAllRecommendedArticle() {
-        return seoBusiness.pushAllRecommendedArticle();
     }
 
     /**

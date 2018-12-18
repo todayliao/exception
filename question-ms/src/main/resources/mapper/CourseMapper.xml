@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.exception.qms.domain.entity.Course" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="en_title" property="enTitle" jdbcType="VARCHAR" />
     <result column="title_image" property="titleImage" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="TINYINT" />
@@ -29,12 +28,12 @@
   </select>
 
     <select id="findCourseList" resultMap="BaseResultMap">
-        select en_title, title, title_image, summary, type, create_user_id, create_time from t_cms_course
+        select id, title, title_image, summary, type, create_user_id, create_time from t_cms_course
         where is_deleted = 0 order by create_time desc limit #{start}, #{pageSize}
     </select>
 
     <select id="findCourseById" resultMap="BaseResultMap">
-        select id, en_title from t_cms_course where id = #{courseId} and is_deleted = 0
+        select id, title from t_cms_course where id = #{courseId} and is_deleted = 0
     </select>
 
   <select id="findTitleByEnTitle" resultMap="BaseResultMap">
