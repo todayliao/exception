@@ -85,7 +85,7 @@ public class CourseBusinessImpl implements CourseBusiness {
         String chapterTitle = courseChapters.get(0).getTitle();
         // chapterId 为空的情况，设置为第一章节 id
         if (chapterId == null) {
-            chapterId = courseChapters.get(0).getCourseId();
+            chapterId = courseChapters.get(0).getId();
         }
 
         // 如果 chapterId 不为空
