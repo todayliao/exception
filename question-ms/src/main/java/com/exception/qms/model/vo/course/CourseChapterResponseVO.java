@@ -16,5 +16,9 @@ public class CourseChapterResponseVO implements Serializable {
     private String title;
     private Integer chapterNum;
     private Boolean isSelected;
+    /**
+     * 是否是二级章节
+     */
+    private Boolean isSecondary;
     private String enTitle;
 }

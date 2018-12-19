@@ -61,9 +61,11 @@
                 <ul class="catalog">
                     <li th:each="item : ${response.chapters}">
                         <a th:if="${item.isSelected == true}" class="sidebar-link selected"
+                           th:classappend="${item.isSecondary == true} ? 'secondary_title' : ''"
                            th:href="@{'/course/' + ${response.id} + '/chapter/' + ${item.id}}"
                            th:utext="${item.title}">章节标题</a>
                         <a th:if="${item.isSelected == false}" class="sidebar-link"
+                           th:classappend="${item.isSecondary == true} ? 'secondary_title' : ''"
                            th:href="@{'/course/' + ${response.id} + '/chapter/' + ${item.id}}"
                            th:utext="${item.title}">章节标题</a>
                     </li>

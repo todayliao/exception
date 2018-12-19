@@ -27,6 +27,6 @@ public class CourseChapter {
 
     private Boolean isDeleted;
 
-    private String enTitle;
+    private Boolean isSecondary;
 
 }
