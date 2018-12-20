@@ -21,8 +21,6 @@ public class EditCourseChapterForm implements Serializable {
     @NotNull
     private Integer chapterNum;
     @NotBlank
-    private String enTitle;
-    @NotBlank
     private String seoKeywords;
     @NotBlank
     private String content;

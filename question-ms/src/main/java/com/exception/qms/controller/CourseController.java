@@ -90,5 +90,13 @@ public class CourseController {
         return courseBusiness.editChapter(editCourseChapterForm, user);
     }
 
+    @GetMapping("/course/{courseId}/chapter/{chapterId}/pushToBaidu")
+    @OperatorLog(description = "推送章节连接给百度")
+    @ResponseBody
+    public Boolean pushToBaidu(@PathVariable("courseId") Long courseId,
+                               @PathVariable("chapterId") Long chapterId) {
+        return courseBusiness.pushToBaidu(courseId, chapterId);
+    }
+
 
 }

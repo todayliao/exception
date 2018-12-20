@@ -12,7 +12,7 @@ public interface BaiduLinkPushService {
 
     void pushArticleDetailPageLink(long articleId);
 
-    void pushCourseChapterPageLink(long chapterId);
+    boolean pushCourseChapterPageLink(long chapterId);
 
     void pushRecommendedArticleDetailPageLink(long articleId);
 

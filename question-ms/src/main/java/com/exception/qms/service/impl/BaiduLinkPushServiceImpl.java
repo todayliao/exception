@@ -150,14 +150,14 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
     }
 
     @Override
-    public void pushCourseChapterPageLink(long chapterId) {
+    public boolean pushCourseChapterPageLink(long chapterId) {
         String url = String.format("http://%s/urls?site=%s&token=%s", linkPushHost, domain, linkPushToken);
 
         CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
 
         Long courseId = courseChapter.getCourseId();
 
-        String courseChapterPageUrl = String.format("%s/course/%s/%s", domain, courseId, chapterId);
+        String courseChapterPageUrl = String.format("%s/course/%s/chapter/%s", domain, courseId, chapterId);
 
         HttpClient client = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -180,12 +180,14 @@ public class BaiduLinkPushServiceImpl implements BaiduLinkPushService {
 
             if (HttpStatus.SC_OK == responseCode) {
                 log.info("push the link of course chapter content page success, url ==> {}, remain: {}", courseChapterPageUrl, baiduPushLinkResponseDTO.getRemain());
+                return true;
             } else {
                 log.info("push the link of course chapter content page fail, url ==> {}", courseChapterPageUrl);
             }
         } catch (Exception e) {
             log.error("push the link of article detail page error, ", e);
         }
+        return false;
     }
 
     @Override
