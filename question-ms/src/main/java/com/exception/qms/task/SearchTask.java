@@ -18,4 +18,9 @@ public class SearchTask {
     @Autowired
     private SearchBusiness searchBusiness;
 
+    public static void main(String[] args) {
+        System.out.println(4%3);
+
+    }
+
 }
