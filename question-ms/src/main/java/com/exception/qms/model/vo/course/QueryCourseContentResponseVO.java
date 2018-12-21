@@ -18,6 +18,10 @@ public class QueryCourseContentResponseVO implements Serializable {
     private String contentHtml;
     private String chapterTitle;
     private Long chapterId;
+    /**
+     * SEO
+     */
     private String chapterSEOKeywords;
+    private String chapterSEODescription;
     private List<CourseChapterResponseVO> chapters;
 }

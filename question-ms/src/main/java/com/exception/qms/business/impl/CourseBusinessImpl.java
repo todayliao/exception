@@ -120,9 +120,18 @@ public class CourseBusinessImpl implements CourseBusiness {
             queryCourseContentResponseVO = mapper.map(chapterContent, QueryCourseContentResponseVO.class);
             queryCourseContentResponseVO.setContentHtml(MarkdownUtil.parse2Html(chapterContent.getContent()));
             queryCourseContentResponseVO.setChapterSEOKeywords(chapterContent.getSeoKeywords());
+            // description 最多显示 120 字符
+            int limit = 300;
+            if (chapterContent.getContent().length() > limit) {
+                queryCourseContentResponseVO.setChapterSEODescription(chapterContent.getContent().substring(0, limit));
+            } else {
+                queryCourseContentResponseVO.setChapterSEODescription(chapterContent.getContent());
+            }
         } else {
             queryCourseContentResponseVO = new QueryCourseContentResponseVO();
             queryCourseContentResponseVO.setContentHtml("// TODO 正在努力憋稿中, 内容会尽快上线与您见面 ...");
+            queryCourseContentResponseVO.setChapterSEODescription(course.getTitle());
+            queryCourseContentResponseVO.setChapterSEOKeywords(course.getTitle());
         }
         queryCourseContentResponseVO.setId(courseId);
         queryCourseContentResponseVO.setTitle(course.getTitle());
@@ -201,5 +210,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
 
         return new BaseResponse().success();
+    }
+
+    @Override
+    public boolean pushToBaidu(Long courseId, Long chapterId) {
+        return baiduLinkPushService.pushCourseChapterPageLink(chapterId);
     }
 }

@@ -25,4 +25,6 @@ public interface CourseBusiness {
     EditCourseChapterResponseVO showEditChapterPage(Long courseId, Long chapterId);
 
     BaseResponse editChapter(EditCourseChapterForm editCourseChapterForm, User user);
+
+    boolean pushToBaidu(Long courseId, Long chapterId);
 }
