@@ -96,3 +96,7 @@ body {
     padding-left: 30px;
 }
 
+pre code {
+    font-size: 14px;
+}
+

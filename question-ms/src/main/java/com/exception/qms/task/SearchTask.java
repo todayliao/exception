@@ -18,4 +18,5 @@ public class SearchTask {
     @Autowired
     private SearchBusiness searchBusiness;
 
+
 }
