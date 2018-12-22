@@ -3,7 +3,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title th:text="${response.title} + ' ' + ${response.chapterTitle} + ' | Exception 教程'">title</title>
+    <title th:text="${response.title} + ' - ' + ${response.chapterTitle} + ' | Exception 教程'">title</title>
     <meta name="description" th:content="${response.chapterSEODescription}">
     <meta name="keywords" th:content="${response.chapterSEOKeywords}">
 
@@ -34,13 +34,12 @@
     <!-- commoncBootstrap CSS -->
     <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
     <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
-    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
     <link rel="stylesheet" th:href="@{/css/common/base.css}">
-    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/androidstudio.css}">
+    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github-gist.css}">
     <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
-    <link rel="stylesheet" th:href="@{/css/article/article-detail.css}">
     <link rel="stylesheet" th:href="@{/css/course/course-detail.css}">
 
     <!-- 百度统计 -->
@@ -94,7 +93,7 @@
 </body>
 
 <script th:replace="fragment/common-js :: js"></script>
-<script src="https://lib.baomitu.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.13.1/highlight.min.js"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
 <script th:src="@{/plugins/zoomify/zoomify.js}"></script>
 <script th:src="@{/js/jquery.sticky.js}"></script>
@@ -102,7 +101,6 @@
 <script th:replace="fragment/common-js :: 360LinkPush"></script>
 
 <script th:inline="javascript">
-
     $(document).ready(function () {
         // 代码高亮
         hljs.initHighlightingOnLoad();

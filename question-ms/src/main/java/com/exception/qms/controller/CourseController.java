@@ -97,6 +97,5 @@ public class CourseController {
                                @PathVariable("chapterId") Long chapterId) {
         return courseBusiness.pushToBaidu(courseId, chapterId);
     }
-
-
+    
 }
