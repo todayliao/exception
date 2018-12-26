@@ -98,5 +98,4 @@ public class CourseController {
         return courseBusiness.pushToBaidu(courseId, chapterId);
     }
 
-
 }
