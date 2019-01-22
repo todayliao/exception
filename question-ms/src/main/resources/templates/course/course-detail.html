@@ -54,7 +54,7 @@
 <!-- main content -->
 <main class="container-fluid main-content">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-12 col-md-3 col-xl-2">
             <div id="list-example" class="sidebar">
                 <div class="sidebar-header" th:utext="${response.title}">Spring boot 整合各种技术栈教程系列</div>
                 <ul class="catalog">
@@ -71,7 +71,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-9">
+        <!-- 核心区 -->
+        <div class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
             <div data-spy="scroll" data-target="#list-example" data-offset="0"
                  class="course-content">
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
@@ -82,6 +83,8 @@
                 <div th:utext="${response.contentHtml}"></div>
             </div>
         </div>
+        <!-- 右边栏 -->
+        <div class="d-none d-xl-block col-xl-2 bd-toc"></div>
 
     </div>
     <!-- 回到顶部 -->
