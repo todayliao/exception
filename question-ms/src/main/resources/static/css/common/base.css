@@ -297,7 +297,7 @@ input::-webkit-input-placeholder{
     background: transparent;
     border: none;
     position: absolute;
-    top: 0;
+    top: -0.5px;
     height: 100%;
     color: #838E95;
     padding-left: 2px;
