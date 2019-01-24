@@ -193,6 +193,10 @@ body {
     margin: 0 auto;
 }
 
+.catalog {
+    padding-left: 1em;
+}
+
 .catalog li {
     list-style: none;
 }
@@ -245,7 +249,7 @@ body {
 
 .selected {
     /*border-right: .25rem solid #007bff;*/
-    color: #1aad16;
+    color: #007bff;
 }
 
 .secondary_title {

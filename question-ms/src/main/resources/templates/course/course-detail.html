@@ -7,24 +7,6 @@
     <meta name="keywords" th:content="${response.chapterSEOKeywords}">
     <meta name="description" th:content="${response.chapterSEODescription}">
 
-    <!-- og start -->
-    <!--<meta property="og:locale" content="zh_CN">-->
-    <!--<meta property="og:type" content="article">-->
-    <!--<meta property="og:title" th:content="${response.chapterTitle} + ' - Exception 博客'">-->
-    <!--<meta property="og:description" th:content="${response.chapterTitle}">-->
-    <!--<meta property="og:url" th:content="'https://www.exception.site/article/' + ${response.id}">-->
-    <!--<meta property="og:site_name" content="Exception">-->
-    <!--<meta property="article:published_time" th:content="${response.createTimeStr}">-->
-    <!-- og end -->
-
-    <!-- twitter start -->
-    <!--<meta name="twitter:card" content="summary">-->
-    <!--&lt;!&ndash;<meta name="twitter:description" th:content="${response.seoDescription}">&ndash;&gt;-->
-    <!--&lt;!&ndash;<meta name="twitter:title" th:content="${response.title} + ' - Exception 博客'">&ndash;&gt;-->
-    <!--<meta name="twitter:site" content="@Exception">-->
-    <!--<meta name="twitter:creator" content="@Exception">-->
-    <!-- twitter end -->
-
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
@@ -40,6 +22,8 @@
     <link rel="stylesheet" th:href="@{/css/common/base.css}">
     <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github-gist.css}">
     <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
+    <!-- toc -->
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-toc/bootstrap-toc.css}">
     <link rel="stylesheet" th:href="@{/css/course/course-detail.css}">
 
     <!-- 百度统计 -->
@@ -48,7 +32,7 @@
     <script th:replace="fragment/common-js :: gtagjs"></script>
     <script th:replace="fragment/common-js :: googleStatistics"></script>
 </head>
-<body style="background: #fff;">
+<body style="background: #fff;" data-spy="scroll" data-target="#toc">
 <!-- 顶部导航栏 -->
 <header th:replace="fragment/common :: header"></header>
 <!-- main content -->
@@ -84,7 +68,10 @@
             </div>
         </div>
         <!-- 右边栏 -->
-        <div class="d-none d-xl-block col-xl-2 bd-toc"></div>
+        <div class="d-none d-xl-block col-xl-2 bd-toc">
+            <!-- 目录 -->
+            <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+        </div>
 
     </div>
     <!-- 回到顶部 -->
@@ -97,6 +84,8 @@
 
 <script th:replace="fragment/common-js :: js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.13.1/highlight.min.js"></script>
+<!-- toc -->
+<script th:src="@{/plugins/bootstrap-toc/bootstrap-toc.min.js}"></script>
 <script th:src="@{/plugins/layer/layer.js}"></script>
 <script th:src="@{/plugins/zoomify/zoomify.js}"></script>
 <script th:src="@{/js/jquery.sticky.js}"></script>

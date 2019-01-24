@@ -85,9 +85,14 @@ pre code {
 }
 
 blockquote {
-    padding: 0 1em;
     color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
+    border-left: 4px solid rgb(66, 185, 131);
+    background-color: rgba(66, 185, 131, 0.1);
+    padding:  10px 15px 10px 15px;
+}
+
+blockquote p {
+    margin-bottom: 0;
 }
 
 .dropdown-menu {

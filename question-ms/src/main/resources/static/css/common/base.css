@@ -1,10 +1,9 @@
 body {
     font-family: -apple-system-font,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Microsoft YaHei",Arial,sans-serif;
-    /*font-family: "Open Sans", Arial, "Hiragino Sans GB","Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif,sans-serif;*/
-    color: #000;
+    color: #353535;
     font-size: 15px;
-    letter-spacing: .2px;
     background: #f6f8f9;
+    line-height: 1.6;
 }
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
@@ -298,7 +297,7 @@ input::-webkit-input-placeholder{
     background: transparent;
     border: none;
     position: absolute;
-    top: -1px;
+    top: 0;
     height: 100%;
     color: #838E95;
     padding-left: 2px;
@@ -484,7 +483,7 @@ input::-webkit-input-placeholder{
 }
 
 a {
-    color: #0366d6;
+    color: #007bff;
 }
 
 .m-navbar-brand {
