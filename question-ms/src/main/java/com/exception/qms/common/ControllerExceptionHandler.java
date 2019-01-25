@@ -2,6 +2,7 @@ package com.exception.qms.common;
 
 import com.alibaba.fastjson.JSON;
 import com.exception.qms.enums.QmsResponseCodeEnum;
+import com.exception.qms.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import site.exception.common.BaseResponse;
 import site.exception.exception.BaseException;
 
@@ -27,6 +29,16 @@ import java.util.Optional;
 @ControllerAdvice
 @Slf4j
 public class ControllerExceptionHandler {
+
+    /**
+     * 资源 404 异常处理
+     * @return
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    ModelAndView handleControllerExceptionWith404() {
+        ModelAndView modelAndView = new ModelAndView("error/404");
+        return modelAndView;
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
