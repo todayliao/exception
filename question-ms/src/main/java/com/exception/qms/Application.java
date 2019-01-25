@@ -1,9 +1,11 @@
 package com.exception.qms;
 
+import com.exception.qms.config.MyErrorPageRegistrar;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ErrorPageRegistrar;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -75,13 +77,9 @@ public class Application {
 		return threadPoolExecutorFactoryBean;
 	}
 
-//	@Bean
-//	public TaskExecutor taskExceutorBean() {
-//		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-//		executor.setCorePoolSize(1);
-//		executor.setMaxPoolSize(30);
-//		executor.initialize();
-//		return executor;
-//	}
+	@Bean
+	public ErrorPageRegistrar errorPageRegistrar(){
+		return new MyErrorPageRegistrar();
+	}
 
 }

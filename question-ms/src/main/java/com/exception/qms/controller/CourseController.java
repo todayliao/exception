@@ -41,19 +41,19 @@ public class CourseController {
 
     @GetMapping("/course/{courseId}")
     @OperatorLog(description = "教程详情展示")
-    public String showCourseContent(@PathVariable("courseId") Long courseId,
+    public String showCourseContent(@PathVariable("courseId") String courseIdStr,
                                     Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseId, null));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseIdStr, null));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }
 
     @GetMapping("/course/{courseId}/chapter/{chapterId}")
     @OperatorLog(description = "教程详情展示(带标题)")
-    public String showCourseContentWithChapterEnTitle(@PathVariable("courseId") Long courseId,
-                                                      @PathVariable("chapterId") Long chapterId,
+    public String showCourseContentWithChapterEnTitle(@PathVariable("courseId") String courseIdStr,
+                                                      @PathVariable("chapterId") String chapterIdStr,
                                                       Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseId, chapterId));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseIdStr, chapterIdStr));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }

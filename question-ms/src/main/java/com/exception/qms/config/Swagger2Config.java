@@ -44,7 +44,7 @@ public class Swagger2Config {
                 "www.exception.site", "weiwosuoai1991@gmail.com");
 
         return new ApiInfoBuilder()
-                .title(title + " Exception 问答社区 API 文档")
+                .title(title + " Exception 教程 API 文档")
                 .contact(contact)
                 .version("1.0")
                 .build();

@@ -1,10 +1,7 @@
 package com.exception.qms.utils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
+import java.util.Objects;
 
 /**
  * @author jiangbing(江冰)
@@ -23,7 +20,7 @@ public class HttpUtil {
      */
     public static boolean isAjaxRequest(HttpServletRequest request) {
         String ajaxHeader = request.getHeader("X-Requested-With");
-        return "XMLHttpRequest".equals(ajaxHeader);
+        return Objects.equals("XMLHttpRequest", ajaxHeader);
     }
 
 

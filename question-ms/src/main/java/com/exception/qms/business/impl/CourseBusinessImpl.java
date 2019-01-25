@@ -6,8 +6,7 @@ import com.exception.qms.domain.entity.Course;
 import com.exception.qms.domain.entity.CourseChapter;
 import com.exception.qms.domain.entity.CourseChapterContent;
 import com.exception.qms.domain.entity.User;
-import com.exception.qms.enums.QmsResponseCodeEnum;
-import com.exception.qms.exception.QMSException;
+import com.exception.qms.exception.ResourceNotFoundException;
 import com.exception.qms.model.form.course.EditCourseChapterForm;
 import com.exception.qms.model.form.course.PublishCourseForm;
 import com.exception.qms.model.vo.course.CourseChapterResponseVO;
@@ -19,6 +18,7 @@ import com.exception.qms.service.CourseService;
 import com.exception.qms.utils.MarkdownUtil;
 import com.google.common.base.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,12 +71,22 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public QueryCourseContentResponseVO queryCourseContent(Long courseId, Long chapterId) {
+    public QueryCourseContentResponseVO queryCourseContent(String courseIdStr, String chapterIdStr) {
+        Long courseId = null;
+        Long chapterId = null;
+        try {
+            courseId = Long.valueOf(courseIdStr);
+            chapterId = StringUtils.isNotBlank(chapterIdStr) ? Long.valueOf(chapterIdStr) : null;
+        } catch (Exception e) {
+            log.error("courseIdStr or chapterIdStr convert to long error: ", e);
+            throw new ResourceNotFoundException();
+        }
+
         Course course = courseService.findCourseById(courseId);
 
         if (course == null) {
             log.warn("the course not exited, courseId: {}", courseId);
-            throw new QMSException(QmsResponseCodeEnum.PARAM_ERROR);
+            throw new ResourceNotFoundException();
         }
 
         List<CourseChapter> courseChapters = courseService.findChaptersByCourseId(courseId);
@@ -96,7 +106,7 @@ public class CourseBusinessImpl implements CourseBusiness {
 
             if (CollectionUtils.isEmpty(tmpList)) {
                 log.warn("the chapter of the course not exited, courseId: {}, chapterId: {}", courseId, chapterId);
-                throw new QMSException(QmsResponseCodeEnum.PARAM_ERROR);
+                throw new ResourceNotFoundException();
             }
             chapterTitle = tmpList.get(0).getTitle();
         }

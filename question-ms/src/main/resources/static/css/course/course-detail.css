@@ -268,3 +268,7 @@ pre code {
     background-color: #f6f8fa !important;
 }
 
+.toc {
+    border-left: 1px solid #eee;
+}
+
