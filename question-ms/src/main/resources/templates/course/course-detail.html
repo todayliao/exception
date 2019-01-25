@@ -32,7 +32,7 @@
     <script th:replace="fragment/common-js :: gtagjs"></script>
     <script th:replace="fragment/common-js :: googleStatistics"></script>
 </head>
-<body style="background: #fff;" data-spy="scroll" data-target="#toc">
+<body style="background: #fff;">
 <!-- 顶部导航栏 -->
 <header th:replace="fragment/common :: header"></header>
 <!-- main content -->
@@ -70,7 +70,7 @@
         <!-- 右边栏 -->
         <div class="d-none d-xl-block col-xl-2 bd-toc">
             <!-- 目录 -->
-            <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+            <nav id="toc" class="sticky-top"></nav>
         </div>
 
     </div>
@@ -94,6 +94,13 @@
 
 <script th:inline="javascript">
     $(document).ready(function () {
+        var navSelector = "#toc";
+        var $myNav = $(navSelector);
+        Toc.init($myNav);
+        $("body").scrollspy({
+            target: navSelector
+        });
+
         // 代码高亮
         hljs.initHighlightingOnLoad();
         // $("pre").addClass("prettyprint");
@@ -102,6 +109,7 @@
         // 图片放大
         $('p img').zoomify();
     });
+
 
 </script>
 </html>
