@@ -201,6 +201,14 @@ body {
     list-style: none;
 }
 
+.catalog li a {
+    color: #7f8c8d;
+}
+
+.catalog li a:hover{
+    border-bottom: 2px solid #007bff;
+}
+
 .sidebar-header {
     transition: color .15s ease;
     cursor: pointer;
@@ -214,10 +222,8 @@ body {
 .sidebar-link {
     font-weight: 400;
     display: inline-block;
-    border-left: .25rem solid transparent;
     padding: .35rem 1rem .35rem 0;
     line-height: 1.5;
-    width: 100%;
     box-sizing: border-box;
     /*color: #353535;*/
 }
@@ -249,7 +255,7 @@ body {
 
 .selected {
     /*border-right: .25rem solid #007bff;*/
-    color: #007bff;
+    color: #007bff !important;
 }
 
 .secondary_title {
