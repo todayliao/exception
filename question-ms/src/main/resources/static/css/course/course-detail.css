@@ -222,7 +222,8 @@ body {
 .sidebar-link {
     font-weight: 400;
     display: inline-block;
-    padding: .35rem 1rem .35rem 0;
+    padding: .35rem .35rem 0 0;
+    margin-bottom: .35rem;
     line-height: 1.5;
     box-sizing: border-box;
     /*color: #353535;*/
