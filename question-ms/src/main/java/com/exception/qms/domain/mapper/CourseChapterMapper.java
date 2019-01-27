@@ -21,7 +21,10 @@ public interface CourseChapterMapper {
 
     CourseChapter findChapterByChapterId(long chapterId);
 
+    List<CourseChapter> findByChapterIds(List<Long> chapterIds);
+
     int updateByPrimaryKeySelective(CourseChapter record);
 
     int updateByPrimaryKey(CourseChapter record);
+
 }

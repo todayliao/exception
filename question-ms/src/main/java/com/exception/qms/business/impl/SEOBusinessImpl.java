@@ -1,10 +1,13 @@
 package com.exception.qms.business.impl;
 
 import com.exception.qms.business.SEOBusiness;
-import com.exception.qms.domain.entity.Answer;
-import com.exception.qms.domain.entity.Article;
-import com.exception.qms.domain.entity.Question;
-import com.exception.qms.service.*;
+import com.exception.qms.domain.entity.*;
+import com.exception.qms.domain.mapper.CourseChapterContentMapper;
+import com.exception.qms.domain.mapper.CourseChapterMapper;
+import com.exception.qms.service.AnswerService;
+import com.exception.qms.service.ArticleService;
+import com.exception.qms.service.BaiduLinkPushService;
+import com.exception.qms.service.QuestionService;
 import com.exception.qms.utils.ConstantsUtil;
 import com.redfin.sitemapgenerator.ChangeFreq;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
@@ -42,6 +45,10 @@ public class SEOBusinessImpl implements SEOBusiness {
     private BaiduLinkPushService baiduLinkPushService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private CourseChapterContentMapper courseChapterContentMapper;
+    @Autowired
+    private CourseChapterMapper courseChapterMapper;
 
     @Override
     public BaseResponse pushAllQuestion() {
@@ -66,13 +73,37 @@ public class SEOBusinessImpl implements SEOBusiness {
                     .build();
             wsg.addUrl(url);
 
-            // recommended article list page
-//            WebSitemapUrl recommendedArtcileUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article")
-//                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
-//                    .priority(0.9)
-//                    .changeFreq(ChangeFreq.ALWAYS)
-//                    .build();
-//            wsg.addUrl(recommendedArtcileUrl);
+            // course home page
+            WebSitemapUrl courseHomeUrl = new WebSitemapUrl.Options(baseUrl + "/course")
+                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
+                    .priority(0.9)
+                    .changeFreq(ChangeFreq.ALWAYS)
+                    .build();
+            wsg.addUrl(courseHomeUrl);
+
+            // course
+            // 1.查找出已经有内容的 chapterId
+            List<CourseChapterContent> chapterContents = courseChapterContentMapper.findAllChapterId();
+            List<Long> chapterIds = chapterContents.stream().map(CourseChapterContent::getChapterId).collect(Collectors.toList());
+            // 2.查找出对应的 courseId
+            List<CourseChapter> courseChapters = courseChapterMapper.findByChapterIds(chapterIds);
+            Map<Long, CourseChapter> chapterIdCourseChapterMap = courseChapters.stream()
+                    .collect(Collectors.toMap(CourseChapter::getId, p -> p));
+
+            for (CourseChapterContent courseChapterContent : chapterContents) {
+                long chapterId = courseChapterContent.getChapterId();
+                CourseChapter courseChapter = chapterIdCourseChapterMap.get(chapterId);
+                long courseId = courseChapter.getCourseId();
+                LocalDateTime latestUpdateTime = courseChapterContent.getUpdateTime()
+                        .isBefore(courseChapter.getUpdateTime()) ?
+                        courseChapterContent.getUpdateTime() : courseChapter.getUpdateTime();
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/course/" + courseId + "/chapter/" + chapterId)
+                        .lastMod(dateTimeFormatter.format(latestUpdateTime))
+                        .priority(0.9)
+                        .changeFreq(ChangeFreq.DAILY)
+                        .build();
+                wsg.addUrl(tmpUrl);
+            }
 
             // step1：question detail pages
             List<Question> questions = questionService.queryAllQuestions();
@@ -90,25 +121,11 @@ public class SEOBusinessImpl implements SEOBusiness {
 
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + questionId)
                         .lastMod(dateTimeFormatter.format(updateTime))
-                        .priority(0.9)
+                        .priority(0.8)
                         .changeFreq(ChangeFreq.DAILY)
                         .build();
                 wsg.addUrl(tmpUrl);
             }
-
-            // step2: recommended article
-//            List<RecommendedArticle> recommendedArticles = recommendedArticleService.queryAllArticles();
-//            for (RecommendedArticle recommendedArticle : recommendedArticles) {
-//                Long recommendedArticleId = recommendedArticle.getId();
-//                LocalDateTime updateTime = recommendedArticle.getUpdateTime();
-//
-//                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/recommended/article/" + recommendedArticleId)
-//                        .lastMod(dateTimeFormatter.format(updateTime))
-//                        .priority(0.9)
-//                        .changeFreq(ChangeFreq.DAILY)
-//                        .build();
-//                wsg.addUrl(tmpUrl);
-//            }
 
             // step3: articles
             List<Article> articles = articleService.queryAll();
@@ -118,7 +135,7 @@ public class SEOBusinessImpl implements SEOBusiness {
 
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/article/" + articleId)
                         .lastMod(dateTimeFormatter.format(updateTime))
-                        .priority(0.9)
+                        .priority(0.8)
                         .changeFreq(ChangeFreq.DAILY)
                         .build();
                 wsg.addUrl(tmpUrl);

@@ -32,6 +32,11 @@
     select id, chapter_id, seo_keywords, view_num, create_time, content from t_cms_course_chapter_content
     where chapter_id = #{chapterId} and is_deleted = 0
   </select>
+  
+  <select id="findAllChapterId" resultMap="BaseResultMap">
+    select chapter_id, update_time from t_cms_course_chapter_content
+    where is_deleted = 0
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_cms_course_chapter_content
