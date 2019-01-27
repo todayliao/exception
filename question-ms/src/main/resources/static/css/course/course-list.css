@@ -5,7 +5,7 @@
 }
 
 .course-title {
-    color: #1a1a1a;
+    color: #07111B;
     font-size: 18px;
     font-weight: 500;
     line-height: 24px;
@@ -20,9 +20,13 @@
 }
 
 .course-summary {
-    color: #646464;
+    color: #93999F;
 }
 
 .course-container-a:hover {
     text-decoration: none;
+}
+
+.title-image {
+    height: 140px;
 }

@@ -40,7 +40,7 @@
                 <div class="grid-layout-cell" th:each="item : ${response.data}">
                     <a th:href="@{'/course/' + ${item.id}}" class="course-container-a">
                         <div class="card">
-                            <img class="card-img-top" th:src="${item.titleImage}">
+                            <img class="card-img-top title-image" th:src="${item.titleImage}">
                             <div class="card-body">
                                 <h3 class="document-card-title course-title" th:utext="${item.title}">
                                     教程标题
