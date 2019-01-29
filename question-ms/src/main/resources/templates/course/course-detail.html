@@ -61,10 +61,18 @@
                  class="course-content">
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/edit'}">edit</a>
+                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/edit'}">编辑</a>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/pushToBaidu'}">pushToBaidu</a>
+                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/pushToBaidu'}">推送百度</a>
                 <div th:utext="${response.contentHtml}"></div>
+                <!-- 微信公众号 -->
+                <div class="wechat-gzh">
+                    <h2>欢迎关注公众号: 小哈学Java</h2>
+                    <p align="center">
+                        <img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/154874842150997" alt="" class="zoomify">
+                        扫码关注有惊喜哦
+                    </p>
+                </div>
             </div>
         </div>
         <!-- 右边栏 -->
