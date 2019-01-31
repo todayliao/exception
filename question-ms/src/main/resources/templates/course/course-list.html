@@ -13,9 +13,7 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 
-    <!-- commoncBootstrap CSS -->
-    <!--<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">-->
-    <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
@@ -34,9 +32,7 @@
 <main class="container main-content">
     <div class="row">
         <div class="col-md-12 br-3px">
-
             <div class="grid-layout">
-
                 <div class="grid-layout-cell" th:each="item : ${response.data}">
                     <a th:href="@{'/course/' + ${item.id}}" class="course-container-a">
                         <div class="card">
