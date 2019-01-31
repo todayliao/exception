@@ -507,5 +507,9 @@ a {
     background-color: rgba(0,132,255,.15) !important;
 }
 
+.copy-right strong {
+    font-weight: normal;
+}
+
 
 
