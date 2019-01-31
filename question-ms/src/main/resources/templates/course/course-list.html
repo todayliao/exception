@@ -52,14 +52,13 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!-- 回到顶部 -->
-    <button th:replace="fragment/common :: backToTop"></button>
 </main>
 <!-- footer -->
 <footer th:replace="fragment/common :: footer"></footer>
+<!-- 回到顶部 -->
+<button th:replace="fragment/common :: backToTop"></button>
+<!-- 登录 model -->
 <div th:replace="fragment/common :: loginModal"></div>
 </body>
 
@@ -70,9 +69,4 @@
 <script th:replace="fragment/common-js :: baiduLinkPush"></script>
 <script th:replace="fragment/common-js :: 360LinkPush"></script>
 
-<script th:inline="javascript">
-    $(document).ready(function () {
-    });
-
-</script>
 </html>
