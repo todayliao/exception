@@ -23,6 +23,7 @@ public interface CourseMapper {
 
     Course findByEnTitle(String enTitle);
 
+    List<Course> findEnTitlesByIds(List<Long> courseIds);
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);

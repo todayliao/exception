@@ -41,6 +41,15 @@
       select id, title, en_title from t_cms_course where en_title = #{enTitle} and is_deleted = 0 limit 1
   </select>
   
+  <select id="findEnTitlesByIds" resultMap="BaseResultMap">
+    select id, en_title from t_cms_course
+    where id in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and is_deleted = 0
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_cms_course
     where id = #{id,jdbcType=BIGINT}

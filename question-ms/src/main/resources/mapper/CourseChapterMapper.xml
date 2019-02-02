@@ -40,7 +40,7 @@
   </select>
 
   <select id="findByChapterIds" resultMap="BaseResultMap">
-    select id, course_id, update_time from t_cms_course_chapter
+    select id, course_id, update_time, en_title from t_cms_course_chapter
     where id in
     <foreach collection="list" item="chapterId" open="(" separator="," close=")">
       #{chapterId}

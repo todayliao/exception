@@ -4,6 +4,7 @@ import com.exception.qms.business.SEOBusiness;
 import com.exception.qms.domain.entity.*;
 import com.exception.qms.domain.mapper.CourseChapterContentMapper;
 import com.exception.qms.domain.mapper.CourseChapterMapper;
+import com.exception.qms.domain.mapper.CourseMapper;
 import com.exception.qms.service.AnswerService;
 import com.exception.qms.service.ArticleService;
 import com.exception.qms.service.BaiduLinkPushService;
@@ -49,6 +50,8 @@ public class SEOBusinessImpl implements SEOBusiness {
     private CourseChapterContentMapper courseChapterContentMapper;
     @Autowired
     private CourseChapterMapper courseChapterMapper;
+    @Autowired
+    private CourseMapper courseMapper;
 
     @Override
     public BaseResponse pushAllQuestion() {
@@ -90,14 +93,24 @@ public class SEOBusinessImpl implements SEOBusiness {
             Map<Long, CourseChapter> chapterIdCourseChapterMap = courseChapters.stream()
                     .collect(Collectors.toMap(CourseChapter::getId, p -> p));
 
+            List<Long> courseIds = courseChapters.stream().map(CourseChapter::getCourseId)
+                    .distinct().collect(Collectors.toList());
+
+            List<Course> courses = courseMapper.findEnTitlesByIds(courseIds);
+            Map<Long, String> courseIdCourseMap = courses.stream()
+                    .collect(Collectors.toMap(Course::getId, Course::getEnTitle));
+
             for (CourseChapterContent courseChapterContent : chapterContents) {
                 long chapterId = courseChapterContent.getChapterId();
                 CourseChapter courseChapter = chapterIdCourseChapterMap.get(chapterId);
                 long courseId = courseChapter.getCourseId();
+                String chapterEnTitle = courseChapter.getEnTitle();
                 LocalDateTime latestUpdateTime = courseChapterContent.getUpdateTime()
                         .isBefore(courseChapter.getUpdateTime()) ?
                         courseChapterContent.getUpdateTime() : courseChapter.getUpdateTime();
-                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/course/" + courseId + "/chapter/" + chapterId)
+
+                WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/"
+                        + courseIdCourseMap.get(courseId) + "/" + chapterEnTitle)
                         .lastMod(dateTimeFormatter.format(latestUpdateTime))
                         .priority(0.9)
                         .changeFreq(ChangeFreq.DAILY)
