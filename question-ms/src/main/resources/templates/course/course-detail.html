@@ -38,7 +38,7 @@
         <!-- 章节目录 -->
         <div class="col-12 col-md-3 col-xl-2">
             <div class="sidebar-container">
-                <div class="sidebar-header" th:utext="${response.title}">Spring boot 整合各种技术栈教程系列</div>
+                <div class="sidebar-header">[[${response.title}]]</div>
                 <ul class="catalog">
                     <li th:each="item : ${response.chapters}"
                         th:classappend="${item.isHeader == true} ? 'heading' : ''">

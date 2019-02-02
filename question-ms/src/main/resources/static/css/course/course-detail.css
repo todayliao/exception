@@ -208,14 +208,17 @@
 .catalog li a:hover{
     color: rgb(66, 185, 131);
     /*border-bottom: 2px solid #007bff;*/
-    background-color: rgba(0, 0, 0, 0.03);
+    /*background-color: rgba(0, 0, 0, 0.03);*/
+
+    background-color: rgb(66, 185, 131);
+    color: #fff !important;
 }
 
 .sidebar-header {
     transition: color .15s ease;
     /*cursor: pointer;*/
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     padding-left: 0.5rem;
     margin-top: 0;
     margin-bottom: .5rem;
@@ -257,8 +260,10 @@
 .selected {
     /*border-right: .25rem solid #007bff;*/
     /*color: #007bff !important;*/
-    background-color: rgba(0, 0, 0, 0.03);
-    color: rgb(66, 185, 131) !important;
+    /*background-color: rgba(0, 0, 0, 0.03);*/
+    /*color: rgb(66, 185, 131) !important;*/
+    background-color: rgb(66, 185, 131);
+    color: #fff !important;
 }
 
 .secondary_title {
@@ -285,9 +290,10 @@ pre code {
 .heading {
     padding-left: 12px;
     line-height: 36px;
-    background-color: rgb(66, 185, 131);
-    color: #fff;
+    /*background-color: rgb(66, 185, 131);*/
+    /*color: #fff;*/
     font-size: 14px;
+    font-weight: 600;
 }
 
 .sidebar-container {
