@@ -29,4 +29,7 @@ public class CourseChapter {
 
     private Boolean isSecondary;
 
+    private String enTitle;
+
+    private Boolean isHeader;
 }

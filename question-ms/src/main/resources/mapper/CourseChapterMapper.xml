@@ -5,12 +5,14 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="course_id" property="courseId" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="en_title" property="enTitle" jdbcType="VARCHAR" />
     <result column="chapter_num" property="chapterNum" jdbcType="INTEGER" />
     <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
     <result column="is_secondary" property="isSecondary" jdbcType="BIT" />
+    <result column="is_header" property="isHeader" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, course_id, title, chapter_num, create_user_id, create_time, update_time, is_deleted
@@ -23,7 +25,7 @@
   </select>
 
   <select id="findChaptersByCourseId" resultMap="BaseResultMap">
-    select id, course_id, title, is_secondary, chapter_num from t_cms_course_chapter
+    select id, course_id, title, is_secondary, chapter_num, en_title, is_header from t_cms_course_chapter
     where course_id = #{courseId} and is_deleted = 0 order by chapter_num
   </select>
 

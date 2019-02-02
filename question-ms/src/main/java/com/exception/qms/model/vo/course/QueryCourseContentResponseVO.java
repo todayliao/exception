@@ -15,6 +15,8 @@ import java.util.List;
 public class QueryCourseContentResponseVO implements Serializable {
     private Long id;
     private String title;
+    private String enTitle;
+    private String chapterEnTitle;
     private String contentHtml;
     private String chapterTitle;
     private Long chapterId;

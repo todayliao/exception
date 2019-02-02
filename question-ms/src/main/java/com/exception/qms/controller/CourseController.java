@@ -29,31 +29,31 @@ public class CourseController {
     @Autowired
     private CourseBusiness courseBusiness;
 
-    @GetMapping("/course")
+    @GetMapping({"", "/home"})
     @OperatorLog(description = "教程页展示")
     public String showCourseListPage(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                      @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                      Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCoursePageList(pageIndex, pageSize));
-        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
+        model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.HOME.getCode());
         return "course/course-list";
     }
 
-    @GetMapping("/course/{courseId}")
+    @GetMapping("/{courseEnTitle}")
     @OperatorLog(description = "教程详情展示")
-    public String showCourseContent(@PathVariable("courseId") String courseIdStr,
+    public String showCourseContent(@PathVariable("courseEnTitle") String courseEnTitle,
                                     Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseIdStr, null));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseEnTitle, null));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }
 
-    @GetMapping("/course/{courseId}/chapter/{chapterId}")
+    @GetMapping("/{courseEnTitle}/{chapterEnTitle}")
     @OperatorLog(description = "教程详情展示(带标题)")
-    public String showCourseContentWithChapterEnTitle(@PathVariable("courseId") String courseIdStr,
-                                                      @PathVariable("chapterId") String chapterIdStr,
+    public String showCourseContentWithChapterEnTitle(@PathVariable("courseEnTitle") String courseEnTitle,
+                                                      @PathVariable("chapterEnTitle") String chapterEnTitle,
                                                       Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseIdStr, chapterIdStr));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseEnTitle, chapterEnTitle));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-detail";
     }

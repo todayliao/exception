@@ -18,7 +18,7 @@ public interface CourseBusiness {
 
     PageQueryResponse queryCoursePageList(Integer pageIndex, Integer pageSize);
 
-    QueryCourseContentResponseVO queryCourseContent(String courseIdStr, String chapterIdStr);
+    QueryCourseContentResponseVO queryCourseContent(String courseEnTitle, String chapterEnTitle);
 
     BaseResponse publishCourse(PublishCourseForm publishCourseDTO, User user);
 

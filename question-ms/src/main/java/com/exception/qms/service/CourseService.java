@@ -24,7 +24,7 @@ public interface CourseService {
 
     CourseChapterContent findContentByChaperId(Long chapterId);
 
-    Course findTitleByEnTitle(String enTitle);
+    Course findByEnTitle(String enTitle);
 
     CourseChapter findChapterByEnTitle(String chapterEnTitle);
 
@@ -39,4 +39,5 @@ public interface CourseService {
     int updateCourseChapter(CourseChapter courseChapter);
 
     int updateCourseChapterContent(String seoKeywords, String content, Long chapterId);
+
 }

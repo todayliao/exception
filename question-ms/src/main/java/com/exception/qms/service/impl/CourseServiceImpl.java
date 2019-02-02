@@ -53,8 +53,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findTitleByEnTitle(String enTitle) {
-        return courseMapper.findTitleByEnTitle(enTitle);
+    public Course findByEnTitle(String enTitle) {
+        return courseMapper.findByEnTitle(enTitle);
     }
 
     @Override

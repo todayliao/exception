@@ -29,4 +29,6 @@ public class Course {
 
     private Boolean isDeleted;
 
+    private String enTitle;
+
 }

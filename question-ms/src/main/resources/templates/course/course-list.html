@@ -31,10 +31,11 @@
 <!-- main content -->
 <main class="container main-content">
     <div class="row">
-        <div class="col-md-12 br-3px">
+        <!-- 左边栏 -->
+        <div class="col-md-8 br-3px">
             <div class="grid-layout">
                 <div class="grid-layout-cell" th:each="item : ${response.data}">
-                    <a th:href="@{'/course/' + ${item.id}}" class="course-container-a">
+                    <a th:href="@{'/' + ${item.enTitle}}" class="course-container-a">
                         <div class="card">
                             <img class="card-img-top title-image" th:src="${item.titleImage}">
                             <div class="card-body">
@@ -47,6 +48,10 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <!-- 右边栏 -->
+        <div class="col-md-8">
+
         </div>
     </div>
 </main>

@@ -18,7 +18,7 @@ import com.exception.qms.service.CourseService;
 import com.exception.qms.utils.MarkdownUtil;
 import com.google.common.base.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,18 +71,16 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public QueryCourseContentResponseVO queryCourseContent(String courseIdStr, String chapterIdStr) {
-        Long courseId = null;
-        Long chapterId = null;
-        try {
-            courseId = Long.valueOf(courseIdStr);
-            chapterId = StringUtils.isNotBlank(chapterIdStr) ? Long.valueOf(chapterIdStr) : null;
-        } catch (Exception e) {
-            log.error("courseIdStr or chapterIdStr convert to long error: ", e);
+    public QueryCourseContentResponseVO queryCourseContent(String courseEnTitle, String chapterEnTitle) {
+        // 查询该教程是否存在
+        Course course = courseService.findByEnTitle(courseEnTitle);
+
+        if (course == null) {
+            log.error("the resource not found, courseEnTile: {}", courseEnTitle);
             throw new ResourceNotFoundException();
         }
 
-        Course course = courseService.findCourseById(courseId);
+        Long courseId = course.getId();
 
         if (course == null) {
             log.warn("the course not exited, courseId: {}", courseId);
@@ -93,22 +91,24 @@ public class CourseBusinessImpl implements CourseBusiness {
 
         // 获取对应章节的 chapterId, 默认第一章节
         String chapterTitle = courseChapters.get(0).getTitle();
-        // chapterId 为空的情况，设置为第一章节 id
-        if (chapterId == null) {
+        Long chapterId = null;
+        // chapterId 为空的情况，设置为第一章节 enTitle
+        if (StringUtils.isBlank(chapterEnTitle)) {
             chapterId = courseChapters.get(0).getId();
+            chapterEnTitle = courseChapters.get(0).getEnTitle();
         }
-
-        // 如果 chapterId 不为空
-        if (chapterId != null) {
-            Long finalChapterId1 = chapterId;
+        // 如果 chapterEnTitle 不为空
+        else {
+            String finalChapterEnTitle = chapterEnTitle;
             List<CourseChapter> tmpList = courseChapters.stream()
-                    .filter(p -> Objects.equal(p.getId(), finalChapterId1)).collect(Collectors.toList());
+                    .filter(p -> Objects.equal(p.getEnTitle(), finalChapterEnTitle)).collect(Collectors.toList());
 
             if (CollectionUtils.isEmpty(tmpList)) {
                 log.warn("the chapter of the course not exited, courseId: {}, chapterId: {}", courseId, chapterId);
                 throw new ResourceNotFoundException();
             }
             chapterTitle = tmpList.get(0).getTitle();
+            chapterId = tmpList.get(0).getId();
         }
 
         // 组合目录数据
@@ -145,8 +145,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         queryCourseContentResponseVO.setId(courseId);
         queryCourseContentResponseVO.setTitle(course.getTitle());
+        queryCourseContentResponseVO.setEnTitle(course.getEnTitle());
         queryCourseContentResponseVO.setChapterId(chapterId);
         queryCourseContentResponseVO.setChapterTitle(chapterTitle);
+        queryCourseContentResponseVO.setChapterEnTitle(chapterEnTitle);
         queryCourseContentResponseVO.setChapters(courseChapterResponseVOS);
 
         return queryCourseContentResponseVO;

@@ -29,7 +29,7 @@ public class HomeController {
      * 首页问题列表分页
      * @return
      */
-    @GetMapping({"", "/home"})
+    @GetMapping("/old")
     @OperatorLog(description = "首页列表展示")
     public String queryHomeList(@RequestParam(value = "qLimitTime", defaultValue = "") String qLimitTime,
                                 @RequestParam(value = "aLimitTime", defaultValue = "") String aLimitTime,

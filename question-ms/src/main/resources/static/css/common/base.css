@@ -192,6 +192,7 @@ input::-webkit-input-placeholder{
     padding-bottom: 20px;
     color: #8590a6;
     font-size: 14px;
+    text-align: center;
 }
 
 .footer p {
@@ -509,6 +510,8 @@ a {
 
 .copy-right {
     font-size: 13px;
+    max-width: 1260px;
+    margin: 0 auto;
 }
 
 .copy-right strong {

@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class QueryCoursePageListResponseVO implements Serializable {
     private Long id;
     private String title;
+    private String enTitle;
     private String titleImage;
     private String summary;
     private Integer type;
