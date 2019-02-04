@@ -183,10 +183,12 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public EditCourseChapterResponseVO showEditChapterPage(Long courseId, Long chapterId) {
-        CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
+    public EditCourseChapterResponseVO showEditChapterPage(String courseEnTitle, String chapterEnTitle) {
+//        CourseChapter courseChapter = courseService.findChapterByChapterId(chapterId);
+        CourseChapter courseChapter = courseService.findChapterByEnTitle(chapterEnTitle);
         EditCourseChapterResponseVO editCourseChapterResponseVO = null;
         if (courseChapter != null) {
+            Long chapterId = courseChapter.getId();
             editCourseChapterResponseVO = mapper.map(courseChapter, EditCourseChapterResponseVO.class);
             CourseChapterContent chapterContent = courseService.findContentByChaperId(chapterId);
             editCourseChapterResponseVO.setSeoKeywords(chapterContent == null ? null : chapterContent.getSeoKeywords());

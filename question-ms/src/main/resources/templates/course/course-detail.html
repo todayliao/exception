@@ -33,7 +33,7 @@
 <body>
 <!-- 顶部导航栏 -->
 <header th:replace="fragment/common :: header"></header>
-<div class="container main-content">
+<main class="container main-content">
     <div class="row">
         <!-- 章节目录 -->
         <div class="col-12 col-md-3 col-xl-2">
@@ -60,13 +60,13 @@
             </div>
         </div>
         <!-- 内容展示区 -->
-        <main role="main" class="col-12 col-md-9 col-xl-8 bd-content">
+        <div class="col-12 col-md-9 col-xl-8 bd-content">
             <article data-spy="scroll" data-target="#list-example" data-offset="0"
                  class="course-content card">
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
                 <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处 - https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/edit'}">编辑</a>
+                   th:href="@{'/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">编辑</a>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
                    th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/pushToBaidu'}">推送百度</a>
                 <div th:utext="${response.contentHtml}"></div>
@@ -79,7 +79,7 @@
                     </p>
                 </div>
             </article>
-        </main>
+        </div>
         <!-- 右边栏 -->
         <div class="d-none d-xl-block col-xl-2 bd-toc">
             <!-- 目录 -->
@@ -87,7 +87,7 @@
         </div>
 
     </div>
-</div>
+</main>
 <!-- footer -->
 <footer th:replace="fragment/common :: footer"></footer>
 <!-- 回到顶部 -->
@@ -103,25 +103,7 @@
 <script th:src="@{/plugins/layer/layer.js}"></script>
 <script th:src="@{/plugins/zoomify/zoomify.js}"></script>
 <script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/course/course-detail.js}"></script>
 <script th:replace="fragment/common-js :: baiduLinkPush"></script>
 <script th:replace="fragment/common-js :: 360LinkPush"></script>
-
-<script th:inline="javascript">
-    $(document).ready(function () {
-        var navSelector = "#toc";
-        var $myNav = $(navSelector);
-        Toc.init($myNav);
-        $("body").scrollspy({
-            target: navSelector
-        });
-
-        // 代码高亮
-        hljs.initHighlightingOnLoad();
-        // $("pre").addClass("prettyprint");
-        // prettyPrint();
-
-        // 图片放大
-        $('p img').zoomify();
-    });
-</script>
 </html>

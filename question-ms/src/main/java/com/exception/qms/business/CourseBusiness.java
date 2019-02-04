@@ -22,7 +22,7 @@ public interface CourseBusiness {
 
     BaseResponse publishCourse(PublishCourseForm publishCourseDTO, User user);
 
-    EditCourseChapterResponseVO showEditChapterPage(Long courseId, Long chapterId);
+    EditCourseChapterResponseVO showEditChapterPage(String courseEnTitle, String chapterEnTitle);
 
     BaseResponse editChapter(EditCourseChapterForm editCourseChapterForm, User user);
 

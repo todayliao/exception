@@ -73,12 +73,12 @@ public class CourseController {
         return "course/course-publish";
     }
 
-    @GetMapping("/course/{courseId}/chapter/{chapterId}/edit")
+    @GetMapping("/{courseEnTitle}/{chapterEnTitle}/edit")
     @OperatorLog(description = "章节编辑页")
-    public String showEditChapterPage(@PathVariable("courseId") Long courseId,
-                                      @PathVariable("chapterId") Long chapterId,
+    public String showEditChapterPage(@PathVariable("courseEnTitle") String courseEnTitle,
+                                      @PathVariable("chapterEnTitle") String chapterEnTitle,
                                       Model model) {
-        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.showEditChapterPage(courseId, chapterId));
+        model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.showEditChapterPage(courseEnTitle, chapterEnTitle));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "chapter/chapter-edit";
     }

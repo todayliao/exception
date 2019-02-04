@@ -18,6 +18,8 @@ public class EditCourseChapterForm implements Serializable {
     private Long id;
     @NotBlank
     private String title;
+    @NotBlank
+    private String enTitle;
     @NotNull
     private Integer chapterNum;
     @NotBlank
