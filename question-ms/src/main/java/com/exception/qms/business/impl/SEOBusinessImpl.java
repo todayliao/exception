@@ -69,20 +69,12 @@ public class SEOBusinessImpl implements SEOBusiness {
         try {
             wsg = new WebSitemapGenerator(baseUrl);
             // home page
-            WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl + "/home")
+            WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl)
                     .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
                     .priority(1.0)
                     .changeFreq(ChangeFreq.ALWAYS)
                     .build();
             wsg.addUrl(url);
-
-            // course home page
-            WebSitemapUrl courseHomeUrl = new WebSitemapUrl.Options(baseUrl + "/course")
-                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
-                    .priority(0.9)
-                    .changeFreq(ChangeFreq.ALWAYS)
-                    .build();
-            wsg.addUrl(courseHomeUrl);
 
             // course
             // 1.查找出已经有内容的 chapterId
