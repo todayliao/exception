@@ -73,7 +73,7 @@ public class CourseController {
         return "course/course-publish";
     }
 
-    @GetMapping("/{courseEnTitle}/{chapterEnTitle}/edit")
+    @GetMapping("/course/{courseEnTitle}/{chapterEnTitle}/edit")
     @OperatorLog(description = "章节编辑页")
     public String showEditChapterPage(@PathVariable("courseEnTitle") String courseEnTitle,
                                       @PathVariable("chapterEnTitle") String chapterEnTitle,
@@ -90,12 +90,12 @@ public class CourseController {
         return courseBusiness.editChapter(editCourseChapterForm, user);
     }
 
-    @GetMapping("/course/{courseId}/chapter/{chapterId}/pushToBaidu")
+    @GetMapping("/course/{courseEnTitle}/{chapterEnTitle}/pushToBaidu")
     @OperatorLog(description = "推送章节连接给百度")
     @ResponseBody
-    public Boolean pushToBaidu(@PathVariable("courseId") Long courseId,
-                               @PathVariable("chapterId") Long chapterId) {
-        return courseBusiness.pushToBaidu(courseId, chapterId);
+    public Boolean pushToBaidu(@PathVariable("courseEnTitle") String courseEnTitle,
+                               @PathVariable("chapterEnTitle") String chapterEnTitle) {
+        return courseBusiness.pushToBaidu(courseEnTitle, chapterEnTitle);
     }
 
 }

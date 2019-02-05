@@ -14,6 +14,8 @@ public interface BaiduLinkPushService {
 
     boolean pushCourseChapterPageLink(long chapterId);
 
+    boolean pushCourseChapterPageLink(String courseEnTitle, String chapterEnTitle);
+
     void pushRecommendedArticleDetailPageLink(long articleId);
 
 }

@@ -1,17 +1,4 @@
 $(document).ready(function () {
-    var navSelector = "#toc";
-    var $myNav = $(navSelector);
-    Toc.init($myNav);
-    $("body").scrollspy({
-        target: navSelector
-    });
-
-    // 代码高亮
-    hljs.initHighlightingOnLoad();
-
-    // 图片放大
-    $('p img').zoomify();
-
     // back to top
     $('.to-top').toTop({
         //以下是选项默认参数，您可以根据自己的需求修改

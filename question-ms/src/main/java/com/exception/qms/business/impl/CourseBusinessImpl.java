@@ -227,7 +227,7 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
 
     @Override
-    public boolean pushToBaidu(Long courseId, Long chapterId) {
-        return baiduLinkPushService.pushCourseChapterPageLink(chapterId);
+    public boolean pushToBaidu(String courseEnTitle, String chapterEnTitle) {
+        return baiduLinkPushService.pushCourseChapterPageLink(courseEnTitle, chapterEnTitle);
     }
 }

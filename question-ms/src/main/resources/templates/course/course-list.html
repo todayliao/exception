@@ -7,7 +7,7 @@
     <meta name="keywords" content="程序员,教程,学习,Java,MySQL,SQL,并发">
     <meta name="description" content="Exception 教程（www.exception.site）提供各类编程技术系列教程,让您能够学习并提高自己的编程技术 ..">
 
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link rel="icon" type="image/x-icon" th:href="@{/static/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
@@ -16,9 +16,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
-    <link rel="stylesheet" th:href="@{/css/common/base.css}">
-    <link rel="stylesheet" th:href="@{/css/course/course-list.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/base.css}">
+    <link rel="stylesheet" th:href="@{/static/css/course/course-list.css}">
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>
     <!-- google 统计 -->
@@ -63,11 +63,11 @@
 <div th:replace="fragment/common :: loginModal"></div>
 </body>
 
-<script th:replace="fragment/common-js :: js"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
-<script th:src="@{/plugins/layer/layer.js}"></script>
-<script th:replace="fragment/common-js :: ajaxLoadHotTags"></script>
-<script th:replace="fragment/common-js :: baiduLinkPush"></script>
-<script th:replace="fragment/common-js :: 360LinkPush"></script>
-
+<script src="https://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script th:src="@{/static/js/jquery.toTop.min.js}"></script>
+<script th:src="@{/static/js/jquery.sticky.js}"></script>
+<script th:src="@{/static/plugins/layer/layer.js}"></script>
+<script th:src="@{/static/js/course/course-list.js}"></script>
 </html>

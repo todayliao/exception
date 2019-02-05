@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <title th:text="${response.chapterTitle} + ' | Exception 教程'">title</title>
     <meta name="keywords" th:content="${response.chapterSEOKeywords}">
-    <meta name="description" th:content="${response.chapterSEODescription}">
+    <meta name="description" th:content="${response.chapterTitle} + ' ' + ${response.chapterSEODescription}">
+    <link rel="canonical" th:href="'http://www.exception.site/' + ${response.enTitle} + '/' + ${response.chapterEnTitle}" />
 
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link rel="icon" type="image/x-icon" th:href="@{/static/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
@@ -16,13 +17,13 @@
     <!-- commoncBootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
-    <link rel="stylesheet" th:href="@{/css/common/base.css}">
-    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github-gist.css}">
-    <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/base.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/highlight/styles/github-gist.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/zoomify/zoomify.css}">
     <!-- toc -->
-    <link rel="stylesheet" th:href="@{/plugins/bootstrap-toc/bootstrap-toc.css}">
-    <link rel="stylesheet" th:href="@{/css/course/course-detail.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/bootstrap-toc/bootstrap-toc.css}">
+    <link rel="stylesheet" th:href="@{/static/css/course/course-detail.css}">
 
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>
@@ -64,11 +65,11 @@
             <article data-spy="scroll" data-target="#list-example" data-offset="0"
                  class="course-content card">
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
-                <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处 - https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
+                <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处: http://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                   th:href="@{'/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">编辑</a>
+                   th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">编辑</a>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
-                   th:href="@{'/course/' + ${response.id} + '/chapter/' + ${response.chapterId} + '/pushToBaidu'}">推送百度</a>
+                   th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/pushToBaidu'}">推送百度</a>
                 <div th:utext="${response.contentHtml}"></div>
                 <!-- 微信公众号 -->
                 <div class="wechat-gzh">
@@ -85,7 +86,6 @@
             <!-- 目录 -->
             <nav id="toc" class="sticky-top toc"></nav>
         </div>
-
     </div>
 </main>
 <!-- footer -->
@@ -96,14 +96,15 @@
 <div th:replace="fragment/common :: loginModal"></div>
 </body>
 
-<script th:replace="fragment/common-js :: js"></script>
+<script src="https://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script th:src="@{/static/js/jquery.toTop.min.js}"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.13.1/highlight.min.js"></script>
 <!-- toc -->
-<script th:src="@{/plugins/bootstrap-toc/bootstrap-toc.min.js}"></script>
-<script th:src="@{/plugins/layer/layer.js}"></script>
-<script th:src="@{/plugins/zoomify/zoomify.js}"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
-<script th:src="@{/js/course/course-detail.js}"></script>
-<script th:replace="fragment/common-js :: baiduLinkPush"></script>
-<script th:replace="fragment/common-js :: 360LinkPush"></script>
+<script th:src="@{/static/plugins/bootstrap-toc/bootstrap-toc.min.js}"></script>
+<script th:src="@{/static/plugins/zoomify/zoomify.js}"></script>
+<script th:src="@{/static/js/jquery.sticky.js}"></script>
+<script th:src="@{/static/plugins/layer/layer.js}"></script>
+<script th:src="@{/static/js/course/course-detail.js}"></script>
 </html>

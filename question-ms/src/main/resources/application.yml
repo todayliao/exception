@@ -14,6 +14,8 @@ spring:
     encoding: UTF-8
     content-type: text/html
     mode: HTML
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/
   session:
     store-type: hash_map # session 会话的存储类型
   http:

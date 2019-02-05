@@ -26,5 +26,5 @@ public interface CourseBusiness {
 
     BaseResponse editChapter(EditCourseChapterForm editCourseChapterForm, User user);
 
-    boolean pushToBaidu(Long courseId, Long chapterId);
+    boolean pushToBaidu(String courseEnTitle, String chapterEnTitle);
 }

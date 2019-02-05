@@ -3,11 +3,9 @@
 <body>
 <!-- 顶部导航栏 -->
 <header th:fragment="header">
-    <!-- Content here -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light m-navbar">
         <div class="container-fluid">
             <a class="navbar-brand m-navbar-brand" th:href="@{/}">
-                <!--<img th:src="@{/images/logo.jpg}" width="30" height="30" class="d-inline-block align-top" alt="">-->
                 Exception 教程网
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +17,6 @@
                     <li class="nav-item" id="home" >
                         <a class="nav-link fs-16px" th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
                     </li>
-                    <!--<li class="nav-item" id="course">-->
-                        <!--<a class="nav-link fs-16px" th:href="@{/course}">教程</a>-->
-                    <!--</li>-->
                 </ul>
                 <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
                     <div class="form-group">
@@ -87,12 +82,6 @@
 <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <!--<div class="modal-header">-->
-                <!--<h5 class="modal-title" id="exampleModalLongTitle">登录</h5>-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                    <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-            <!--</div>-->
             <div class="modal-body">
                 <div class="modal-body-header">
                     <div class="modal-logo">Exception</div>
@@ -124,47 +113,10 @@
                    title="内测阶段, 暂未开放哦">&nbsp;注册</a>
             </div>
             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
-                <!--<span aria-hidden="true">&times;</span>-->
                 <svg class="modal-close-icon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M13.486 12l5.208-5.207a1.048 1.048 0 0 0-.006-1.483 1.046 1.046 0 0 0-1.482-.005L12 10.514 6.793 5.305a1.048 1.048 0 0 0-1.483.005 1.046 1.046 0 0 0-.005 1.483L10.514 12l-5.208 5.207a1.048 1.048 0 0 0 .006 1.483 1.046 1.046 0 0 0 1.482.005L12 13.486l5.207 5.208a1.048 1.048 0 0 0 1.483-.006 1.046 1.046 0 0 0 .005-1.482L13.486 12z" fill-rule="evenodd"></path></svg>
             </button>
-
         </div>
     </div>
-
-    <script th:inline="javascript">
-        function showLoginModal() {
-            $('#loginModal').modal('show');
-        }
-
-        function ajaxLogin() {
-            // csrf
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function (e, xhr, options) {
-                xhr.setRequestHeader(header, token);
-            });
-
-            var formParam = $('#login-form').serialize();
-            $.ajax({
-                type: "post",
-                async: true,
-                url: "/login",
-                data: formParam,
-                success: function (response) {
-                    if (response.success == true) {
-                        $('#loginModal').modal('hide');
-                        window.location.reload();
-                    } else {
-                        layer.msg(response.errorMessage);
-                    }
-                },
-                // http status not 200
-                error: function(response) {
-                    layer.msg('登录失败 !!!');
-                }
-            });
-        }
-    </script>
 </div>
 
 <div th:fragment="csrfHiddenInput">
