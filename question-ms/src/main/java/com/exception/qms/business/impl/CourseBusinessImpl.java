@@ -161,7 +161,6 @@ public class CourseBusinessImpl implements CourseBusiness {
                 preChapterVO.setCourseEnTitle(courseEnTitle);
                 preChapterVO.setChapterEnTitle(preChapter.getEnTitle());
                 preChapterVO.setChapterTitle(preChapter.getTitle());
-                preChapterVO.setIsPreLink(true);
                 queryCourseContentResponseVO.setPreChapter(preChapterVO);
             }
         }

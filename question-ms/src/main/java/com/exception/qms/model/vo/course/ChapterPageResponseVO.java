@@ -15,5 +15,4 @@ public class ChapterPageResponseVO implements Serializable {
     private String chapterTitle;
     private String courseEnTitle;
     private String chapterEnTitle;
-    private Boolean isPreLink;
 }
