@@ -1,6 +1,7 @@
 package com.exception.qms.domain.mapper;
 
 import com.exception.qms.domain.entity.CourseChapter;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,6 +23,12 @@ public interface CourseChapterMapper {
     CourseChapter findChapterByChapterId(long chapterId);
 
     List<CourseChapter> findByChapterIds(List<Long> chapterIds);
+
+    CourseChapter findPreChapter(@Param("courseId") Long courseId,
+                                 @Param("chapterNum") Integer chapterNum);
+
+    CourseChapter findNextChapter(@Param("courseId") Long courseId,
+                                  @Param("chapterNum") Integer chapterNum);
 
     int updateByPrimaryKeySelective(CourseChapter record);
 

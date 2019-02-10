@@ -68,6 +68,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public CourseChapter findPreChapter(Long courseId, Integer chapterNum) {
+        return courseChapterMapper.findPreChapter(courseId, chapterNum);
+    }
+
+    @Override
+    public CourseChapter findNextChapter(Long courseId, Integer chapterNum) {
+        return courseChapterMapper.findNextChapter(courseId, chapterNum);
+    }
+
+    @Override
     public int addCourseRecord(Course course) {
         return courseMapper.insert(course);
     }

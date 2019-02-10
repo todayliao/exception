@@ -30,6 +30,10 @@ public interface CourseService {
 
     CourseChapter findChapterByChapterId(long chapterId);
 
+    CourseChapter findPreChapter(Long courseId, Integer chapterNum);
+
+    CourseChapter findNextChapter(Long courseId, Integer chapterNum);
+
     int addCourseRecord(Course course);
 
     int addCourseChapterBatch(List<CourseChapter> courseChapters);

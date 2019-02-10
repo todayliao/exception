@@ -48,6 +48,26 @@
     and is_deleted = 0
   </select>
 
+  <select id="findPreChapter" resultMap="BaseResultMap">
+    select id, title, en_title from t_cms_course_chapter
+    where course_id = #{courseId}
+    and chapter_num &lt; #{chapterNum}
+    and is_deleted = 0
+    and is_header = 0
+    order by chapter_num desc
+    limit 1
+  </select>
+
+  <select id="findNextChapter" resultMap="BaseResultMap">
+    select id, title, en_title from t_cms_course_chapter
+    where course_id = #{courseId}
+    and chapter_num &gt; #{chapterNum}
+    and is_deleted = 0
+    and is_header = 0
+    order by chapter_num asc
+    limit 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_cms_course_chapter
     where id = #{id,jdbcType=BIGINT}

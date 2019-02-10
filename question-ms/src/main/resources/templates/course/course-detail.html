@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title th:text="${response.chapterTitle} + ' | Exception 教程'">title</title>
     <meta name="keywords" th:content="${response.chapterSEOKeywords}">
-    <meta name="description" th:content="${response.chapterTitle} + ' ' + ${response.chapterSEODescription}">
+    <meta name="description" th:content="${response.chapterTitle} + '   ' + ${response.chapterSEODescription}">
     <link rel="canonical" th:href="'https://www.exception.site/' + ${response.enTitle} + '/' + ${response.chapterEnTitle}" />
 
     <link rel="icon" type="image/x-icon" th:href="@{/static/images/favicon.ico}">
@@ -64,13 +64,50 @@
         <div class="col-12 col-md-9 col-xl-8 bd-content">
             <article data-spy="scroll" data-target="#list-example" data-offset="0"
                  class="course-content card">
+                <!-- 上一节&下一节连接 -->
+                <div class="pagination marginbottom-30px">
+                    <a th:if="${response.preChapter != null}" class="pagination-item pre-link"
+                       th:href="@{'/' + ${response.preChapter.courseEnTitle} + '/' + ${response.preChapter.chapterEnTitle}}"
+                       rel="prev"
+                        th:title="${response.preChapter.chapterTitle}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        [[${response.preChapter.chapterTitle}]]
+                    </a>
+                    <a th:if="${response.nextChapter != null}" class="pagination-item next-link"
+                       th:href="@{'/' + ${response.nextChapter.courseEnTitle} + '/' + ${response.nextChapter.chapterEnTitle}}"
+                       rel="next"
+                       th:title="${response.nextChapter.chapterTitle}">
+                        [[${response.nextChapter.chapterTitle}]]
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
-                <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处: https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
-                <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
+                <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处 https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
+                <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username !=     null}"
                    th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">编辑</a>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
                    th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/pushToBaidu'}">推送百度</a>
                 <div th:utext="${response.contentHtml}"></div>
+
+                <!-- 上一节&下一节连接 -->
+                <div class="pagination margintop-30px">
+                    <a th:if="${response.preChapter != null}" class="pagination-item pre-link"
+                       th:href="@{'/' + ${response.preChapter.courseEnTitle} + '/' + ${response.preChapter.chapterEnTitle}}"
+                       rel="prev"
+                       th:title="${response.preChapter.chapterTitle}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        [[${response.preChapter.chapterTitle}]]
+                    </a>
+                    <a th:if="${response.nextChapter != null}" class="pagination-item next-link"
+                       th:href="@{'/' + ${response.nextChapter.courseEnTitle} + '/' + ${response.nextChapter.chapterEnTitle}}"
+                       rel="next"
+                       th:title="${response.nextChapter.chapterTitle}">
+                        [[${response.nextChapter.chapterTitle}]]
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
                 <!-- 微信公众号 -->
                 <div class="wechat-gzh">
                     <h2>欢迎关注公众号: 小哈学Java</h2>

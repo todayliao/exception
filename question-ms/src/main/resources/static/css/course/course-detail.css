@@ -306,5 +306,35 @@ pre code {
     margin-bottom: 1.5em;
 }
 
+.pre-link {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.next-link {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.pagination {
+    color: #767676;
+    text-align: center;
+}
+
+.pagination-item {
+    position: relative;
+    display: block;
+    padding: .6rem;
+    border: 1px solid #eee;
+    float: left;
+    width: 50%;
+    margin-bottom: 0;
+}
+
+.pagination a {
+    color: #767676;
+}
+
+
 
 

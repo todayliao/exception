@@ -9,10 +9,7 @@ import com.exception.qms.domain.entity.User;
 import com.exception.qms.exception.ResourceNotFoundException;
 import com.exception.qms.model.form.course.EditCourseChapterForm;
 import com.exception.qms.model.form.course.PublishCourseForm;
-import com.exception.qms.model.vo.course.CourseChapterResponseVO;
-import com.exception.qms.model.vo.course.EditCourseChapterResponseVO;
-import com.exception.qms.model.vo.course.QueryCourseContentResponseVO;
-import com.exception.qms.model.vo.course.QueryCoursePageListResponseVO;
+import com.exception.qms.model.vo.course.*;
 import com.exception.qms.service.BaiduLinkPushService;
 import com.exception.qms.service.CourseService;
 import com.exception.qms.utils.MarkdownUtil;
@@ -89,13 +86,16 @@ public class CourseBusinessImpl implements CourseBusiness {
 
         List<CourseChapter> courseChapters = courseService.findChaptersByCourseId(courseId);
 
+        CourseChapter courseChapter = courseChapters.get(0);
         // 获取对应章节的 chapterId, 默认第一章节
-        String chapterTitle = courseChapters.get(0).getTitle();
+        String chapterTitle = courseChapter.getTitle();
         Long chapterId = null;
+        Integer chapterNum = null;
         // chapterId 为空的情况，设置为第一章节 enTitle
         if (StringUtils.isBlank(chapterEnTitle)) {
-            chapterId = courseChapters.get(0).getId();
-            chapterEnTitle = courseChapters.get(0).getEnTitle();
+            chapterId = courseChapter.getId();
+            chapterEnTitle = courseChapter.getEnTitle();
+            chapterNum = courseChapter.getChapterNum();
         }
         // 如果 chapterEnTitle 不为空
         else {
@@ -109,6 +109,7 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
             chapterTitle = tmpList.get(0).getTitle();
             chapterId = tmpList.get(0).getId();
+            chapterNum = tmpList.get(0).getChapterNum();
         }
 
         // 组合目录数据
@@ -151,6 +152,28 @@ public class CourseBusinessImpl implements CourseBusiness {
         queryCourseContentResponseVO.setChapterEnTitle(chapterEnTitle);
         queryCourseContentResponseVO.setChapters(courseChapterResponseVOS);
 
+        // 上下章节
+        // 上
+        if (!Objects.equal(chapterNum, 1)) {
+            CourseChapter preChapter = courseService.findPreChapter(courseId, chapterNum);
+            if (preChapter != null) {
+                ChapterPageResponseVO preChapterVO = new ChapterPageResponseVO();
+                preChapterVO.setCourseEnTitle(courseEnTitle);
+                preChapterVO.setChapterEnTitle(preChapter.getEnTitle());
+                preChapterVO.setChapterTitle(preChapter.getTitle());
+                preChapterVO.setIsPreLink(true);
+                queryCourseContentResponseVO.setPreChapter(preChapterVO);
+            }
+        }
+        // 下
+        CourseChapter nextChapter = courseService.findNextChapter(courseId, chapterNum);
+        if (nextChapter != null) {
+            ChapterPageResponseVO nextChapterVO = new ChapterPageResponseVO();
+            nextChapterVO.setCourseEnTitle(courseEnTitle);
+            nextChapterVO.setChapterEnTitle(nextChapter.getEnTitle());
+            nextChapterVO.setChapterTitle(nextChapter.getTitle());
+            queryCourseContentResponseVO.setNextChapter(nextChapterVO);
+        }
         return queryCourseContentResponseVO;
     }
 
