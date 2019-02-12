@@ -257,6 +257,12 @@
     padding-bottom: 16px;
 }
 
+.course-content h3, h4, h5, h6 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
 .selected {
     /*border-right: .25rem solid #007bff;*/
     /*color: #007bff !important;*/
