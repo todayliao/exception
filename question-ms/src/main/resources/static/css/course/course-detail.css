@@ -203,6 +203,9 @@
     width: 100%;
     line-height: 36px;
     padding-left: 12px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .catalog li a:hover{
