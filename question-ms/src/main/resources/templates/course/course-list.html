@@ -32,7 +32,7 @@
 <main class="container main-content">
     <div class="row">
         <!-- 左边栏 -->
-        <div class="col-md-8 br-3px">
+        <div class="col-md-12 br-3px">
             <div class="grid-layout">
                 <div class="grid-layout-cell" th:each="item : ${response.data}">
                     <a th:href="@{'/' + ${item.enTitle}}" class="course-container-a">
@@ -48,10 +48,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <!-- 右边栏 -->
-        <div class="col-md-8">
-
         </div>
     </div>
 </main>
