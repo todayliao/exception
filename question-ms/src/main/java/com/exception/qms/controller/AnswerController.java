@@ -34,7 +34,6 @@ public class AnswerController {
      * @return
      */
     @GetMapping("/answer/{answerId}/edit")
-    @OperatorLog(description = "方案添加页面展示")
     public String showAnswerEditPage(@PathVariable("answerId") Long answerId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), answerBusiness.queryAnswerInfo(answerId));
         return "answer/answer-edit";

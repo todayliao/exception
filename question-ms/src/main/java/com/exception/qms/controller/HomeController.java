@@ -1,6 +1,5 @@
 package com.exception.qms.controller;
 
-import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.HomeBusiness;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
@@ -30,7 +29,6 @@ public class HomeController {
      * @return
      */
     @GetMapping("/old")
-    @OperatorLog(description = "首页列表展示")
     public String queryHomeList(@RequestParam(value = "qLimitTime", defaultValue = "") String qLimitTime,
                                 @RequestParam(value = "aLimitTime", defaultValue = "") String aLimitTime,
 //                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
@@ -45,7 +43,6 @@ public class HomeController {
      * @return
      */
     @GetMapping("/home/hot/tag/list")
-    @OperatorLog(description = "首页热门标签")
     @ApiOperation("首页热门标签")
     @ResponseBody
     public BaseResponse queryHotTags() {
@@ -57,7 +54,6 @@ public class HomeController {
      * @return
      */
     @GetMapping("/home/hot/question/list")
-    @OperatorLog(description = "首页热门问题")
     @ApiOperation("首页热门问题")
     @ResponseBody
     public BaseResponse queryHotQuestions() {

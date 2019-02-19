@@ -29,7 +29,6 @@ public class SearchController {
     private SearchBusiness searchBusiness;
 
     @GetMapping("/search")
-    @OperatorLog(description = "问题搜索")
     public String searchQuestion(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                  @RequestParam(value = "key", required = false, defaultValue = "") String key,
@@ -43,7 +42,6 @@ public class SearchController {
     }
 
     @GetMapping("/search/question/about")
-    @OperatorLog(description = "相关问题搜索")
     @ResponseBody
     public BaseResponse<List<SearchAboutQuestionResponseDTO>> searchAboutQuestion(
             @RequestParam(value = "title") String title,
@@ -52,7 +50,6 @@ public class SearchController {
     }
 
     @GetMapping("/search/recommended/article/about")
-    @OperatorLog(description = "优选文章相关搜索")
     @ResponseBody
     public BaseResponse<List<SearchAboutRecommendedArticleResponseDTO>> searchAboutRecommendedArticle(
             @RequestParam(value = "title") String title,
@@ -62,7 +59,6 @@ public class SearchController {
 
 
     @GetMapping("/search/question/allIndex/update")
-    @OperatorLog(description = "更新所有问题索引")
     @ResponseBody
     public BaseResponse updateAllQuestionIndex() {
         return searchBusiness.updateAllQuestionIndex();

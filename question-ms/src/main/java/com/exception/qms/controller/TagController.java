@@ -2,7 +2,6 @@ package com.exception.qms.controller;
 
 import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.TagBusiness;
-import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
 import com.exception.qms.model.dto.question.request.QueryTagsByNameRequestDTO;
@@ -27,7 +26,6 @@ public class TagController {
     private TagBusiness tagBusiness;
 
     @GetMapping("/tag")
-    @OperatorLog(description = "展示标签墙")
     public String showUserWall(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                @RequestParam(value = "pageSize", defaultValue = "36") Integer pageSize,
                                Model model) {
@@ -42,7 +40,6 @@ public class TagController {
      * @return
      */
     @PostMapping("/tag/queryByName")
-    @OperatorLog(description = "根据输入模糊查询标签信息")
     @ApiOperation("根据输入模糊查询标签信息")
     @ResponseBody
     public BaseResponse queryTagsByTagName(@Validated @RequestBody QueryTagsByNameRequestDTO queryTagsByNameRequestDTO) {

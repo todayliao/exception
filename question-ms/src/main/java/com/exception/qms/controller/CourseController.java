@@ -1,6 +1,5 @@
 package com.exception.qms.controller;
 
-import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.CourseBusiness;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
@@ -30,7 +29,7 @@ public class CourseController {
     private CourseBusiness courseBusiness;
 
     @GetMapping({"", "/home"})
-    @OperatorLog(description = "教程页展示")
+//    @OperatorLog(description = "教程页展示")
     public String showCourseListPage(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                      @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                      Model model) {
@@ -40,7 +39,7 @@ public class CourseController {
     }
 
     @GetMapping("/{courseEnTitle}")
-    @OperatorLog(description = "教程详情展示")
+//    @OperatorLog(description = "教程详情展示")
     public String showCourseContent(@PathVariable("courseEnTitle") String courseEnTitle,
                                     Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), courseBusiness.queryCourseContent(courseEnTitle, null));
@@ -49,7 +48,7 @@ public class CourseController {
     }
 
     @GetMapping("/{courseEnTitle}/{chapterEnTitle}")
-    @OperatorLog(description = "教程详情展示(带标题)")
+//    @OperatorLog(description = "教程详情展示(带标题)")
     public String showCourseContentWithChapterEnTitle(@PathVariable("courseEnTitle") String courseEnTitle,
                                                       @PathVariable("chapterEnTitle") String chapterEnTitle,
                                                       Model model) {
@@ -59,7 +58,7 @@ public class CourseController {
     }
 
     @PostMapping("/course/publish")
-    @OperatorLog(description = "发布教程")
+//    @OperatorLog(description = "发布教程")
     @ResponseBody
     public BaseResponse publishCourse(@Validated PublishCourseForm publishCourseDTO, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
@@ -67,14 +66,14 @@ public class CourseController {
     }
 
     @GetMapping("/course/publish")
-    @OperatorLog(description = "教程发布页")
+//    @OperatorLog(description = "教程发布页")
     public String showCoursePublishPage(Model model) {
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.COURSE.getCode());
         return "course/course-publish";
     }
 
     @GetMapping("/course/{courseEnTitle}/{chapterEnTitle}/edit")
-    @OperatorLog(description = "章节编辑页")
+//    @OperatorLog(description = "章节编辑页")
     public String showEditChapterPage(@PathVariable("courseEnTitle") String courseEnTitle,
                                       @PathVariable("chapterEnTitle") String chapterEnTitle,
                                       Model model) {
@@ -91,7 +90,7 @@ public class CourseController {
     }
 
     @GetMapping("/course/{courseEnTitle}/{chapterEnTitle}/pushToBaidu")
-    @OperatorLog(description = "推送章节连接给百度")
+//    @OperatorLog(description = "推送章节连接给百度")
     @ResponseBody
     public Boolean pushToBaidu(@PathVariable("courseEnTitle") String courseEnTitle,
                                @PathVariable("chapterEnTitle") String chapterEnTitle) {

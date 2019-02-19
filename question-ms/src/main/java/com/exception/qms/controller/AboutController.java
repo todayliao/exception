@@ -23,7 +23,6 @@ public class AboutController {
      * @return
      */
     @GetMapping("/about")
-    @OperatorLog(description = "关于页面")
     public String showAboutPage(Model model) {
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.ABOUT.getCode());
         return "about/about";

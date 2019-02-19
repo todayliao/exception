@@ -1,16 +1,14 @@
 package com.exception.qms.controller;
 
-import com.exception.qms.aspect.OperatorLog;
 import com.exception.qms.business.QuestionBusiness;
-import com.exception.qms.common.ControllerExceptionHandler;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
 import com.exception.qms.enums.TopNavEnum;
-import com.exception.qms.utils.SpringMVCUtil;
 import com.exception.qms.model.dto.question.request.ChangeQuestionVoteUpRequestDTO;
 import com.exception.qms.model.dto.question.request.QuestionViewNumIncreaseRequestDTO;
 import com.exception.qms.model.form.question.QuestionForm;
 import com.exception.qms.model.form.question.QuestionUpdateForm;
+import com.exception.qms.utils.SpringMVCUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +52,6 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/question/write")
-    @OperatorLog(description = "问题添加页面展示")
     public String showQuestionAddPage(Model model) {
         return "question/question-add";
     }
@@ -65,7 +62,6 @@ public class QuestionController {
      * @return
      */
     @PostMapping("/question")
-    @OperatorLog(description = "问题添加")
     @ResponseBody
     public BaseResponse addQuestion(@Validated QuestionForm questionForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
@@ -78,7 +74,6 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/question/{questionId}/edit")
-    @OperatorLog(description = "问题改进页面展示")
     public String showQuestionEditPage(@PathVariable("questionId") Long quesitonId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), questionBusiness.queryQuestionInfo(quesitonId));
         return "question/question-edit";
@@ -127,7 +122,6 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/question/tag/{tagId}")
-    @OperatorLog(description = "问题标签页面展示")
     public String showQuestionTagPage(@PathVariable("tagId") Long tagId,
                                       @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                                       @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,

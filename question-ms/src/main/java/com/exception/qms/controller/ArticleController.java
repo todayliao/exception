@@ -32,13 +32,11 @@ public class ArticleController {
     private ArticleBusiness articleBusiness;
 
     @GetMapping("/article/write")
-    @OperatorLog(description = "博客写作页")
     public String showArticleWritePage() {
         return "article/article-write";
     }
 
     @PostMapping("/article")
-    @OperatorLog(description = "提交博客")
     @ResponseBody
     public BaseResponse commitArticle(@Validated ArticleForm articleForm, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
@@ -46,7 +44,6 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{articleId}")
-    @OperatorLog(description = "博客展示页")
     public String showArticleDetail(@PathVariable("articleId") Long articleId, Model model) {
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(), articleBusiness.queryArticleDetail(articleId));
         model.addAttribute(ResponseModelKeyEnum.TOP_NAV.getCode(), TopNavEnum.ARTICLE.getCode());
