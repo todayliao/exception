@@ -1,7 +1,7 @@
 
 package com.exception.qms.aspect;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -44,15 +44,15 @@ public class WebLogAspect {
         log.info("HTTP Method    : {}", request.getMethod());
         log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
         log.info("IP             : {}", request.getRemoteAddr());
-        log.info("Request Args   : {}", JSONObject.toJSONString(joinPoint.getArgs()));
+        log.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()));
     }
 
     /**
      * 在切点之后织入
      * @throws Throwable
      */
-    @AfterReturning("webLog()")
-    public void afterReturning() throws Throwable {
+    @After("webLog()")
+    public void doAfter() throws Throwable {
         log.info("=========================================== End ===========================================");
         // 每个请求之间空一行
         log.info("");
@@ -65,11 +65,11 @@ public class WebLogAspect {
      * @throws Throwable
      */
     @Around("webLog()")
-    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = proceedingJoinPoint.proceed();
         // 以 json 形式打印出参
-        log.info("Response Args  : {}", JSONObject.toJSONString(result));
+        log.info("Response Args  : {}", new Gson().toJson(result));
         // 执行耗时
         log.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime);
         return result;
