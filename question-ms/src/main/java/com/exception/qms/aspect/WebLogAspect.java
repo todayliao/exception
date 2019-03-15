@@ -3,6 +3,7 @@ package com.exception.qms.aspect;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.SystemUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -22,6 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Slf4j
 public class WebLogAspect {
+
+    /**
+     * 换行符
+     */
+    private static final String LINE_SEPARATOR = SystemUtils.LINE_SEPARATOR;
 
     /** 以 controller 包下定义的所有请求为切入点 */
     @Pointcut("execution(public * com.exception.qms.controller..*.*(..))")
@@ -53,9 +59,7 @@ public class WebLogAspect {
      */
     @After("webLog()")
     public void doAfter() throws Throwable {
-        log.info("=========================================== End ===========================================");
-        // 每个请求之间空一行
-        log.info("");
+        log.info("=========================================== End ==========================================={}", LINE_SEPARATOR);
     }
 
     /**
