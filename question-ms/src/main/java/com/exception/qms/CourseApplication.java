@@ -16,10 +16,10 @@ import site.exception.utils.JsonUtil;
 @SpringBootApplication
 @MapperScan("com.exception.qms.domain.mapper")
 @EnableScheduling
-public class Application {
+public class CourseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(CourseApplication.class, args);
 	}
 
     /**

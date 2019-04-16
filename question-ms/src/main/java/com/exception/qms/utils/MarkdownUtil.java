@@ -1,15 +1,19 @@
 package com.exception.qms.utils;
 
-import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ast.AutoLink;
+import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.html.AttributeProvider;
+import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profiles.pegdown.Extensions;
-import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +28,10 @@ import java.util.Arrays;
 @Slf4j
 public class MarkdownUtil {
 
-
     private final static Parser parser;
     private final static HtmlRenderer renderer;
+
+    private static final String SITE_NAME = "www.exception.site";
 
     static {
         // 定制 markdown 选项
@@ -34,13 +39,56 @@ public class MarkdownUtil {
 
         // set optional extensions
         options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(),
-                StrikethroughExtension.create()));
+                StrikethroughExtension.create(), NofollowExtension.create()));
 
         // convert soft-breaks to hard breaks
 //        options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
 
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).build();
+    }
+
+    static class NofollowExtension implements HtmlRenderer.HtmlRendererExtension {
+        @Override
+        public void rendererOptions(final MutableDataHolder options) {
+            // add any configuration settings to options you want to apply to everything, here
+        }
+
+        @Override
+        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+            rendererBuilder.attributeProviderFactory(NofollowAttributeProvider.Factory());
+        }
+
+        static NofollowExtension create() {
+            return new NofollowExtension();
+        }
+    }
+
+    static class NofollowAttributeProvider implements AttributeProvider {
+        @Override
+        public void setAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
+            if ((node instanceof Link || node instanceof AutoLink /*|| node instanceof ??SomeHTMLNode?? */)
+                    && (part == AttributablePart.LINK)) {
+
+                attributes.replaceValue("target", "_blank");
+                String href = attributes.getValue("href");
+                // 对于 md 文档中不包含本站域名的，设置 nofollow
+                if (!href.contains(SITE_NAME)) {
+                    // Put info in custom attribute instead
+                    attributes.replaceValue("rel", "nofollow noopener noreferrer");
+                }
+            }
+        }
+
+        static AttributeProviderFactory Factory() {
+            return new IndependentAttributeProviderFactory() {
+                @Override
+                public AttributeProvider create(LinkResolverContext context) {
+                    //noinspection ReturnOfInnerClass
+                    return new NofollowAttributeProvider();
+                }
+            };
+        }
     }
 
     /**
@@ -60,12 +108,18 @@ public class MarkdownUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(parse2Html("|  fdsf |  fdsf |\n" +
-                "| ------------ | ------------ |\n" +
-                "|  fdsf |fsdf   |\n" +
-                "|fsdf   |  fdsf |\n" +
+//        System.out.println(parse2Html("|  fdsf |  fdsf |\n" +
+//                "| ------------ | ------------ |\n" +
+//                "|  fdsf |fsdf   |\n" +
+//                "|fsdf   |  fdsf |\n" +
+//                "\n" +
+//                ":warnings:"));
+
+        System.out.println(parse2Html("## 一、Spring Boot 是什么\n" +
                 "\n" +
-                ":warnings:"));
+                "以下截图自 [Spring Boot 官方文档](https://spring.io/projects/spring-boot/)：\n" +
+                "\n" +
+                "![什么是Spring Boot](https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155523379091222 \"什么是Spring Boot\")"));
     }
 
 }

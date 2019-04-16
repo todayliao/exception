@@ -37,6 +37,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 移除掉默认支持的 Tomcat -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 添加 Undertow 容器 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
 		<dependency>
@@ -72,7 +85,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope><!---->
+			<optional>true</optional><!---->
 		</dependency>
 
 		<!-- 测试相关 -->
@@ -109,6 +122,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<!--只在编译期作用-->
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- guava 非常好用的工具类-->
