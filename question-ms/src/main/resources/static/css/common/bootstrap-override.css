@@ -17,7 +17,7 @@ pre {
     line-height: 1.45;
     background-color: #f6f8fa;
     border-radius: 3px;
-    overflow-x: auto;
+    /*overflow-x: auto;*/
     padding: 16px;
 }
 

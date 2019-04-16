@@ -67,7 +67,7 @@ public class MarkdownUtil {
     static class NofollowAttributeProvider implements AttributeProvider {
         @Override
         public void setAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
-            if ((node instanceof Link || node instanceof AutoLink /*|| node instanceof ??SomeHTMLNode?? */)
+            if ((node instanceof Link || node instanceof AutoLink)
                     && (part == AttributablePart.LINK)) {
 
                 attributes.replaceValue("target", "_blank");
