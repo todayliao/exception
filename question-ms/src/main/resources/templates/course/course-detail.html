@@ -83,7 +83,7 @@
                 </div>
 
                 <h1 class="chapter-title" th:utext="${response.chapterTitle}">章节标题</h1>
-                <div class="article-copyright">本文为 Exception 教程网原创，转载请注明出处 https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
+                <div class="article-copyright">本文为 Exception 教程网原创，作者: 犬小哈，转载请注明出处 https://www.exception.site/[[${response.enTitle}]]/[[${response.chapterEnTitle}]]</div>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username !=     null}"
                    th:href="@{'/course/' + ${response.enTitle} + '/' + ${response.chapterEnTitle} + '/edit'}">编辑</a>
                 <a th:if="${session?.SPRING_SECURITY_CONTEXT?.authentication?.principal?.username != null}"
