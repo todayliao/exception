@@ -10,6 +10,7 @@ import com.exception.qms.service.ArticleService;
 import com.exception.qms.service.BaiduLinkPushService;
 import com.exception.qms.service.QuestionService;
 import com.exception.qms.utils.ConstantsUtil;
+import com.exception.qms.utils.TimeUtil;
 import com.redfin.sitemapgenerator.ChangeFreq;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
 import com.redfin.sitemapgenerator.WebSitemapUrl;
@@ -20,9 +21,11 @@ import org.springframework.stereotype.Service;
 import site.exception.common.BaseResponse;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -63,17 +66,19 @@ public class SEOBusinessImpl implements SEOBusiness {
     @Override
     public String createSiteMapXmlContent() {
         String baseUrl = String.format("https://%s", domain);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(ConstantsUtil.FORMATTER_DATE);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(ConstantsUtil.GOOGLE_FORMATTER_DATE);
 
         WebSitemapGenerator wsg = null;
         try {
             wsg = new WebSitemapGenerator(baseUrl);
             // home page
             WebSitemapUrl url = new WebSitemapUrl.Options(baseUrl)
-                    .lastMod(dateTimeFormatter.format(LocalDateTime.now()))
+                    .lastMod(TimeUtil.localDateTime2Date(LocalDateTime.now()))
                     .priority(1.0)
                     .changeFreq(ChangeFreq.ALWAYS)
                     .build();
+
             wsg.addUrl(url);
 
             // course
@@ -95,6 +100,11 @@ public class SEOBusinessImpl implements SEOBusiness {
             for (CourseChapterContent courseChapterContent : chapterContents) {
                 long chapterId = courseChapterContent.getChapterId();
                 CourseChapter courseChapter = chapterIdCourseChapterMap.get(chapterId);
+
+                if (courseChapter == null) {
+                    // 脏数据的情况下，可能为空
+                    continue;
+                }
                 long courseId = courseChapter.getCourseId();
                 String chapterEnTitle = courseChapter.getEnTitle();
                 LocalDateTime latestUpdateTime = courseChapterContent.getUpdateTime()
@@ -103,9 +113,9 @@ public class SEOBusinessImpl implements SEOBusiness {
 
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/"
                         + courseIdCourseMap.get(courseId) + "/" + chapterEnTitle)
-                        .lastMod(dateTimeFormatter.format(latestUpdateTime))
+                        .lastMod(TimeUtil.localDateTime2Date(latestUpdateTime))
                         .priority(0.9)
-                        .changeFreq(ChangeFreq.DAILY)
+                        .changeFreq(ChangeFreq.HOURLY)
                         .build();
                 wsg.addUrl(tmpUrl);
             }
@@ -125,9 +135,9 @@ public class SEOBusinessImpl implements SEOBusiness {
                         questionLatestUpdateTime.isBefore(answerLatestUpdateTime) ? answerLatestUpdateTime : questionLatestUpdateTime;
 
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/question/" + questionId)
-                        .lastMod(dateTimeFormatter.format(updateTime))
+                        .lastMod(TimeUtil.localDateTime2Date(updateTime))
                         .priority(0.8)
-                        .changeFreq(ChangeFreq.DAILY)
+                        .changeFreq(ChangeFreq.HOURLY)
                         .build();
                 wsg.addUrl(tmpUrl);
             }
@@ -139,9 +149,9 @@ public class SEOBusinessImpl implements SEOBusiness {
                 LocalDateTime updateTime = article.getUpdateTime();
 
                 WebSitemapUrl tmpUrl = new WebSitemapUrl.Options(baseUrl + "/article/" + articleId)
-                        .lastMod(dateTimeFormatter.format(updateTime))
+                        .lastMod(TimeUtil.localDateTime2Date(updateTime))
                         .priority(0.8)
-                        .changeFreq(ChangeFreq.DAILY)
+                        .changeFreq(ChangeFreq.HOURLY)
                         .build();
                 wsg.addUrl(tmpUrl);
             }

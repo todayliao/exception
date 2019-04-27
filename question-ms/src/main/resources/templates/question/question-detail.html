@@ -25,7 +25,7 @@
     <meta name="twitter:creator" content="@Exception">
     <!-- twitter end -->
 
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link rel="icon" type="image/x-icon" th:href="@{/static/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.getToken()}">
     <!-- default header name is X-CSRF-TOKEN -->
@@ -36,12 +36,12 @@
     <!--<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.css}">-->
     <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" th:href="@{/css/common/bootstrap-override.css}">
-    <link rel="stylesheet" th:href="@{/css/common/base.css}">
-    <link rel="stylesheet" th:href="@{/plugins/highlight/styles/github-gist.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/bootstrap-override.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common/base.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/highlight/styles/github-gist.css}">
     <!--<link rel="stylesheet" th:href="@{/plugins/google-code-prettify/prettify.css}">-->
-    <link rel="stylesheet" th:href="@{/plugins/zoomify/zoomify.css}">
-    <link rel="stylesheet" th:href="@{/css/question/question-detail.css}">
+    <link rel="stylesheet" th:href="@{/static/plugins/zoomify/zoomify.css}">
+    <link rel="stylesheet" th:href="@{/static/css/question/question-detail.css}">
 
     <!-- 百度统计 -->
     <script th:replace="fragment/common-js :: baiduStatistics"></script>
@@ -208,6 +208,14 @@
                                 </div>
                             </div>
                         </div>
+                        <!--推广-->
+                        <div style="margin-top: 20px;">
+                            <h2>福利 | 免费分享 10G 学习&面试资料</h2>
+                            <p>获取方式: 关注微信公众号: <b>小哈学Java</b>, 后台回复"<b>666</b>"，既可<b>免费无套路获取资源链接</b>，下面是目录以及部分截图：</p>
+                            <p><img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155634329863783" title="关注微信公众号【小哈学Java】,回复“666”，即可免费无套路领取哦" alt="关注微信公众号【小哈学Java】,回复“666”，即可免费无套路领取哦"></p>
+                            <h2>欢迎关注我的微信公众号: 小哈学Java</h2>
+                            <p><img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155634562788477" title="小哈学Java，关注领取10G面试学习资料哦" alt="小哈学Java，关注领取10G面试学习资料哦"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -239,9 +247,9 @@
 
 <script th:replace="fragment/common-js :: js"></script>
 <script src="https://lib.baomitu.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script th:src="@{/plugins/layer/layer.js}"></script>
-<script th:src="@{/plugins/zoomify/zoomify.js}"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/static/plugins/layer/layer.js}"></script>
+<script th:src="@{/static/plugins/zoomify/zoomify.js}"></script>
+<script th:src="@{/static/js/jquery.sticky.js}"></script>
 <script th:replace="fragment/common-js :: baiduLinkPush"></script>
 <script th:replace="fragment/common-js :: 360LinkPush"></script>
 
@@ -265,29 +273,29 @@
         var questionTitle = [[${response.titleCn}]];
         var questionId = [[${response.id}]];
 
-        // 右边栏相似问题，异步加载
-        $.ajax({
-            type: "GET",
-            async: true,
-            url: "/search/question/about?id=" + questionId + "&title=" + questionTitle,
-            datatype: "json",
-            success: function (response) {
-                if (response.success == true) {
-                    $('#about-question-card').show();
-                    var html = '';
-                    var data = response.data;
-                    $.each(data, function (i, question) {
-                        html += "<div class=\"about-question-item\">";
-                        html += "<a class=\"fs-14px blue-a\" href=\"/question/" + question.id + "\">" + question.title + "</a>";
-                        if (question.voteUp > 0) {
-                            html += "&nbsp;&nbsp;"+question.voteUp+"&nbsp;赞";
-                        }
-                        html += "</div>";
-                    });
-                    $('#about-question-list').html(html);
-                }
-            }
-        });
+        // // 右边栏相似问题，异步加载
+        // $.ajax({
+        //     type: "GET",
+        //     async: true,
+        //     url: "/search/question/about?id=" + questionId + "&title=" + questionTitle,
+        //     datatype: "json",
+        //     success: function (response) {
+        //         if (response.success == true) {
+        //             $('#about-question-card').show();
+        //             var html = '';
+        //             var data = response.data;
+        //             $.each(data, function (i, question) {
+        //                 html += "<div class=\"about-question-item\">";
+        //                 html += "<a class=\"fs-14px blue-a\" href=\"/question/" + question.id + "\">" + question.title + "</a>";
+        //                 if (question.voteUp > 0) {
+        //                     html += "&nbsp;&nbsp;"+question.voteUp+"&nbsp;赞";
+        //                 }
+        //                 html += "</div>";
+        //             });
+        //             $('#about-question-list').html(html);
+        //         }
+        //     }
+        // });
 
         // increase the viewNum of question
         // csrf

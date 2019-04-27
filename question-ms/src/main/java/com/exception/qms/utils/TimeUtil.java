@@ -3,7 +3,7 @@ package com.exception.qms.utils;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 
 /**
  * @author jiangbing(江冰)
@@ -66,6 +66,13 @@ public class TimeUtil {
 
         }
         return null;
+    }
+
+    public static Date localDateTime2Date(LocalDateTime localDateTime) {
+//        ZoneId zone = ZoneId.of("Asia/Shanghai");
+        ZoneId zone = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zone).toInstant();
+        return Date.from(instant);
     }
 
 

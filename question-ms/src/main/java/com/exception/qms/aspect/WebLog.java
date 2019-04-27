@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
-public @interface OperatorLog {
+public @interface WebLog {
     /**
      * 日志方法描述
      *

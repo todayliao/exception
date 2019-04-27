@@ -1,5 +1,6 @@
 package com.exception.qms.controller;
 
+import com.exception.qms.aspect.WebLog;
 import com.exception.qms.business.QuestionBusiness;
 import com.exception.qms.domain.entity.User;
 import com.exception.qms.enums.ResponseModelKeyEnum;
@@ -38,6 +39,7 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/question/{questionId}")
+    @WebLog
     public String queryQuestionInfo(@PathVariable("questionId") Long questionId, Model model, HttpSession session) {
         User user = SpringMVCUtil.getCurrentLoginUser(session);
         model.addAttribute(ResponseModelKeyEnum.RESPONSE.getCode(),
